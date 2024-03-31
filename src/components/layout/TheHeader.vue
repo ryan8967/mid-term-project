@@ -1,0 +1,56 @@
+<!-- eslint-disable vue/no-parsing-error -->
+<template>
+  <header class="header">
+    <h1 class="logo">NCU二手物交易網</h1>
+    <nav class="nav">
+      <div class="search-bar"></div>
+      <router-link to="/cart"
+        ><img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa33fdb5f297f9c803839ca0a548882d3b6d75074bf1b3078a48c91734d1f92?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+          alt="User-profile-icon"
+          class="user-icon"
+      /></router-link>
+      <router-link to="/profile"
+        ><img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+          alt="Shopping-cart-icon"
+          class="cart-icon"
+      /></router-link>
+    </nav>
+  </header>
+</template>
+
+<style scoped>
+.header {
+  background-color: #7b6d64;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 29px 49px;
+  gap: 20px;
+}
+
+.logo {
+  color: #fff;
+  font: 700 30px Inter, sans-serif;
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 19px;
+}
+
+.nav-icon {
+  width: 250px;
+  aspect-ratio: 8.33;
+  object-fit: contain;
+}
+
+.user-icon,
+.cart-icon {
+  width: 50px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+</style>
