@@ -3,7 +3,11 @@
   <header class="header">
     <h1 class="logo">NCU二手物交易網</h1>
     <nav class="nav">
-      <div class="search-bar"></div>
+      <div class="search">
+        <form action="#">
+          <input type="text" placeholder="  Search..." name="search" />
+        </form>
+      </div>
       <router-link to="/cart"
         ><img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa33fdb5f297f9c803839ca0a548882d3b6d75074bf1b3078a48c91734d1f92?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
@@ -52,5 +56,20 @@
   width: 50px;
   aspect-ratio: 1;
   object-fit: contain;
+}
+
+.search input[type="text"] {
+  min-width: 300px;
+  min-height: 30px;
+  border-radius: 25px;
+  border: none;
+  padding-left: 10px;
+}
+
+.search {
+  float: right;
+  margin: 7px;
+  align-self: center;
+  box-sizing: border-box;
 }
 </style>
