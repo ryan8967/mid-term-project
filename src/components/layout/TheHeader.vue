@@ -56,6 +56,8 @@
   width: 50px;
   aspect-ratio: 1;
   object-fit: contain;
+  box-shadow: 3px 3px 3px black;
+  border-radius: 50%;
 }
 
 .search input[type="text"] {
