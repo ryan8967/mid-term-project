@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
   <header class="header">
-    <h1 class="logo">NCU二手物交易網</h1>
+    <h1 class="logo"><router-link to="/home">NCU二手物交易網</router-link></h1>
     <nav class="nav">
       <div class="search">
         <form action="#">
-          <input type="text" placeholder="  Search..." name="search" />
+          <input type="text" placeholder=" Search..." name="search" />
         </form>
       </div>
       <router-link to="/cart"
@@ -30,13 +30,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 29px 49px;
+  padding: 20px 40px;
   gap: 20px;
 }
 
 .logo {
   color: #fff;
-  font: 700 30px Inter, sans-serif;
+  font: 800 30px Inter, sans-serif;
   margin: 0;
 }
 
@@ -62,10 +62,10 @@
 
 .search input[type="text"] {
   min-width: 300px;
-  min-height: 30px;
-  border-radius: 25px;
+  min-height: 40px;
+  border-radius: 20px;
   border: none;
-  padding-left: 10px;
+  padding-left: 16px;
 }
 
 .search {
@@ -73,5 +73,10 @@
   margin: 7px;
   align-self: center;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit
 }
 </style>
