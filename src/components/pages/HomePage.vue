@@ -30,7 +30,7 @@ export default {
         {
           id: 2,
           title: "輕量化無線滑鼠 對稱式高背設計",
-          image: "https://picsum.photos/200/300?random=2",
+          image: "https://shoplineimg.com/5a238dc8080f0658ad003280/655184effafd2661c21e462c/800x.jpg?",
           price: 299,
           description: "符合人體工學的無線滑鼠，適合長時間操作不易疲勞。",
           tag1: "3C",
@@ -38,12 +38,12 @@ export default {
         },
         {
           id: 3,
-          title: "多功能運動手環",
-          image: "https://picsum.photos/200/300?random=3",
+          title: "最新C語言：程式設計實例入門Ｉ博碩文化出版",
+          image: "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/057/68/0010576829.jpg&v=5113823dk&w=1146&h=600",
           price: 120,
-          description: "隨時監測你的運動數據，輕巧舒適，時尚健康兩不誤。",
-          tag1: "穿戴裝置",
-          tag2: "智能手環",
+          description: "最新C語言：程式設計實例入門Ｉ博碩文化出版",
+          tag1: "書籍",
+          tag2: "文具",
         },
         // {
         //   id: 4,
