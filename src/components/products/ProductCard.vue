@@ -8,6 +8,7 @@
           <span class="product-card__tag">{{ tag2 }}</span>
         </div>
         <h3 class="title">{{ title }}</h3>
+        <h3 class="price">${{ price }}</h3>
       </div>
       <!-- <div class="product__text">
         <h3>{{ title }}</h3>
@@ -82,9 +83,9 @@ export default {
 .product-card {
   display: flex;
   flex-direction: column;
-  width: 286px;
+  width: 300px;
   /* Sets the card width */
-  height: 286px;
+  height: 350px;
   /* Sets the card height to maintain a square shape */
   border-radius: 35px;
   /* Applies rounded corners */
@@ -146,7 +147,27 @@ export default {
   /* Adds ellipsis for overflow */
   white-space: nowrap;
   /* Ensures text stays on one line */
-  margin-top: 10px;
+  margin-top: 5px;
+  /* Adds space above the title */
+  padding: 0;
+  /* Adjusts padding */
+  width: 100%;
+  /* Ensures title spans full width */
+}
+
+.price {
+  font-family: Zen Old Mincho, sans-serif;
+  font-size: 15px;
+  /* Adjusts font size */
+  font-weight: 600;
+  color: #7B6D64;
+  text-align: right;
+  /* Aligns title text to the left */
+
+
+  white-space: nowrap;
+  /* Ensures text stays on one line */
+  margin-top: 0px;
   /* Adds space above the title */
   padding: 0;
   /* Adjusts padding */
