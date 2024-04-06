@@ -8,6 +8,7 @@
           <span class="product-card__tag">{{ tag2 }}</span>
         </div>
         <h3 class="title">{{ title }}</h3>
+        <h3 class="price">${{ price }}</h3>
       </div>
       <!-- <div class="product__text">
         <h3>{{ title }}</h3>
@@ -16,6 +17,7 @@
         </base-badge>
         <p>{{ description }}</p>
       </div> -->
+
     </div>
     <!-- <div class="product__actions">
       <button @click="addToCart">Add to Cart</button>
@@ -24,101 +26,103 @@
 </template>
 
 <script>
-// import axios from 'axios';
+import axios from 'axios';
 export default {
-  props: ["id", "image", "title", "price", "description", "tag1", "tag2"],
+  props: ['id', 'image', 'title', 'price', 'description', 'tag1', 'tag2'],
   methods: {
     addToCart() {
-      // const payload = {
-      //   productId: this.id,
-      // };
-      // axios
-      //   .post(`http://localhost:3000/addcart/ryanyang`)
-      //   .then((response) => {
-      //     this.products = response.data;
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      const payload = {
+        productId: this.id,
+      };
+      axios
+        .post(`http://localhost:3000/addcart/ryanyang`)
+        .then((response) => {
+          this.products = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       // Construct the payload to send to the backend
-      //   fetch(`http://localhost:3000/addcart/ryanyang`, {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //       // 'Authorization': `Bearer ${token}`
-      //     },
-      //     body: JSON.stringify(payload),
-      //   })
-      //     .then(response => {
-      //       if (!response.ok) {
-      //         throw new Error('Failed to add item to cart');
-      //       }
-      //       return response.json();
-      //     })
-      //     .then(data => {
-      //       // Handle successful response from the backend if needed
-      //       console.log(data);
-      //     })
-      //     .catch(error => {
-      //       // Handle errors if any
-      //       console.error('Error adding item to cart:', error);
-      //     });
+
+
+      fetch(`http://localhost:3000/addcart/ryanyang`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to add item to cart');
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle successful response from the backend if needed
+          console.log(data);
+        })
+        .catch(error => {
+          // Handle errors if any
+          console.error('Error adding item to cart:', error);
+        });
     },
   },
 };
 </script>
 
+
 <style scoped>
 .product {
   list-style-type: none;
   margin-bottom: 20px;
-  margin-right: 10px;
-  /* Spacing between cards */
+  /* Adds spacing between cards */
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  width: 286px;
-  /* Width of the card */
-  height: 286px;
-  /* Height to match the width, making it square */
+  width: 300px;
+  /* Sets the card width */
+  height: 350px;
+  /* Sets the card height to maintain a square shape */
   border-radius: 35px;
-  /* Adjust as needed for border-radius */
+  /* Applies rounded corners */
   overflow: hidden;
-  /* Ensures the content doesn't overflow */
+  /* Hides any overflow */
   background-color: #fbf6f0;
+  /* Sets the background color */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  /* Adds shadow for depth */
 }
 
 .product-card__content {
   display: flex;
   flex-direction: column;
+  padding: 15px 26px 23px;
+  /* Adjusts padding */
   height: 100%;
-}
-
-img {
-  height: 150px;
+  /* Ensures content uses full height */
 }
 
 .product-card__image {
   height: 60%;
-  /* Half of the card's height */
+  /* Adjusts the image height */
   width: 100%;
-  /* Full width */
-  object-fit: contain, cover;
-  /* Cover the area without stretching */
+  border-radius: 15px;
+  /* Ensures image covers the full width */
+  object-fit: cover;
+  /* Covers the area without stretching */
 }
 
 .product-card__tags {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  /* Aligns tags to the left */
   gap: 5px;
-  padding: 8px 0;
-  /* Padding for visual spacing */
-  background-color: transparent;
-  /* Background of tags, can be adjusted */
+  margin-top: 10px;
+  /* Adds space between tags */
 }
 
 .product-card__tag {
@@ -129,24 +133,45 @@ img {
   color: #fff;
 }
 
-.product:last-child {
-  margin-right: 0;
-}
-
 .title {
-  flex-grow: 1;
-  /* Allows the title to fill the remaining space */
   font-family: Zen Old Mincho, sans-serif;
   font-size: 18px;
+  /* Adjusts font size */
   font-weight: 500;
   color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 10px;
+  text-align: left;
+  /* Aligns title text to the left */
   overflow: hidden;
+  /* Hides overflow */
   text-overflow: ellipsis;
+  /* Adds ellipsis for overflow */
   white-space: nowrap;
+  /* Ensures text stays on one line */
+  margin-top: 5px;
+  /* Adds space above the title */
+  padding: 0;
+  /* Adjusts padding */
+  width: 100%;
+  /* Ensures title spans full width */
+}
+
+.price {
+  font-family: Zen Old Mincho, sans-serif;
+  font-size: 15px;
+  /* Adjusts font size */
+  font-weight: 600;
+  color: #7B6D64;
+  text-align: right;
+  /* Aligns title text to the left */
+
+
+  white-space: nowrap;
+  /* Ensures text stays on one line */
+  margin-top: 0px;
+  /* Adds space above the title */
+  padding: 0;
+  /* Adjusts padding */
+  width: 100%;
+  /* Ensures title spans full width */
 }
 </style>

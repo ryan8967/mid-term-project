@@ -1,17 +1,10 @@
 <template>
-  <h1>Home</h1>
+  <!-- <h1>Home</h1> -->
   <div class="products-container">
-    <ProductCard
-      v-for="product in products"
-      :key="product.id"
-      :id="product.id"
-      :title="product.title"
-      :image="product.image"
-      :price="product.price"
-      :description="product.description"
-      :tag1="product.tag1"
-      :tag2="product.tag2"
-    />
+    <img src="@/assets/images/popular.png" alt="Random product" class="product-card" />
+    <ProductCard v-for="product in products" :key="product.id" :id="product.id" :title="product.title"
+      :image="product.image" :price="product.price" :description="product.description" :tag1="product.tag1"
+      :tag2="product.tag2" />
   </div>
 </template>
 
@@ -52,16 +45,16 @@ export default {
           tag1: "穿戴裝置",
           tag2: "智能手環",
         },
-        {
-          id: 4,
-          title: "經典皮革長夾",
-          image: "https://picsum.photos/200/300?random=4",
-          price: 450,
-          description:
-            "經典款式皮革長夾，結合優雅與實用性，是商務人士的最佳選擇。",
-          tag1: "新品",
-          tag2: "推薦",
-        },
+        // {
+        //   id: 4,
+        //   title: "經典皮革長夾",
+        //   image: "https://picsum.photos/200/300?random=4",
+        //   price: 450,
+        //   description:
+        //     "經典款式皮革長夾，結合優雅與實用性，是商務人士的最佳選擇。",
+        //   tag1: "新品",
+        //   tag2: "推薦",
+        // },
       ],
     };
   },
@@ -73,16 +66,33 @@ export default {
   font-family: Open Sans;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 75%;
-  padding: 10px;
+.products-container {
+  padding: 25px;
+
 }
 
 .controls {
   display: flex;
   justify-content: space-between;
+}
+
+.product-card {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+
+  width: 350px;
+  /* 讓寬度彈性 */
+  object-fit: scale-down;
+  /* 防止圖片變形或裁切 */
+  height: auto;
+  /* Sets the card height to maintain a square shape */
+  /* Applies rounded corners */
+  overflow: hidden;
+  /* Hides any overflow */
+
+  /* Sets the background color */
+
+  /* Adds shadow for depth */
 }
 </style>
