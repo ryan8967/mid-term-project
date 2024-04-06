@@ -180,7 +180,7 @@ button:active {
 }
 </style> -->
 
-<style scoped>
+<!-- <style scoped>
 .product {
   list-style-type: none;
   margin-bottom: 20px;
@@ -209,11 +209,13 @@ button:active {
 }
 
 .product-card__image {
-  height: 50%;
+  height: 60%;
   /* Half of the card's height */
   width: 100%;
   /* Full width */
   object-fit: cover;
+  border-radius: 35px;
+  padding: 8%;
   /* Cover the area without stretching */
 }
 
@@ -251,5 +253,88 @@ button:active {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+</style> -->
+
+<style scoped>
+.product {
+  list-style-type: none;
+  margin-bottom: 20px;
+  /* Adds spacing between cards */
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  width: 286px;
+  /* Sets the card width */
+  height: 286px;
+  /* Sets the card height to maintain a square shape */
+  border-radius: 35px;
+  /* Applies rounded corners */
+  overflow: hidden;
+  /* Hides any overflow */
+  background-color: #fbf6f0;
+  /* Sets the background color */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  /* Adds shadow for depth */
+}
+
+.product-card__content {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 26px 23px;
+  /* Adjusts padding */
+  height: 100%;
+  /* Ensures content uses full height */
+}
+
+.product-card__image {
+  height: 60%;
+  /* Adjusts the image height */
+  width: 100%;
+  border-radius: 15px;
+  /* Ensures image covers the full width */
+  object-fit: cover;
+  /* Covers the area without stretching */
+}
+
+.product-card__tags {
+  display: flex;
+  justify-content: flex-start;
+  /* Aligns tags to the left */
+  gap: 5px;
+  margin-top: 10px;
+  /* Adds space between tags */
+}
+
+.product-card__tag {
+  font-family: Zen Old Mincho, sans-serif;
+  border-radius: 20px;
+  background-color: #c69f76;
+  padding: 4px 12px;
+  color: #fff;
+}
+
+.title {
+  font-family: Zen Old Mincho, sans-serif;
+  font-size: 18px;
+  /* Adjusts font size */
+  font-weight: 500;
+  color: #000;
+  text-align: left;
+  /* Aligns title text to the left */
+  overflow: hidden;
+  /* Hides overflow */
+  text-overflow: ellipsis;
+  /* Adds ellipsis for overflow */
+  white-space: nowrap;
+  /* Ensures text stays on one line */
+  margin-top: 10px;
+  /* Adds space above the title */
+  padding: 0;
+  /* Adjusts padding */
+  width: 100%;
+  /* Ensures title spans full width */
 }
 </style>
