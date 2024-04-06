@@ -3,6 +3,8 @@
 </template>
 
 <script>
+
+
 export default {
   components: {},
   data() {
@@ -15,6 +17,7 @@ export default {
 * {
   font-family: Open Sans;
 }
+
 img {
   display: block;
   margin-left: auto;
@@ -22,6 +25,7 @@ img {
   width: 75%;
   padding: 10px;
 }
+
 .controls {
   display: flex;
   justify-content: space-between;
