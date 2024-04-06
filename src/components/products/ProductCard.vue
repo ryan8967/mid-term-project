@@ -16,7 +16,6 @@
         </base-badge>
         <p>{{ description }}</p>
       </div> -->
-
     </div>
     <!-- <div class="product__actions">
       <button @click="addToCart">Add to Cart</button>
@@ -25,165 +24,55 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 export default {
-  props: ['id', 'image', 'title', 'price', 'description', 'tag1', 'tag2'],
+  props: ["id", "image", "title", "price", "description", "tag1", "tag2"],
   methods: {
     addToCart() {
-      const payload = {
-        productId: this.id,
-      };
-      axios
-        .post(`http://localhost:3000/addcart/ryanyang`)
-        .then((response) => {
-          this.products = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      // const payload = {
+      //   productId: this.id,
+      // };
+      // axios
+      //   .post(`http://localhost:3000/addcart/ryanyang`)
+      //   .then((response) => {
+      //     this.products = response.data;
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
       // Construct the payload to send to the backend
-
-
-      fetch(`http://localhost:3000/addcart/ryanyang`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // 'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(payload),
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to add item to cart');
-          }
-          return response.json();
-        })
-        .then(data => {
-          // Handle successful response from the backend if needed
-          console.log(data);
-        })
-        .catch(error => {
-          // Handle errors if any
-          console.error('Error adding item to cart:', error);
-        });
+      //   fetch(`http://localhost:3000/addcart/ryanyang`, {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       // 'Authorization': `Bearer ${token}`
+      //     },
+      //     body: JSON.stringify(payload),
+      //   })
+      //     .then(response => {
+      //       if (!response.ok) {
+      //         throw new Error('Failed to add item to cart');
+      //       }
+      //       return response.json();
+      //     })
+      //     .then(data => {
+      //       // Handle successful response from the backend if needed
+      //       console.log(data);
+      //     })
+      //     .catch(error => {
+      //       // Handle errors if any
+      //       console.error('Error adding item to cart:', error);
+      //     });
     },
   },
 };
 </script>
 
-<!-- <style scoped>
-li.product {
-  margin: 2rem auto;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-  width: 250px;
-  /* Fixed width */
-  min-height: 350px;
-  /* Minimum height to maintain consistency */
-  display: flex;
-  flex-direction: column;
-  /* Stack image and text vertically */
-  justify-content: space-between;
-  /* Distribute space */
-}
-
-.product__data {
-  /* If you're using flexbox for layout, ensure it aligns items as intended */
-}
-
-.product__image img {
-  height: 10rem;
-  width: 10rem;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  /* Ensure some space between the image and text */
-}
-
-.product__text {
-  /* Fixed height for the text container can be set if needed */
-  min-height: 100px;
-  /* Example: Setting minimum height */
-  overflow-y: auto;
-  /* Makes content scrollable if it exceeds the container height */
-}
-
-.product__actions {
-  margin-top: 1rem;
-  /* Ensure space between text and buttons */
-  text-align: center;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-  background-color: #45006d;
-  color: white;
-  border: 1px solid #45006d;
-  padding: 0.5rem 1.5rem;
-  border-radius: 30px;
-  width: 100%;
-  /* Optional: Makes button full width */
-}
-
-button:hover,
-button:active {
-  background-color: #760ab4;
-  border-color: #760ab4;
-}
-</style> -->
-
-<!-- <style scoped>
-.product-card {
-  display: flex;
-  max-width: 286px;
-  flex-direction: column;
-  font-size: 15px;
-  font-weight: 400;
-  justify-content: center;
-}
-
-.product-card__content {
-  border-radius: 35px;
-  background-color: #fbf6f0;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding: 15px 26px 23px;
-}
-
-.product-card__image {
-  aspect-ratio: 1.64;
-  object-fit: cover;
-  width: 100%;
-}
-
-.product-card__tags {
-  display: flex;
-  margin-top: 12px;
-  gap: 5px;
-  color: #fff;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.product-card__tag {
-  font-family: Zen Old Mincho, sans-serif;
-  border-radius: 20px;
-  background-color: #c69f76;
-  padding: 4px 12px;
-}
-
-.product-card__title {
-  color: #000;
-  font-family: Zen Old Mincho, sans-serif;
-  margin-top: 17px;
-}
-</style> -->
-
 <style scoped>
 .product {
   list-style-type: none;
   margin-bottom: 20px;
+  margin-right: 10px;
   /* Spacing between cards */
 }
 
@@ -208,12 +97,16 @@ button:active {
   height: 100%;
 }
 
+img {
+  height: 150px;
+}
+
 .product-card__image {
-  height: 50%;
+  height: 60%;
   /* Half of the card's height */
   width: 100%;
   /* Full width */
-  object-fit: cover;
+  object-fit: contain, cover;
   /* Cover the area without stretching */
 }
 
@@ -234,6 +127,10 @@ button:active {
   background-color: #c69f76;
   padding: 4px 12px;
   color: #fff;
+}
+
+.product:last-child {
+  margin-right: 0;
 }
 
 .title {
