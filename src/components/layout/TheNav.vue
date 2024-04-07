@@ -132,7 +132,8 @@ export default{
 .subcategory-menu {
   display: none;
   position: absolute;
-  top:120%;
+  left:0;
+  top:100%;
   width: 450px;
   height: 210px;
   background-color: #fbf6f0;
