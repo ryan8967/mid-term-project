@@ -1,25 +1,22 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
   <header class="header">
-    <h1 class="logo"><router-link to="/home">NCU二手物交易網</router-link></h1>
+    <div class="logo-container">
+      <img src="../../assets/images/Logo.png" alt="Logo" class="logo-icon" />
+      <h1 class="logo"><router-link to="/home">NCU二手物交易網</router-link></h1>
+    </div>
     <nav class="nav">
       <div class="search">
         <form action="#">
           <input type="text" placeholder=" Search..." name="search" />
         </form>
       </div>
-      <router-link to="/cart"
-        ><img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa33fdb5f297f9c803839ca0a548882d3b6d75074bf1b3078a48c91734d1f92?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-          alt="User-profile-icon"
-          class="user-icon"
-      /></router-link>
-      <router-link to="/profile"
-        ><img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-          alt="Shopping-cart-icon"
-          class="cart-icon"
-      /></router-link>
+      <router-link to="/cart">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa33fdb5f297f9c803839ca0a548882d3b6d75074bf1b3078a48c91734d1f92?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&" alt="User-profile-icon" class="user-icon" />
+      </router-link>
+      <router-link to="/profile">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&" alt="Shopping-cart-icon" class="cart-icon" />
+      </router-link>
     </nav>
   </header>
 </template>
@@ -30,8 +27,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
-  gap: 20px;
+  padding: 0px 50px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-icon {
+  width: 90px;
+  height: 90px;
+  padding: 0;
+  margin: 0;
 }
 
 .logo {
@@ -42,13 +50,7 @@
 
 .nav {
   display: flex;
-  gap: 19px;
-}
-
-.nav-icon {
-  width: 250px;
-  aspect-ratio: 8.33;
-  object-fit: contain;
+  gap: 20px;
 }
 
 .user-icon,
@@ -77,6 +79,6 @@
 
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
 }
 </style>

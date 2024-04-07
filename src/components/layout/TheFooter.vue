@@ -55,7 +55,7 @@
         </ul>
       </nav>
     </div>
-    <hr />
+    <hr/>
     <div class="footer-copyright">@2023 No Rights Reserved</div>
   </footer>
 </template>
@@ -72,7 +72,7 @@
 }
 
 .footer-content {
-  padding-left: 8%;
+  padding-left: 50px;
   width: 75%;
   display: flex;
   /* justify-content: space-around;
@@ -118,7 +118,7 @@
 .footer-menu-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 20px 0;
   text-decoration: none;
 }
 
@@ -142,7 +142,7 @@ hr {
   border: none;
   height: 2px;
   background-color: black;
-  margin-bottom: 14px;
+  margin: auto;
 }
 
 a:hover {
@@ -155,7 +155,8 @@ a {
   color: inherit;
 }
 .footer-copyright {
+
   font-size: 14px;
-  margin-bottom: 10px;
+  margin: 20px 0;
 }
 </style>
