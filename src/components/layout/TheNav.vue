@@ -2,16 +2,78 @@
   <div class="category-menu">
     <div class="category-menu-container">
       <nav class="category-menu-nav">
-        <router-link to="/newProducts">新品</router-link>
-        <router-link to="/newProducts">食品</router-link>
-        <router-link to="/newProducts">日常 </router-link>
-        <router-link to="/clothes">3C</router-link>
-        <router-link to="/books">書店</router-link>
-        <router-link to="/others">其他</router-link>
+        <div class="category-menu-item"
+        v-for="category in categories"
+        :key="category.name">
+        <!--主選項-->
+        <router-link :to="category.path">{{ category.name }}</router-link>
+          <!--子菜單-->
+          <div class="subcategory-menu">
+          <router-link v-for="subcategory in category.subcategories" 
+          :key="subcategory.name"
+          :to="subcategory.path">
+          {{ subcategory.name }}
+          </router-link>
+        </div>
+        </div>
       </nav>
     </div>
   </div>
 </template>
+
+<script>
+export default{
+  data() {
+    return {
+      categories: [
+        {
+          name: '新品',
+          path: '/newProducts',
+          subcategories: [
+          ],
+        },
+        {
+          name: '食品',
+          path: '/newProducts',
+          subcategories: [
+          { name: '泡麵', path: '/newProducts' },
+          { name: '零食', path: '/newProducts' },
+          { name: '生鮮', path: '/newProducts' },
+          { name: '熟食/小吃', path: '/newProducts' },
+          { name: '飲品', path: '/newProducts' },
+          { name: '罐頭/醬料', path: '/newProducts' },
+          { name: '冷凍食品', path: '/newProducts' },
+        ],
+        },
+        {
+          name: '日常',
+          path: '/newProducts',
+          subcategories: [
+          ],
+        },
+        {
+          name: '3C',
+          path: '/clothes',
+          subcategories: [
+          ],
+        },
+        {
+          name: '書店',
+          path: '/books',
+          subcategories: [
+          ],
+        },
+        {
+          name: '其他',
+          path: '/others',
+          subcategories: [
+          ],
+        },
+      ],
+    };
+  },
+}
+</script>
 
 <style scoped>
 .category-menu {
@@ -53,14 +115,41 @@
 
 .category-menu-item {
   font-family: Inter, sans-serif;
+  width: calc(100% / 6);
+  text-align: center;
   padding: 18px 38px 10px;
+  position: relative;
 }
 
 @media (max-width: 991px) {
   .category-menu-item {
     white-space: initial;
     padding: 0 20px;
+    position: relative;
   }
+}
+
+.subcategory-menu {
+  display: none;
+  position: absolute;
+  top:120%;
+  width: 450px;
+  height: 210px;
+  background-color: #fbf6f0;
+  border-bottom: 3px solid #C69F76 ;
+  border-radius: 0 0 10px 10px;
+  z-index: 1000;
+}
+
+.category-menu-item:hover .subcategory-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.subcategory-menu a {
+  display: block; 
+  padding:25px
 }
 
 a {
