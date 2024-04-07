@@ -1,19 +1,9 @@
 <template>
   <!-- <h1>Home</h1> -->
-  <v-carousel
-      cycle
-      height="400"
-      hide-delimiter-background
-      show-arrows-on-hover
-    >
-      <v-carousel-item
-        v-for="(item,i) in items"  
-        :key="i"
-        :src="item.src"   
-        :href="item.link" 
-        target="_blank"   
-      ></v-carousel-item>
-    </v-carousel>
+  <div class="slider-container">
+    <ImageSlider></ImageSlider>
+  </div>
+  
   <div class="products-container">
     <img src="@/assets/images/popular.png" alt="Random product" class="product-card" />
     <ProductCard v-for="product in products" :key="product.id" :id="product.id" :title="product.title"
@@ -23,9 +13,11 @@
 </template>
 
 <script>
+import ImageSlider from "@/components/ui/ImageSlider.vue";
 import ProductCard from "@/components/products/ProductCard.vue";
 export default {
   components: {
+    ImageSlider,
     ProductCard,
   },
   data() {
@@ -96,6 +88,9 @@ export default {
 <style scoped>
 * {
   font-family: Open Sans;
+}
+.slider-container{
+  padding:25px;
 }
 
 .products-container {
