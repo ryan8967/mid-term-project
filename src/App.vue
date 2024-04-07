@@ -31,6 +31,7 @@ export default {
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 html,
@@ -47,21 +48,11 @@ body {
 
 .wrapper {
   flex: 1;
+  min-height: calc(100vh - 25vh); /* Adjusted to account for footer height */
 }
 
 the-footer {
   flex-shrink: 0;
   max-height: 25vh;
-  margin: 0;
-}
-
-.products-container {
-  display: flex;
-  flex-wrap: wrap;
-  /* Use this if you want to allow wrapping to a new line on small screens */
-  justify-content: space-around;
-  /* This spreads out the products evenly across the container */
-  gap: 20px;
-  /* Optional: Adds space between the products */
 }
 </style>
