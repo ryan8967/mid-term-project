@@ -22,24 +22,6 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          src: 'https://cloud.culture.tw/e_new_upload/task/97b68b43-4653-4595-b7a0-a816818be7c5/587794988cfb0e6362426451c88d970dcaeab92fbed83de272e1f84b444a4791faa943baf8f2f2132c22901c1fed15e150e81853796917ad0d43678fd0bd4959/75f5e3277ba0206c65cc73cdaaa781922e4c3c5a.jpg',
-          link: 'https://www.arte.gov.tw/pro1_exh_now.asp?KeyID\u003d3087',
-        },
-        {
-          src: 'https://cloud.culture.tw/e_new_upload/cms/image/A0/B0/C0/D20/E144/F948/ec4f1767-21a6-45b0-9c65-1f1151f2de53.jpg',
-          link: 'https://reurl.cc/dGleMq',
-        },
-        {
-          src: 'https://cloud.culture.tw/e_new_upload/cms/image/A0/B0/C0/D22/E186/F1/3962a866-f005-400f-89e7-05799e95efb4.jpg',
-          link: 'http://jam.jutfoundation.org.tw/exhibition/3101',
-        },
-        {
-          src: 'https://cloud.culture.tw/e_new_upload/cms/image/A0/B0/C0/D24/E155/F250/0a005484-53de-4382-958c-e71b79b9cc78.jpg',
-          link: 'https://mipaliwlandart.com',
-        },
-      ],
       products: [
         {
           id: 1,
