@@ -3,6 +3,7 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-heading">
+        <img src="../../assets/images/Logo.png" alt="Logo" class="logo-icon" />
         <h1 class="footer-title">NCU二手物交易網</h1>
       </div>
       <div class="footer-contact-info">
@@ -54,8 +55,13 @@
           >
         </ul>
       </nav>
+      <img
+        class="social-media"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/bf7b1942a9bd7dab87c86e55fc34a96f1a478625722d9897eb346c1af5db8bd6?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+        alt="Product Image"
+      />
     </div>
-    <hr/>
+    <hr />
     <div class="footer-copyright">@2023 No Rights Reserved</div>
   </footer>
 </template>
@@ -64,7 +70,6 @@
 .footer {
   background-color: #ebd9b4;
   color: #000;
-  padding: 10px;
   text-align: center;
   font-size: 14px;
   width: 100%;
@@ -72,7 +77,8 @@
 }
 
 .footer-content {
-  padding-left: 50px;
+  padding-left: 8%;
+  padding-top: 20px;
   width: 75%;
   display: flex;
   /* justify-content: space-around;
@@ -81,8 +87,20 @@
 
 .footer-heading {
   margin: 0 20px;
-  text-align: left;
-  padding-right: 50px;
+  /* display: flex; */
+  /* align-items: center;  */
+}
+
+.logo-icon {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
+  margin: auto;
+}
+
+.footer-title {
+  text-align: center;
+  margin: 10px 0 0 0;
 }
 .footer-contact-info {
   flex: 1;
@@ -121,7 +139,12 @@
   margin: 20px 0;
   text-decoration: none;
 }
-
+.social-media{
+  width: 150px;
+  height: 100px;
+  margin: auto;
+  padding: 0 10px;
+}
 .footer-menu-item {
   margin-top: 25px;
   margin-bottom: 24px;
@@ -138,11 +161,12 @@
 }
 
 hr {
-  width: 75%;
+  width: 70%;
   border: none;
   height: 2px;
   background-color: black;
   margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 a:hover {
@@ -155,7 +179,6 @@ a {
   color: inherit;
 }
 .footer-copyright {
-
   font-size: 14px;
   margin: 20px 0;
 }
