@@ -104,6 +104,8 @@ export default {
   /* Adjusts padding */
   height: 100%;
   /* Ensures content uses full height */
+  position: relative;
+  /* 新增相對定位 */
 }
 
 .product-card__image {
@@ -141,11 +143,12 @@ export default {
   color: #000;
   text-align: left;
   /* Aligns title text to the left */
-  overflow: hidden;
+  overflow: visible;
   /* Hides overflow */
   text-overflow: ellipsis;
   /* Adds ellipsis for overflow */
-  white-space: nowrap;
+  white-space: normal;
+  /* 允許文字換行 */
   /* Ensures text stays on one line */
   margin-top: 5px;
   /* Adds space above the title */
@@ -156,13 +159,21 @@ export default {
 }
 
 .price {
+  position: absolute;
+  /* 新增絕對定位 */
+  bottom: 10px;
+  /* 距離底部的距離 */
+  right: 20px;
+
+  /* 距離右側的距離 */
   font-family: Zen Old Mincho, sans-serif;
-  font-size: 15px;
+  font-size: 20px;
   /* Adjusts font size */
   font-weight: 600;
   color: #7B6D64;
   text-align: right;
   /* Aligns title text to the left */
+  /*background-color: #fbf6f0;*/
 
 
   white-space: nowrap;
@@ -173,5 +184,6 @@ export default {
   /* Adjusts padding */
   width: 100%;
   /* Ensures title spans full width */
+
 }
 </style>
