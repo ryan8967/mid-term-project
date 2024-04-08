@@ -17,7 +17,7 @@
     </div>
     <div class="banner-right">
       <img
-        src="@/assets/images/Capture-removebg-preview.png"
+        src="@/assets/images/Payment.png"
         alt="Banner image"
         class="banner-right-image"
       />
@@ -138,6 +138,7 @@ export default {
 .banner-right-image {
   width: auto;
   height: 310px;
+  padding-left: 25px; 
 }
 
 .banner-left-text {
