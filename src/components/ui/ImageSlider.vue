@@ -136,7 +136,7 @@ export default {
 .image {
   width: 100%;
   display: block;
-  max-height: 600px;
+  height: 600px;
   object-fit: fill;
 }
 .caption {

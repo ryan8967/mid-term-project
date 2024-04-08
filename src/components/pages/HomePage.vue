@@ -1,8 +1,21 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <template>
   <div class="slider-container">
     <ImageSlider></ImageSlider>
   </div>
-
+  <div class="banner">
+  <div class="banner-left">
+    <img
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/4a2066ba092df430ed84ed22cd6e4ba0300cb017621607a42c2952aff8a02242?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+      alt="Banner image"
+      class="banner-left-image"
+    />
+    <div class="banner-left-text">
+      用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
+    </div>
+    <button class="banner-left-button">成為賣家!</button>
+  </div>
+  </div>
   <div class="products-container">
     <img
       src="@/assets/images/popular.png"
@@ -10,7 +23,8 @@
       class="product-card"
     />
     <div class="product-card-row">
-      <ProductCard claee="product"
+      <ProductCard
+        claee="product"
         v-for="product in products"
         :key="product.id"
         :id="product.id"
@@ -89,6 +103,51 @@ export default {
 .slider-container {
   padding: 10px;
 }
+.banner {
+  padding-top: 14px;;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 700px;
+  padding: 46px 80px 16px 40px;
+  overflow: hidden;
+  font-weight: 700;
+  border-radius: 30px;
+}
+.banner-left-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.banner-left-text {
+  position: relative;
+  align-self: start;
+  color: #fff;
+  font: 32px Zen Old Mincho, sans-serif;
+}
+
+.banner-left-button {
+  position: relative;
+  align-self: center;
+  margin-top: 31px;
+  padding: 12px 26px;
+  border-radius: 50px;
+  background-color: #ebf8fa;
+  color: #000;
+  font: 24px Zen Old Mincho, sans-serif;
+  text-align: center;
+  white-space: nowrap;
+}
 
 .products-container {
   padding: 25px;
@@ -106,7 +165,7 @@ export default {
   padding: 10px;
 }
 .product-card {
-  padding: 10px ;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   margin-right: 20px;
@@ -119,7 +178,7 @@ export default {
   /* Applies rounded corners */
   overflow: hidden;
 }
-.product{
+.product {
   padding: 0 20px;
 }
 </style>
