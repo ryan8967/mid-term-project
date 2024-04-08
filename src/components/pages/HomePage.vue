@@ -105,7 +105,6 @@ export default {
   padding: 10px;
 }
 .banner {
-  padding-top: 28px;;
   display: flex;
   justify-content: center;
   align-items: center;
