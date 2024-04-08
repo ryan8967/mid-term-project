@@ -4,17 +4,24 @@
     <ImageSlider></ImageSlider>
   </div>
   <div class="banner">
-  <div class="banner-left">
-    <img
-      src="https://cdn.builder.io/api/v1/image/assets/TEMP/4a2066ba092df430ed84ed22cd6e4ba0300cb017621607a42c2952aff8a02242?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-      alt="Banner image"
-      class="banner-left-image"
-    />
-    <div class="banner-left-text">
-      用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
+    <div class="banner-left">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/4a2066ba092df430ed84ed22cd6e4ba0300cb017621607a42c2952aff8a02242?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+        alt="Banner image"
+        class="banner-left-image"
+      />
+      <div class="banner-left-text">
+        用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
+      </div>
+      <button class="banner-left-button">成為賣家!</button>
     </div>
-    <button class="banner-left-button">成為賣家!</button>
-  </div>
+    <div class="banner-right">
+      <img
+        src="@/assets/images/Capture.jpg"
+        alt="Banner image"
+        class="banner-right-image"
+      />
+    </div>
   </div>
   <div class="products-container">
     <img
@@ -105,7 +112,6 @@ export default {
   padding: 10px;
 }
 .banner {
-  padding-top: 28px;;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,6 +134,10 @@ export default {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+.banner-right-image {
+  width: 700px;
+  height: 300px;
 }
 
 .banner-left-text {
