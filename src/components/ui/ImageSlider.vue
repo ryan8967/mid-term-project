@@ -83,7 +83,7 @@ export default {
 .carousel {
   position: relative;
   width: 90%;
-  height: 500px;
+  height: 600px;
   margin: auto;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -136,7 +136,7 @@ export default {
 .image {
   width: 100%;
   display: block;
-  max-height: 500px;
+  max-height: 600px;
   object-fit: fill;
 }
 .caption {
