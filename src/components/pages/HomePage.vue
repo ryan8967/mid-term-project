@@ -17,7 +17,7 @@
     </div>
     <div class="banner-right">
       <img
-        src="@/assets/images/Capture.jpg"
+        src="@/assets/images/Capture-removebg-preview.png"
         alt="Banner image"
         class="banner-right-image"
       />
@@ -136,8 +136,8 @@ export default {
   object-position: center;
 }
 .banner-right-image {
-  width: 700px;
-  height: 300px;
+  width: auto;
+  height: 310px;
 }
 
 .banner-left-text {
