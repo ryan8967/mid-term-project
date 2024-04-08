@@ -6,6 +6,7 @@
         <div class="product-card__tags">
           <span class="product-card__tag">{{ tag1 }}</span>
           <span class="product-card__tag">{{ tag2 }}</span>
+          <p class="amount">數量: 1</p>
         </div>
         <h3 class="title">{{ title }}</h3>
         <h3 class="price">${{ price }}</h3>
@@ -17,7 +18,6 @@
         </base-badge>
         <p>{{ description }}</p>
       </div> -->
-
     </div>
     <!-- <div class="product__actions">
       <button @click="addToCart">Add to Cart</button>
@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  props: ['id', 'image', 'title', 'price', 'description', 'tag1', 'tag2'],
+  props: ["id", "image", "title", "price", "description", "tag1", "tag2"],
   methods: {
     addToCart() {
       const payload = {
@@ -44,34 +44,32 @@ export default {
         });
       // Construct the payload to send to the backend
 
-
       fetch(`http://localhost:3000/addcart/ryanyang`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           // 'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload),
       })
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
-            throw new Error('Failed to add item to cart');
+            throw new Error("Failed to add item to cart");
           }
           return response.json();
         })
-        .then(data => {
+        .then((data) => {
           // Handle successful response from the backend if needed
           console.log(data);
         })
-        .catch(error => {
+        .catch((error) => {
           // Handle errors if any
-          console.error('Error adding item to cart:', error);
+          console.error("Error adding item to cart:", error);
         });
     },
   },
 };
 </script>
-
 
 <style scoped>
 .product {
@@ -157,7 +155,9 @@ export default {
   width: 100%;
   /* Ensures title spans full width */
 }
-
+.amount {
+    padding-left: 20px;
+  }
 .price {
   position: absolute;
   /* 新增絕對定位 */
@@ -170,11 +170,10 @@ export default {
   font-size: 20px;
   /* Adjusts font size */
   font-weight: 600;
-  color: #7B6D64;
+  color: #7b6d64;
   text-align: right;
   /* Aligns title text to the left */
   /*background-color: #fbf6f0;*/
-
 
   white-space: nowrap;
   /* Ensures text stays on one line */
@@ -184,6 +183,5 @@ export default {
   /* Adjusts padding */
   width: 100%;
   /* Ensures title spans full width */
-
 }
 </style>

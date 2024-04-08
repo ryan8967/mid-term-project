@@ -13,7 +13,7 @@
           :key="img.id"
         >
           <img :src="img.src" :alt="`Image ${index}`" class="image" />
-          <div class="caption">{{ img.caption }}</div>
+          <!-- <div class="caption">{{ img.caption }}</div> -->
         </div>
       </transition-group>
       <button @click="nextImage" class="nav-button right-nav">&gt;</button>
@@ -45,7 +45,7 @@ export default {
         },
         {
           id: 3,
-          src: "https://www.twarchitect.org.tw/web2015/wp-content/uploads/2021/10/202110a4-3.jpg",
+          src: require("@/assets/images/FycSxeNWAAIrQPM.jpg"),
         },
       ],
       currentIndex: 0,
@@ -83,7 +83,7 @@ export default {
 .carousel {
   position: relative;
   width: 90%;
-  height: 600px;
+  height: 650px;
   margin: auto;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);

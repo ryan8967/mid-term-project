@@ -24,7 +24,7 @@
     />
     <div class="product-card-row">
       <ProductCard
-        claee="product"
+        class="product"
         v-for="product in products"
         :key="product.id"
         :id="product.id"
@@ -101,10 +101,11 @@ export default {
   font-family: Open Sans;
 }
 .slider-container {
+  height: 650px;
   padding: 10px;
 }
 .banner {
-  padding-top: 14px;;
+  padding-top: 28px;;
   display: flex;
   justify-content: center;
   align-items: center;
