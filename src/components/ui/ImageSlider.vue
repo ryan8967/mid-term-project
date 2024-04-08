@@ -103,7 +103,7 @@ export default {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #fbf6f0;
+  background-color:rgba(255, 255, 255, 0.5);
   color: #333;
   border: none;
   border-radius: 50%;
@@ -118,7 +118,7 @@ export default {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 .nav-button:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color:  #fbf6f0;
 }
 .left-nav {
   left: 30px;
