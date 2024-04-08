@@ -37,11 +37,11 @@ export default {
       images: [
         {
           id: 1,
-          src: "https://www.twarchitect.org.tw/web2015/wp-content/uploads/2021/10/202110a4-1.jpg",
+          src: require("@/assets/images/SiteRules.jpg"),
         },
         {
           id: 2,
-          src: "https://www.twarchitect.org.tw/web2015/wp-content/uploads/2021/10/202110a4-2.jpg",
+          src: require("@/assets/images/Carousel1.jpg"),
         },
         {
           id: 3,
@@ -50,6 +50,8 @@ export default {
       ],
       currentIndex: 0,
       slideDirection: "slide-right",
+      timer: null, 
+      intervalDuration: 5000,
     };
   },
   computed: {
@@ -129,7 +131,7 @@ export default {
 }
 .carousel-item {
   min-width: 100%;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 .image {
   width: 100%;
@@ -166,7 +168,7 @@ export default {
 /*查看下一張圖片*/
 .slide-left-enter-active,
 .slide-right-leave-active {
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .slide-left-enter,
 .slide-right-leave-to {
@@ -177,7 +179,7 @@ export default {
 /*查看上一張圖片 */
 .slide-right-enter-active,
 .slide-left-leave-active {
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .slide-right-enter,
 .slide-left-leave-to {
