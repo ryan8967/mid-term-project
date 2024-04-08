@@ -80,8 +80,8 @@ export default {
 <style scoped>
 .carousel {
   position: relative;
-  width: 1500px;
-  height: 600px;
+  width: 90%;
+  height: 500px;
   margin: auto;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -134,7 +134,7 @@ export default {
 .image {
   width: 100%;
   display: block;
-  max-height: 600px;
+  max-height: 500px;
   object-fit: fill;
 }
 .caption {

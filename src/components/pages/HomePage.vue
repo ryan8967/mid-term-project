@@ -1,5 +1,4 @@
 <template>
-  <!-- <h1>Home</h1> -->
   <div class="slider-container">
     <ImageSlider></ImageSlider>
   </div>
@@ -72,12 +71,11 @@ export default {
   font-family: Open Sans;
 }
 .slider-container{
-  padding:25px;
+  padding:10px;
 }
 
 .products-container {
   padding: 25px;
-
 }
 
 .controls {
