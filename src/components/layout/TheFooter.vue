@@ -6,7 +6,7 @@
         <img src="../../assets/images/Logo.png" alt="Logo" class="logo-icon" />
         <h1 class="footer-title">NCU二手物交易網</h1>
       </div>
-      <div class="footer-contact-info">
+      <div class="footer-contact-info" id="test">
         <h2 class="footer-contact-title">CONTACT</h2>
         <ul class="footer-contact-list">
           <li class="footer-contact-item">
@@ -33,7 +33,7 @@
               alt="Email icon"
               class="footer-icon"
             />
-            <p class="footer-text">NoCareYou404@cc.edu.gmail.com</p>
+            <p class="footer-text"><a href="mailto:someone@example.com">NoCareYou404@cc.edu.gmail.com</a></p>
           </li>
         </ul>
       </div>
@@ -55,11 +55,6 @@
           >
         </ul>
       </nav>
-      <img
-        class="social-media"
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/bf7b1942a9bd7dab87c86e55fc34a96f1a478625722d9897eb346c1af5db8bd6?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-        alt="Product Image"
-      />
     </div>
     <hr />
     <div class="footer-copyright">@2023 No Rights Reserved</div>
