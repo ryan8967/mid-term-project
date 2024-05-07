@@ -100,21 +100,19 @@ export default {
 .nav-button {
   padding: 0;
   margin: 0;
+  width: 50px;
+  height: 50px;
+  font-size: 26px;
+  font-weight:600;
   position: absolute;
+  display: flex;
+  align-items: center; /* 將內容(箭頭)置中 */
+  justify-content: center;
   top: 50%;
-  transform: translateY(-50%);
   background-color:rgba(255, 255, 255, 0.5);
   color: #333;
   border: none;
   border-radius: 50%;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  font-weight:600;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 .nav-button:hover {

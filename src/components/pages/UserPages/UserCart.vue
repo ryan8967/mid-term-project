@@ -16,7 +16,7 @@
             <td>{{ item.name }}</td>
             <td>
               <button @click="decrement(item)" class="cart-button">-</button>
-              {{ item.quantity }}
+                <span>{{ item.quantity }}</span>
               <button @click="increment(item)" class="cart-button">+</button>
             </td>
             <td>{{ item.prices }}</td>
@@ -88,18 +88,25 @@ th, td {
   font: 25px Zen Old Mincho, sans-serif;
   color: gray;
   padding: 8px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #eee;
 }
 
 .cart-button{
   font: 15px Zen Old Mincho, sans-serif;
-  border-radius: 45px;
-  transition: background-color 0.3s;
-  opacity: 0.5;
+  margin: 0 10px; /* 左右邊距為10像素 */
+  background-color:rgba(255, 255, 255, 0.5);
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  visibility: hidden; /* 預設隱藏按鈕 */
+  transition: visibility 0.1s; /* 平滑過渡效果 */
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
-.cart-button:hover{
-  opacity: 1;
+
+tr:hover .cart-button {
+    visibility: visible; /* 懸停時顯示按鈕 */
+    background-color:  #fbf6f0;
 }
 
 .checkout {
@@ -112,11 +119,8 @@ th, td {
 .checkout-button{
   font: 20px Zen Old Mincho, sans-serif;
   padding: 10px 20px;
+  border: 1px solid #C69F76;
   border-radius: 30px;
-  opacity: 0.5;
-}
-
-.checkout-button:hover{
-  opacity: 1;
+  cursor: pointer; /*將鼠標樣式更改為點擊*/
 }
 </style>
