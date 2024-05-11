@@ -7,8 +7,8 @@
         :key="category.name">
         <!--主選項-->
         <router-link :to="category.path">{{ category.name }}</router-link>
-          <!--子菜單-->
-          <div class="subcategory-menu">
+          <!--子菜單，只有當有子類別時顯示-->
+          <div class="subcategory-menu" v-if="category.subcategories.length > 0">
           <router-link v-for="subcategory in category.subcategories" 
           :key="subcategory.name"
           :to="subcategory.path">
@@ -20,6 +20,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 export default{
@@ -39,7 +40,7 @@ export default{
           { name: '泡麵', path: '/newProducts' },
           { name: '零食', path: '/newProducts' },
           { name: '生鮮', path: '/newProducts' },
-          { name: '熟食/小吃', path: '/newProducts' },
+          { name: '熟食', path: '/newProducts' },
           { name: '飲品', path: '/newProducts' },
           { name: '罐頭/醬料', path: '/newProducts' },
           { name: '冷凍食品', path: '/newProducts' },
@@ -49,18 +50,30 @@ export default{
           name: '日常',
           path: '/newProducts',
           subcategories: [
+          { name: '家電', path: '/newProducts' },
+          { name: '服飾', path: '/newProducts' },
+          { name: '衛生', path: '/newProducts' },
+          { name: '裝飾', path: '/newProducts' },
           ],
         },
         {
           name: '3C',
           path: '/clothes',
           subcategories: [
+          { name: '行動裝置', path: '/newProducts' },
+          { name: '電腦', path: '/newProducts' },
+          { name: '電腦周邊', path: '/newProducts' },
+          { name: '相機', path: '/newProducts' },
+          { name: '耳機', path: '/newProducts' },
           ],
         },
         {
           name: '書店',
           path: '/books',
           subcategories: [
+          { name: '教科書', path: '/newProducts' },
+          { name: '小說', path: '/newProducts' },
+          { name: '知識/理財', path: '/newProducts' },
           ],
         },
         {

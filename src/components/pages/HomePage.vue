@@ -13,7 +13,7 @@
       <div class="banner-left-text">
         用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
       </div>
-      <button class="banner-left-button">成為賣家!</button>
+      <button class="banner-left-button"><router-link to="/notFound">成為賣家!</router-link></button>
     </div>
     <div class="banner-right">
       <img
@@ -192,5 +192,10 @@ export default {
 }
 .product {
   padding: 0 20px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 </style>
