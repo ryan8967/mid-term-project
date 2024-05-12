@@ -43,14 +43,10 @@ export default {
           id: 2,
           src: require("@/assets/images/Carousel1.jpg"),
         },
-        {
-          id: 3,
-          src: require("@/assets/images/FycSxeNWAAIrQPM.jpg"),
-        },
       ],
       currentIndex: 0,
       slideDirection: "slide-right",
-      timer: null, 
+      timer: 5000, 
       intervalDuration: 5000,
     };
   },
