@@ -67,7 +67,7 @@ export default {
           subcategories: [
             { name: "行動裝置", path: "/newProducts" },
             { name: "電腦", path: "/newProducts" },
-            { name: "電腦周邊", path: "/newProducts" },
+            { name: "周邊", path: "/newProducts" },
             { name: "相機", path: "/newProducts" },
             { name: "耳機", path: "/newProducts" },
           ],
@@ -79,6 +79,7 @@ export default {
             { name: "教科書", path: "/newProducts" },
             { name: "小說", path: "/newProducts" },
             { name: "知識/理財", path: "/newProducts" },
+            { name: "文具", path: "/newProducts" },
           ],
         },
         {
@@ -117,7 +118,7 @@ export default {
   display: flex;
   width: 80%;
   max-width: 1029px;
-  gap: 16px;
+  gap: 14px;
   justify-content: space-between;
   align-items: center;
 }
@@ -134,7 +135,7 @@ export default {
   font-family: Inter, sans-serif;
   width: calc(100% / 6);
   text-align: center;
-  padding: 18px 38px 10px;
+  padding: 16px 30px 10px;
   position: relative;
 }
 
@@ -147,28 +148,29 @@ export default {
 }
 
 .subcategory-menu {
-  display: none;
+  display: none; /* This remains the same to keep it hidden until hovered */
   position: absolute;
   left: 0;
   top: 100%;
-  width: 400px;
-  height: auto;
-  font-size: smaller;
-  background-color: #fbf6f0;
+  width: 300px; /* Adjust width as necessary to fit 4 items per row */
+  background-color: #f9f3ec;
   border-bottom: 3px solid #c69f76;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 8px 8px;
   z-index: 1000;
+  grid-template-columns: repeat(2, 1fr); /* 4 columns of equal width */
+  grid-gap: 6px; /* Optional: add gap between grid items */
+  font-size: smaller;
 }
 
 .category-menu-item:hover .subcategory-menu {
-  display: flex;
+  display: grid; /* Changed from flex to grid */
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
 }
 .subcategory-menu a {
   display: block;
-  padding: 25px;
+  padding: 10px; /* Adjust padding as needed */
 }
 
 a {

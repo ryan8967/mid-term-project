@@ -78,7 +78,7 @@ export default {
 <style scoped>
 .carousel {
   position: relative;
-  width: 75%;
+  width: 70%;
   height: 575px;
   margin: auto;
   overflow: hidden;
