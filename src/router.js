@@ -3,13 +3,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./components/pages/HomePage.vue";
 import NotFound from "./components/pages/NotFound.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
-import BooksProducts from "./components/pages/ProductsPage/BooksProducts.vue";
-import NewProducts from "./components/pages/ProductsPage/NewProducts.vue";
-import FoodProducts from "./components/pages/ProductsPage/FoodProducts.vue";
-import ClothesProducts from "./components/pages/ProductsPage/ClothesProducts.vue";
+import ProductsPage from "./components/pages/ProductsPage/productsPage.vue";
 import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import UserCart from "./components/pages/UserPages/UserCart.vue";
-import OtherProducts from "./components/pages/ProductsPage/OtherProducts.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
 import MarketPlace from "./components/pages/UserPages/MarketPlace.vue";
 import ShelfPage from "./components/pages/UserPages/ShelfPage.vue";
@@ -20,17 +16,13 @@ const router = createRouter({
     { path: "/", redirect: "/Home" },
     { path: "/home", component: HomePage },
     { path: "/about", component: AboutUs },
-    { path: "/books", component: BooksProducts },
-    { path: "/newProducts", component: NewProducts },
-    { path: "/foods", component: FoodProducts },
-    { path: "/clothes", component: ClothesProducts },
+    { path: "/products", component: ProductsPage },
     { path: "/profile", component: ProfilePage },
     { path: "/cart", component: UserCart },
-    { path: "/others", component: OtherProducts },
     { path: "/:notFound(.*)", component: NotFound },
-    { path: "/records", component: RecordsPage},
-    { path: "/marketplace", component:  MarketPlace},
-    { path: "/shelf", component: ShelfPage},
+    { path: "/records", component: RecordsPage },
+    { path: "/marketplace", component: MarketPlace },
+    { path: "/shelf", component: ShelfPage },
   ],
 });
 
