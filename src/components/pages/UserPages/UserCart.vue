@@ -37,7 +37,6 @@
 export default {
   data() {
     return {
-      //連接加入購物車功能?
       cartItems: [
         { id: 1, name: '商品A', price: 100, quantity: 1, stock: 10 },
         { id: 2, name: '商品B', price: 200, quantity: 2, stock: 5 },
@@ -63,7 +62,6 @@ export default {
     },
     checkout() {
       alert('結帳金額為：' + this.totalPrice);
-      //等待後續後端實現結帳功能
     },
   },
 

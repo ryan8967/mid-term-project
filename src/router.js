@@ -10,6 +10,9 @@ import ClothesProducts from "./components/pages/ProductsPage/ClothesProducts.vue
 import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import UserCart from "./components/pages/UserPages/UserCart.vue";
 import OtherProducts from "./components/pages/ProductsPage/OtherProducts.vue";
+import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
+import MarketPlace from "./components/pages/UserPages/MarketPlace.vue";
+import ShelfPage from "./components/pages/UserPages/ShelfPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,6 +28,9 @@ const router = createRouter({
     { path: "/cart", component: UserCart },
     { path: "/others", component: OtherProducts },
     { path: "/:notFound(.*)", component: NotFound },
+    { path: "/records", component: RecordsPage},
+    { path: "/marketplace", component:  MarketPlace},
+    { path: "/shelf", component: ShelfPage},
   ],
 });
 

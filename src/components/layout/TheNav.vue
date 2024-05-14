@@ -168,6 +168,7 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
+
 .subcategory-menu a {
   display: block;
   padding: 10px; /* Adjust padding as needed */
