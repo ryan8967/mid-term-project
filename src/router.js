@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./components/pages/HomePage.vue";
 import NotFound from "./components/pages/NotFound.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
-import ProductsPage from "./components/pages/ProductsPage/productsPage.vue";
+import ProductsPage from "./components/pages/productsPage.vue";
 import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import UserCart from "./components/pages/UserPages/UserCart.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
