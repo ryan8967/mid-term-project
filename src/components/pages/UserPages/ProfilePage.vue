@@ -67,7 +67,7 @@ export default {
   font-weight: bold;
 }
 
-.menu{
+.profile-menu{
   display: flex;   /* 使用 Flexbox 來布局 */
   justify-content: space-between; /* 按鈕之間均勻分布 */
   align-items: center;
@@ -78,7 +78,7 @@ export default {
 
 .actions {
   display: flex;
-  width: 350px;
+  width: 200px;
   justify-content: center;
   align-items: center;
   font-weight: bold;
