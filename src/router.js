@@ -8,7 +8,7 @@ import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import UserCart from "./components/pages/UserPages/UserCart.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
 import MarketPlace from "./components/pages/UserPages/MarketPlace.vue";
-import newProduct from "./components/products/newProduct.vue";
+import newProduct from "./components/pages/products/newProduct.vue";
 
 const router = createRouter({
   history: createWebHistory(),
