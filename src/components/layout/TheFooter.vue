@@ -44,7 +44,7 @@
           <router-link to="/home"
             ><li class="footer-menu-item">Home</li></router-link
           >
-          <router-link to="/personal"
+          <router-link to="/profile"
             ><li class="footer-menu-item">Profile</li></router-link
           >
           <router-link to="/notFound"

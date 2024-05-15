@@ -10,7 +10,7 @@
     </div>
     <div class="menu">
       <router-link :to="{ path: '/records' }"><div class="actions">買賣紀錄/申訴</div></router-link>
-      <router-link :to="{ path: '/shelf' }"><div class="actions">上架物品</div></router-link>
+      <router-link :to="{ path: '/newproduct' }"><div class="actions">上架物品</div></router-link>
       <router-link :to="{ path: '/marketplace' }"><div class="actions">個人商場</div></router-link>
     </div>
   </div>

@@ -31,7 +31,7 @@
         </router-link>
         <div class="dropdown-content" v-show="dropDown">
           <router-link to="/profile">我的帳戶</router-link>
-          <router-link to="/shelf">我的賣場</router-link>
+          <router-link to="/marketplace">我的賣場</router-link>
           <router-link to="/logout">登出</router-link>
         </div>
       </div>
