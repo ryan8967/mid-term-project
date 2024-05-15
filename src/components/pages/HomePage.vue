@@ -48,7 +48,7 @@
 
 <script>
 import ImageSlider from "@/components/ui/ImageSlider.vue";
-import ProductCard from "@/components/products/ProductCard.vue";
+import ProductCard from "@/components/ui/ProductCard.vue";
 export default {
   components: {
     ImageSlider,
