@@ -57,13 +57,13 @@
       </nav>
       <div class="footer-social">
         <div class="social-item">
-          <a href="https://www.facebook.com/"><img src="../../assets/images/facebook-icon.png" alt="facebook"></a>
+          <a href="https://www.facebook.com/"><img src="@/assets/images/facebook-icon.png" alt="facebook"></a>
         </div>
         <div class="social-item">
-          <a href="https://twitter.com/home"><img src="../../assets/images/twitter-icon.png" alt="twitter"></a>
+          <a href="https://twitter.com/home"><img src="@/assets/images/twitter-icon.png" alt="twitter"></a>
         </div>
         <div class="social-item">
-          <a href="https://www.instagram.com/"><img src="../../assets/images/insta-icon.png" alt="instagram"></a>
+          <a href="https://www.instagram.com/"><img src="@/assets/images/insta-icon.png" alt="instagram"></a>
         </div>
       </div>
     </div>

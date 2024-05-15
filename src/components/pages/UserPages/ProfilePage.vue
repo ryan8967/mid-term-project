@@ -8,10 +8,10 @@
       <div class="info"><label>信箱</label><span>{{ account.email }}</span></div>
       <div class="info"><label>電話</label><span>{{ account.phone }}</span></div>
     </div>
-    <div class="menu">
-      <router-link :to="{ path: '/records' }"><div class="actions">買賣紀錄/申訴</div></router-link>
-      <router-link :to="{ path: '/newproduct' }"><div class="actions">上架物品</div></router-link>
-      <router-link :to="{ path: '/marketplace' }"><div class="actions">個人商場</div></router-link>
+    <div class="profile-menu">
+      <router-link :to="{ path: '/RecordsPage' }"><div class="actions">買賣紀錄/申訴</div></router-link>
+      <router-link :to="{ path: '/newProduct' }"><div class="actions">上架物品</div></router-link>
+      <router-link :to="{ path: '/IndivMarket' }"><div class="actions">個人商場</div></router-link>
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ export default {
   font-weight: bold;
 }
 
-.menu{
+.profile-menu{
   display: flex;   /* 使用 Flexbox 來布局 */
   justify-content: space-between; /* 按鈕之間均勻分布 */
   align-items: center;
@@ -78,7 +78,7 @@ export default {
 
 .actions {
   display: flex;
-  width: 350px;
+  width: 200px;
   justify-content: center;
   align-items: center;
   font-weight: bold;

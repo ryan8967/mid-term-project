@@ -9,8 +9,9 @@ import AboutUs from "./components/pages/AboutUs.vue";
 import UserCart from "./components/pages/UserPages/UserCart.vue";
 import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
-import MarketPlace from "./components/pages/UserPages/MarketPlace.vue";
-import newProduct from "./components/products/newProduct.vue";
+import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
+import newProduct from "./components/pages/ProductPages/newProduct.vue";
+import ProductsPage from "./components/pages/ProductPages/productsPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
