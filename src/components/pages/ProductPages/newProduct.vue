@@ -36,6 +36,7 @@
   }
   </script>
   
+  <!-- css -->
   <style scoped>
   .form-container {
     max-width: 500px;
