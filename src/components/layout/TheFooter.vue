@@ -55,6 +55,17 @@
           >
         </ul>
       </nav>
+      <div class="footer-social">
+        <div class="social-item">
+          <a href="https://www.facebook.com/"><img src="../../assets/images/facebook-icon.png" alt="facebook"></a>
+        </div>
+        <div class="social-item">
+          <a href="https://twitter.com/home"><img src="../../assets/images/twitter-icon.png" alt="twitter"></a>
+        </div>
+        <div class="social-item">
+          <a href="https://www.instagram.com/"><img src="../../assets/images/insta-icon.png" alt="instagram"></a>
+        </div>
+      </div>
     </div>
     <hr />
     <div class="footer-copyright">@2023 No Rights Reserved</div>
@@ -123,7 +134,6 @@
   padding: 0;
   margin: 0;
   align-items: flex-start;
-
   height: 180px;
 }
 
@@ -143,6 +153,23 @@
 .footer-menu-item {
   margin-top: 25px;
   margin-bottom: 24px;
+}
+
+.footer-social{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 0 20px;
+  text-align: left;
+  padding: 10px 50px;
+}
+.social-item + .social-item{
+  margin-left: 20px;
+}
+
+.social-item img{
+  width:  50px;
+  height: auto;
 }
 
 .footer-icon {
