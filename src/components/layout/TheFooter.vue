@@ -83,7 +83,7 @@
 }
 
 .footer-content {
-  padding-left: 8%;
+  padding-left: 6%;
   padding-top: 20px;
   width: 75%;
   display: flex;
@@ -92,9 +92,11 @@
 }
 
 .footer-heading {
-  margin: 0 20px;
+  min-width: 200px;
+  margin: 0 14px;
   /* display: flex; */
   /* align-items: center;  */
+  font-size: small;
 }
 
 .logo-icon {
@@ -106,13 +108,14 @@
 
 .footer-title {
   text-align: center;
-  margin: 10px 0 0 0;
+  margin: 6px 0 0 0;
+  min-width: 220px;
 }
 .footer-contact-info {
   flex: 1;
   margin: 0 20px;
   text-align: left;
-  padding-left: 200px;
+  padding-left: 160px;
 }
 
 .footer-navigation {
