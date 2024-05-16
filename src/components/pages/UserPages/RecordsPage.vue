@@ -17,11 +17,81 @@
     <div class="product-item">
       <div class="product-name">最新C語言：程式設計實例入門Ｉ博碩文化出版</div>
       <div class="product-appeal">
-        <button class="appeal-button">申訴</button>
+        <button class="appeal-button" @click="showComplaintForm = true">
+          申訴
+        </button>
+      </div>
+    </div>
+
+    <div v-if="showComplaintForm" class="complaint-form-container">
+      <div class="main-container">
+        <section class="complaint-section">
+          <header class="complaint-header">
+            <h1 class="complaint-title">申訴原因</h1>
+          </header>
+          <form class="complaint-options">
+            <label for="product-issue" class="checkbox-label">
+              商品與實際不符
+              <input
+                type="checkbox"
+                id="product-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
+            </label>
+            <label for="attitude-issue" class="checkbox-label">
+              交易態度差
+              <input
+                type="checkbox"
+                id="attitude-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
+            </label>
+            <label for="time-issue" class="checkbox-label">
+              交易時間遲到
+              <input
+                type="checkbox"
+                id="time-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
+            </label>
+            <label for="location-issue" class="checkbox-label">
+              交易地點不符
+              <input
+                type="checkbox"
+                id="location-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
+            </label>
+            <label for="other" class="checkbox-label">
+              其他
+              <input type="text" id="other" name="other" class="text-input" />
+            </label>
+          </form>
+          <section class="action-buttons">
+            <button class="cancel-button" @click="showComplaintForm = false">
+              取消
+            </button>
+            <button class="submit-button">確認</button>
+          </section>
+        </section>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      showComplaintForm: false,
+    };
+  },
+};
+</script>
 
 <style scoped>
 .product-details {
@@ -38,12 +108,6 @@
   padding: 30px 20px 40px 10px;
 }
 
-/* @media (max-width: 991px) {
-  .product-details {
-    padding: 73px 20px;
-  }
-} */
-
 .product-header {
   padding-left: 4%;
   display: flex;
@@ -51,12 +115,6 @@
   font-size: 24px;
   font-weight: 400;
 }
-
-/* @media (max-width: 991px) {
-  .product-header {
-    flex-wrap: wrap;
-  }
-} */
 
 .product-title {
   font-family: Zen Old Mincho, sans-serif;
@@ -86,7 +144,6 @@
   gap: 50px;
   justify-content: space-between;
   text-align: right;
-  /* flex-grow: 1; */
 }
 
 @media (max-width: 991px) {
@@ -115,7 +172,7 @@
   margin-top: 30px;
   padding: 0 16px;
   width: 100%;
-  justify-content: space-between; /* Ensures space is distributed between children */
+  justify-content: space-between;
 }
 
 @media (max-width: 991px) {
@@ -125,7 +182,6 @@
 }
 
 .product-name {
-  /* flex-grow: 1; */
   font: 400 20px Zen Old Mincho, sans-serif;
 }
 
@@ -133,8 +189,8 @@
   display: flex;
   font-size: 20px;
   font-weight: 500;
-  justify-content: center; /* Centers button within the appeal div */
-  align-items: right; /* Vertically centers the content */
+  justify-content: center;
+  align-items: right;
 }
 
 .appeal-button {
@@ -154,9 +210,88 @@
   }
 }
 
-.product-image {
+.main-container {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ebd9b4;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.complaint-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.complaint-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.complaint-title {
+  font-family: Zen Old Mincho, sans-serif;
+  font-size: 24px;
+  color: #000;
+  font-weight: 700;
+}
+
+.complaint-options {
+  display: flex;
+  font-size: 20px;
+  font-weight: 400;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Zen Old Mincho, sans-serif;
+  color: #000;
+}
+
+.text-input {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 50%;
+  margin-left: auto;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.submit-button {
+  font-family: Zen Old Mincho, sans-serif;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(198, 159, 118, 1);
+  background-color: #fff;
+  padding: 5px 20px;
+}
+
+.complaint-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  max-height: 600px;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  margin-top: 19px;
 }
 </style>
