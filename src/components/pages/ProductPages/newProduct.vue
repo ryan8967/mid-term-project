@@ -1,35 +1,24 @@
 <template>
   <div class="form-container">
     <form @submit.prevent="handleSubmit">
-      <div class="color-block"><strong>商品圖片</strong></div>
-      <div class="button-row">
-        <button class="add-image-button" type="button" @click="addImageField">
-          新增圖片
-        </button>
+      <div class="form-row">
+        <label class="input-label">商品圖片</label>
+        <button type="button" @click="addImageField">新增圖片</button>
       </div>
       <div class="form-row" v-for="(input, index) in formInputs" :key="index">
-        <div class="input-title">{{ input.label }}</div>
-        <input
-          :id="input.id"
-          v-model="input.value"
-          :type="input.type"
-          :placeholder="input.placeholder"
-        />
+        <label class="input-label" :for="input.id">{{ input.label }}</label>
+        <input :id="input.id" v-model="input.value" :type="input.type" :placeholder="input.placeholder">
+      </div>
+      <div class="form-row">
+        <label class="input-label" for="description">詳情描述</label>
+        <textarea id="description" v-model="description" placeholder="請輸入..."></textarea>
+      </div>
+      <div class="image-upload-row" v-for="(image, index) in images" :key="'image' + index">
+        <label class="input-label" :for="'imageUpload' + index">上傳圖片 {{ index + 1 }}</label>
+        <input type="file" :id="'imageUpload' + index" @change="handleFileUpload($event, index)">
       </div>
       <div class="button-row">
         <button type="submit">提交</button>
-      </div>
-      <div
-        class="image-upload-row"
-        v-for="(image, index) in images"
-        :key="'image' + index"
-      >
-        <label :for="'imageUpload' + index">上傳圖片 {{ index + 1 }}</label>
-        <input
-          type="file"
-          :id="'imageUpload' + index"
-          @change="handleFileUpload($event, index)"
-        />
       </div>
     </form>
   </div>
@@ -37,53 +26,17 @@
 
 <script>
 export default {
-  name: "CustomForm",
+  name: 'CustomForm',
   data() {
     return {
       images: [],
+      description: '',
       formInputs: [
-        {
-          id: "id_number",
-          label: "商品名稱",
-          value: "",
-          type: "text",
-          placeholder: "請輸入...",
-        },
-        {
-          id: "department",
-          label: "類別",
-          value: "",
-          type: "text",
-          placeholder: "請輸入...",
-        },
-        {
-          id: "position",
-          label: "狀況",
-          value: "",
-          type: "text",
-          placeholder: "請輸入...(新舊程度)",
-        },
-        {
-          id: "phone",
-          label: "售價",
-          value: "",
-          type: "text",
-          placeholder: "請輸入...",
-        },
-        {
-          id: "email",
-          label: "數量",
-          value: "",
-          type: "text",
-          placeholder: "請輸入...",
-        },
-        {
-          id: "comments",
-          label: "詳情描述",
-          value: "",
-          type: "text",
-          placeholder: "請輸入...",
-        },
+        { id: 'product-name', label: '商品名稱', value: '', type: 'text', placeholder: '請輸入...' },
+        { id: 'category', label: '類別', value: '', type: 'text', placeholder: '請選擇...' },
+        { id: 'condition', label: '狀況', value: '', type: 'text', placeholder: '請輸入...(新舊程度)' },
+        { id: 'price', label: '售價', value: '', type: 'text', placeholder: '請輸入...' },
+        { id: 'quantity', label: '數量', value: '', type: 'text', placeholder: '請輸入...' },
       ],
     };
   },
@@ -91,6 +44,7 @@ export default {
     handleSubmit() {
       // 處理提交邏輯
       console.log(this.formInputs);
+      console.log(this.description);
       console.log(this.images);
     },
     handleFileUpload(event, index) {
@@ -98,39 +52,22 @@ export default {
       this.$set(this.images, index, file);
     },
     addImageField() {
-      this.images.push(null); // 推入一個新的空位置到 images 陣列
-    },
-  },
+      this.images.push(null);  // 推入一個新的空位置到 images 陣列
+    }
+  }
 };
 </script>
 
+
+<!-- css -->
 <style scoped>
-.color-block {
-  width: 100px;
-  height: 35px;
-  background-color: #fff2d7;
-  position: absolute;
-  top: 31%;
-  left: 41.5%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.add-image-button {
-  display: flex;
-  justify-content: left;
-  margin: auto;
-}
-
 .form-container {
-  display: flex;
-  flex-direction: column;
   max-width: 400px;
   margin: auto;
   padding: 20px;
   background-color: #ffffff;
-  border-radius: 4px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-row,
@@ -140,38 +77,47 @@ export default {
   margin-bottom: 15px;
 }
 
-.input-title {
-  width: 100px;
-  padding: 8px;
-  background-color: #fff2d7; /* 可根據需要修改顏色 */
-  text-align: center;
+.input-label {
+  width: 100px; /* 你可以根据需要调整宽度 */
+  margin-right: 10px;
   font-weight: bold;
-  border: 2px solid #ccc;
-  border-radius: 4px 0 0 4px;
 }
 
 input[type="text"],
-textarea {
+input[type="file"],
+textarea,
+button {
   flex: 1;
   padding: 8px;
-  border: 2px solid #ccc;
-  border-radius: 0 4px 4px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  height: 80px;
 }
 
 button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #007bff;
+  background-color: #007BFF;
   color: white;
-  border-radius: 5px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  padding: 10px 20px;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 
 .button-row {
   display: flex;
-  justify-content: flex-end; /* 按鈕靠右對齊 */
+  justify-content: flex-end;
 }
 </style>
+
 
 /*{ id: 'name', label: '商品圖片', value: '', type: 'text', placeholder:
 '請输入...' }, { id: 'id_number', label: '商品名稱', value: '', type: 'text',

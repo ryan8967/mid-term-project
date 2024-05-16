@@ -6,7 +6,7 @@ import NotFound from "./components/pages/NotFound.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
 
 // Product Pages
-import ProductsPage from "./components/pages/ProductPages/ProductsPage.vue";
+// import ProductsPage from "./components/pages/ProductPages/productsPage.vue";
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
 
 // User Pages
@@ -15,7 +15,7 @@ import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
 import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
-import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
+//import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -35,9 +35,8 @@ const router = createRouter({
     { path: "/seller", component: SellerPage },
 
     // Product Pages
-    { path: "/products", component: ProductsPage },
+   // { path: "/products", component: productsPage },
     { path: "/newproduct", component: newProduct },
-    { path: "/ProductDetail", component: ProductDetail },
     
   ],
 });
