@@ -256,7 +256,7 @@ export default {
 }
 
 .text-input {
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid #ccc;
   padding: 5px;
   width: 50%;

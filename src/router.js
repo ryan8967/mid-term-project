@@ -15,10 +15,12 @@ import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
 import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
+import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    
     // General Pages
     { path: "/", redirect: "/home" },
     { path: "/home", component: HomePage },
@@ -35,6 +37,7 @@ const router = createRouter({
     // Product Pages
     { path: "/products", component: ProductsPage },
     { path: "/newproduct", component: newProduct },
+    { path: "/ProductDetail", component: ProductDetail },
   ],
 });
 
