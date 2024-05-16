@@ -2,19 +2,31 @@
   <div class="form-container">
     <form @submit.prevent="handleSubmit">
       <div class="form-row">
-        <label class="input-label">商品圖片</label>
+        <div class="label-wrapper">
+          <div class="color-block"></div>
+          <label class="input-label">商品圖片</label>
+        </div>
         <button type="button" @click="addImageField">新增圖片</button>
       </div>
       <div class="form-row" v-for="(input, index) in formInputs" :key="index">
-        <label class="input-label" :for="input.id">{{ input.label }}</label>
+        <div class="label-wrapper">
+          <div class="color-block"></div>
+          <label class="input-label" :for="input.id">{{ input.label }}</label>
+        </div>
         <input :id="input.id" v-model="input.value" :type="input.type" :placeholder="input.placeholder">
       </div>
       <div class="form-row">
-        <label class="input-label" for="description">詳情描述</label>
+        <div class="label-wrapper">
+          <div class="color-block"></div>
+          <label class="input-label" for="description">詳情描述</label>
+        </div>
         <textarea id="description" v-model="description" placeholder="請輸入..."></textarea>
       </div>
       <div class="image-upload-row" v-for="(image, index) in images" :key="'image' + index">
-        <label class="input-label" :for="'imageUpload' + index">上傳圖片 {{ index + 1 }}</label>
+        <div class="label-wrapper">
+          <div class="color-block"></div>
+          <label class="input-label" :for="'imageUpload' + index">上傳圖片 {{ index + 1 }}</label>
+        </div>
         <input type="file" :id="'imageUpload' + index" @change="handleFileUpload($event, index)">
       </div>
       <div class="button-row">
@@ -77,10 +89,28 @@ export default {
   margin-bottom: 15px;
 }
 
-.input-label {
-  width: 100px; /* 你可以根据需要调整宽度 */
+.label-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
   margin-right: 10px;
+}
+
+.color-block {
+  width: 100px;
+  height: 20px;
+  background-color: #FFF2D7;
+}
+
+.input-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
   font-weight: bold;
+  line-height: 20px; /* 使标签垂直居中 */
+  pointer-events: none; /* 确保点击标签不会影响到颜色块 */
 }
 
 input[type="text"],
@@ -117,6 +147,7 @@ button:hover {
   justify-content: flex-end;
 }
 </style>
+
 
 
 /*{ id: 'name', label: '商品圖片', value: '', type: 'text', placeholder:
