@@ -1,4 +1,4 @@
-<!--還沒寫完-->
+<!--還剩一點，待更新，有問題或要改拜託一定要告訴我-->
 <template>
   <div class="product-card">
     <img
@@ -6,10 +6,12 @@
       alt="Product Image"
       class="product-image"
       style="
-        width: 600px;
-        height: 600px;
+        width: 450px;
+        height: 450px;
         border-radius: 15px;
         position: relative;
+        top: 100px; 
+        left: 100px; 
       "
     />
     <h1 class="product-name" style="top: 70px">{{ product.name }}</h1>
@@ -31,7 +33,9 @@
         <!-- Render stars based on rating -->
         <span v-for="n in product.rating" :key="n" class="star">&#9733;</span>
       </div>
-      <button @click="addToCart">加入購物車</button>
+        <div class="add-to-cart-btn">
+          <button @click="addToCart" style="position: absolute; bottom: 20px; right: 20px; width: 200px; height: 50px; padding: 10px 20px; font-size: 20px; background-color: #ffffff; color: black; border: 3px solid #d5ba9c; border-radius: 30px; cursor: pointer; box-shadow: 2px 2px 3px #888888;">加入購物車</button>
+        </div>
     </div>
     <div class="item-details" style="width: 610px; margin-top: 30px">
       <ul style="font-size: 25px; line-height: 2.25">
@@ -80,8 +84,8 @@ export default {
 
 <style scoped>
 .product-card {
-  width: 300px;
-  border: 1px solid #ccc;
+  width: 500px; 
+  height: 700px;
   padding: 20px;
   margin: 10px;
   position: relative;
@@ -89,8 +93,8 @@ export default {
 
 .product-image {
   position: relative;
-  width: 600px;
-  height: 600px;
+  width: 450px;
+  height: 450px;
 }
 
 .product-name {
