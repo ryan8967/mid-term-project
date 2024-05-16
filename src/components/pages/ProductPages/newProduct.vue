@@ -3,18 +3,33 @@
     <form @submit.prevent="handleSubmit">
       <div class="color-block"><strong>商品圖片</strong></div>
       <div class="button-row">
-        <button class="add-image-button" type="button" @click="addImageField">新增圖片</button>
+        <button class="add-image-button" type="button" @click="addImageField">
+          新增圖片
+        </button>
       </div>
       <div class="form-row" v-for="(input, index) in formInputs" :key="index">
         <div class="input-title">{{ input.label }}</div>
-        <input :id="input.id" v-model="input.value" :type="input.type" :placeholder="input.placeholder">
+        <input
+          :id="input.id"
+          v-model="input.value"
+          :type="input.type"
+          :placeholder="input.placeholder"
+        />
       </div>
       <div class="button-row">
         <button type="submit">提交</button>
       </div>
-      <div class="image-upload-row" v-for="(image, index) in images" :key="'image' + index">
+      <div
+        class="image-upload-row"
+        v-for="(image, index) in images"
+        :key="'image' + index"
+      >
         <label :for="'imageUpload' + index">上傳圖片 {{ index + 1 }}</label>
-        <input type="file" :id="'imageUpload' + index" @change="handleFileUpload($event, index)">
+        <input
+          type="file"
+          :id="'imageUpload' + index"
+          @change="handleFileUpload($event, index)"
+        />
       </div>
     </form>
   </div>
@@ -22,18 +37,53 @@
 
 <script>
 export default {
-  name: 'CustomForm',
+  name: "CustomForm",
   data() {
     return {
       images: [],
       formInputs: [
-        
-        { id: 'id_number', label: '商品名稱', value: '', type: 'text', placeholder: '請輸入...' },
-        { id: 'department', label: '類別', value: '', type: 'text', placeholder: '請輸入...' },
-        { id: 'position', label: '狀況', value: '', type: 'text', placeholder: '請輸入...(新舊程度)' },
-        { id: 'phone', label: '售價', value: '', type: 'text', placeholder: '請輸入...' },
-        { id: 'email', label: '數量', value: '', type: 'text', placeholder: '請輸入...' },
-        { id: 'comments', label: '詳情描述', value: '', type: 'text', placeholder: '請輸入...' }
+        {
+          id: "id_number",
+          label: "商品名稱",
+          value: "",
+          type: "text",
+          placeholder: "請輸入...",
+        },
+        {
+          id: "department",
+          label: "類別",
+          value: "",
+          type: "text",
+          placeholder: "請輸入...",
+        },
+        {
+          id: "position",
+          label: "狀況",
+          value: "",
+          type: "text",
+          placeholder: "請輸入...(新舊程度)",
+        },
+        {
+          id: "phone",
+          label: "售價",
+          value: "",
+          type: "text",
+          placeholder: "請輸入...",
+        },
+        {
+          id: "email",
+          label: "數量",
+          value: "",
+          type: "text",
+          placeholder: "請輸入...",
+        },
+        {
+          id: "comments",
+          label: "詳情描述",
+          value: "",
+          type: "text",
+          placeholder: "請輸入...",
+        },
       ],
     };
   },
@@ -48,9 +98,9 @@ export default {
       this.$set(this.images, index, file);
     },
     addImageField() {
-      this.images.push(null);  // 推入一個新的空位置到 images 陣列
-    }
-  }
+      this.images.push(null); // 推入一個新的空位置到 images 陣列
+    },
+  },
 };
 </script>
 
@@ -58,7 +108,7 @@ export default {
 .color-block {
   width: 100px;
   height: 35px;
-  background-color: #FFF2D7;
+  background-color: #fff2d7;
   position: absolute;
   top: 31%;
   left: 41.5%;
@@ -83,7 +133,8 @@ export default {
   border-radius: 4px;
 }
 
-.form-row, .image-upload-row {
+.form-row,
+.image-upload-row {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
@@ -92,7 +143,7 @@ export default {
 .input-title {
   width: 100px;
   padding: 8px;
-  background-color: #FFF2D7; /* 可根據需要修改顏色 */
+  background-color: #fff2d7; /* 可根據需要修改顏色 */
   text-align: center;
   font-weight: bold;
   border: 2px solid #ccc;
@@ -110,7 +161,7 @@ textarea {
 button {
   padding: 10px 20px;
   border: none;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border-radius: 5px;
   cursor: pointer;
@@ -122,11 +173,12 @@ button {
 }
 </style>
 
-
-/*{ id: 'name', label: '商品圖片', value: '', type: 'text', placeholder: '請输入...' },
-{ id: 'id_number', label: '商品名稱', value: '', type: 'text', placeholder: '请输入...' },
-{ id: 'department', label: '類別', value: '', type: 'text', placeholder: '请输入...' },
-{ id: 'position', label: '狀況', value: '', type: 'text', placeholder: '请输入...(新舊程度)' },
-{ id: 'phone', label: '售價', value: '', type: 'tel', placeholder: '请输入...' },
-{ id: 'email', label: '數量', value: '', type: 'email', placeholder: '请输入...' },
-{ id: 'comments', label: '詳情描述', value: '', type: 'textarea', placeholder: '请输入...' }*/
+/*{ id: 'name', label: '商品圖片', value: '', type: 'text', placeholder:
+'請输入...' }, { id: 'id_number', label: '商品名稱', value: '', type: 'text',
+placeholder: '请输入...' }, { id: 'department', label: '類別', value: '', type:
+'text', placeholder: '请输入...' }, { id: 'position', label: '狀況', value: '',
+type: 'text', placeholder: '请输入...(新舊程度)' }, { id: 'phone', label:
+'售價', value: '', type: 'tel', placeholder: '请输入...' }, { id: 'email',
+label: '數量', value: '', type: 'email', placeholder: '请输入...' }, { id:
+'comments', label: '詳情描述', value: '', type: 'textarea', placeholder:
+'请输入...' }*/

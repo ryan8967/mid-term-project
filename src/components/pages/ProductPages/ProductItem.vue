@@ -48,6 +48,7 @@ export default {
     'productImg',
   ],
   data() {
+    
     return {
       isClicked: false,
       img: '',

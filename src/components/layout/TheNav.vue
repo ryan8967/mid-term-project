@@ -7,9 +7,7 @@
           v-for="category in categories"
           :key="category.name"
         >
-          <!--主選項-->
           <router-link :to="category.path">{{ category.name }}</router-link>
-          <!--子菜單，只有當有子類別時顯示-->
           <div
             class="subcategory-menu"
             v-if="category.subcategories.length > 0"
@@ -63,7 +61,7 @@ export default {
         },
         {
           name: "3C",
-          path: "/clothes",
+          path: "/newProducts",
           subcategories: [
             { name: "行動裝置", path: "/newProducts" },
             { name: "電腦", path: "/newProducts" },
@@ -74,7 +72,7 @@ export default {
         },
         {
           name: "書店",
-          path: "/books",
+          path: "/newProducts",
           subcategories: [
             { name: "教科書", path: "/newProducts" },
             { name: "小說", path: "/newProducts" },

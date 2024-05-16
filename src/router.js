@@ -20,7 +20,7 @@ import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    
+
     // General Pages
     { path: "/", redirect: "/home" },
     { path: "/home", component: HomePage },
@@ -38,6 +38,7 @@ const router = createRouter({
     { path: "/products", component: ProductsPage },
     { path: "/newproduct", component: newProduct },
     { path: "/ProductDetail", component: ProductDetail },
+    
   ],
 });
 

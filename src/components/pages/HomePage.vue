@@ -13,7 +13,9 @@
       <div class="banner-left-text">
         用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
       </div>
-      <button class="banner-left-button"><router-link to="/notFound">成為賣家!</router-link></button>
+      <button class="banner-left-button">
+        <router-link to="/notFound">成為賣家!</router-link>
+      </button>
     </div>
     <div class="banner-right">
       <img
@@ -35,12 +37,13 @@
         v-for="product in products"
         :key="product.id"
         :id="product.id"
-        :title="product.title"
         :image="product.image"
+        :title="product.title"
+        :tag="product.tag"
+        :condition="product.condition"
         :price="product.price"
+        :quantity="product.quantity"
         :description="product.description"
-        :tag1="product.tag1"
-        :tag2="product.tag2"
       />
     </div>
   </div>
@@ -59,13 +62,14 @@ export default {
       products: [
         {
           id: 1,
-          title: "辛拉麵 韓國境內版",
           image:
             "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
+          title: "辛拉麵 韓國境內版",
+          tag: "食品",
+          condition: "新品",
           price: 35,
+          quantity: 1,
           description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
-          tag1: "食品",
-          tag2: "泡麵",
         },
         {
           id: 2,
@@ -138,7 +142,7 @@ export default {
 .banner-right-image {
   width: auto;
   height: 310px;
-  padding-left: 25px; 
+  padding-left: 25px;
 }
 
 .banner-left-text {
@@ -194,7 +198,7 @@ export default {
   padding: 0 20px;
 }
 
-a{
+a {
   text-decoration: none;
   color: black;
 }

@@ -1,16 +1,29 @@
 <template>
-  <!-- <h1>Profile</h1> -->
   <div class="profile-container">
     <div class="profile-card">
-      <div class="info"><label>姓名</label><span>{{ account.name }}</span></div>
-      <div class="info"><label>學號</label><span>{{ account.sid }}</span></div>
-      <div class="info"><label>信箱</label><span>{{ account.email }}</span></div>
-      <div class="info"><label>電話</label><span>{{ account.phone }}</span></div>
+      <div class="info">
+        <label>姓名</label><span>{{ account.name }}</span>
+      </div>
+      <div class="info">
+        <label>學號</label><span>{{ account.sid }}</span>
+      </div>
+      <div class="info">
+        <label>信箱</label><span>{{ account.email }}</span>
+      </div>
+      <div class="info">
+        <label>電話</label><span>{{ account.phone }}</span>
+      </div>
     </div>
     <div class="menu">
-      <router-link :to="{ path: '/records' }"><div class="actions">買賣紀錄/申訴</div></router-link>
-      <router-link :to="{ path: '/newproduct' }"><div class="actions">上架物品</div></router-link>
-      <router-link :to="{ path: '/IndivMarket' }"><div class="actions">個人商場</div></router-link>
+      <router-link :to="{ path: '/records' }"
+        ><div class="actions">買賣紀錄/申訴</div></router-link
+      >
+      <router-link :to="{ path: '/newproduct' }"
+        ><div class="actions">上架物品</div></router-link
+      >
+      <router-link :to="{ path: '/IndivMarket' }"
+        ><div class="actions">個人商場</div></router-link
+      >
     </div>
   </div>
 </template>
@@ -19,14 +32,12 @@
 export default {
   data() {
     return {
-      account: 
-        {
-          name: "coolstuff",
-          sid: "111432100",
-          birth: "2000/1/1",
-          email: "test@gmail.com",
-          phone: "0987654321",
-        }
+      account: {
+        name: "coolstuff",
+        sid: "111432100",
+        email: "test@gmail.com",
+        phone: "0987654321",
+      },
     };
   },
 };
@@ -34,19 +45,19 @@ export default {
 
 <style>
 .profile-container {
-  display: flex;  /* 使用flex布局 */
-  justify-content: space-between;  /* 兩個子元素之間保持距離 */
-  align-items: flex-start;  /* 讓子元素從頂部開始對齊 */
-  width: 70%;  /* 調整容器寬度以適應內容 */
-  max-width: 1200px;  /* 可設定最大寬度 */
-  padding: 20px;  
+  display: flex; /* 使用flex布局 */
+  justify-content: space-between; /* 兩個子元素之間保持距離 */
+  align-items: flex-start; /* 讓子元素從頂部開始對齊 */
+  width: 70%; /* 調整容器寬度以適應內容 */
+  max-width: 1200px; /* 可設定最大寬度 */
+  padding: 20px;
   margin: 50px auto;
 }
 
-.profile-card { 
+.profile-card {
   padding: 20px;
   justify-content: center;
-  background-color: #EBD9B4;
+  background-color: #ebd9b4;
   border-radius: 30px;
 }
 
@@ -66,11 +77,11 @@ export default {
   font-weight: bold;
 }
 
-.menu{
-  display: flex;   /* 使用 Flexbox 來布局 */
+.menu {
+  display: flex; /* 使用 Flexbox 來布局 */
   align-items: center;
   flex-direction: column;
-  gap: 16px; 
+  gap: 16px;
   width: 100%; /* 確保容器寬度適應父元素 */
   padding-top: 10px;
 }
@@ -81,7 +92,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  border: 2px solid #C69F76;
+  border: 2px solid #c69f76;
   border-radius: 30px;
   padding: 16px 18px;
   font-size: 16px;
