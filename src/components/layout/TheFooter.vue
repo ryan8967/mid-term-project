@@ -83,17 +83,17 @@
 }
 
 .footer-content {
-  padding-left: 6%;
+  display: flex;
+  padding-left: 10%;
   padding-top: 20px;
   width: 75%;
-  display: flex;
   /* justify-content: space-around;
   align-items: flex-start; */
 }
 
 .footer-heading {
   min-width: 200px;
-  margin: 0 14px;
+  margin: 0 20px;
   /* display: flex; */
   /* align-items: center;  */
   font-size: small;
@@ -162,9 +162,9 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  margin: 0 20px;
+  margin: 20 0px;
   text-align: left;
-  padding: 10px 50px;
+  padding-top: 10px;
 }
 .social-item + .social-item{
   margin-left: 20px;
