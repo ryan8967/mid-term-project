@@ -57,8 +57,12 @@
     </div>
     <div class="item-details" style="width: 610px; margin-top: 30px">
       <ul style="font-size: 25px; line-height: 2.25">
-        <li>商品狀況 : 九成新</li>
-        <li>數量: 1</li>
+        <li>商品狀況 :
+           <span class="condition">{{ product.condition }}<br></span>
+        </li>
+        <li>數量：
+          <span class="productNumber">{{ product.productNumber }}</span>
+        </li>
         <li>商品詳情描述 :</li>
         <p class="description">{{ product.description }}</p>
       </ul>
@@ -137,6 +141,8 @@ export default {
       product: {
         name: "Fender Stratocaster",
         price: "¥87,800",
+        condition:"九成新",
+        productNumber:1,
         description:
           "Alder body with gloss finish, Three Player Series single-coil Stratocaster pickups, 'Modern C'-shaped neck profile",
         rating: 5,
