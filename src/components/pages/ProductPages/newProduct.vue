@@ -2,7 +2,10 @@
   <div class="product-form">
     <div class="form-group">
       <label>商品圖片</label>
-      <button class="upload-button">新增圖片</button>
+      <!-- <button class="upload-button">新增圖片</button> -->
+      <form>
+        <input type="file" id="imageUpload" name="imageUpload" class="upload-button"/>
+      </form>
     </div>
     <div class="form-group">
       <label>商品名稱</label>
@@ -89,13 +92,12 @@ export default {
   },
   methods: {
     // handleFileUpload(event, index) {
-     
+
     // },
     submitForm() {
-
       console.log("Form submitted!");
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

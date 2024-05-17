@@ -39,7 +39,7 @@
         :id="product.id"
         :image="product.image"
         :title="product.title"
-        :tag="product.tag"
+        :tag1="product.tag1"
         :condition="product.condition"
         :price="product.price"
         :quantity="product.quantity"
@@ -65,7 +65,8 @@ export default {
           image:
             "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
           title: "辛拉麵 韓國境內版",
-          tag: "食品",
+          tag1: "食品",
+          tag2: "食品",
           condition: "新品",
           price: 35,
           quantity: 1,
