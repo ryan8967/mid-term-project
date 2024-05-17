@@ -21,14 +21,12 @@
         />
       </router-link>
       <div class="profile-dropdown">
-        <router-link to="/profile" class="profile">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-            alt="Shopping-cart-icon"
-            class="cart-icon"
-            @click="toggleDropdown"
-          />
-        </router-link>
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+          alt="Shopping-cart-icon"
+          class="cart-icon"
+          @click="toggleDropdown"
+        />
         <div class="dropdown-content" v-show="dropDown">
           <router-link to="/profile">我的帳戶</router-link>
           <router-link to="/IndivMarket">我的賣場</router-link>
