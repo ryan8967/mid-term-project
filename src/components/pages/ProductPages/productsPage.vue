@@ -26,12 +26,22 @@ export default {
       products: [],
     };
   },
+
+  props: {
+    query: {
+      type: String,
+      required: true,
+      default: '' // Provide a default value if needed
+    }
+  },
+
   components: {
     ProductCard,
   },
+
   created() {
     axios
-      .get('http://127.0.0.1:8000/api/products')
+      .get(`http://127.0.0.1:8000/api/products/${this.query}`)
       .then((response) => {
         this.products = response.data;
       })
