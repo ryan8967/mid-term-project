@@ -4,7 +4,8 @@
       <div class="product-card__content">
         <img :src="image" :alt="title" class="product-card__image" />
         <div class="product-card__tags">
-          <span class="product-card__tag">{{ tag }}</span>
+          <span class="product-card__tag">{{ tag1 }}</span>
+          <span class="product-card__tag">{{ tag2 }}</span>
           <p class="amount">數量:{{ quantity }}</p>
         </div>
         <h3 class="title">{{ title }}</h3>
@@ -31,7 +32,8 @@ export default {
     "id",
     "image",
     "title",
-    "tag",
+    "tag1",
+    "tag2",
     "condition",
     "price",
     "quantity",
