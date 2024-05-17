@@ -1,19 +1,19 @@
 <template>
-  <div class="product-form">
+  <form class="product-form">
     <div class="form-group">
       <label>商品圖片</label>
       <!-- <button class="upload-button">新增圖片</button> -->
-      <form>
-        <input type="file" id="imageUpload" name="imageUpload" class="upload-button"/>
-      </form>
+      <div class="form-group">
+        <input type="file" id="imageUpload" name="imageUpload" class="upload-button" @change="handleFileUpload" required/>
+      </div>
     </div>
     <div class="form-group">
       <label>商品名稱</label>
-      <input type="text" placeholder="請輸入..." />
+      <input type="text" v-model="name" placeholder="請輸入..." required/>
     </div>
     <div class="form-group">
       <label>類別</label>
-      <select>
+      <select v-model="mainCategory">
         <option>請選擇...</option>
         <optgroup label="食品">食品</optgroup>
         <option value="泡麵">泡麵</option>
@@ -48,21 +48,21 @@
     </div>
     <div class="form-group">
       <label>狀況</label>
-      <input type="text" placeholder="請輸入新舊程度..." />
+      <input type="text" v-model="condition" placeholder="請輸入新舊程度..." />
     </div>
     <div class="form-group">
       <label>售價</label>
-      <input type="text" placeholder="請輸入..." />
+      <input type="number" v-model="price" placeholder="請輸入..." />
     </div>
     <div class="form-group">
       <label>數量</label>
-      <input type="text" placeholder="請輸入..." />
+      <input type="number" v-model="quantity" placeholder="請輸入..." required/>
     </div>
     <div class="form-group">
       <label>詳細描述</label>
-      <textarea placeholder="請輸入..."></textarea>
-    </div>
-    <div
+      <textarea v-model="description" placeholder="請輸入..."></textarea>
+  </div>
+    <!-- <div
       class="image-upload-row"
       v-for="(image, index) in images"
       :key="'image' + index"
@@ -75,30 +75,61 @@
         :id="'imageUpload' + index"
         @change="handleFileUpload($event, index)"
       />
-    </div>
+    </div> -->
     <div class="form-group">
       <button class="submit-button" @click="submitForm">提交</button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "ProductForm",
   data() {
     return {
       // Your data properties here
+      imageUpload: null,
+      name: '',
+      mainCategory: '',
+      subCategory: '',
+      condition: '',
+      price: '',
+      quantity: '',
+      remarks: '',
+      soldStatus: ''
     };
   },
   methods: {
-    // handleFileUpload(event, index) {
-
-    // },
-    submitForm() {
-      console.log("Form submitted!");
+    handleFileUpload(event) {
+      this.imageUpload = event.target.files[0];
     },
-  },
-};
+    submitForm() {
+      const formData = new FormData();
+
+      formData.append('image_url', this.imageUpload);
+      formData.append('name', this.name);
+      formData.append('main_category', this.mainCategory);
+      formData.append('sub_category', this.subCategory);
+      formData.append('condition', this.condition);
+      formData.append('price', this.price);
+      formData.append('quantity', this.quantity);
+      formData.append('remarks', this.remarks);
+      formData.append('sold_status', this.soldStatus);
+
+      axios.post('http://localhost:8000/api/products', formData)
+        .then((response) => {
+          console.log('Product created:' ,response.data);
+          alert('商品成功上架!');
+        })
+        .catch(error => {
+          console.error('Error creating product:', error.response);
+          alert('商品上架失敗。')
+        });
+      
+    }
+    },
+  };
 </script>
 <style scoped>
 .product-form {
@@ -146,6 +177,12 @@ export default {
 
 .upload-button:hover {
   background-color: #e0e0e0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
 }
 
 .submit-button {
