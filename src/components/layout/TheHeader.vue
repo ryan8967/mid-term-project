@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -46,8 +47,42 @@ export default {
     };
   },
   methods: {
+    isLoggedIn() {
+      return localStorage.getItem("mode") === "in";
+    },
+
     toggleDropdown() {
-      this.dropDown = !this.dropDown;
+      if (this.LoggedIn == "true") {
+        this.dropDown = !this.dropDown;
+      } else {
+        this.Login();
+      }
+    },
+
+    async Login() {
+      if (this.LoggedIn === "login") {
+        try {
+          const response = await axios.get(
+            "http://localhost:8000/login",
+
+            console.log("Signed in successfully:"),
+            localStorage.setItem("token", response.data.token),
+            localStorage.setItem("mode", "in")
+          );
+        } catch (error) {
+          console.log("Signed in failed")
+        }
+      }
+    },
+
+    checkAuthentication() {
+      // Initial check
+      this.LoggedIn = this.isLoggedIn();
+
+      // Periodic check every 5 seconds (adjust interval as needed)
+      setInterval(() => {
+        this.LoggedIn = this.isLoggedIn();
+      }, 500);
     },
   },
 };

@@ -27,17 +27,60 @@ const router = createRouter({
     { path: "/about", component: AboutUs },
 
     // User Pages
-    { path: "/cart", component: UserCart },
-    { path: "/IndivMarket", component: IndivMarket },
-    { path: "/records", component: RecordsPage },
-    { path: "/profile", component: ProfilePage },
+    {
+      path: "/cart",
+      component: UserCart,
+      // meta: {
+      //   requiresAuth: true,
+      // },
+    },
+    {
+      path: "/IndivMarket",
+      component: IndivMarket,
+      // meta: {
+      //   requiresAuth: true,
+      // },
+    },
+    {
+      path: "/records",
+      component: RecordsPage,
+      // meta: {
+      //   requiresAuth: true,
+      // },
+    },
+    {
+      path: "/profile",
+      component: ProfilePage,
+      // meta: {
+      //   requiresAuth: true,
+      // },
+    },
     { path: "/seller", component: SellerPage },
 
     // Product Pages
     { path: "/products", component: ProductsPage },
-    { path: "/newproduct", component: newProduct },
+    {
+      path: "/newproduct",
+      component: newProduct,
+      // meta: {
+      //   requiresAuth: true,
+      // },
+    },
     { path: "/productdetail", component: ProductDetail },
   ],
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.requiresAuth) {
+//     const user = localStorage.getItem("user");
+//     if (user) {
+//       next();
+//     } else {
+//       next("/auth");
+//     }
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;
