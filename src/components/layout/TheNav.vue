@@ -33,7 +33,7 @@ export default {
       categories: [
         {
           name: "新品",
-          path: "/newProducts",
+          path: "/products",
           subcategories: [],
         },
         {

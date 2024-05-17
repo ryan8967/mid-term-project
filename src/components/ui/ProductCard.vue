@@ -2,77 +2,66 @@
   <li class="product">
     <div class="product-card">
       <div class="product-card__content">
-        <img :src="image" :alt="title" class="product-card__image" />
+        <img :src="image" :alt="name" class="product-card__image" />
         <div class="product-card__tags">
-          <span class="product-card__tag">{{ tag1 }}</span>
-          <span class="product-card__tag">{{ tag2 }}</span>
+          <span class="product-card__tag">{{ main_category }}</span>
+          <span class="product-card__tag">{{ sub_category }}</span>
           <p class="amount">數量:{{ quantity }}</p>
         </div>
-        <h3 class="title">{{ title }}</h3>
+        <h3 class="title">{{ name }}</h3>
         <h3 class="price">${{ price }}</h3>
       </div>
     </div>
   </li>
-  <!-- <div class="product__text">
-        <h3>{{ title }}</h3>
-        <base-badge mode="highlight" :no-margin-left="true">
-          <h4>${{ price }}</h4>
-        </base-badge>
-        <p>{{ description }}</p>
-      </div> -->
-  <!-- <div class="product__actions">
-      <button @click="addToCart">Add to Cart</button>
-    </div> -->
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   props: [
     "id",
     "image",
-    "title",
-    "tag1",
-    "tag2",
+    "name",
+    "main_category",
+    "sub_category",
     "condition",
     "price",
     "quantity",
-    "description",
+    "remarks",
   ],
   methods: {
-    addToCart() {
-      const payload = {
-        productId: this.id,
-      };
-      axios
-        .post(`http://localhost:3000/addcart/ryanyang`)
-        .then((response) => {
-          this.products = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      fetch(`http://localhost:3000/addcart/ryanyang`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to add item to cart");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error("Error adding item to cart:", error);
-        });
-    },
+    //   addToCart() {
+    //     const payload = {
+    //       productId: this.id,
+    //     };
+    //     axios
+    //       .post(`http://localhost:3000/addcart/ryanyang`)
+    //       .then((response) => {
+    //         this.products = response.data;
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //     fetch(`http://localhost:3000/addcart/ryanyang`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(payload),
+    //     })
+    //       .then((response) => {
+    //         if (!response.ok) {
+    //           throw new Error("Failed to add item to cart");
+    //         }
+    //         return response.json();
+    //       })
+    //       .then((data) => {
+    //         console.log(data);
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error adding item to cart:", error);
+    //       });
+    // },
   },
 };
 </script>

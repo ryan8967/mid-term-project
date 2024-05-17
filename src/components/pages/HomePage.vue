@@ -33,18 +33,17 @@
     />
     <div class="product-card-row">
       <ProductCard
-        class="product"
-        v-for="product in products"
-        :key="product.id"
-        :id="product.id"
-        :image="product.image"
-        :title="product.title"
-        :tag1="product.tag1"
-        :condition="product.condition"
-        :price="product.price"
-        :quantity="product.quantity"
-        :description="product.description"
-      />
+      class="product"
+      v-for="prod in products"
+      :key="prod._id"
+      :id="prod._id"
+      :image="prod.image"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :price="prod.price"
+      :quantity="prod.quantity"
+    ></ProductCard>
     </div>
   </div>
 </template>
@@ -64,10 +63,9 @@ export default {
           id: 1,
           image:
             "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
-          title: "辛拉麵 韓國境內版",
-          tag1: "食品",
-          tag2: "食品",
-          condition: "新品",
+          name: "辛拉麵 韓國境內版",
+          main_category: "食品",
+          sub_category: "食品",
           price: 35,
           quantity: 1,
           description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
