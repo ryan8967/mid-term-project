@@ -33,7 +33,7 @@
         <div class="sub-block">私訊</div>
       </div>
       <section class="product-actions">
-        <button class="add-to-cart">加入購物車</button>
+        <button @click="addToCart(product.id, product.productNumber)" class="add-to-cart">加入購物車</button>
       </section>
     </div>
   </div>
@@ -67,11 +67,22 @@ export default {
     };
   },
   methods: {
-    addToCart() {
-      alert("Added to cart!");
-    },
+    addToCart(productId, quantity) {
+    axios.post('/api/cart/add', {
+      product_id: productId,
+      quantity: quantity
+    })
+    .then(response => {
+      alert('產品已加入購物車！');
+      console.log('加入購物車:', response.data);
+    })
+    .catch(error => {
+      console.error('加入購物車失敗:', error.response.data);
+      alert('加入購物車失敗: ' + (error.response.data.message || error.message));
+    });
+  },
     created() {
-    const productId = this.$route.params.id;
+    const productId = this.$route.params.id; // 確保你的路由設置可以接收id參數
     axios
       .get(`http://127.0.0.1:8000/api/products/${productId}`)
       .then((response) => {

@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ProductCard from '@/components/ui/ProductCard.vue';
 export default {
     components: {
@@ -34,29 +35,59 @@ export default {
     },
     data() {
         return {
+            userId: null, // 假設你已知的用戶ID，實際應用中你可能從登入狀態或URL參數中獲得
             products: [
                 {
-                    id: 1,
-                    title: "辛拉麵 韓國境內版",
-                    image:
-                        "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
-                    price: 35,
-                    description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
-                    tag1: "食品",
-                    tag2: "泡麵",
-                },
-                {
-                    id: 2,
-                    title: "輕量化無線滑鼠 對稱式高背設計",
-                    image:
-                        "https://shoplineimg.com/5a238dc8080f0658ad003280/655184effafd2661c21e462c/800x.jpg?",
-                    price: 299,
-                    description: "符合人體工學的無線滑鼠，適合長時間操作不易疲勞。",
-                    tag1: "3C",
-                    tag2: "滑鼠",
+                //     id: 1,
+                //     title: "辛拉麵 韓國境內版",
+                //     image:
+                //         "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
+                //     price: 35,
+                //     description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
+                //     tag1: "食品",
+                //     tag2: "泡麵",
+                // },
+                // {
+                //     id: 2,
+                //     title: "輕量化無線滑鼠 對稱式高背設計",
+                //     image:
+                //         "https://shoplineimg.com/5a238dc8080f0658ad003280/655184effafd2661c21e462c/800x.jpg?",
+                //     price: 299,
+                //     description: "符合人體工學的無線滑鼠，適合長時間操作不易疲勞。",
+                //     tag1: "3C",
+                //     tag2: "滑鼠",
+                 
                 },
             ]
+            
         }
+    },
+    methods: {
+        //能登入後再測試一次
+        fetchUserId() {
+            axios.get('/api/user')  // 使用相對路徑調用 API
+                .then(response => {
+                    this.userId = response.data.user_id;  // 假設後端返回的資訊中包含 id
+                    this.fetchProducts();
+                })
+                .catch(error => {
+                    console.error('Error fetching user ID:', error);
+                });
+        },
+        fetchProducts() {
+            if (!this.userId) return;  // 確保有 userId 才發起請求
+            axios.get(`http://localhost:8000/api/products/user/${this.userId}`)
+                .then(response => {
+                    this.products = response.data;
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+    },
+    mounted() {
+        this.fetchUserId();  // 在掛載時獲取用戶 ID
+        this.fetchProducts();
     }
 }
 </script>
