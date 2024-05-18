@@ -1,12 +1,12 @@
 import { createApp } from 'vue';
 import router from './router';
 import App from './App.vue';
-import axios from 'axios';
+// import axios from 'axios';
 
-axios.defaults.withCredentials = true;
-axios.get('/csrf-token').then(response => {
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken;
-});
+// axios.defaults.withCredentials = true;
+// axios.get('/csrf-token').then(response => {
+//     axios.defaults.headers.common['X-CSRF-TOKEN'] = response.data.csrfToken;
+// });
 
 // document.addEventListener('DOMContentLoaded', function () {
 //     const token = document.querySelector('meta[name="csrf-token"]');
