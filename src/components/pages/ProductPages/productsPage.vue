@@ -2,7 +2,8 @@
   <div class="container">
     <h1>New Products</h1>
   </div>
-  <ProductCard
+  <div class="products">
+    <ProductCard
       v-for="prod in products"
       :key="prod._id"
       :id="prod._id"
@@ -15,11 +16,12 @@
       :quantity="prod.quantity"
       :remarks="prod.remarks"
     ></ProductCard>
+  </div>
 </template>
 
 <script>
 import ProductCard from "@/components/ui/ProductCard.vue";
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
@@ -31,8 +33,8 @@ export default {
     query: {
       type: String,
       required: true,
-      default: '' // Provide a default value if needed
-    }
+      default: "", // Provide a default value if needed
+    },
   },
 
   components: {
@@ -52,3 +54,10 @@ export default {
 };
 </script>
 
+<style scoped>
+.products {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
+  gap: 20px; /* Adds space between product cards */
+}
+</style>
