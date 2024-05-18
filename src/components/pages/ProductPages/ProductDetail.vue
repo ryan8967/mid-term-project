@@ -1,128 +1,46 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <div class="product-card">
-    <img
-      src="@/assets/images/guitar.png"
-      alt="Product Image"
-      class="product-image"
-      style="
-        width: 450px;
-        height: 450px;
-        border-radius: 15px;
-        position: relative;
-        top: 100px;
-        left: 100px;
-      "
-    />
-    <h1 class="product-name" style="top: 70px">{{ product.name }}</h1>
-    <div class="rectangle" style="left: 759px">
-      <span class="text">其他</span>
-    </div>
-    <div class="rectangle" style="left: calc(759px + 102px + 13px)">
-      <span class="text">吉他</span>
-    </div>
-    <div class="line"></div>
-    <div class="product-details">
-      <div
-        class="price-container"
-        style="position: absolute; left: calc(759px + 450px)"
-      >
-        <p class="price">{{ product.price }}</p>
-      </div>
-      <div class="ratings">
-        <!-- Render stars based on rating -->
-        <span v-for="n in product.rating" :key="n" class="star">&#9733;</span>
-      </div>
-      <div class="add-to-cart-btn">
-        <button
-          @click="addToCart"
-          style="
-            position: absolute;
-            bottom: 40px;
-            right: -780px;
-            width: 200px;
-            height: 50px;
-            padding: 10px 20px;
-            font-size: 20px;
-            background-color: #ffffff;
-            color: black;
-            border: 3px solid #d5ba9c;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 2px 2px 3px #888888;
-          "
-        >
-          加入購物車
-        </button>
-      </div>
-    </div>
-    <div class="item-details" style="width: 610px; margin-top: 30px">
-      <ul style="font-size: 25px; line-height: 2.25">
-        <li>商品狀況 :
-           <span class="condition">{{ product.condition }}<br></span>
-        </li>
-        <li>數量：
-          <span class="productNumber">{{ product.productNumber }}</span>
-        </li>
-        <li>商品詳情描述 :</li>
-        <p class="description">{{ product.description }}</p>
-      </ul>
-    </div>
-    <!-- New colored block at the bottom left corner -->
-    <div class="staffInformation">
-      <p class="ratinggg">{{ product.rating.toFixed(1) }}</p>
-      <div class="sub-block left">COOL STUFF</div>
-      <div class="sub-block right">私訊</div>
-    </div>
-    <div>
-      <p
-        style="
-          position: absolute;
-          bottom: 110px;
-          right: -740px;
-          font-size: 20px;
-          color: rgb(186, 116, 131);
-        "
-      >
-        我有興趣!(N)
-      </p>
+  <div class="container">
+    <div class="product-overview">
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Heart_corazón.svg"
-        alt="heart Icon"
-        style="
-          position: absolute;
-          bottom: 106px;
-          right: -620px;
-          width: 30px;
-          height: 30px;
-        "
+        loading="lazy"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/e7093d4bda2d68a620b8b4de4502f66d5320e50facc2f4139bd6455a4bc89aeb?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+        alt="Fender Stratocaster"
+        class="product-image"
       />
+      <section class="product-details">
+        <div class="product-header">
+          <div class="product-info">
+            <h1 class="product-title">{{ product.name }}</h1>
+          </div>
+          <div class="product-tags">
+            <span class="tag">{{ tag1 }}</span>
+            <span class="tag">tag2</span>
+            <span class="product-price">{{ product.price }}</span>
+          </div>
+        </div>
+        <hr class="divider" />
+        <div class="product-description">
+          <p class="description">商品狀況: {{ product.condition }}</p>
+          <p class="description">數量: {{ product.productNumber }}</p>
+          <p class="description">詳情描述: {{ product.description }}</p>
+        </div>
+      </section>
     </div>
-    <div class="add-to-cart-btn">
-      <button
-        @click="addToCart"
-        style="
-          position: absolute;
-          bottom: 40px;
-          right: -780px;
-          width: 200px;
-          height: 50px;
-          padding: 10px 20px;
-          font-size: 20px;
-          background-color: #ffffff;
-          color: black;
-          border: 3px solid #d5ba9c;
-          border-radius: 30px;
-          cursor: pointer;
-          box-shadow: 2px 2px 3px #888888;
-        "
-      >
-        加入購物車
-      </button>
+    <div class="actions-container">
+      <div class="staffInformation">
+        <div class="sub-block">COOL STUFF</div>
+        <div class="sub-block">私訊</div>
+      </div>
+      <section class="product-actions">
+        <button class="add-to-cart">加入購物車</button>
+      </section>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   props: [
     "id",
@@ -135,150 +53,183 @@ export default {
     "quantity",
     "description",
   ],
-  name: "ProductCard",
   data() {
     return {
       product: {
         name: "Fender Stratocaster",
         price: "¥87,800",
-        condition:"九成新",
-        productNumber:1,
+        condition: "九成新",
+        productNumber: 1,
         description:
           "Alder body with gloss finish, Three Player Series single-coil Stratocaster pickups, 'Modern C'-shaped neck profile",
         rating: 5,
       },
     };
   },
-
   methods: {
-    nextSlide() {
-      this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    },
     addToCart() {
-      // Add to cart logic
       alert("Added to cart!");
     },
+    created() {
+    const productId = this.$route.params.id;
+    axios
+      .get(`http://127.0.0.1:8000/api/products/${productId}`)
+      .then((response) => {
+        this.product = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   },
 };
 </script>
 
 <style scoped>
-.product-card {
-  width: 500px;
-  height: 700px;
-  padding: 20px;
-  margin: 10px;
-  position: relative;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  padding-top: 3%;
+}
+
+.product-overview {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 70%;
+}
+
+@media (min-width: 992px) {
+  .product-overview {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
 .product-image {
-  position: relative;
-  width: 450px;
-  height: 450px;
-}
-
-.product-name {
-  position: absolute;
-  top: 15px;
-  left: 755px;
-  width: 361px;
-  height: 58px;
-  font-size: 40px;
+  width: 500px;
+  height: 500px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
 }
 
 .product-details {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
 }
 
-.star {
-  position: relative;
-  bottom: -120px;
-  right: -350px;
-  font-size: 35px;
-  color: #fff384;
-  -webkit-text-stroke: 2.5px #d1b596;
-  z-index: 1;
+.product-header {
+  display: flex;
+  flex-direction: column;
 }
 
-.rectangle {
-  width: 85px;
-  height: 29px;
-  background-color: #e2dbc9;
-  border-radius: 30px;
-  position: absolute;
-  top: 135px;
-  text-align: center;
+.product-info {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
 
-.text {
-  font-size: 20px;
-  line-height: 32px;
-}
-
-.price-container {
-  position: absolute;
-  top: 113px;
-}
-
-.price {
+.product-title {
+  font-family: "Zen Old Mincho", sans-serif;
   font-size: 40px;
+  font-weight: 500;
 }
-.line {
-  position: absolute;
-  top: 180px;
-  width: 633px;
-  height: 2px;
-  left: 730px;
+
+.product-tags {
+  display: flex;
+  margin-top: 25px;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.tag {
+  font-family: "Zen Old Mincho", sans-serif;
+  border-radius: 30px;
+  background-color: #cfaf8d;
+  padding: 7px 30px;
+}
+
+.divider {
+  border: 2px solid rgba(198, 159, 118, 1);
   background-color: #c69f76;
+  height: 2px;
+  margin: 14px 0 0 0;
 }
-.item-details {
-  position: absolute;
-  top: 200px;
-  left: 730px;
-  font-size: 18px;
+
+.product-price {
+  font-family: "Zen Old Mincho", sans-serif;
+  font-weight: 600;
+  font-size: 36px;
 }
+
+.product-description {
+  margin-top: 23px;
+  font-family: "Zen Old Mincho", sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+.description{
+  margin-top: 16px;
+
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+}
+
 .staffInformation {
-  position: absolute;
-  bottom: 40px;
-  left: 100px;
-  width: 720px;
-  height: 60px;
+  flex: 1;
   background-color: #e2dbc9;
   border-radius: 25px;
-  font-size: 23px;
-  line-height: 42px;
-  text-align: center;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
   box-shadow: 2px 2px 3px #888888;
 }
+
 .sub-block {
-  position: absolute;
-  bottom: 10px;
-  height: 40px;
-  border-radius: 25px;
+  flex: 1;
+  margin: 0 10px;
+  height: 45px;
+  display: flex;
   justify-content: center;
-  font-size: 23px;
-  text-align: center;
-  line-height: 42px;
-}
-.left {
-  width: 240px;
-  left: 10px;
+  align-items: center;
   background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: larger;
 }
-.right {
-  width: 180px;
-  right: 10px;
-  background-color: #ffffff;
+
+.product-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
 }
-.ratinggg {
-  position: absolute;
-  bottom: 10px;
-  left: 465px;
-  font-size: 27px;
-  line-height: 42px;
+
+.add-to-cart {
+  border: 1px solid #000;
+  color: #000;
   text-align: center;
-  z-index: 1;
-  color: #c69f76;
-  /*-webkit-text-stroke: 3px #C69F76;*/
+  justify-content: center;
+  padding: 18px 26px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  font-family: "Zen Old Mincho", sans-serif;
+  font-size: 20px;
+  font-weight: 550;
 }
 </style>

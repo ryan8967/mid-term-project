@@ -85,6 +85,7 @@
 
 <script>
 export default {
+  props:[],
   data() {
     return {
       showComplaintForm: false,

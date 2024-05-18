@@ -66,7 +66,7 @@ const router = createRouter({
       //   requiresAuth: true,
       // },
     },
-    { path: "/productdetail", component: ProductDetail },
+    { path: "/productdetail/:id", component: ProductDetail },
   ],
 });
 

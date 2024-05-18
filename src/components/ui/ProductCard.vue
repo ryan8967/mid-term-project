@@ -1,5 +1,5 @@
 <template>
-  <li class="product">
+  <li class="product" @click="navigateToDetails">
     <div class="product-card">
       <div class="product-card__content">
         <img :src="image" :alt="name" class="product-card__image" />
@@ -30,6 +30,9 @@ export default {
     "remarks",
   ],
   methods: {
+    navigateToDetails() {
+      this.$emit('navigate', this.id);
+    }
     //   addToCart() {
     //     const payload = {
     //       productId: this.id,

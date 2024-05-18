@@ -15,6 +15,7 @@
       :price="prod.price"
       :quantity="prod.quantity"
       :remarks="prod.remarks"
+      @navigate="goToProductDetails"
     ></ProductCard>
   </div>
 </template>
@@ -50,6 +51,11 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  methods: {
+    goToProductDetails(productId) {
+      this.$router.push({ name: "ProductDetails", params: { id: productId } });
+    },
   },
 };
 </script>
