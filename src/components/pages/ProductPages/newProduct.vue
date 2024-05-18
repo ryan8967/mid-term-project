@@ -1,5 +1,5 @@
 <template>
-  <form class="product-form">
+  <form class="product-form" @submit.prevent="submitForm">
     <div class="form-group">
       <label>商品圖片</label>
       <!-- <button class="upload-button">新增圖片</button> -->
@@ -12,47 +12,32 @@
       <input type="text" v-model="name" placeholder="請輸入..." required/>
     </div>
     <div class="form-group">
-      <label>類別</label>
+      <label>主類別</label>
       <select v-model="mainCategory">
         <option>請選擇...</option>
-        <optgroup label="食品">食品</optgroup>
-        <option value="泡麵">泡麵</option>
-        <option value="零食">零食</option>
-        <option value="生鮮">生鮮</option>
-        <option value="熟食">熟食</option>
-        <option value="飲品">飲品</option>
-        <option value="冷凍食品">冷凍食品</option>
-        <option value="罐頭/醬料">罐頭/醬料</option>
-        <option value="食品">其他食品</option>
-
-        <optgroup label="日常">日常</optgroup>
-        <option value="家電">家電</option>
-        <option value="服飾">服飾</option>
-        <option value="衛生">衛生</option>
-        <option value="裝飾">裝飾</option>
-        <option value="日常">其他日常</option>
-
-        <optgroup label="3C">3C</optgroup>
-        <option value="行動裝置">行動裝置</option>
-        <option value="電腦">電腦</option>
-        <option value="周邊">周邊</option>
-        <option value="相機">相機</option>
-        <option value="3C">其他3C</option>
-
-        <optgroup label="書店">書店</optgroup>
-        <option value="教科書">教科書</option>
-        <option value="小說">小說</option>
-        <option value="知識/理財">知識/理財</option>
-        <option value="文具">文具</option>
+        <option value="食品">食品</option>
+        <option value="日常">日常</option>
+        <option value="3C">3C</option>
+        <option value="書店">書店</option>
       </select>
+    </div>
+    <div class="form-group" v-if="availableSubCategories.length">
+      <label>副類別</label>
+        <select v-model="selectedSubCategory">
+          <!-- 不可提交空值 -->
+          <option disabled value="">請選擇...</option>
+          <option v-for="subCategory in availableSubCategories" :key="subCategory" :value="subCategory">
+            {{ subCategory }}
+          </option>
+        </select>
     </div>
     <div class="form-group">
       <label>狀況</label>
-      <input type="text" v-model="condition" placeholder="請輸入新舊程度..." />
+      <input type="text" v-model="condition" placeholder="請輸入新舊程度..." required/>
     </div>
     <div class="form-group">
       <label>售價</label>
-      <input type="number" v-model="price" placeholder="請輸入..." />
+      <input type="number" v-model="price" placeholder="請輸入..." required/>
     </div>
     <div class="form-group">
       <label>數量</label>
@@ -60,7 +45,7 @@
     </div>
     <div class="form-group">
       <label>詳細描述</label>
-      <textarea v-model="description" placeholder="請輸入..."></textarea>
+      <textarea v-model="remarks" placeholder="請輸入..."></textarea>
   </div>
     <!-- <div
       class="image-upload-row"
@@ -77,13 +62,26 @@
       />
     </div> -->
     <div class="form-group">
-      <button class="submit-button" @click="submitForm">提交</button>
+      <button type="submit" class="submit-button">上架</button>
     </div>
   </form>
 </template>
 
 <script>
 import axios from 'axios';
+//設置default url
+axios.defaults.baseURL = 'http://localhost:8000/api';
+
+axios.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
+
 export default {
   name: "ProductForm",
   data() {
@@ -92,13 +90,27 @@ export default {
       imageUpload: null,
       name: '',
       mainCategory: '',
-      subCategory: '',
+      subCategories: {
+        食品: ["泡麵", "零食", "生鮮", "熟食", "飲品", "冷凍食品", "罐頭/醬料", "其他食品"],
+        日常: ["家電", "服飾", "衛生", "裝飾", "其他日常"],
+        '3C': ["行動裝置", "電腦", "周邊", "相機", "其他3C"],
+        書店: ["教科書", "小說", "知識/理財", "文具"]
+      },
+      selectedSubCategory: '',
+      //預設為空，即不會顯示副類別(於主類別未選擇時)
+      availableSubCategories: [],
       condition: '',
       price: '',
       quantity: '',
       remarks: '',
-      soldStatus: ''
+      soldStatus: 'In stock'
     };
+  },
+  watch:{
+    mainCategory(newVal){
+      this.availableSubCategories = this.subCategories[newVal] || [];
+      this.selectedSubCategory = ''; // Reset on main category change
+    }
   },
   methods: {
     handleFileUpload(event) {
@@ -110,20 +122,20 @@ export default {
       formData.append('image_url', this.imageUpload);
       formData.append('name', this.name);
       formData.append('main_category', this.mainCategory);
-      formData.append('sub_category', this.subCategory);
+      formData.append('sub_category', this.selectedSubCategory);
       formData.append('condition', this.condition);
       formData.append('price', this.price);
       formData.append('quantity', this.quantity);
       formData.append('remarks', this.remarks);
       formData.append('sold_status', this.soldStatus);
 
-      axios.post('http://localhost:8000/api/products', formData)
+      axios.post('/products', formData)
         .then((response) => {
-          console.log('Product created:' ,response.data);
+          console.log('Product created:',response.data);
           alert('商品成功上架!');
         })
         .catch(error => {
-          console.error('Error creating product:', error.response);
+          console.error('Error creating product:',error.response);
           alert('商品上架失敗。')
         });
       
