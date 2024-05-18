@@ -9,6 +9,7 @@ import AboutUs from "./components/pages/AboutUs.vue";
 // import ProductsPage from "./components/pages/ProductPages/ProductsPage.vue";
 import ProductsPage from "./components/pages/ProductPages/productsPage.vue";
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
+import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
 
 // User Pages
 import UserCart from "./components/pages/UserPages/UserCart.vue";
@@ -16,7 +17,6 @@ import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
 import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
-import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -59,7 +59,7 @@ const router = createRouter({
     { path: "/seller", component: SellerPage },
 
     // Product Pages
-    { path: "/products", component: ProductsPage },
+    { path: "/products/:id", component: ProductsPage },
     {
       path: "/newproduct",
       component: newProduct,

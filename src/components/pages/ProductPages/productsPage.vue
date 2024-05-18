@@ -23,6 +23,7 @@
 <script>
 import ProductCard from "@/components/ui/ProductCard.vue";
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -32,8 +33,6 @@ export default {
 
   props: {
     query: {
-      type: String,
-      required: true,
       default: "", // Provide a default value if needed
     },
   },
@@ -43,22 +42,49 @@ export default {
   },
 
   created() {
-    axios
-      .get(`http://127.0.0.1:8000/api/products/${this.query}`)
-      .then((response) => {
-        this.products = response.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    this.fetchProducts();
+    console.log(this.query);
   },
+
   methods: {
+    fetchProducts() {
+      const queryParams = new URLSearchParams(this.$route.query).toString();
+      const url = `http://127.0.0.1:8000/api/products/?${queryParams}`;
+      console.log(url);
+      axios
+        .get(url)
+        .then((response) => {
+          this.products = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId } });
+      this.$router.push({ name: "ProductDetails", params: { _id: productId } });
+    },
+  },
+
+  watch: {
+    // Watch for changes in route query parameters and refetch products
+    "$route.query": {
+      handler() {
+        this.fetchProducts();
+      },
+      immediate: true,
     },
   },
 };
 </script>
+
+<style scoped>
+.products {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
+  gap: 20px; /* Adds space between product cards */
+}
+</style>
+
 
 <style scoped>
 .products {

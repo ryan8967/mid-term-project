@@ -26,6 +26,7 @@
   </div>
 </template>
 
+
 <script>
 export default {
   data() {
@@ -38,11 +39,11 @@ export default {
         },
         {
           name: "食品",
-          path: "/products",
+          path: "/products/食品",
           props: { query: "食品" },
           subcategories: [
-            { name: "泡麵", path: "/products", props: { query: "泡麵" } },
-            { name: "零食", path: "/products", props: { query: "零食" } },
+            { name: "泡麵", path: "/products/泡麵",  props: true},
+            { name: "零食", path: "/products/零食", props: { query: "零食" } },
             { name: "生鮮", path: "/products", props: { query: "生鮮" } },
             { name: "熟食", path: "/products", props: { query: "熟食" } },
             { name: "飲品", path: "/products", props: { query: "飲品" } },
@@ -55,8 +56,8 @@ export default {
           path: "/products",
           props: { query: "日常" },
           subcategories: [
-            { name: "家電", path: "/products", props: { query: "家電" } },
-            { name: "服飾", path: "/products", props: { query: "服飾" } },
+            { name: "家電", path: "/products", props: { query: "?sub_category=家電" } },
+            { name: "服飾", path: "/products", props: { query: "?sub_category=服飾" } },
             { name: "衛生", path: "/products", props: { query: "衛生" } },
             { name: "裝飾", path: "/products", props: { query: "裝飾" } },
           ],
