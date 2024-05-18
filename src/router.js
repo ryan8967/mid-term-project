@@ -6,7 +6,8 @@ import NotFound from "./components/pages/NotFound.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
 
 // Product Pages
-import ProductsPage from "./components/pages/ProductPages/ProductsPage.vue";
+// import ProductsPage from "./components/pages/ProductPages/ProductsPage.vue";
+import ProductsPage from "./components/pages/ProductPages/productsPage.vue";
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
 
 // User Pages
