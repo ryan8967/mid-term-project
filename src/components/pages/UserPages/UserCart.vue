@@ -1,6 +1,6 @@
 <template>
     <!-- <h1>Cart</h1> -->
-    <div class="cart-container">
+    <form @submit.prevent="submitOrder" class="cart-container">
       <table>
         <thead>
           <tr>
@@ -9,38 +9,44 @@
             <th>價格</th>
             <th>小計</th>
             <th>庫存量</th>
+            <!-- <th>購買</th> -->
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in cartItems" :key="item.id">
             <td>{{ item.name }}</td>
             <td>
-              <button @click="decrement(item)" class="cart-button">-</button>
-                <span>{{ item.quantity }}</span>
-              <button @click="increment(item)" class="cart-button">+</button>
+              <button type="button" @click="decrement(item)" class="cart-button" :disabled="item.quantity <= 1">-</button>
+              <span>{{ item.quantity }}</span>
+              <button type="button" @click="increment(item)" class="cart-button" :disabled="item.quantity >= item.stock">+</button>
             </td>
-            <td>{{ item.prices }}</td>
-            <td>{{ item.prices * item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.price * item.quantity }}</td>
             <td>{{ item.stock }}</td>
+            <!-- <td>
+              <button @click="purchaseProduct(item.id, item.quantity)" class="purchase-button">購買</button>
+            </td> -->
           </tr>
         </tbody>
       </table>
-    </div>
+    </form>
     <div class="checkout">
-      <p>總金額:{{totalPrice}}</p>
+      <p>總金額:{{ totalPrice }}</p>
       <button @click="checkout" class="checkout-button">結帳</button>
     </div>
 
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       cartItems: [
         { id: 1, name: '商品A', price: 100, quantity: 1, stock: 10 },
-        { id: 2, name: '商品B', price: 200, quantity: 2, stock: 5 },
-        { id: 3, name: '商品C', price: 150, quantity: 1, stock: 8 }
+        // { id: 2, name: '商品B', price: 200, quantity: 2, stock: 5 },
+        // { id: 3, name: '商品C', price: 150, quantity: 1, stock: 8 }
       ]
     };
   },
@@ -61,8 +67,23 @@ export default {
       }
     },
     checkout() {
-      alert('結帳金額為：' + this.totalPrice);
+      //為每一個商品做購買的動作
+      this.cartItems.forEach(item =>{
+        this.purchaseProduct(item.id, item.quantity);
+      });
     },
+    purchaseProduct(productId, quantity) {
+    axios.post(`/api/products/${productId}/purchase`, { quantity: quantity })
+      .then(response => {
+        alert('購買成功');
+        console('已成功向賣家下單:', response.data)
+      })
+      .catch(error => {
+        console.error('購買失敗:', error.response.data);
+        alert('購買失敗。' + error.response.data.message);
+      });
+  }
+
   },
 
 }
@@ -105,6 +126,14 @@ th, td {
 tr:hover .cart-button {
     visibility: visible; /* 懸停時顯示按鈕 */
     background-color:  #fbf6f0;
+}
+
+.purchase-button{
+  font: 20px Zen Old Mincho, sans-serif;
+  padding: 10px 20px;
+  border: 1px solid #C69F76;
+  border-radius: 30px;
+  cursor: pointer; /*將鼠標樣式更改為點擊*/
 }
 
 .checkout {
