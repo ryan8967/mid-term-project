@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ProductCard from '@/components/ui/ProductCard.vue';
 export default {
     components: {
@@ -36,27 +37,42 @@ export default {
         return {
             products: [
                 {
-                    id: 1,
-                    title: "辛拉麵 韓國境內版",
-                    image:
-                        "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
-                    price: 35,
-                    description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
-                    tag1: "食品",
-                    tag2: "泡麵",
-                },
-                {
-                    id: 2,
-                    title: "輕量化無線滑鼠 對稱式高背設計",
-                    image:
-                        "https://shoplineimg.com/5a238dc8080f0658ad003280/655184effafd2661c21e462c/800x.jpg?",
-                    price: 299,
-                    description: "符合人體工學的無線滑鼠，適合長時間操作不易疲勞。",
-                    tag1: "3C",
-                    tag2: "滑鼠",
+                //     id: 1,
+                //     title: "辛拉麵 韓國境內版",
+                //     image:
+                //         "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
+                //     price: 35,
+                //     description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
+                //     tag1: "食品",
+                //     tag2: "泡麵",
+                // },
+                // {
+                //     id: 2,
+                //     title: "輕量化無線滑鼠 對稱式高背設計",
+                //     image:
+                //         "https://shoplineimg.com/5a238dc8080f0658ad003280/655184effafd2661c21e462c/800x.jpg?",
+                //     price: 299,
+                //     description: "符合人體工學的無線滑鼠，適合長時間操作不易疲勞。",
+                //     tag1: "3C",
+                //     tag2: "滑鼠",
+                userId: 1000001356955509966 // 假設你已知的用戶ID，實際應用中你可能從登入狀態或URL參數中獲得
                 },
             ]
         }
+    },
+    methods: {
+        fetchProducts() {
+            axios.get(`http://localhost:8000/api/products/user/${this.userId}`)
+                .then(response => {
+                    this.products = response.data;
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                });
+        }
+    },
+    mounted() {
+        this.fetchProducts();
     }
 }
 </script>

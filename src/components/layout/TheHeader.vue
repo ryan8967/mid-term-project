@@ -52,39 +52,33 @@ export default {
     },
 
     toggleDropdown() {
-      if (this.LoggedIn == "true") {
-        this.dropDown = !this.dropDown;
-      } else {
-        this.Login();
-      }
-    },
+    if (this.isLoggedIn()) { // 檢查是否已登入
+      this.dropDown = !this.dropDown; // 如果已登入，則切換下拉菜單的顯示狀態
+    } else {
+      this.Login(); // 如果未登入，則呼叫 Login 方法進行登入
+    }
+  },
 
-    async Login() {
-      if (this.LoggedIn === "login") {
-        try {
-          const response = await axios.get(
-            "http://localhost:8000/login",
+  async Login() {
+    try {
+      const response = await axios.get("http://localhost:8000/login"); // 調用登入 API
+      console.log("Signed in successfully");
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("mode", "in");
+      this.LoggedIn = true; // 更新 LoggedIn 狀態為已登入
+    } catch (error) {
+      console.error("Signed in failed", error);
+    }
+  },
 
-            console.log("Signed in successfully:"),
-            localStorage.setItem("token", response.data.token),
-            localStorage.setItem("mode", "in")
-          );
-        } catch (error) {
-          console.log("Signed in failed")
-        }
-      }
-    },
-
-    checkAuthentication() {
-      // Initial check
-      this.LoggedIn = this.isLoggedIn();
-
-      // Periodic check every 5 seconds (adjust interval as needed)
-      setInterval(() => {
-        this.LoggedIn = this.isLoggedIn();
-      }, 500);
+  checkAuthentication() {
+    this.LoggedIn = this.isLoggedIn(); // 初始檢查
+    setInterval(() => {
+      this.LoggedIn = this.isLoggedIn(); // 每500毫秒檢查一次
+      }, 5000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
     },
   },
+
 };
 </script>
 <style scoped>
@@ -127,6 +121,8 @@ export default {
   box-shadow: 3px 3px 3px black;
   border-radius: 50%;
 }
+
+
 
 .search input[type="text"] {
   min-width: 300px;
