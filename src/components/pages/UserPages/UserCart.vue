@@ -9,6 +9,7 @@
             <th>價格</th>
             <th>小計</th>
             <th>庫存量</th>
+            <th></th>
             <!-- <th>購買</th> -->
           </tr>
         </thead>
@@ -23,6 +24,9 @@
             <td>{{ item.price }}</td>
             <td>{{ item.price * item.quantity }}</td>
             <td>{{ item.stock }}</td>
+            <td>
+              <button @click="removeFromCart(item.id)" class="remove-button">移除</button>
+            </td>
             <!-- <td>
               <button @click="purchaseProduct(item.id, item.quantity)" class="purchase-button">購買</button>
             </td> -->
@@ -32,6 +36,7 @@
     </form>
     <div class="checkout">
       <p>總金額:{{ totalPrice }}</p>
+      <button @click="clearCart" class="clear-cart-button">清空購物車</button>
       <button @click="checkout" class="checkout-button">結帳</button>
     </div>
 
@@ -82,7 +87,29 @@ export default {
         console.error('購買失敗:', error.response.data);
         alert('購買失敗。' + error.response.data.message);
       });
-  }
+    },
+    removeFromCart(productId) {
+    axios.post(`/api/cart/remove`, { product_id: productId })
+      .then(() => {
+        this.cartItems = this.cartItems.filter(item => item.id !== productId);
+        alert('商品已從購物車移除');
+      })
+      .catch(error => {
+        console.error('移除失敗:', error.response);
+        alert('移除失敗: ' + error.response.data.message);
+      });
+    },
+    clearCart() {
+      axios.post(`/api/cart/clear`)
+        .then(() => {
+          this.cartItems = [];
+          alert('購物車已清空');
+        })
+        .catch(error => {
+          console.error('清空購物車失敗:', error.response);
+          alert('清空購物車失敗: ' + error.response.data.message);
+        });
+    },
 
   },
 
@@ -128,6 +155,14 @@ tr:hover .cart-button {
     background-color:  #fbf6f0;
 }
 
+.remove-button{
+  font: 16px Zen Old Mincho, sans-serif;
+  padding: 5px 10px;
+  border: 1px solid #C69F76;
+  border-radius: 30px;
+  cursor: pointer; /*將鼠標樣式更改為點擊*/
+}
+
 .purchase-button{
   font: 20px Zen Old Mincho, sans-serif;
   padding: 10px 20px;
@@ -143,11 +178,16 @@ tr:hover .cart-button {
   text-align: right;
 }
 
+.clear-cart-button,
 .checkout-button{
   font: 20px Zen Old Mincho, sans-serif;
   padding: 10px 20px;
   border: 1px solid #C69F76;
   border-radius: 30px;
   cursor: pointer; /*將鼠標樣式更改為點擊*/
+}
+
+.clear-cart-button{
+  margin-right: 20px;
 }
 </style>
