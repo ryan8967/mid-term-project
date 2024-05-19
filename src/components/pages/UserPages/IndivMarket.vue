@@ -9,16 +9,19 @@
     <div class="product-card-row">
         <ProductCard 
          class="product" 
-         v-for="product in products" 
-         :key="product.id" 
-         :id="product.id"
-         :title="product.title" 
-         :image="product.image" 
-         :price="product.price" 
-         :description="product.description"
-         :tag1="product.tag1" 
-         :tag2="product.tag2"
-        />
+         v-for="prod in products"
+        :key="prod._id"
+        :id="prod._id"
+        :image_url="prod.image_url"
+        :name="prod.name"
+        :main_category="prod.main_category"
+        :sub_category="prod.sub_category"
+        :condition="prod.condition"
+        :price="prod.price"
+        :quantity="prod.quantity"
+        :remarks="prod.remarks"
+        @navigate="goToProductDetails"
+        ></ProductCard>
     </div>
     <div class="market-menu">
         <router-link :to="{ path: '/newProducts' }"><div class="actions">上架物品</div></router-link>
@@ -51,15 +54,21 @@ export default {
                     console.error('Error fetching user ID:', error.response.data);
                 });
         },
+        //下面確定能抓到商品了
         fetchProducts() {
             if (!this.userId) return;  // 確保有 userId 才發起請求
-            axios.get(`http://localhost:8000/api/products/user/${this.userId}`)
-                .then(response => {
+
+            // 使用 URLSearchParams 來組建查詢字符串
+            const params = new URLSearchParams({ seller_id: this.userId }).toString();
+            let url = `http://127.0.0.1:8000/api/products/?${params}`;
+
+            axios.get(url)
+            .then(response => {
                     this.products = response.data;
                 })
-                .catch(error => {
-                    console.error('Error fetching products:', error.response.data);
-                });
+            .catch(error => {
+                console.error('Error fetching products:', error.response ? error.response.data : 'Unknown error');
+            });
         }
     },
     mounted() {
