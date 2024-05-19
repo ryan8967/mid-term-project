@@ -13,7 +13,7 @@ import NewPage from "./components/pages/ProductPages/Category/NewPage.vue";
 import OtherPage from "./components/pages/ProductPages/Category/OtherPage.vue";
 
 import ThreeCPage from "./components/pages/ProductPages/Category/3C/3CPage.vue";
-import AcessPage from "./components/pages/ProductPages/Category/3C/AcessPage.vue";
+// import AcessPage from "./components/pages/ProductPages/Category/3C/AcessPage.vue";
 import ComputerPage from "./components/pages/ProductPages/Category/3C/ComputerPage.vue";
 import EarPage from "./components/pages/ProductPages/Category/3C/EarPage.vue";
 import MobilePage from "./components/pages/ProductPages/Category/3C/MobilePage.vue";
@@ -90,7 +90,7 @@ const router = createRouter({
       { path: "其他", component: OtherPage },
 
       { path: "3C", component: ThreeCPage },
-      { path: "周邊", component: AcessPage },
+      { path: "周邊", component: HomePage },
       { path: "電腦", component: ComputerPage },
       { path: "耳機", component: EarPage },
       { path: "行動裝置", component: MobilePage },

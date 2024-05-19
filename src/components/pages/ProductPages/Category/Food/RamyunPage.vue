@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Other Products</h1>
+    <h1>泡麵</h1>
   </div>
   <div class="products">
     <ProductCard
@@ -36,18 +36,34 @@ export default {
   },
 
   created() {
-    this.fetchProducts();
+    console.log("what");
+    console.log("Route Query:", this.$route.query); // Debugging line
+
+    const queryParams = new URLSearchParams(this.$route.query).toString();
+    console.log("Query Params:", queryParams); // Debugging line
+
+    let url = "http://127.0.0.1:8000/api/products/?sub_category=${queryParams}";
+    console.log(url); // Debugging line
+
+    axios
+      .get(url)
+      .then((response) => {
+        this.products = response.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 
   methods: {
     fetchProducts() {
-      console.log('Route Query:', this.$route.query); // Debugging line
+      console.log("Route Query:", this.$route.query); // Debugging line
 
       const queryParams = new URLSearchParams(this.$route.query).toString();
-      console.log('Query Params:', queryParams); // Debugging line
-
-      let url = 'http://127.0.0.1:8000/api/products/?sub_category=泡麵';
-      console.log('Request URL:', url); // Debugging line
+      console.log("Query Params:", queryParams); // Debugging line
+      let url =
+        "http://127.0.0.1:8000/api/products/?sub_category=${queryParams}";
+      console.log(url); // Debugging line
 
       axios
         .get(url)
@@ -58,27 +74,9 @@ export default {
           console.log(error);
         });
     },
-    goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId } });
-    },
-    generatePath(path, props) {
-      if (props && props.query) {
-        return {
-          path: path,
-          query: props.query,
-        };
-      }
-      return path;
-    },
-  },
-
-  watch: {
-    "$route.query": {
-      handler() {
-        this.fetchProducts();
-      },
-      immediate: true,
-    },
+    // goToProductDetails(productId) {
+    //   this.$router.push({ name: "ProductDetails", params: { id: productId } });
+    // },
   },
 };
 </script>

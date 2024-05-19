@@ -7,9 +7,7 @@
           v-for="category in categories"
           :key="category.name"
         >
-          <router-link :to="generatePath(category.path, category.props)">
-            {{ category.name }}
-          </router-link>
+          <router-link :to="category.path">{{ category.name }}</router-link>
           <div
             class="subcategory-menu"
             v-if="category.subcategories.length > 0"
@@ -17,7 +15,7 @@
             <router-link
               v-for="subcategory in category.subcategories"
               :key="subcategory.name"
-              :to="generatePath(subcategory.path, subcategory.props)"
+              :to="subcategory.path"
             >
               {{ subcategory.name }}
             </router-link>
@@ -26,28 +24,9 @@
       </nav>
     </div>
   </div>
-  <div class="products">
-    <ProductCard
-      v-for="prod in products"
-      :key="prod._id"
-      :id="prod._id"
-      :image_url="prod.image_url"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :condition="prod.condition"
-      :price="prod.price"
-      :quantity="prod.quantity"
-      :remarks="prod.remarks"
-      @navigate="goToProductDetails"
-    ></ProductCard>
-  </div>
 </template>
 
 <script>
-import ProductCard from "@/components/ui/ProductCard.vue"; // Ensure this path is correct
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -63,107 +42,51 @@ export default {
           path: "/products/食品",
           subcategories: [
             { name: "泡麵", path: "/products/泡麵" },
-            { name: "零食", path: "/products" },
-            { name: "熟食", path: "/products" },
-            { name: "飲品", path: "/products" },
-            { name: "罐頭/醬料", path: "/products", props: { query: { sub_category: "罐頭/醬料" } } },
-            { name: "冷凍/生鮮", path: "/products", props: { query: { sub_category: "冷凍冷凍/生鮮" } } },
+            { name: "零食", path: "/products/零食" },
+            { name: "熟食", path: "/products/熟食" },
+            { name: "飲品", path: "/products/飲品" },
+            { name: "罐頭/醬料", path: "/products/罐頭醬料" },
+            { name: "冷凍/生鮮", path: "/products/冷凍生鮮" },
           ],
         },
         {
           name: "日常",
-          path: "/products",
+          path: "/products/日常",
           props: { query: { sub_category: "日常" } },
           subcategories: [
-            { name: "家電", path: "/products", props: { query: { sub_category: "家電" } } },
-            { name: "服飾", path: "/products", props: { query: { sub_category: "服飾" } } },
-            { name: "衛生", path: "/products", props: { query: { sub_category: "衛生" } } },
-            { name: "裝飾", path: "/products", props: { query: { sub_category: "裝飾" } } },
+            { name: "家電", path: "/products/家電" },
+            { name: "服飾", path: "/products/服飾" },
+            { name: "衛生", path: "/products/衛生" },
+            { name: "裝飾", path: "/products/裝飾" },
           ],
         },
         {
           name: "3C",
           path: "/products/3C",
-          // props: { query: { sub_category: "3C" } },
+          props: { query: { main_category: "3C" } },
           subcategories: [
-            { name: "行動裝置", path: "/products", props: { query: { sub_category: "行動裝置" } } },
-            { name: "電腦", path: "/products", props: { query: { sub_category: "電腦" } } },
-            { name: "周邊", path: "/products", props: { query: { sub_category: "周邊" } } },
-            { name: "耳機", path: "/products", props: { query: { sub_category: "耳機" } } },
+            { name: "行動裝置", path: "/products/行動裝置" },
+            { name: "電腦", path: "/products/電腦" },
+            { name: "周邊", path: "/products/周邊" },
+            { name: "耳機", path: "/products" },
           ],
         },
         {
           name: "書店",
-          path: "/products",
-          props: { query: { sub_category: "書店" } },
+          path: "/products/書店",
           subcategories: [
-            { name: "教科書", path: "/products", props: { query: { sub_category: "教科書" } } },
-            { name: "小說", path: "/products", props: { query: { sub_category: "小說" } } },
-            { name: "知識/理財", path: "/products", props: { query: { sub_category: "知識/理財" } } },
-            { name: "文具", path: "/products", props: { query: { sub_category: "文具" } } },
+            { name: "教科書", path: "/products" },
+            { name: "小說", path: "/products" },
+            { name: "知識/理財", path: "/products" },
+            { name: "文具", path: "/products" },
           ],
         },
         {
           name: "其他",
-          path: "/products",
-          subcategories: [],
-          props: { query: {} },
+          path: "/products/其他",
         },
       ],
     };
-  },
-
-  components: {
-    ProductCard, // Register the ProductCard component
-  },
-
-  created() {
-    this.fetchProducts();
-  },
-
-  methods: {
-    fetchProducts() {
-      console.log('Route Query:', this.$route.query); // Debugging line
-
-      const queryParams = new URLSearchParams(this.$route.query).toString();
-      console.log('Query Params:', queryParams); // Debugging line
-
-      let url = 'http://127.0.0.1:8000/api/products/';
-      if (queryParams) {
-        url += `?${queryParams}`;
-      }
-      console.log('Request URL:', url); // Debugging line
-
-      axios
-        .get(url)
-        .then((response) => {
-          this.products = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId } });
-    },
-    generatePath(path, props) {
-      if (props && props.query) {
-        return {
-          path: path,
-          query: props.query,
-        };
-      }
-      return path;
-    },
-  },
-
-  watch: {
-    "$route.query": {
-      handler() {
-        this.fetchProducts();
-      },
-      immediate: true,
-    },
   },
 };
 </script>
