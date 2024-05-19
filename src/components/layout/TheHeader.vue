@@ -9,8 +9,9 @@
     </div>
     <nav class="nav">
       <div class="search">
-        <form action="#">
-          <input type="text" placeholder=" Search..." name="search" />
+        <form @submit.prevent="searchProducts">
+          <input type="text" placeholder="Search..." v-model="searchQuery" />
+          <input type="submit" hidden />
         </form>
       </div>
       <router-link to="/cart">
@@ -41,6 +42,7 @@ export default {
     return {
       LoggedIn: false,
       dropDown: false,
+      searchQuery: '',
     };
   },
   methods: {
@@ -74,6 +76,25 @@ export default {
         this.LoggedIn = this.isLoggedIn(); // 每500毫秒檢查一次
       }, 5000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
     },
+
+    async searchProducts() {
+      const baseUrl = `http://127.0.0.1:8000/api/products/`;
+      const query = this.searchQuery.trim() ? `?name=${encodeURIComponent(this.searchQuery)}` : '';
+      const fullUrl = baseUrl + query;
+
+      console.log("Request URL:", fullUrl); // Debugging line
+
+      // Trigger navigation with query parameters
+      this.$router.push({ path: '/search', query: { name: this.searchQuery } });
+      // axios
+      //   .get(fullUrl)
+      //   .then((response) => {
+      //     this.products = response.data;
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error:", error);
+      //   });
+    }
   },
 
 };

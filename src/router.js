@@ -8,6 +8,7 @@ import AboutUs from "./components/pages/AboutUs.vue";
 // Product Pages
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
 import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
+import SearchPage from "./components/pages/SearchPage.vue";
 
 import NewPage from "./components/pages/ProductPages/Category/NewPage.vue";
 import OtherPage from "./components/pages/ProductPages/Category/OtherPage.vue";
@@ -117,6 +118,7 @@ const router = createRouter({
       //   { path: "零食", component: SnackPage },
       // ],
     },
+    { path: "/search", component: SearchPage},
     { path: "/products/其他", component: OtherPage },
     { path: "/products/3C", component: ThreeCPage },
     { path: "/products/周邊", component: AcessPage },
