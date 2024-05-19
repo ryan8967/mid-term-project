@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>New Products</h1>
+    <h1>Other Products</h1>
   </div>
   <div class="products">
     <ProductCard
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ProductCard from "@/components/ui/ProductCard.vue";
+import ProductCard from "@/components/ui/ProductCard.vue"; // Ensure this path is correct
 import axios from "axios";
 
 export default {
@@ -30,43 +30,49 @@ export default {
       products: [],
     };
   },
-
-  props: {
-    query: {
-      default: "", // Provide a default value if needed
-    },
-  },
-
+  
   components: {
-    ProductCard,
+    ProductCard, // Register the ProductCard component
   },
 
   created() {
     this.fetchProducts();
-    console.log(this.query);
   },
 
   methods: {
     fetchProducts() {
-      const queryParams = new URLSearchParams(this.$route.query).toString();
-      const url = `http://127.0.0.1:8000/api/products/?${queryParams}`;
-      console.log(url);
+      const queryParams = new URLSearchParams(this.$route.query);
+      console.log("Query Params:", queryParams);
+      // console.log('Query:', this.query);
+
+      let url = `http://127.0.0.1:8000/api/products/?`+queryParams;
+      console.log("Request URL:", url); // Debugging line
+
       axios
         .get(url)
         .then((response) => {
           this.products = response.data;
         })
         .catch((error) => {
+          console.log("Response Data:", this.products.data); // Debugging line
           console.log(error);
         });
     },
     goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { _id: productId } });
+      this.$router.push({ name: "ProductDetails", params: { id: productId } });
+    },
+    generatePath(path, props) {
+      if (props && props.query) {
+        return {
+          path: path,
+          query: props.query,
+        };
+      }
+      return path;
     },
   },
 
   watch: {
-    // Watch for changes in route query parameters and refetch products
     "$route.query": {
       handler() {
         this.fetchProducts();
@@ -76,15 +82,6 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.products {
-  display: flex;
-  flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
-  gap: 20px; /* Adds space between product cards */
-}
-</style>
-
 
 <style scoped>
 .products {

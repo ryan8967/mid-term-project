@@ -26,11 +26,11 @@
   </div>
 </template>
 
-
 <script>
 export default {
   data() {
     return {
+      products: [],
       categories: [
         {
           name: "新品",
@@ -40,56 +40,50 @@ export default {
         {
           name: "食品",
           path: "/products/食品",
-          props: { query: "食品" },
           subcategories: [
-            { name: "泡麵", path: "/products/泡麵",  props: true},
-            { name: "零食", path: "/products/零食", props: { query: "零食" } },
-            { name: "生鮮", path: "/products", props: { query: "生鮮" } },
-            { name: "熟食", path: "/products", props: { query: "熟食" } },
-            { name: "飲品", path: "/products", props: { query: "飲品" } },
-            { name: "罐頭/醬料", path: "/products", props: { query: "罐頭/醬料" } },
-            { name: "冷凍食品", path: "/products", props: { query: "冷凍食品" } },
+            { name: "泡麵", path: "/products/泡麵" },
+            { name: "零食", path: "/products/零食" },
+            { name: "熟食", path: "/products/熟食" },
+            { name: "飲品", path: "/products/飲品" },
+            { name: "罐頭/醬料", path: "/products/罐頭醬料" },
+            { name: "冷凍/生鮮", path: "/products/冷凍生鮮" },
           ],
         },
         {
           name: "日常",
-          path: "/products",
-          props: { query: "日常" },
+          path: "/products/日常",
+          props: { query: { sub_category: "日常" } },
           subcategories: [
-            { name: "家電", path: "/products", props: { query: "?sub_category=家電" } },
-            { name: "服飾", path: "/products", props: { query: "?sub_category=服飾" } },
-            { name: "衛生", path: "/products", props: { query: "衛生" } },
-            { name: "裝飾", path: "/products", props: { query: "裝飾" } },
+            { name: "家電", path: "/products/家電" },
+            { name: "服飾", path: "/products/服飾" },
+            { name: "衛生", path: "/products/衛生" },
+            { name: "裝飾", path: "/products/裝飾" },
           ],
         },
         {
           name: "3C",
-          path: "/products",
-          props: { query: "3C" },
+          path: "/products/3C",
+          props: { query: { main_category: "3C" } },
           subcategories: [
-            { name: "行動裝置", path: "/products", props: { query: "行動裝置" } },
-            { name: "電腦", path: "/products", props: { query: "電腦" } },
-            { name: "周邊", path: "/products", props: { query: "周邊" } },
-            { name: "相機", path: "/products", props: { query: "相機" } },
-            { name: "耳機", path: "/products", props: { query: "耳機" } },
+            { name: "行動裝置", path: "/products/行動裝置" },
+            { name: "電腦", path: "/products/電腦" },
+            { name: "周邊", path: "/products/周邊" },
+            { name: "耳機", path: "/products" },
           ],
         },
         {
           name: "書店",
-          path: "/products",
-          props: { query: "書店" },
+          path: "/products/書店",
           subcategories: [
-            { name: "教科書", path: "/products", props: { query: "教科書" } },
-            { name: "小說", path: "/products", props: { query: "小說" } },
-            { name: "知識/理財", path: "/products", props: { query: "知識/理財" } },
-            { name: "文具", path: "/products", props: { query: "文具" } },
+            { name: "教科書", path: "/products" },
+            { name: "小說", path: "/products" },
+            { name: "知識/理財", path: "/products" },
+            { name: "文具", path: "/products" },
           ],
         },
         {
           name: "其他",
-          path: "/products",
-          subcategories: [],
-          props: { query: "" },
+          path: "/products/其他",
         },
       ],
     };
