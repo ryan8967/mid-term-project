@@ -1,22 +1,12 @@
 <template>
   <div class="container">
-    <h1>Other Products</h1>
+    <h1>3C</h1>
   </div>
   <div class="products">
-    <ProductCard
-      v-for="prod in products"
-      :key="prod._id"
-      :id="prod._id"
-      :image_url="prod.image_url"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :condition="prod.condition"
-      :price="prod.price"
-      :quantity="prod.quantity"
-      :remarks="prod.remarks"
-      @navigate="goToProductDetails"
-    ></ProductCard>
+    <ProductCard v-for="prod in products" :key="prod._id" :id="prod._id" :image_url="prod.image_url" :name="prod.name"
+      :main_category="prod.main_category" :sub_category="prod.sub_category" :condition="prod.condition"
+      :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks" @navigate="goToProductDetails">
+    </ProductCard>
   </div>
 </template>
 
@@ -30,22 +20,27 @@ export default {
       products: [],
     };
   },
-  
+
   components: {
     ProductCard, // Register the ProductCard component
   },
 
   created() {
-    this.fetchProducts();
+    // this.fetchProducts();
+  },
+
+  mounted() {
+    // this.fetchProducts();
   },
 
   methods: {
     fetchProducts() {
-      const queryParams = new URLSearchParams(this.$route.query);
-      console.log("Query Params:", queryParams);
+      // const queryParams = new URLSearchParams(this.$route.query);
+      // console.log("Query Params:", queryParams);
       // console.log('Query:', this.query);
 
-      let url = `http://127.0.0.1:8000/api/products/?`+queryParams;
+      // let url = `http://127.0.0.1:8000/api/products/?`+queryParams;
+      let url = `http://127.0.0.1:8000/api/products/?main_category=3C`;
       console.log("Request URL:", url); // Debugging line
 
       axios
@@ -86,7 +81,9 @@ export default {
 <style scoped>
 .products {
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
-  gap: 20px; /* Adds space between product cards */
+  flex-wrap: wrap;
+  /* Allows wrapping to the next row if there's not enough space */
+  gap: 20px;
+  /* Adds space between product cards */
 }
 </style>
