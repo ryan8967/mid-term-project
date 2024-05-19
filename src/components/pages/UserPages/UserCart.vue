@@ -61,6 +61,7 @@ export default {
     }
   },
   methods:{
+    //數量變更
     increment(item) {
       if (item.quantity < item.stock) {
         item.quantity++;
@@ -77,6 +78,7 @@ export default {
         this.purchaseProduct(item.id, item.quantity);
       });
     },
+    //購買商品
     purchaseProduct(productId, quantity) {
     axios.post(`/api/products/${productId}/purchase`, { quantity: quantity })
       .then(response => {
@@ -84,31 +86,33 @@ export default {
         console('已成功向賣家下單:', response.data)
       })
       .catch(error => {
-        console.error('購買失敗:', error.response.data);
+        console.log('購買失敗:', error.response.data);
         alert('購買失敗。' + (error.response.data.message || error.message));
       });
     },
+    //移除商品
     removeFromCart(productId) {
     axios.post(`/api/cart/remove`, { product_id: productId })
-      .then(() => {
-        this.cartItems = this.cartItems.filter(item => item.id !== productId);
+      .then(response => {
+        this.cartItems = response.data.items; // 假設後端返回的購物車數據包含在items屬性中
         alert('商品已從購物車移除');
       })
       .catch(error => {
-        console.error('移除失敗:', error.response.data);
-        alert('移除失敗: ' + (error.response.data.message || error.message));
+        console.log('移除失敗:', error.response.data);
+        alert('移除失敗: ' + (error.response && error.response.data.message ? error.response.data.message : error.message));
       });
     },
+    //清空購物車
     clearCart() {
-      axios.post(`/api/cart/clear`)
-        .then(() => {
-          this.cartItems = [];
-          alert('購物車已清空');
-        })
-        .catch(error => {
-          console.error('清空購物車失敗:', error.response.data);
-          alert('清空購物車失敗: ' + (error.response.data.message || error.message));
-        });
+    axios.post(`/api/cart/clear`)
+      .then(response => {
+        this.cartItems = response.data.items || []; // 使用後端返回的數據確保同步
+        alert('購物車已清空');
+    })
+      .catch(error => {
+        console.log('清空購物車失敗:', error.response.data);
+        alert('清空購物車失敗: ' + (error.response.data.message || error.message));
+      });
     },
 
   },
