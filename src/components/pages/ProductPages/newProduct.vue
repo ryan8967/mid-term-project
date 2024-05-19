@@ -3,7 +3,6 @@
     <div class="form-group">
       <label>商品圖片</label>
       <!-- <button class="upload-button">新增圖片</button> -->
-      <div class="form-group">
         <input
           type="file"
           id="imageUpload"
@@ -12,7 +11,6 @@
           @change="handleFileUpload"
           required
         />
-      </div>
     </div>
     <div class="form-group">
       <label>商品名稱</label>
@@ -101,16 +99,7 @@ export default {
       name: "",
       mainCategory: "",
       subCategories: {
-        食品: [
-          "泡麵",
-          "零食",
-          "生鮮",
-          "熟食",
-          "飲品",
-          "冷凍食品",
-          "罐頭/醬料",
-          "其他食品",
-        ],
+        食品: ["泡麵", "零食", "生鮮", "熟食", "飲品", "冷凍食品", "罐頭/醬料", "其他食品",],
         日常: ["家電", "服飾", "衛生", "裝飾", "其他日常"],
         "3C": ["行動裝置", "電腦", "周邊", "相機", "其他3C"],
         書店: ["教科書", "小說", "知識/理財", "文具"],
@@ -148,8 +137,11 @@ export default {
       formData.append("remarks", this.remarks);
       formData.append("sold_status", this.soldStatus);
 
-      axios
-        .post("/products", formData)
+      axios.post('/products', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
         .then((response) => {
           console.log("Product created:", response.data);
           alert("商品成功上架!");
@@ -176,16 +168,21 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 20px; /* Adds gap between form groups */
+  /* margin-bottom: 20px; Adds gap between form groups */
   gap: 40px; /* Adds gap between label and input within each form group */
 }
 
 .form-group label {
   width: 150px;
+  height: 80px;
   padding: 16px;
   font-size: 18px;
   font-weight: 500;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 5px;
   background-color: #fff2d7;
+  border-radius: 20px;
 }
 
 .form-group input,
@@ -196,6 +193,7 @@ export default {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 14px;
+  margin-bottom: 10px;
 }
 
 .upload-button {
@@ -223,6 +221,7 @@ input::-webkit-inner-spin-button {
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+  margin: 20px 0;
 }
 
 .submit-button:hover {
