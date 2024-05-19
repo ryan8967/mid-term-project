@@ -6,9 +6,37 @@ import NotFound from "./components/pages/NotFound.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
 
 // Product Pages
-import ProductsPage from "./components/pages/ProductPages/ProductsPage.vue";
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
 import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
+
+import NewPage from "./components/pages/ProductPages/Category/NewPage.vue";
+import OtherPage from "./components/pages/ProductPages/Category/OtherPage.vue";
+
+import ThreeCPage from "./components/pages/ProductPages/Category/3C/3CPage.vue";
+// import AcessPage from "./components/pages/ProductPages/Category/3C/AcessPage.vue";
+import ComputerPage from "./components/pages/ProductPages/Category/3C/ComputerPage.vue";
+import EarPage from "./components/pages/ProductPages/Category/3C/EarPage.vue";
+import MobilePage from "./components/pages/ProductPages/Category/3C/MobilePage.vue";
+
+import BookPage from "./components/pages/ProductPages/Category/Book/BookPage.vue";
+import FictionPage from "./components/pages/ProductPages/Category/Book/FictionBook.vue";
+import KnowPage from "./components/pages/ProductPages/Category/Book/KnowBook.vue";
+import StaplePage from "./components/pages/ProductPages/Category/Book/StapleBook.vue";
+import TextPage from "./components/pages/ProductPages/Category/Book/TextBook.vue";
+
+import AppliancePage from "./components/pages/ProductPages/Category/Essential/AppliancePage.vue";
+import ClothPage from "./components/pages/ProductPages/Category/Essential/ClothPage.vue";
+import DecorPage from "./components/pages/ProductPages/Category/Essential/DecorPage.vue";
+import EssentialPage from "./components/pages/ProductPages/Category/Essential/EssentialPage.vue";
+import HygeinePage from "./components/pages/ProductPages/Category/Essential/HygeinePage.vue";
+
+import FoodPage from "./components/pages/ProductPages/Category/Food/FoodPage.vue";
+import DrinkPage from "./components/pages/ProductPages/Category/Food/DrinkPage.vue";
+import FreshPage from "./components/pages/ProductPages/Category/Food/FreshPage.vue";
+import HotPage from "./components/pages/ProductPages/Category/Food/HotPage.vue";
+import RamyunPage from "./components/pages/ProductPages/Category/Food/RamyunPage.vue";
+import SnackPage from "./components/pages/ProductPages/Category/Food/SnackPage.vue";
+
 
 // User Pages
 import UserCart from "./components/pages/UserPages/UserCart.vue";
@@ -58,7 +86,35 @@ const router = createRouter({
     { path: "/seller", component: SellerPage },
 
     // Product Pages
-    { path: "/products/:id", component: ProductsPage },
+    { path: "/products", component: NewPage ,children: [
+      { path: "其他", component: OtherPage },
+
+      { path: "3C", component: ThreeCPage },
+      { path: "周邊", component: HomePage },
+      { path: "電腦", component: ComputerPage },
+      { path: "耳機", component: EarPage },
+      { path: "行動裝置", component: MobilePage },
+
+      { path: "書店", component: BookPage },
+      { path: "小說", component: FictionPage },
+      { path: "知識/理財", component: KnowPage },
+      { path: "文具", component: StaplePage },
+      { path: "教科書", component: TextPage },
+
+      { path: "家電", component: AppliancePage },
+      { path: "服裝", component: ClothPage },
+      { path: "裝飾", component: DecorPage },
+      { path: "日常", component: EssentialPage },
+      { path: "衛生用品", component: HygeinePage },
+
+      { path: "食品", component: FoodPage },
+      { path: "飲品", component: DrinkPage },
+      { path: "生鮮/冷凍", component: FreshPage },
+      { path: "熟食", component: HotPage },
+      { path: "泡麵", component: RamyunPage },
+      { path: "零食", component: SnackPage },
+    ]
+    },
     {
       path: "/newproduct",
       component: newProduct,
