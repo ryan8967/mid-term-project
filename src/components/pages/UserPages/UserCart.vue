@@ -46,74 +46,74 @@
 import axios from 'axios';
 
 export default {
-data() {
-  return {
-    cartItems: [
-      { id: 1, name: '商品A', price: 100, quantity: 1, stock: 10 },
-      // { id: 2, name: '商品B', price: 200, quantity: 2, stock: 5 },
-      // { id: 3, name: '商品C', price: 150, quantity: 1, stock: 8 }
-    ]
-  };
-},
-computed: {
-  totalPrice() {
-    return this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }
-},
-methods:{
-  //數量變更
-  increment(item) {
-    if (item.quantity < item.stock) {
-      item.quantity++;
+  data() {
+    return {
+      cartItems: [
+        { id: 1, name: '商品A', price: 100, quantity: 1, stock: 10 },
+        // { id: 2, name: '商品B', price: 200, quantity: 2, stock: 5 },
+        // { id: 3, name: '商品C', price: 150, quantity: 1, stock: 8 }
+      ]
+    };
+  },
+  computed: {
+    totalPrice() {
+      return this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     }
   },
-  decrement(item) {
-    if (item.quantity > 1) {
-      item.quantity--;
-    }
-  },
-  checkout() {
-    //為每一個商品做購買的動作
-    this.cartItems.forEach(item =>{
-      this.purchaseProduct(item.id, item.quantity);
-    });
-  },
-  //購買商品
-  purchaseProduct(productId, quantity) {
-  axios.post(`/api/products/${productId}/purchase`, { quantity: quantity })
-    .then(response => {
-      alert('購買成功');
-      console('已成功向賣家下單:', response.data)
+  methods:{
+    //數量變更
+    increment(item) {
+      if (item.quantity < item.stock) {
+        item.quantity++;
+      }
+    },
+    decrement(item) {
+      if (item.quantity > 1) {
+        item.quantity--;
+      }
+    },
+    checkout() {
+      //為每一個商品做購買的動作
+      this.cartItems.forEach(item =>{
+        this.purchaseProduct(item.id, item.quantity);
+      });
+    },
+    //購買商品
+    purchaseProduct(productId, quantity) {
+    axios.post(`/api/products/${productId}/purchase`, { quantity: quantity })
+      .then(response => {
+        alert('購買成功');
+        console('已成功向賣家下單:', response.data)
+      })
+      .catch(error => {
+        console.log('購買失敗:', error.response.data);
+        alert('購買失敗。' + (error.response.data.message || error.message));
+      });
+    },
+    //移除商品
+    removeFromCart(productId) {
+    axios.post(`/api/cart/remove`, { product_id: productId })
+      .then(response => {
+        this.cartItems = response.data.items; // 假設後端返回的購物車數據包含在items屬性中
+        alert('商品已從購物車移除');
+      })
+      .catch(error => {
+        console.log('移除失敗:', error.response.data);
+        alert('移除失敗: ' + (error.response && error.response.data.message ? error.response.data.message : error.message));
+      });
+    },
+    //清空購物車
+    clearCart() {
+    axios.post(`/api/cart/clear`)
+      .then(response => {
+        this.cartItems = response.data.items || []; // 使用後端返回的數據確保同步
+        alert('購物車已清空');
     })
-    .catch(error => {
-      console.log('購買失敗:', error.response.data);
-      alert('購買失敗。' + (error.response.data.message || error.message));
-    });
-  },
-  //移除商品
-  removeFromCart(productId) {
-  axios.post(`/api/cart/remove`, { product_id: productId })
-    .then(response => {
-      this.cartItems = response.data.items; // 假設後端返回的購物車數據包含在items屬性中
-      alert('商品已從購物車移除');
-    })
-    .catch(error => {
-      console.log('移除失敗:', error.response.data);
-      alert('移除失敗: ' + (error.response && error.response.data.message ? error.response.data.message : error.message));
-    });
-  },
-  //清空購物車
-  clearCart() {
-  axios.post(`/api/cart/clear`)
-    .then(response => {
-      this.cartItems = response.data.items || []; // 使用後端返回的數據確保同步
-      alert('購物車已清空');
-  })
-    .catch(error => {
-      console.log('清空購物車失敗:', error.response.data);
-      alert('清空購物車失敗: ' + (error.response.data.message || error.message));
-    });
-  },
+      .catch(error => {
+        console.log('清空購物車失敗:', error.response.data);
+        alert('清空購物車失敗: ' + (error.response.data.message || error.message));
+      });
+    },
 
 },
 

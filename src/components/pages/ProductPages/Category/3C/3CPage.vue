@@ -3,20 +3,10 @@
     <h1>3C 用品都在這</h1>
   </div>
   <div class="products">
-    <ProductCard
-      v-for="prod in products"
-      :key="prod._id"
-      :id="prod._id"
-      :image_url="prod.image_url"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :condition="prod.condition"
-      :price="prod.price"
-      :quantity="prod.quantity"
-      :remarks="prod.remarks"
-      @navigate="goToProductDetails"
-    ></ProductCard>
+    <ProductCard v-for="prod in products" :key="prod._id" :id="prod._id" :image_url="prod.image_url" :name="prod.name"
+      :main_category="prod.main_category" :sub_category="prod.sub_category" :condition="prod.condition"
+      :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks" @navigate="goToProductDetails">
+    </ProductCard>
   </div>
 </template>
 
@@ -30,7 +20,7 @@ export default {
       products: [],
     };
   },
-  
+
   components: {
     ProductCard,
   },
