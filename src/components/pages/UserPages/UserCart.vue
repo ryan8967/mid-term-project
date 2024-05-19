@@ -85,7 +85,7 @@ export default {
       })
       .catch(error => {
         console.error('購買失敗:', error.response.data);
-        alert('購買失敗。' + error.response.data.message);
+        alert('購買失敗。' + (error.response.data.message || error.message));
       });
     },
     removeFromCart(productId) {
@@ -95,8 +95,8 @@ export default {
         alert('商品已從購物車移除');
       })
       .catch(error => {
-        console.error('移除失敗:', error.response);
-        alert('移除失敗: ' + error.response.data.message);
+        console.error('移除失敗:', error.response.data);
+        alert('移除失敗: ' + (error.response.data.message || error.message));
       });
     },
     clearCart() {
@@ -106,8 +106,8 @@ export default {
           alert('購物車已清空');
         })
         .catch(error => {
-          console.error('清空購物車失敗:', error.response);
-          alert('清空購物車失敗: ' + error.response.data.message);
+          console.error('清空購物車失敗:', error.response.data);
+          alert('清空購物車失敗: ' + (error.response.data.message || error.message));
         });
     },
 
