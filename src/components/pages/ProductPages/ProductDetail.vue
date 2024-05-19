@@ -73,15 +73,16 @@ export default {
   },
   created() {
     const productId = this.$route.params.id; // 確保你的路由設置可以接收id參數
+    console.log("Query Params:", productId); // Debugging line
     axios
       .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
       .then((response) => {
-        this.products = response.data;
+        this.products = response.data[0];
+        console.log(this.products);
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(this.products);
   },
 };
 </script>

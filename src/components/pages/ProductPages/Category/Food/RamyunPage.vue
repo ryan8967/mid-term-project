@@ -42,7 +42,7 @@ export default {
     const queryParams = new URLSearchParams(this.$route.query).toString();
     console.log("Query Params:", queryParams); // Debugging line
 
-    let url = "http://127.0.0.1:8000/api/products/?sub_category=${{queryParams}}";
+    let url = "http://127.0.0.1:8000/api/products/?sub_category=泡麵";
     console.log(url); // Debugging line
 
     axios
@@ -74,9 +74,9 @@ export default {
           console.log(error);
         });
     },
-    // goToProductDetails(productId) {
-    //   this.$router.push({ name: "ProductDetails", params: { id: productId } });
-    // },
+    goToProductDetails(productId) {
+      this.$router.push({ name: "productdetail", params: { id: productId } });
+    },
   },
 };
 </script>

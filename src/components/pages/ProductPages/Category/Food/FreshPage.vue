@@ -41,13 +41,13 @@ export default {
 
   methods: {
     fetchProducts() {
-      console.log('Route Query:', this.$route.query); // Debugging line
+      console.log("Route Query:", this.$route.query); // Debugging line
 
       const queryParams = new URLSearchParams(this.$route.query).toString();
-      console.log('Query Params:', queryParams); // Debugging line
+      console.log("Query Params:", queryParams); // Debugging line
 
-      let url = 'http://127.0.0.1:8000/api/products/?sub_category=生鮮/冷凍';
-      console.log('Request URL:', url); // Debugging line
+      let url = "http://127.0.0.1:8000/api/products/?sub_category=生鮮/冷凍";
+      console.log("Request URL:", url); // Debugging line
 
       axios
         .get(url)
@@ -59,16 +59,7 @@ export default {
         });
     },
     goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId } });
-    },
-    generatePath(path, props) {
-      if (props && props.query) {
-        return {
-          path: path,
-          query: props.query,
-        };
-      }
-      return path;
+      this.$router.push({ name: "productdetail", params: { id: productId } });
     },
   },
 

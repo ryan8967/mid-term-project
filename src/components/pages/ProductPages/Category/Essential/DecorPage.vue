@@ -1,89 +1,80 @@
 <template>
-    <div class="container">
-      <h1>裝飾</h1>
-    </div>
-    <div class="products">
-      <ProductCard
-        v-for="prod in products"
-        :key="prod._id"
-        :id="prod._id"
-        :image_url="prod.image_url"
-        :name="prod.name"
-        :main_category="prod.main_category"
-        :sub_category="prod.sub_category"
-        :condition="prod.condition"
-        :price="prod.price"
-        :quantity="prod.quantity"
-        :remarks="prod.remarks"
-        @navigate="goToProductDetails"
-      ></ProductCard>
-    </div>
-  </template>
-  
-  <script>
-  import ProductCard from "@/components/ui/ProductCard.vue"; // Ensure this path is correct
-  import axios from "axios";
-  
-  export default {
-    data() {
-      return {
-        products: [],
-      };
+  <div class="container">
+    <h1>裝飾</h1>
+  </div>
+  <div class="products">
+    <ProductCard
+      v-for="prod in products"
+      :key="prod._id"
+      :id="prod._id"
+      :image_url="prod.image_url"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :condition="prod.condition"
+      :price="prod.price"
+      :quantity="prod.quantity"
+      :remarks="prod.remarks"
+      @navigate="goToProductDetails"
+    ></ProductCard>
+  </div>
+</template>
+
+<script>
+import ProductCard from "@/components/ui/ProductCard.vue"; // Ensure this path is correct
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      products: [],
+    };
+  },
+
+  components: {
+    ProductCard, // Register the ProductCard component
+  },
+
+  created() {
+    this.fetchProducts();
+  },
+
+  methods: {
+    fetchProducts() {
+      console.log("Route Query:", this.$route.query); // Debugging line
+
+      const queryParams = new URLSearchParams(this.$route.query).toString();
+      console.log("Query Params:", queryParams); // Debugging line
+
+      let url = "http://127.0.0.1:8000/api/products/?sub_category=裝飾";
+      console.log("Request URL:", url); // Debugging line
+
+      axios
+        .get(url)
+        .then((response) => {
+          this.products = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-  
-    components: {
-      ProductCard, // Register the ProductCard component
+    goToProductDetails(productId) {
+      this.$router.push({ name: "productdetail", params: { id: productId } });
     },
-  
-    created() {
-      this.fetchProducts();
-    },
-  
-    methods: {
-      fetchProducts() {
-        console.log('Route Query:', this.$route.query); // Debugging line
-  
-        const queryParams = new URLSearchParams(this.$route.query).toString();
-        console.log('Query Params:', queryParams); // Debugging line
-  
-        let url = 'http://127.0.0.1:8000/api/products/?sub_category=裝飾';
-        console.log('Request URL:', url); // Debugging line
-  
-        axios
-          .get(url)
-          .then((response) => {
-            this.products = response.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+  },
+
+  watch: {
+    "$route.query": {
+      handler() {
+        this.fetchProducts();
       },
-      goToProductDetails(productId) {
-        this.$router.push({ name: "ProductDetails", params: { id: productId } });
-      },
-      generatePath(path, props) {
-        if (props && props.query) {
-          return {
-            path: path,
-            query: props.query,
-          };
-        }
-        return path;
-      },
+      immediate: true,
     },
-  
-    watch: {
-      "$route.query": {
-        handler() {
-          this.fetchProducts();
-        },
-        immediate: true,
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
+  },
+};
+</script>
+
+<style scoped>
 .products {
   display: flex;
   flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */

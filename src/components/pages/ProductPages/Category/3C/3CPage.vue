@@ -47,7 +47,7 @@ export default {
         });
     },
     goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId } });
+      this.$router.push({ name: "productdetail", params: { id: productId } });
     },
   },
 

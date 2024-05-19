@@ -150,7 +150,7 @@ const router = createRouter({
       //   requiresAuth: true,
       // },
     },
-    { path: "/productdetail/:id", component: ProductDetail },
+    { path: "/productdetail/:id", component: ProductDetail, name : "productdetail"},
   ],
 });
 
