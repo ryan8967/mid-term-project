@@ -84,6 +84,7 @@ export default {
         {
           name: "其他",
           path: "/products/其他",
+          subcategories: [],
         },
       ],
     };
