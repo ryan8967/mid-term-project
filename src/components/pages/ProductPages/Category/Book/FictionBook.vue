@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-      <h1>Other Products</h1>
+      <h1>小說</h1>
     </div>
     <div class="products">
       <ProductCard
@@ -41,8 +41,6 @@
   
     methods: {
       fetchProducts() {
-        console.log('Route Query:', this.$route.query); // Debugging line
-  
         const queryParams = new URLSearchParams(this.$route.query).toString();
         console.log('Query Params:', queryParams); // Debugging line
   

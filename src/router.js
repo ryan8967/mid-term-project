@@ -13,7 +13,7 @@ import NewPage from "./components/pages/ProductPages/Category/NewPage.vue";
 import OtherPage from "./components/pages/ProductPages/Category/OtherPage.vue";
 
 import ThreeCPage from "./components/pages/ProductPages/Category/3C/3CPage.vue";
-// import AcessPage from "./components/pages/ProductPages/Category/3C/AcessPage.vue";
+import AcessPage from "./components/pages/ProductPages/Category/3C/AcessPage.vue";
 import ComputerPage from "./components/pages/ProductPages/Category/3C/ComputerPage.vue";
 import EarPage from "./components/pages/ProductPages/Category/3C/EarPage.vue";
 import MobilePage from "./components/pages/ProductPages/Category/3C/MobilePage.vue";
@@ -119,7 +119,7 @@ const router = createRouter({
     },
     { path: "/products/其他", component: OtherPage },
     { path: "/products/3C", component: ThreeCPage },
-    { path: "/products/周邊", component: HomePage },
+    { path: "/products/周邊", component: AcessPage },
     { path: "/products/電腦", component: ComputerPage },
     { path: "/products/耳機", component: EarPage },
     { path: "/products/行動裝置", component: MobilePage },
@@ -142,6 +142,7 @@ const router = createRouter({
     { path: "/products/熟食", component: HotPage },
     { path: "/products/泡麵", component: RamyunPage },
     { path: "/products/零食", component: SnackPage },
+    
     {
       path: "/newproduct",
       component: newProduct,

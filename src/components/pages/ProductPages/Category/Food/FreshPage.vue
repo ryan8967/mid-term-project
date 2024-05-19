@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Other Products</h1>
+    <h1>生鮮&冷凍食品</h1>
   </div>
   <div class="products">
     <ProductCard

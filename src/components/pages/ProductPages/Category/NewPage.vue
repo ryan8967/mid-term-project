@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Other Products</h1>
+    <h1>新品上市</h1>
   </div>
   <div class="products">
     <ProductCard v-for="prod in products" :key="prod._id" :id="prod._id" :image_url="prod.image_url" :name="prod.name"

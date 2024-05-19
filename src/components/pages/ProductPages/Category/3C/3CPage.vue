@@ -34,7 +34,7 @@ export default {
     fetchProducts() {
       const queryParams = new URLSearchParams(this.$route.query);
       console.log("Query Params:", queryParams);
-      let url = `http://127.0.0.1:8000/api/products/?${queryParams}`;
+      let url = `http://127.0.0.1:8000/api/products/?main_category=3C`;
       console.log("Request URL:", url); // Debugging line
 
       axios
