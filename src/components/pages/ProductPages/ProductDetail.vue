@@ -4,26 +4,26 @@
     <div class="product-overview">
       <img
         loading="lazy"
-        src="{{ product.image_url }}"
+        :src="products.image_url"
         alt="Fender Stratocaster"
         class="product-image"
       />
       <section class="product-details">
         <div class="product-header">
           <div class="product-info">
-            <h1 class="product-title">{{ product.name }}</h1>
+            <h1 class="product-title">{{ products.name }}</h1>
           </div>
           <div class="product-tags">
-            <span class="tag">{{ product.main_cateory }}</span>
-            <span class="tag">{{product.sub_cateory}}</span>
-            <span class="product-price">{{ product.price }}</span>
+            <span class="tag">{{ products.main_category }}</span>
+            <span class="tag">{{ products.sub_category }}</span>
+            <span class="product-price">{{ products.price }}</span>
           </div>
         </div>
         <hr class="divider" />
         <div class="product-description">
-          <p class="description">商品狀況: {{ product.condition }}</p>
-          <p class="description">數量: {{ product.quantity }}</p>
-          <p class="description">詳情描述: {{ product.description }}</p>
+          <p class="description">商品狀況: {{ products.condition }}</p>
+          <p class="description">數量: {{ products.quantity }}</p>
+          <p class="description">詳情描述: {{ products.description }}</p>
         </div>
       </section>
     </div>
@@ -33,7 +33,12 @@
         <div class="sub-block">私訊</div>
       </div>
       <section class="product-actions">
-        <button @click="addToCart(product._id, product.quantity)" class="add-to-cart">加入購物車</button>
+        <button
+          @click="addToCart(products._id, products.quantity)"
+          class="add-to-cart"
+        >
+          加入購物車
+        </button>
       </section>
     </div>
   </div>
@@ -42,57 +47,41 @@
 <script>
 import axios from "axios";
 export default {
-  // props: [
-  //   "id",
-  //   "image",
-  //   "title",
-  //   "tag1",
-  //   "tag2",
-  //   "condition",
-  //   "price",
-  //   "quantity",
-  //   "description",
-  // ],
   data() {
     return {
-      // product: {
-      //   name: "Fender Stratocaster",
-      //   price: "¥87,800",
-      //   condition: "九成新",
-      //   productNumber: 1,
-      //   description:
-      //     "Alder body with gloss finish, Three Player Series single-coil Stratocaster pickups, 'Modern C'-shaped neck profile",
-      //   rating: 5,
-      // },
-      products: [],
+      products: {},
     };
   },
   methods: {
     addToCart(productId, quantity) {
-    axios.post('/api/cart/add', {
-      product_id: productId,
-      quantity: quantity
-    })
-    .then(response => {
-      alert('產品已加入購物車！');
-      console.log('加入購物車:', response.data);
-    })
-    .catch(error => {
-      console.error('加入購物車失敗:', error.response.data);
-      alert('加入購物車失敗: ' + (error.response.data.message || error.message));
-    });
+      axios
+        .post("/api/cart/add", {
+          product_id: productId,
+          quantity: quantity,
+        })
+        .then((response) => {
+          alert("產品已加入購物車！");
+          console.log("加入購物車:", response.data);
+        })
+        .catch((error) => {
+          console.error("加入購物車失敗:", error.response.data);
+          alert(
+            "加入購物車失敗: " + (error.response.data.message || error.message)
+          );
+        });
+    },
   },
-    created() {
+  created() {
     const productId = this.$route.params.id; // 確保你的路由設置可以接收id參數
     axios
       .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
       .then((response) => {
-        this.product = response.data;
+        this.products = response.data;
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+    console.log(this.products);
   },
 };
 </script>
@@ -184,9 +173,9 @@ export default {
   font-size: 25px;
   font-weight: 400;
 }
-.description{
-  margin-top: 16px;
 
+.description {
+  margin-top: 16px;
 }
 
 .actions-container {
