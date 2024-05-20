@@ -7,9 +7,7 @@
     <div class="banner-left">
       <img
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/4a2066ba092df430ed84ed22cd6e4ba0300cb017621607a42c2952aff8a02242?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-        alt="Banner image"
-        class="banner-left-image"
-      />
+        alt="Banner image" class="banner-left-image" />
       <div class="banner-left-text">
         用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
       </div>
@@ -18,32 +16,15 @@
       </button>
     </div>
     <div class="banner-right">
-      <img
-        src="@/assets/images/Payment.png"
-        alt="Banner image"
-        class="banner-right-image"
-      />
+      <img src="@/assets/images/Payment.png" alt="Banner image" class="banner-right-image" />
     </div>
   </div>
   <div class="products-container">
-    <img
-      src="@/assets/images/popular.png"
-      alt="Random product"
-      class="product-card"
-    />
+    <img src="@/assets/images/popular.png" alt="Random product" class="product-card" />
     <div class="product-card-row">
-      <ProductCard
-      class="product"
-      v-for="prod in products"
-      :key="prod._id"
-      :id="prod._id"
-      :image="prod.image"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :price="prod.price"
-      :quantity="prod.quantity"
-    ></ProductCard>
+      <ProductCard class="product" v-for="prod in products" :key="prod._id" :id="prod._id" :image="prod.image"
+        :name="prod.name" :main_category="prod.main_category" :sub_category="prod.sub_category" :price="prod.price"
+        :quantity="prod.quantity"></ProductCard>
     </div>
   </div>
 </template>
@@ -51,7 +32,12 @@
 <script>
 import ImageSlider from "@/components/ui/ImageSlider.vue";
 import ProductCard from "@/components/ui/ProductCard.vue";
+// import axios from 'axios';
 export default {
+  created() {
+    console.log('Home component created');
+    this.handleToken();
+  },
   components: {
     ImageSlider,
     ProductCard,
@@ -103,6 +89,28 @@ export default {
       ],
     };
   },
+
+  methods: {
+    handleToken() {
+      // 使用 URLSearchParams 解析当前页面 URL 中的查询参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      if (token) {
+        console.log("JWT Token:", token);
+        // 储存 token 到 localStorage 或进行其他操作
+        localStorage.setItem('jwtToken', token);
+        // 可能还需要设置 axios 的 headers 或进行其他 API 调用
+        this.setupAxiosHeaders(token);
+      } else {
+        console.log("No token found in URL.");
+      }
+    },
+    setupAxiosHeaders(token) {
+      // 设置 axios 全局 Authorization 头部，使用 Bearer Token
+      this.$axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+  }
+
 };
 </script>
 
@@ -110,15 +118,18 @@ export default {
 * {
   font-family: Open Sans;
 }
+
 .slider-container {
   height: 650px;
   padding: 10px;
 }
+
 .banner {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .banner-left {
   position: relative;
   display: flex;
@@ -130,6 +141,7 @@ export default {
   font-weight: 700;
   border-radius: 30px;
 }
+
 .banner-left-image {
   position: absolute;
   inset: 0;
@@ -138,6 +150,7 @@ export default {
   object-fit: cover;
   object-position: center;
 }
+
 .banner-right-image {
   width: auto;
   height: 310px;
@@ -174,11 +187,13 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
 .product-card-row {
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
 }
+
 .product-card {
   padding: 10px;
   display: flex;
@@ -193,6 +208,7 @@ export default {
   /* Applies rounded corners */
   overflow: hidden;
 }
+
 .product {
   padding: 0 20px;
 }
