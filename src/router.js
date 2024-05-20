@@ -169,4 +169,17 @@ const router = createRouter({
 //   }
 // });
 
+router.beforeEach((to, from, next) => {
+  // 檢查 URL 中是否有 token
+  const token = to.query.token;
+  if (token) {
+    localStorage.setItem('jwtToken', token);  // 將 token 存儲到 localStorage
+    delete to.query.token;  // 從 URL 中移除 token
+    next({ ...to, query: to.query });  // 繼續路由導航，不帶 token 參數
+  } else {
+    next();  // 無 token，正常進行路由導航
+  }
+});
+
+
 export default router;
