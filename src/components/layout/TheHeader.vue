@@ -20,11 +20,16 @@
           alt="Shopping-cart-icon" class="cart-icon" />
       </router-link>
       <div class="profile-dropdown">
-        <a href="http://127.0.0.1:8000/portal">
+        <!-- <a href="http://127.0.0.1:8000/portal">
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
             alt="User-profile-icon" class="user-icon" @click="toggleDropdown" />
-        </a>
+        </a> -->
+
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
+          alt="User-profile-icon" class="user-icon" @click="toggleDropdown" />
+
         <div class="dropdown-content" v-show="dropDown">
           <router-link to="/profile">我的帳戶</router-link>
           <router-link to="/IndivMarket">我的賣場</router-link>
@@ -36,7 +41,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
   data() {
     return {
@@ -58,14 +63,16 @@ export default {
         this.dropDown = !this.dropDown; // 如果已登入，則切換下拉菜單的顯示狀態
       } else {
         this.Login(); // 如果未登入，則呼叫 Login 方法進行登入
+        // window.location.href = "http://127.0.0.1:8000/portal";
       }
     },
 
     async Login() {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/login"); // 調用登入 API
+        // const response = await axios.get("http://127.0.0.1:8000/portal"); // 調用登入 API
+        window.location.href = "http://127.0.0.1:8000/portal"
         console.log("Signed in successfully");
-        localStorage.setItem("token", response.data.token);
+        // localStorage.setItem("token", response.data.token);
         localStorage.setItem("mode", "in");
         this.LoggedIn = true; // 更新 LoggedIn 狀態為已登入
       } catch (error) {
