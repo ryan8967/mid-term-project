@@ -45,7 +45,7 @@ export default {
     methods: {
         //能登入後再測試一次
         fetchUserId() {
-            axios.get('/api/user')  // 使用相對路徑調用 API
+            axios.get('http://127.0.0.1:8000/api/user')  // 使用相對路徑調用 API
                 .then(response => {
                     this.userId = response.data.user_id;  // 假設後端返回的資訊中包含 id
                     this.fetchProducts();

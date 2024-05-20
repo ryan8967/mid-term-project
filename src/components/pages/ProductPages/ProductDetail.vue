@@ -54,8 +54,10 @@ export default {
   },
   methods: {
     addToCart(productId, quantity) {
+      let url = 'http://127.0.0.1:8000/api/cart/add';
+      console.log("Request url:"+url);
       axios
-        .post("/api/cart/add", {
+        .post(url, {
           product_id: productId,
           quantity: quantity,
         })
