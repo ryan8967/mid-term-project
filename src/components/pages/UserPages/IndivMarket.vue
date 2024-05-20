@@ -45,7 +45,15 @@ export default {
     methods: {
         //能登入後再測試一次
         fetchUserId() {
-            axios.get('http://127.0.0.1:8000/api/user')  // 使用相對路徑調用 API
+            const token = localStorage.getItem("jwtToken");
+            if (!token) {
+                console.error("No token found in local storage.");
+                return;
+            }
+            const url = `http://localhost:8000/user/?token=${encodeURIComponent(token)}`;  // 使用 encodeURIComponent 確保 token 被正確編碼
+            console.log('Request URL:', url); // Debugging line
+
+            axios.get(url)  // 使用相對路徑調用 API
                 .then(response => {
                     this.userId = response.data.user_id;  // 假設後端返回的資訊中包含 id
                     this.fetchProducts();

@@ -8,28 +8,24 @@
           <th>數量</th>
           <th>價格</th>
           <th>小計</th>
-          <th>庫存量</th>
+          <!-- <th>庫存量</th> -->
           <th></th>
-          <!-- <th>購買</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in cartItems" :key="item.id">
+        <tr v-for="item in cartItems" :key="item.productId">
           <td>{{ item.name }}</td>
           <td>
             <button type="button" @click="decrement(item)" class="cart-button" :disabled="item.quantity <= 1">-</button>
             <span>{{ item.quantity }}</span>
-            <button type="button" @click="increment(item)" class="cart-button" :disabled="item.quantity >= item.stock">+</button>
+            <button type="button" @click="increment(item)" class="cart-button">+</button>
           </td>
           <td>{{ item.price }}</td>
           <td>{{ item.price * item.quantity }}</td>
-          <td>{{ item.stock }}</td>
+          <!-- <td>{{ item.stock }}</td> -->
           <td>
-            <button @click="removeFromCart(item.id)" class="remove-button">移除</button>
+            <button @click="removeFromCart(item.productId)" class="remove-button">移除</button>
           </td>
-          <!-- <td>
-            <button @click="purchaseProduct(item.id, item.quantity)" class="purchase-button">購買</button>
-          </td> -->
         </tr>
       </tbody>
     </table>
@@ -48,11 +44,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      cartItems: [
-        { id: 1, name: '商品A', price: 100, quantity: 1, stock: 10 },
-        // { id: 2, name: '商品B', price: 200, quantity: 2, stock: 5 },
-        // { id: 3, name: '商品C', price: 150, quantity: 1, stock: 8 }
-      ]
+      cartItems: [], // 存儲從 API 獲取的購物車項目列表
+      productDetails: []  // 存儲商品的詳細屬性
     };
   },
   computed: {
@@ -61,26 +54,42 @@ export default {
     }
   },
   methods:{
+    //獲取購物車
+    fetchCart() {
+      const token = localStorage.getItem('jwtToken'); // 從 localStorage 獲取 token
+      axios.get('http://127.0.0.1:8000/api/cart', {
+        headers: {
+          'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
+        }
+      })
+      .then(response => {
+        this.cartItems = Array.isArray(response.data.items) ? response.data.items : [];  // 確保賦值為陣列
+        this.productDetails = this.cartItems.map(item => ({
+          productId: item.product_id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          // stock: item.stock
+        }));
+      })
+      .catch(error => {
+        console.error('Error fetching cart:', error);
+    });
+    },
+
     //數量變更
     increment(item) {
-      if (item.quantity < item.stock) {
-        item.quantity++;
-      }
+      item.quantity++;
     },
     decrement(item) {
       if (item.quantity > 1) {
         item.quantity--;
       }
     },
-    checkout() {
-      //為每一個商品做購買的動作
-      this.cartItems.forEach(item =>{
-        this.purchaseProduct(item.id, item.quantity);
-      });
-    },
+
     //購買商品
     purchaseProduct(productId, quantity) {
-    axios.post(`/api/products/${productId}/purchase`, { quantity: quantity })
+    axios.post(`/products/${productId}/purchase`, { quantity: quantity })
       .then(response => {
         alert('購買成功');
         console('已成功向賣家下單:', response.data)
@@ -90,32 +99,39 @@ export default {
         alert('購買失敗。' + (error.response.data.message || error.message));
       });
     },
-    //移除商品
     removeFromCart(productId) {
-    axios.post(`/api/cart/remove`, { product_id: productId })
-      .then(response => {
-        this.cartItems = response.data.items; // 假設後端返回的購物車數據包含在items屬性中
+      axios.post(`/cart/remove`, { product_id: productId })
+      .then(() => {
+        this.cartItems = this.cartItems.filter(item => item.product_id !== productId);
         alert('商品已從購物車移除');
       })
       .catch(error => {
-        console.log('移除失敗:', error.response.data);
-        alert('移除失敗: ' + (error.response && error.response.data.message ? error.response.data.message : error.message));
-      });
-    },
-    //清空購物車
-    clearCart() {
-    axios.post(`/api/cart/clear`)
-      .then(response => {
-        this.cartItems = response.data.items || []; // 使用後端返回的數據確保同步
-        alert('購物車已清空');
-    })
-      .catch(error => {
-        console.log('清空購物車失敗:', error.response.data);
-        alert('清空購物車失敗: ' + (error.response.data.message || error.message));
+        alert('移除失敗: ' + error.message);
       });
     },
 
+    //清空購物車
+    clearCart() {
+      axios.post(`/cart/clear`)
+      .then(() => {
+        this.cartItems = [];
+        alert('購物車已清空');
+      })
+      .catch(error => {
+        alert('清空購物車失敗: ' + error.message);
+      });
+    },
+
+    checkout() {
+      //為每一個商品做購買的動作
+      this.cartItems.forEach(item =>{
+        this.purchaseProduct(item.productId, item.quantity);
+      });
+    },
 },
+  created() {
+    this.fetchCart();  // 在組件創建時獲取購物車資料
+  },
 
 }
 </script>
