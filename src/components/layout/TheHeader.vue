@@ -28,7 +28,7 @@
         <div class="dropdown-content" v-show="dropDown">
           <router-link to="/profile">我的帳戶</router-link>
           <router-link to="/IndivMarket">我的賣場</router-link>
-          <router-link to="/logout">登出</router-link>
+          <router-link to="/logout" @click="Logout">登出</router-link>
         </div>
       </div>
     </nav>
@@ -45,6 +45,9 @@ export default {
       searchQuery: '',
     };
   },
+  created() {
+    this.checkAuthentication();
+  },
   methods: {
     isLoggedIn() {
       return localStorage.getItem("mode") === "in";
@@ -60,7 +63,7 @@ export default {
 
     async Login() {
       try {
-        const response = await axios.get("http://localhost:8000/login"); // 調用登入 API
+        const response = await axios.get("http://127.0.0.1:8000/login"); // 調用登入 API
         console.log("Signed in successfully");
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("mode", "in");
@@ -68,6 +71,12 @@ export default {
       } catch (error) {
         console.error("Signed in failed", error);
       }
+    },
+
+    Logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("mode");
+      this.LoggedIn = false; // 更新 LoggedIn 狀態為未登入
     },
 
     checkAuthentication() {
