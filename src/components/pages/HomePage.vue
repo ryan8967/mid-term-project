@@ -93,6 +93,8 @@ export default {
   methods: {
     handleToken() {
       // 使用 URLSearchParams 解析当前页面 URL 中的查询参数
+
+      console.log("jwt:", localStorage.getItem('jwtToken'));
       const urlParams = new URLSearchParams(window.location.search);
       const token = urlParams.get('token');
       if (token) {
