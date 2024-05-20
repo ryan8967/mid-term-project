@@ -112,6 +112,7 @@ export default {
       quantity: "",
       remarks: "",
       soldStatus: "In stock",
+      
     };
   },
   watch: {
@@ -126,8 +127,11 @@ export default {
     },
     submitForm() {
       const formData = new FormData();
+      const token = localStorage.getItem('jwtToken'); // 從 localStorage 獲取 token
 
-      formData.append("image_url", this.imageUpload);
+      if (this.imageUpload) {
+        formData.append("image_url", this.imageUpload);
+      }
       formData.append("name", this.name);
       formData.append("main_category", this.mainCategory);
       formData.append("sub_category", this.selectedSubCategory);
@@ -137,9 +141,9 @@ export default {
       formData.append("remarks", this.remarks);
       formData.append("sold_status", this.soldStatus);
 
-      axios.post('/products', formData, {
+      axios.post('http://localhost:8000/api/products', formData, {
         headers: {
-            'Content-Type': 'multipart/form-data'
+            'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
         }
     })
         .then((response) => {
@@ -147,8 +151,8 @@ export default {
           alert("商品成功上架!");
         })
         .catch((error) => {
-          console.error("Error creating product:", error.response);
-          alert("商品上架失敗。");
+          console.error("Error creating product:", error.response.data);
+          alert("商品上架失敗。" + (error.response && error.response.data.message ? error.response.data.message : error.message));
         });
     },
   },
