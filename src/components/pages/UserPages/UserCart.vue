@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in cartItems" :key="item.productId">
+        <tr v-for="item in cartItems" :key="item.product_id">
           <td>{{ item.name }}</td>
           <td>
             <button type="button" @click="decrement(item)" class="cart-button" :disabled="item.quantity <= 1">-</button>
@@ -24,7 +24,7 @@
           <td>{{ item.price * item.quantity }}</td>
           <!-- <td>{{ item.stock }}</td> -->
           <td>
-            <button @click="removeFromCart(item.productId)" class="remove-button">移除</button>
+            <button @click="removeFromCart(item.product_id)" class="remove-button">移除</button>
           </td>
         </tr>
       </tbody>
@@ -89,17 +89,21 @@ export default {
 
     //購買商品
     purchaseProduct(productId, quantity) {
-    axios.post(`/products/${productId}/purchase`, { quantity: quantity })
-      .then(response => {
-        alert('購買成功');
-        console('已成功向賣家下單:', response.data)
-      })
-      .catch(error => {
-        console.log('購買失敗:', error.response.data);
-        alert('購買失敗。' + (error.response.data.message || error.message));
-      });
-    },
+      console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
+
+      axios.post(`http://localhost:8000/api/products/${productId}/purchase`, { quantity: quantity })
+        .then(response => {
+          alert('購買成功');
+          console('已成功向賣家下單:', response.data)
+        })
+        .catch(error => {
+          console.log('購買失敗:', error.response.data);
+          alert('購買失敗。' + (error.response.data.message || error.message));
+        });
+      },
+
     removeFromCart(productId) {
+      console.log(productId);
       axios.post(`/cart/remove`, { product_id: productId })
       .then(() => {
         this.cartItems = this.cartItems.filter(item => item.product_id !== productId);
@@ -124,7 +128,7 @@ export default {
 
     checkout() {
       //為每一個商品做購買的動作
-      this.cartItems.forEach(item =>{
+      this.productDetails.forEach(item =>{
         this.purchaseProduct(item.productId, item.quantity);
       });
     },
