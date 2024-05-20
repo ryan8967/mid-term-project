@@ -45,7 +45,6 @@ export default {
   data() {
     return {
       cartItems: [], // 存儲從 API 獲取的購物車項目列表
-      productDetails: []  // 存儲商品的詳細屬性
     };
   },
   computed: {
@@ -64,13 +63,6 @@ export default {
       })
       .then(response => {
         this.cartItems = Array.isArray(response.data.items) ? response.data.items : [];  // 確保賦值為陣列
-        this.productDetails = this.cartItems.map(item => ({
-          productId: item.product_id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          // stock: item.stock
-        }));
       })
       .catch(error => {
         console.error('Error fetching cart:', error);
@@ -128,8 +120,8 @@ export default {
 
     checkout() {
       //為每一個商品做購買的動作
-      this.productDetails.forEach(item =>{
-        this.purchaseProduct(item.productId, item.quantity);
+      this.cartItems.forEach(item =>{
+        this.purchaseProduct(item.product_id, item.quantity);
       });
     },
 },
