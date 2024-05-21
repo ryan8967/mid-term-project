@@ -87,17 +87,33 @@ export default {
     //購買商品
     purchaseProduct(productId, quantity) {
       console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
-      let url = "http://localhost:8000/api/products/"+productId+"/purchase"
+      let url = "http://localhost:8000/api/products/"+productId+"/purchase";
       console.log("Request url:",url);
       axios.post( url, { quantity: quantity })
         .then(() => {
           alert('購買成功');
+          this.addToOrder(productId, quantity);
         })
         .catch(error => {
           console.log('購買失敗:', error.response.data);
           alert('購買失敗。' + (error.response.data.message || error.message));
         });
       },
+
+    //更新訂購紀錄
+    addToOrder(productId, quantity){
+      let url = "http://localhost:8000/api/orders";
+      axios.post( url, {product_id: productId, quantity: quantity})
+        .then(response => {
+          console.log(response.data);
+          alert('訂單紀錄已更新!');
+        })
+        .catch(error =>{
+          console.log('更新訂單失敗:', error.response.data);
+          alert('訂單未更新');
+        }) 
+      
+    },
 
     removeFromCart(productId) {
       console.log(productId);
