@@ -96,6 +96,7 @@ export default {
     return {
       // Your data properties here
       imageUpload: null,
+      image_url: "",
       name: "",
       mainCategory: "",
       subCategories: {
@@ -123,14 +124,36 @@ export default {
   },
   methods: {
     handleFileUpload(event) {
-      this.imageUpload = event.target.files[0];
+
+      // 创建 FormData 对象
+      const formData = new FormData();
+  
+      // 获取文件
+      const file = event.target.files[0];
+      if (!file) {
+        console.error("No file selected");
+        return;
+      }
+
+      // 添加文件到 FormData 对象
+      formData.append("image_url", file); // 确保后端接收的字段名与此一致
+
+      axios.post('http://localhost:8000/api/upload', formData)
+      .then((response) => {
+          this.image_url = response.data.path;
+          console.log("File uploaded successfully:", response.data.path);
+        })
+      .catch((error) => {
+        // 错误处理
+        console.error("Error uploading file:", error.response ? error.response.data : 'Unknown error');
+      });
     },
     submitForm() {
       const formData = new FormData();
       const token = localStorage.getItem('jwtToken'); // 從 localStorage 獲取 token
 
-      if (this.imageUpload) {
-        formData.append("image_url", this.imageUpload);
+      if (this.image_url) {
+        formData.append("image_url", this.image_url);
       }
       formData.append("name", this.name);
       formData.append("main_category", this.mainCategory);
