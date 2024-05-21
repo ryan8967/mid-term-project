@@ -144,7 +144,7 @@ h1 {
   padding: 20px;
   background-color: #f7eac369;
   /*border: 2.5px solid #7b6d644b;*/
-  animation: slideFromLeft 2s ease forwards;
+  animation: slideFromLeft 3s ease forwards;
 }
 .content-section-right {
   display: flex;
@@ -157,7 +157,7 @@ h1 {
   padding: 20px;
   background-color: #b1927243;
   /*border: 2.5px solid #7b6d644b;*/
-  animation: slideFromRight 2s ease forwards;
+  animation: slideFromRight 3s ease forwards;
 }
 
 .text {

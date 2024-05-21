@@ -46,6 +46,10 @@ import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
 
 const router = createRouter({
+  scrollBehavior() {
+    // always scroll to top
+    return { top: 0 }
+  },
   history: createWebHistory(),
   routes: [
     // General Pages
