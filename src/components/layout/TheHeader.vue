@@ -17,7 +17,9 @@
       <router-link to="/cart">
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa33fdb5f297f9c803839ca0a548882d3b6d75074bf1b3078a48c91734d1f92?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-          alt="Shopping-cart-icon" class="cart-icon" />
+          alt="Shopping-cart-icon"
+          class="cart-icon"
+        />
       </router-link>
       <div class="profile-dropdown">
         <!-- <a href="http://127.0.0.1:8000/portal">
@@ -28,7 +30,10 @@
 
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-          alt="User-profile-icon" class="user-icon" @click="toggleDropdown" />
+          alt="User-profile-icon"
+          class="user-icon"
+          @click="toggleDropdown"
+        />
 
         <div class="dropdown-content" v-show="dropDown">
           <router-link to="/profile">我的帳戶</router-link>
@@ -47,10 +52,11 @@ export default {
     return {
       LoggedIn: false,
       dropDown: false,
-      searchQuery: '',
+      searchQuery: "",
     };
   },
   created() {
+    localStorage.setItem("mode", "false");
     this.checkAuthentication();
   },
   methods: {
@@ -59,7 +65,8 @@ export default {
     },
 
     toggleDropdown() {
-      if (this.isLoggedIn()) { // 檢查是否已登入
+      if (this.isLoggedIn()) {
+        // 檢查是否已登入
         this.dropDown = !this.dropDown; // 如果已登入，則切換下拉菜單的顯示狀態
       } else {
         this.Login(); // 如果未登入，則呼叫 Login 方法進行登入
@@ -70,7 +77,7 @@ export default {
     async Login() {
       try {
         // const response = await axios.get("http://127.0.0.1:8000/portal"); // 調用登入 API
-        window.location.href = "http://127.0.0.1:8000/portal"
+        window.location.href = "http://127.0.0.1:8000/portal";
         console.log("Signed in successfully");
         // localStorage.setItem("token", response.data.token);
         localStorage.setItem("mode", "in");
@@ -95,13 +102,15 @@ export default {
 
     async searchProducts() {
       const baseUrl = `http://127.0.0.1:8000/api/products/`;
-      const query = this.searchQuery.trim() ? `?name=${encodeURIComponent(this.searchQuery)}` : '';
+      const query = this.searchQuery.trim()
+        ? `?name=${encodeURIComponent(this.searchQuery)}`
+        : "";
       const fullUrl = baseUrl + query;
 
       console.log("Request URL:", fullUrl); // Debugging line
 
       // Trigger navigation with query parameters
-      this.$router.push({ path: '/search', query: { name: this.searchQuery } });
+      this.$router.push({ path: "/search", query: { name: this.searchQuery } });
       // axios
       //   .get(fullUrl)
       //   .then((response) => {
@@ -110,9 +119,8 @@ export default {
       //   .catch((error) => {
       //     console.log("Error:", error);
       //   });
-    }
+    },
   },
-
 };
 </script>
 <style scoped>
@@ -155,8 +163,6 @@ export default {
   box-shadow: 3px 3px 3px black;
   border-radius: 50%;
 }
-
-
 
 .search input[type="text"] {
   min-width: 300px;

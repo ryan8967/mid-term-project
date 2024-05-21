@@ -50,21 +50,43 @@
         <img src="@/assets/images/team-1.jpg" alt="Team member 1">
         <div class="image-description">
           <p>"中央大學學生團隊"</p>
-          <p>兄弟 轉身</p>
+          <p>兄弟 余欣鴻</p>
         </div>
       </div>
       <div class="team-image">
         <img src="@/assets/images/team-2.jpg" alt="Team member 2">
         <div class="image-description">
           <p>"中央大學學生團隊"</p>
-          <p>兄弟 你好香</p>
+          <p>兄弟 劉芊妤</p>
         </div>
       </div>
       <div class="team-image">
         <img src="@/assets/images/team-3.jpg" alt="Team member 3">
         <div class="image-description">
           <p>"中央大學學生團隊"</p>
-          <p>兄弟 我沒了</p>
+          <p>兄弟 戴宇偵</p>
+        </div>
+       </div>
+      <div class="team-image">
+        <img src="@/assets/images/team-4.gif" alt="Team member 4">
+        <div class="image-description">
+          <p>"中央大學學生團隊"</p>
+          <p>兄弟 楊瑞文</p>
+        </div>
+       </div>
+      <div class="team-image">
+        <img src="@/assets/images/team-5.jpg" alt="Team member 5">
+        <div class="image-description">
+          <p>"中央大學學生團隊"</p>
+          <p>兄弟 謝阿痿</p>
+        </div>
+       </div>
+      <div class="team-image">
+        <img src="@/assets/images/team-6.jpg" alt="Team member 6">
+        <div class="image-description">
+          <p>"中央大學學生團隊"</p>
+          <p>兄弟 林成髒
+          </p>
         </div>
        </div>
     </div>
@@ -158,9 +180,10 @@ h1 {
 
 .team-images {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 3% 20% 5% 20%;
+  margin: 3% 15% 5% 15%;
   max-width: 100%;
   height: auto;
 }
