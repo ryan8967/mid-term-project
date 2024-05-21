@@ -16,11 +16,6 @@
     <div class="product-separator"></div>
     <div class="product-item" v-for="order in orders" :key="order._id">
       <div class="product-name">{{ order.product_name }}</div>
-      <div class="product-appeal">
-        <button class="appeal-button" @click="openComplaintForm(order)">
-          申訴
-        </button>
-      </div>
       <div class="product-seller">{{ order.seller_name }}</div>
       <div class="product-meta">
         <div class="product-quantity">{{ order.quantity }}</div>
@@ -29,6 +24,11 @@
         <div class="product-date">
           {{ new Date(order.created_at).toLocaleString() }}
         </div>
+      </div>
+      <div class="product-appeal">
+        <button class="appeal-button" @click="openComplaintForm(order)">
+          申訴
+        </button>
       </div>
     </div>
 
