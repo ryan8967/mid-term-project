@@ -110,7 +110,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
+  width: auto;
   padding-top: 3%;
 }
 
@@ -209,8 +209,8 @@ export default {
 .quantity-selector {
   display: flex;
   align-items: center;
-  margin: 10px 0;
-  padding-right: 6.5%;
+  margin: 15px 0;
+  padding-right: 5%;
 }
 
 .quantity-input {
@@ -259,9 +259,10 @@ export default {
 .product-actions {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: end;
+  
 }
 
 .add-to-cart {
@@ -271,7 +272,6 @@ export default {
   text-align: center;
   justify-content: center;
   padding: 18px 26px;
-  margin-top: 20px;
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #fff;
