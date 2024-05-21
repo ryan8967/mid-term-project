@@ -50,7 +50,7 @@
           <router-link to="/notFound"
             ><li class="footer-menu-item">Help</li></router-link
           >
-          <router-link to="/notFound"
+          <router-link to="/about"
             ><li class="footer-menu-item">About Us</li></router-link
           >
         </ul>
