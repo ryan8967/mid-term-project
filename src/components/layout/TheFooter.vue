@@ -68,7 +68,7 @@
       </div>
     </div>
     <hr />
-    <div class="footer-copyright">@2023 No Rights Reserved</div>
+    <div class="footer-copyright">@2024 No Rights Reserved</div>
   </footer>
 </template>
 
