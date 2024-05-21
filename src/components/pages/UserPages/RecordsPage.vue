@@ -26,7 +26,9 @@
         <div class="product-quantity">{{ order.quantity }}</div>
         <div class="product-price">{{ order.price }}</div>
         <div class="product-subtotal">{{ order.subtotal }}</div>
-        <div class="product-date">{{ new Date(order.created_at).toLocaleString() }}</div>
+        <div class="product-date">
+          {{ new Date(order.created_at).toLocaleString() }}
+        </div>
       </div>
     </div>
 
@@ -39,19 +41,39 @@
           <form class="complaint-options">
             <label for="product-issue" class="checkbox-label">
               商品與實際不符
-              <input type="checkbox" id="product-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="product-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="attitude-issue" class="checkbox-label">
               交易態度差
-              <input type="checkbox" id="attitude-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="attitude-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="time-issue" class="checkbox-label">
               交易時間遲到
-              <input type="checkbox" id="time-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="time-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="location-issue" class="checkbox-label">
               交易地點不符
-              <input type="checkbox" id="location-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="location-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="other" class="checkbox-label">
               其他
@@ -62,7 +84,7 @@
             <button class="cancel-button" @click="showComplaintForm = false">
               取消
             </button>
-            <button class="submit-button">確認</button>
+            <button class="submit-button" @click="submitComplaint">確認</button>
           </section>
         </section>
       </div>
@@ -71,7 +93,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -84,33 +106,37 @@ export default {
         attitude_issue: false,
         time_issue: false,
         location_issue: false,
-        other: ''
-      }
+        other: "",
+      },
     };
   },
   methods: {
     fetchOrders() {
-      const token = localStorage.getItem('jwtToken');
-      axios.get('http://127.0.0.1:8000/api/orders', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => {
+      const token = localStorage.getItem("jwtToken");
+      axios
+        .get("http://127.0.0.1:8000/api/orders", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
           this.orders = response.data;
         })
-        .catch(error => {
-          console.error('Error fetching orders:', error);
+        .catch((error) => {
+          console.error("Error fetching orders:", error);
         });
     },
+
     openComplaintForm(order) {
       this.complaint.orderId = order._id;
       this.showComplaintForm = true;
     },
+
     closeComplaintForm() {
       this.showComplaintForm = false;
       this.resetComplaintForm();
     },
+
     resetComplaintForm() {
       this.complaint = {
         orderId: null,
@@ -118,32 +144,38 @@ export default {
         attitude_issue: false,
         time_issue: false,
         location_issue: false,
-        other: ''
+        other: "",
       };
     },
+
     submitComplaint() {
-      const token = localStorage.getItem('jwtToken');
-      axios.put(`http://127.0.0.1:8000/api/orders/${this.complaint.orderId}`, {
-        complaint: this.complaint
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => {
-          alert('申訴提交成功');
-          console.log('Complaint submitted:', response.data);
+      const token = localStorage.getItem("jwtToken");
+      axios
+        .put(
+          `http://127.0.0.1:8000/api/orders/${this.complaint.orderId}`,
+          {
+            complaint: this.complaint,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          alert("申訴提交成功");
+          console.log("Complaint submitted:", response.data);
           this.closeComplaintForm();
         })
-        .catch(error => {
-          console.error('Error submitting complaint:', error);
-          alert('申訴提交失敗');
+        .catch((error) => {
+          console.error("Error submitting complaint:", error);
+          alert("申訴提交失敗");
         });
-    }
+    },
   },
   created() {
     this.fetchOrders();
-  }
+  },
 };
 </script>
 
@@ -152,7 +184,7 @@ export default {
   font-size: small;
   padding: 8px;
   margin: 16px;
-  border-radius: 50px;
+  border-radius: 10px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border: 1px solid #000;
   background-color: rgba(255, 255, 255, 0.5);
@@ -165,27 +197,23 @@ export default {
 .product-header {
   padding-left: 4%;
   display: flex;
-  min-width: 100%;
+  width: 100%;
   font-size: 24px;
   font-weight: 400;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .product-title {
   font-family: Zen Old Mincho, sans-serif;
-  flex-grow: 1;
-  max-width: 45%;
+  flex: 1;
 }
 
 .product-info {
   display: flex;
-  gap: 200px;
-  padding-right: 8%;
-}
-
-@media (max-width: 991px) {
-  .product-info {
-    flex-wrap: wrap;
-  }
+  flex: 2;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .product-seller {
@@ -195,15 +223,10 @@ export default {
 
 .product-meta {
   display: flex;
-  gap: 50px;
   justify-content: space-between;
+  gap: 20px;
   text-align: right;
-}
-
-@media (max-width: 991px) {
-  .product-meta {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
 }
 
 .product-quantity,
@@ -211,6 +234,7 @@ export default {
 .product-subtotal,
 .product-date {
   font-family: Zen Old Mincho, sans-serif;
+  text-align: center;
 }
 
 .product-separator {
@@ -218,25 +242,22 @@ export default {
   background-color: #000;
   margin-top: 13px;
   height: 1px;
+  width: 100%;
 }
 
 .product-item {
-  align-self: center;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 30px;
   padding: 0 16px;
   width: 100%;
-  justify-content: space-between;
-}
-
-@media (max-width: 991px) {
-  .product-item {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
 }
 
 .product-name {
   font: 400 20px Zen Old Mincho, sans-serif;
+  flex: 1;
 }
 
 .product-appeal {
@@ -244,7 +265,7 @@ export default {
   font-size: 20px;
   font-weight: 500;
   justify-content: center;
-  align-items: right;
+  align-items: center;
 }
 
 .appeal-button {
@@ -253,15 +274,8 @@ export default {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border: 3px solid #c69f76;
   background-color: #fff;
-  justify-content: center;
   padding: 10px 20px;
   cursor: pointer;
-}
-
-@media (max-width: 991px) {
-  .appeal-button {
-    padding: 11px 20px;
-  }
 }
 
 .main-container {
@@ -348,4 +362,5 @@ export default {
   max-height: 600px;
   width: 100%;
 }
+
 </style>
