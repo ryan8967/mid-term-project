@@ -30,8 +30,9 @@
         />
 
         <div class="dropdown-content" v-show="dropDown">
-          <router-link to="/profile">我的帳戶</router-link>
-          <router-link to="/IndivMarket">我的賣場</router-link>
+          <router-link to="/profile" @click="closeDropdown">我的帳戶</router-link>
+          <router-link to="/IndivMarket" @click="closeDropdown">我的賣場</router-link>
+          <router-link to="/newproduct" @click="closeDropdown">上架商品</router-link>
           <router-link to="/logout" @click="Logout">登出</router-link>
         </div>
       </div>
@@ -68,6 +69,10 @@ export default {
       }
     },
 
+    closeDropdown() {
+      this.dropDown = false;
+    },
+
     async Login() {
       try {
         // const response = await axios.get("http://127.0.0.1:8000/portal"); // 調用登入 API
@@ -93,8 +98,6 @@ export default {
       this.LoggedIn = this.isLoggedIn(); // 初始檢查
       setInterval(() => {
         this.LoggedIn = this.isLoggedIn(); // 每500毫秒檢查一次
-        console.log("Checking authentication status:", this.LoggedIn);
-        console.log("Checking authentication status:", localStorage.getItem("jwtToken"));
       }, 3000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
     },
 

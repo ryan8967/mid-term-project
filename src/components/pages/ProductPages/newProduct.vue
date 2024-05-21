@@ -172,6 +172,7 @@ export default {
         .then((response) => {
           console.log("Product created:", response.data);
           alert("商品成功上架!");
+          this.$router.push({ path: "/IndivMarket" });
         })
         .catch((error) => {
           console.error("Error creating product:", error.response.data);
