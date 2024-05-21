@@ -54,10 +54,10 @@
         </div>
       </div>
       <div class="team-image">
-        <img src="@/assets/images/team-2.jpg" alt="Team member 2">
+        <img src="@\assets\images\16-1.png" alt="Team member 2">
         <div class="image-description">
           <p>"中央大學學生團隊"</p>
-          <p>兄弟 劉芊妤</p>
+          <p>兄弟 劉芊餘</p>
         </div>
       </div>
       <div class="team-image">
@@ -71,7 +71,7 @@
         <img src="@/assets/images/team-4.gif" alt="Team member 4">
         <div class="image-description">
           <p>"中央大學學生團隊"</p>
-          <p>兄弟 楊瑞文</p>
+          <p>兄弟 楊鮪文</p>
         </div>
        </div>
       <div class="team-image">
@@ -85,8 +85,7 @@
         <img src="@/assets/images/team-6.jpg" alt="Team member 6">
         <div class="image-description">
           <p>"中央大學學生團隊"</p>
-          <p>兄弟 林成髒
-          </p>
+          <p>兄弟 林成髒</p>
         </div>
        </div>
     </div>
@@ -182,11 +181,15 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
-  margin: 3% 15% 5% 15%;
-  max-width: 100%;
+  align-items: flex-start;  
+  
   height: auto;
+  width: 950px;
+  background-color: #eee;
+  margin: auto;
+  padding: 20px;
 }
+
 /*我知道視窗縮小的時候圖片會壓縮，等我有精力會回來調*/
 .team-image img {
   flex: 1;
