@@ -88,10 +88,10 @@ export default {
     purchaseProduct(productId, quantity) {
       console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
       let url = "http://localhost:8000/api/products/"+productId+"/purchase"
+      console.log("Request url:",url);
       axios.post( url, { quantity: quantity })
-        .then(response => {
+        .then(() => {
           alert('購買成功');
-          console('已成功向賣家下單:', response.data)
         })
         .catch(error => {
           console.log('購買失敗:', error.response.data);

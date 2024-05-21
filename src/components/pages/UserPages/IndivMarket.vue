@@ -154,12 +154,12 @@ export default {
 .product-card-row {
     display: flex;     /* 啟用 Flexbox */
     flex-wrap: wrap;   /* 允許元素換行 */
-    margin: 20px 0 0 120px;
+    width: auto;
     padding: 10px;     /* 給予一定內距 */
 }
 
 .product{
-    margin: 20px 20px;
+    margin: auto;
 }
 
 .market-menu{
