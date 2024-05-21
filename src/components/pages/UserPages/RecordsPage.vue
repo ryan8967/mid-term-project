@@ -14,12 +14,19 @@
       </div>
     </div>
     <div class="product-separator"></div>
-    <div class="product-item">
-      <div class="product-name">最新C語言：程式設計實例入門Ｉ博碩文化出版</div>
+    <div class="product-item" v-for="order in orders" :key="order._id">
+      <div class="product-name">{{ order.product_name }}</div>
       <div class="product-appeal">
-        <button class="appeal-button" @click="showComplaintForm = true">
+        <button class="appeal-button" @click="openComplaintForm(order)">
           申訴
         </button>
+      </div>
+      <div class="product-seller">{{ order.seller_name }}</div>
+      <div class="product-meta">
+        <div class="product-quantity">{{ order.quantity }}</div>
+        <div class="product-price">{{ order.price }}</div>
+        <div class="product-subtotal">{{ order.subtotal }}</div>
+        <div class="product-date">{{ new Date(order.created_at).toLocaleString() }}</div>
       </div>
     </div>
 
@@ -32,39 +39,19 @@
           <form class="complaint-options">
             <label for="product-issue" class="checkbox-label">
               商品與實際不符
-              <input
-                type="checkbox"
-                id="product-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="product-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="attitude-issue" class="checkbox-label">
               交易態度差
-              <input
-                type="checkbox"
-                id="attitude-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="attitude-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="time-issue" class="checkbox-label">
               交易時間遲到
-              <input
-                type="checkbox"
-                id="time-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="time-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="location-issue" class="checkbox-label">
               交易地點不符
-              <input
-                type="checkbox"
-                id="location-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="location-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="other" class="checkbox-label">
               其他
@@ -84,13 +71,79 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  props:[],
   data() {
     return {
+      orders: [],
       showComplaintForm: false,
+      complaint: {
+        orderId: null,
+        product_issue: false,
+        attitude_issue: false,
+        time_issue: false,
+        location_issue: false,
+        other: ''
+      }
     };
   },
+  methods: {
+    fetchOrders() {
+      const token = localStorage.getItem('jwtToken');
+      axios.get('http://127.0.0.1:8000/api/orders', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          this.orders = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching orders:', error);
+        });
+    },
+    openComplaintForm(order) {
+      this.complaint.orderId = order._id;
+      this.showComplaintForm = true;
+    },
+    closeComplaintForm() {
+      this.showComplaintForm = false;
+      this.resetComplaintForm();
+    },
+    resetComplaintForm() {
+      this.complaint = {
+        orderId: null,
+        product_issue: false,
+        attitude_issue: false,
+        time_issue: false,
+        location_issue: false,
+        other: ''
+      };
+    },
+    submitComplaint() {
+      const token = localStorage.getItem('jwtToken');
+      axios.put(`http://127.0.0.1:8000/api/orders/${this.complaint.orderId}`, {
+        complaint: this.complaint
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          alert('申訴提交成功');
+          console.log('Complaint submitted:', response.data);
+          this.closeComplaintForm();
+        })
+        .catch(error => {
+          console.error('Error submitting complaint:', error);
+          alert('申訴提交失敗');
+        });
+    }
+  },
+  created() {
+    this.fetchOrders();
+  }
 };
 </script>
 
