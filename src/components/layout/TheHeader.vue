@@ -22,12 +22,6 @@
         />
       </router-link>
       <div class="profile-dropdown">
-        <!-- <a href="http://127.0.0.1:8000/portal">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-            alt="User-profile-icon" class="user-icon" @click="toggleDropdown" />
-        </a> -->
-
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
           alt="User-profile-icon"
@@ -61,7 +55,7 @@ export default {
   },
   methods: {
     isLoggedIn() {
-      return localStorage.getItem("mode") === "in";
+      return localStorage.getItem("jwtToken") !== null;
     },
 
     toggleDropdown() {
@@ -88,16 +82,20 @@ export default {
     },
 
     Logout() {
-      localStorage.removeItem("token");
+      localStorage.removeItem("jwtToken");
       localStorage.removeItem("mode");
       this.LoggedIn = false; // 更新 LoggedIn 狀態為未登入
+      this.dropDown = false; // 隱藏下拉菜單
+      this.$router.push({ path: "/home" });
     },
 
     checkAuthentication() {
       this.LoggedIn = this.isLoggedIn(); // 初始檢查
       setInterval(() => {
         this.LoggedIn = this.isLoggedIn(); // 每500毫秒檢查一次
-      }, 5000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
+        console.log("Checking authentication status:", this.LoggedIn);
+        console.log("Checking authentication status:", localStorage.getItem("jwtToken"));
+      }, 3000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
     },
 
     async searchProducts() {
@@ -123,6 +121,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .header {
   background-color: #7b6d64;
