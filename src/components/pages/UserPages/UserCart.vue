@@ -62,11 +62,16 @@ export default {
         }
       })
       .then(response => {
-        this.cartItems = Array.isArray(response.data.items) ? response.data.items : [];  // 確保賦值為陣列
+        if (response.data && Array.isArray(response.data.items)) {
+          this.cartItems = response.data.items;
+        } else {
+          this.cartItems = []; // 若無有效數據，設置為空數組
+    }
       })
       .catch(error => {
         console.error('Error fetching cart:', error);
-    });
+        this.cartItems = []; // 處理異常時也應確保 cartItems 為空數組避免錯誤
+      });
     },
 
     //數量變更
@@ -82,8 +87,8 @@ export default {
     //購買商品
     purchaseProduct(productId, quantity) {
       console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
-
-      axios.post(`http://localhost:8000/api/products/${productId}/purchase`, { quantity: quantity })
+      let url = "http://localhost:8000/api/products/"+productId+"/purchase"
+      axios.post( url, { quantity: quantity })
         .then(response => {
           alert('購買成功');
           console('已成功向賣家下單:', response.data)
