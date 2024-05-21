@@ -22,7 +22,7 @@
         <hr class="divider" />
         <div class="product-description">
           <p class="description">商品狀況: {{ products.condition }}</p>
-          <p class="description">數量: {{ products.quantity }}</p>
+          <p class="description">庫存量: {{ products.quantity }}</p>
           <p class="description">詳情描述: {{ products.description }}</p>
         </div>
       </section>
@@ -33,8 +33,13 @@
         <div class="sub-block">私訊</div>
       </div>
       <section class="product-actions">
+        <div class="quantity-selector">
+          <button @click="decrement" class="quantity-button">-</button>
+          <input type="number" v-model="selectedQuantity" class="quantity-input" min="1"/>
+          <button @click="increment" class="quantity-button">+</button>
+        </div>
         <button
-          @click="addToCart(products._id, products.quantity)"
+          @click="addToCart(products._id)"
           class="add-to-cart"
         >
           加入購物車
@@ -50,16 +55,27 @@ export default {
   data() {
     return {
       products: {},
+      selectedQuantity: 1, // 確保這裡使用 selectedQuantity
     };
   },
   methods: {
-    addToCart(productId, quantity) {
+    increment() {
+      if(!this.selectQuantity<this.products.quantity){
+        this.selectedQuantity++;
+      }
+    },
+    decrement() {
+      if (this.selectedQuantity > 1) {
+        this.selectedQuantity--;
+      }
+    },
+    addToCart(productId) {
       let url = 'http://127.0.0.1:8000/api/cart/add';
       console.log("Request url:"+url);
       axios
         .post(url, {
           product_id: productId,
-          quantity: quantity,
+          quantity: this.selectedQuantity,
         })
         .then((response) => {
           alert("產品已加入購物車！");
@@ -94,7 +110,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%;
+  width: 95%;
   padding-top: 3%;
 }
 
@@ -173,7 +189,7 @@ export default {
 .product-description {
   margin-top: 23px;
   font-family: "Zen Old Mincho", sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 400;
 }
 
@@ -188,6 +204,31 @@ export default {
   padding: 20px;
   width: 80%;
   margin: 0 auto;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding-right: 6.5%;
+}
+
+.quantity-input {
+  width: 40px;
+  text-align: center;
+  justify-content: center;
+  margin: 0 10px;
+  font-size: 20px;
+  border: none;
+}
+
+.quantity-button {
+  padding: 10px 15px;
+  border-radius: 50%;
+  background-color: #fff2d7;
+  cursor: pointer;
+  border: none;
+  box-shadow: 1px 1px 1px #e2dbc9;
 }
 
 .staffInformation {
@@ -224,16 +265,25 @@ export default {
 }
 
 .add-to-cart {
+  width: 30%;
   border: 1px solid #000;
   color: #000;
   text-align: center;
   justify-content: center;
   padding: 18px 26px;
+  margin-top: 20px;
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #fff;
   font-family: "Zen Old Mincho", sans-serif;
   font-size: 20px;
   font-weight: 550;
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
 }
 </style>

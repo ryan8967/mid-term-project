@@ -24,7 +24,7 @@
         ></ProductCard>
     </div>
     <div class="market-menu">
-        <router-link :to="{ path: '/newProducts' }"><div class="actions">上架物品</div></router-link>
+        <router-link :to="{ path: '/newproduct' }"><div class="actions">上架物品</div></router-link>
         <router-link :to="{ path: '/RecordsPage' }"><div class="actions">交易紀錄/申訴</div></router-link>
     </div>
 </template>
