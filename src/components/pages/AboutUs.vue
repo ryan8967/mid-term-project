@@ -38,7 +38,7 @@
         <div class="image">
           <img src="@/assets/images/aboutus-4.jpg" alt="Image for 學生團隊打造">
         </div>
-        <div class="text-right">
+        <div class="text-left">
           <h2>學生團隊打造</h2>
           <p>理解並關心用戶需求，致力打造更便利的交易平台</p>
         </div>
@@ -168,6 +168,11 @@ h1 {
   flex: 1;
   margin: 10%;
   text-align: right;
+}
+.text-left {
+  flex: 1;
+  margin: 10%;
+  text-align: left;
 }
 
 .image {
