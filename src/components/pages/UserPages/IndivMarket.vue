@@ -77,7 +77,10 @@ export default {
             .catch(error => {
                 console.error('Error fetching products:', error.response ? error.response.data : 'Unknown error');
             });
-        }
+        },
+        goToProductDetails(productId) {
+            this.$router.push({ name: "productdetail", params: { id: productId } });
+        },
     },
     mounted() {
         this.fetchUserId();  // 在掛載時獲取用戶 ID
