@@ -59,14 +59,14 @@
     <div class="team-container">
       <div class="team-images">
         <div class="team-image">
-          <img src="@/assets/images/team-1.jpg" alt="Team member 1" />
+          <img src="@/assets/images/team-1.gif" alt="Team member 1" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
-            <p>兄弟 余欣鴻</p>
+            <p>兄弟 余猩鴻</p>
           </div>
         </div>
         <div class="team-image">
-          <img src="@\assets\images\16-1.png" alt="Team member 2" />
+          <img src="@\assets\images\team-2.gif" alt="Team member 2" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
             <p>兄弟 劉芊餘</p>
@@ -87,14 +87,14 @@
           </div>
         </div>
         <div class="team-image">
-          <img src="@/assets/images/team-5.jpg" alt="Team member 5" />
+          <img src="@/assets/images/team-5.gif" alt="Team member 5" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
-            <p>兄弟 謝方瑋</p>
+            <p>兄弟 謝方痿</p>
           </div>
         </div>
         <div class="team-image">
-          <img src="@/assets/images/team-6.jpg" alt="Team member 6" />
+          <img src="@/assets/images/team-6.gif" alt="Team member 6" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
             <p>兄弟 林成髒</p>
@@ -151,7 +151,6 @@ h1 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
   border-radius: 5px;
   padding: 20px;
   background-color: #f7eac369;
@@ -203,19 +202,21 @@ h1 {
   justify-content: center;
   /*align-items: flex-start; */
   height: auto;
-  width: 950px;
+  width: 1000px;
   /* background-color: #eee; */
   /*margin: auto;*/
   padding: 20px;
   margin-bottom: 5%;
+  /* grid-template-columns: repeat(2, 1fr); */
 }
 
 .team-image img {
   flex: 1;
-  width: 250px;
+  width: 300px;
   height: 300px;
   margin: 3%;
 }
+
 .image-description {
   text-align: center;
 }

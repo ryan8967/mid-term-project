@@ -55,7 +55,7 @@
         const queryParams = new URLSearchParams(this.$route.query).toString();
         console.log('Query Params:', queryParams); // Debugging line
   
-        let url = 'http://127.0.0.1:8000/api/products/?main_category=Other';
+        let url = 'http://127.0.0.1:8000/api/products/?main_category=其他';
         console.log('Request URL:', url); // Debugging line
   
         axios
