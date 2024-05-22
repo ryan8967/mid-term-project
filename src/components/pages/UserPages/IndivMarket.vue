@@ -13,7 +13,7 @@
       v-for="prod in formattedProducts"
       :key="prod._id"
       :id="prod._id"
-      :image_url="prod.image"
+      :image="prod.image"
       :name="prod.name"
       :main_category="prod.main_category"
       :sub_category="prod.sub_category"
