@@ -3,8 +3,14 @@
     <div class="form-group">
       <label>商品圖片</label>
       <!-- <button class="upload-button">新增圖片</button> -->
-      <input type="file" id="imageUpload" name="imageUpload" class="upload-button" @change="handleFileUpload"
-        required />
+      <input
+        type="file"
+        id="imageUpload"
+        name="imageUpload"
+        class="upload-button"
+        @change="handleFileUpload"
+        required
+      />
     </div>
     <div class="form-group">
       <label>商品名稱</label>
@@ -26,14 +32,23 @@
       <select v-model="selectedSubCategory">
         <!-- 不可提交空值 -->
         <option disabled value="">請選擇...</option>
-        <option v-for="subCategory in availableSubCategories" :key="subCategory" :value="subCategory">
+        <option
+          v-for="subCategory in availableSubCategories"
+          :key="subCategory"
+          :value="subCategory"
+        >
           {{ subCategory }}
         </option>
       </select>
     </div>
     <div class="form-group">
       <label>狀況</label>
-      <input type="text" v-model="condition" placeholder="請輸入新舊程度..." required />
+      <input
+        type="text"
+        v-model="condition"
+        placeholder="請輸入新舊程度..."
+        required
+      />
     </div>
     <div class="form-group">
       <label>售價</label>
@@ -41,7 +56,12 @@
     </div>
     <div class="form-group">
       <label>數量</label>
-      <input type="number" v-model="quantity" placeholder="請輸入..." required />
+      <input
+        type="number"
+        v-model="quantity"
+        placeholder="請輸入..."
+        required
+      />
     </div>
     <div class="form-group">
       <label>詳細描述</label>
@@ -81,7 +101,16 @@ export default {
       name: "",
       mainCategory: "",
       subCategories: {
-        食品: ["泡麵", "零食", "生鮮", "熟食", "飲品", "冷凍食品", "罐頭/醬料", "其他食品",],
+        食品: [
+          "泡麵",
+          "零食",
+          "生鮮",
+          "熟食",
+          "飲品",
+          "冷凍食品",
+          "罐頭/醬料",
+          "其他食品",
+        ],
         日常: ["家電", "服飾", "衛生", "裝飾", "其他日常"],
         "3C": ["行動裝置", "電腦", "周邊", "相機", "其他3C"],
         書店: ["教科書", "小說", "知識/理財", "文具"],
@@ -95,7 +124,6 @@ export default {
       quantity: "",
       remarks: "",
       soldStatus: "In stock",
-
     };
   },
   watch: {
@@ -106,7 +134,6 @@ export default {
   },
   methods: {
     handleFileUpload(event) {
-
       // 创建 FormData 对象
       const formData = new FormData();
 
@@ -120,19 +147,23 @@ export default {
       // 添加文件到 FormData 对象
       formData.append("image_url", file); // 确保后端接收的字段名与此一致
 
-      axios.post('http://localhost:8000/api/upload', formData)
+      axios
+        .post("http://localhost:8000/api/upload", formData)
         .then((response) => {
           this.image_url = response.data.path;
           console.log("File uploaded successfully:", response.data.path);
         })
         .catch((error) => {
           // 错误处理
-          console.error("Error uploading file:", error.response ? error.response.data : 'Unknown error');
+          console.error(
+            "Error uploading file:",
+            error.response ? error.response.data : "Unknown error"
+          );
         });
     },
     async submitForm() {
       const formData = new FormData();
-      const token = localStorage.getItem('jwtToken'); // 從 localStorage 獲取 token
+      const token = localStorage.getItem("jwtToken"); // 從 localStorage 獲取 token
 
       // if (this.imageUpload) {
       //   formData.append("image_url", this.imageUpload);
@@ -150,11 +181,12 @@ export default {
       formData.append("remarks", this.remarks);
       formData.append("sold_status", this.soldStatus);
 
-      axios.post('http://localhost:8000/api/products', formData, {
-        headers: {
-          'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
-        }
-      })
+      axios
+        .post("http://localhost:8000/api/products", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`, // 使用 JWT token 認證請求
+          },
+        })
         .then((response) => {
           console.log("Product created:", response.data);
           alert("商品成功上架!");
@@ -162,7 +194,12 @@ export default {
         })
         .catch((error) => {
           console.error("Error creating product:", error.response.data);
-          alert("商品上架失敗。" + (error.response && error.response.data.message ? error.response.data.message : error.message));
+          alert(
+            "商品上架失敗。" +
+              (error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message)
+          );
         });
     },
   },

@@ -35,13 +35,15 @@
       <section class="product-actions">
         <div class="quantity-selector">
           <button @click="decrement" class="quantity-button">-</button>
-          <input type="number" v-model="selectedQuantity" class="quantity-input" min="1"/>
+          <input
+            type="number"
+            v-model="selectedQuantity"
+            class="quantity-input"
+            min="1"
+          />
           <button @click="increment" class="quantity-button">+</button>
         </div>
-        <button
-          @click="addToCart(products._id)"
-          class="add-to-cart"
-        >
+        <button @click="addToCart(products._id)" class="add-to-cart">
           加入購物車
         </button>
       </section>
@@ -56,12 +58,12 @@ export default {
     return {
       products: {},
       selectedQuantity: 1, // 確保這裡使用 selectedQuantity
-      baseUrl: 'http://localhost:8000/storage/',
+      baseUrl: "http://localhost:8000/storage/",
     };
   },
   methods: {
     increment() {
-      if(!this.selectQuantity<this.products.quantity){
+      if (!this.selectQuantity < this.products.quantity) {
         this.selectedQuantity++;
       }
     },
@@ -71,8 +73,8 @@ export default {
       }
     },
     addToCart(productId) {
-      let url = 'http://127.0.0.1:8000/api/cart/add';
-      console.log("Request url:"+url);
+      let url = "http://127.0.0.1:8000/api/cart/add";
+      console.log("Request url:" + url);
       axios
         .post(url, {
           product_id: productId,
@@ -91,15 +93,16 @@ export default {
     },
     fetchProductDetails() {
       const productId = this.$route.params.id; // 从路由获取产品ID
-      axios.get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
-      .then((response) => {
-        this.products = response.data[0]; // 假设返回的是数组形式，取第一个
-        this.products.image_url = this.baseUrl + this.products.image_url; // 構造完整的圖片 URL
-        console.log(this.products);
-      })
-      .catch((error) => {
-        console.error("获取产品详情失败:", error);
-      });
+      axios
+        .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
+        .then((response) => {
+          this.products = response.data[0]; // 假设返回的是数组形式，取第一个
+          this.products.image_url = this.baseUrl + this.products.image_url; // 構造完整的圖片 URL
+          console.log(this.products);
+        })
+        .catch((error) => {
+          console.error("获取产品详情失败:", error);
+        });
     },
   },
   created() {
@@ -265,7 +268,6 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: end;
-  
 }
 
 .add-to-cart {

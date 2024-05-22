@@ -36,22 +36,21 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   props: [
-    'id',
-    'catergory',
-    'productName',
-    'productColor',
-    'description',
-    'productPrice',
-    'productImg',
+    "id",
+    "catergory",
+    "productName",
+    "productColor",
+    "description",
+    "productPrice",
+    "productImg",
   ],
   data() {
-    
     return {
       isClicked: false,
-      img: '',
+      img: "",
     };
   },
   created() {
@@ -59,30 +58,30 @@ export default {
   },
   methods: {
     handleBuyClick() {
-      if(localStorage.getItem('mode') === 'in'){
-      this.isClicked = true; // Set isClicked to true when buy button is clicked
-      const token = localStorage.getItem('token');
-      const user = localStorage.getItem('user');
+      if (localStorage.getItem("mode") === "in") {
+        this.isClicked = true; // Set isClicked to true when buy button is clicked
+        const token = localStorage.getItem("token");
+        const user = localStorage.getItem("user");
 
-      axios.post(
-        'http://localhost:3000/addcart/' + user,
-        {
-          userName: user,
-          productId: this.id,
-          productName: this.productName,
-          productColor: this.productColor,
-          description: this.description,
-          productPrice: this.productPrice,
-          productImg: this.productImg,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Adding token to headers
+        axios.post(
+          "http://localhost:3000/addcart/" + user,
+          {
+            userName: user,
+            productId: this.id,
+            productName: this.productName,
+            productColor: this.productColor,
+            description: this.description,
+            productPrice: this.productPrice,
+            productImg: this.productImg,
           },
-        })
-      }
-      else{
-        this.$router.push('/auth');
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Adding token to headers
+            },
+          }
+        );
+      } else {
+        this.$router.push("/auth");
       }
     },
     handleRemoveClick() {

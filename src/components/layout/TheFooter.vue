@@ -33,7 +33,11 @@
               alt="Email icon"
               class="footer-icon"
             />
-            <p class="footer-text"><a href="mailto:someone@example.com">NoCareYou404@cc.edu.gmail.com</a></p>
+            <p class="footer-text">
+              <a href="mailto:someone@example.com"
+                >NoCareYou404@cc.edu.gmail.com</a
+              >
+            </p>
           </li>
         </ul>
       </div>
@@ -57,13 +61,19 @@
       </nav>
       <div class="footer-social">
         <div class="social-item">
-          <a href="https://www.facebook.com/"><img src="@/assets/images/facebook-icon.png" alt="facebook"></a>
+          <a href="https://www.facebook.com/"
+            ><img src="@/assets/images/facebook-icon.png" alt="facebook"
+          /></a>
         </div>
         <div class="social-item">
-          <a href="https://twitter.com/home"><img src="@/assets/images/twitter-icon.png" alt="twitter"></a>
+          <a href="https://twitter.com/home"
+            ><img src="@/assets/images/twitter-icon.png" alt="twitter"
+          /></a>
         </div>
         <div class="social-item">
-          <a href="https://www.instagram.com/"><img src="@/assets/images/insta-icon.png" alt="instagram"></a>
+          <a href="https://www.instagram.com/"
+            ><img src="@/assets/images/insta-icon.png" alt="instagram"
+          /></a>
         </div>
       </div>
     </div>
@@ -147,7 +157,7 @@
   margin: 20px 0;
   text-decoration: none;
 }
-.social-media{
+.social-media {
   width: 150px;
   height: 100px;
   margin: auto;
@@ -158,7 +168,7 @@
   margin-bottom: 24px;
 }
 
-.footer-social{
+.footer-social {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -166,12 +176,12 @@
   text-align: left;
   padding-top: 10px;
 }
-.social-item + .social-item{
+.social-item + .social-item {
   margin-left: 20px;
 }
 
-.social-item img{
-  width:  50px;
+.social-item img {
+  width: 50px;
   height: auto;
 }
 

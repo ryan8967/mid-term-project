@@ -46,7 +46,7 @@ export default {
       ],
       currentIndex: 0,
       slideDirection: "slide-right",
-      timer: 5000, 
+      timer: 5000,
       intervalDuration: 5000,
     };
   },
@@ -99,20 +99,20 @@ export default {
   width: 50px;
   height: 50px;
   font-size: 26px;
-  font-weight:600;
+  font-weight: 600;
   position: absolute;
   display: flex;
   align-items: center; /* 將內容(箭頭)置中 */
   justify-content: center;
   top: 50%;
-  background-color:rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   color: #333;
   border: none;
   border-radius: 50%;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.3);
 }
 .nav-button:hover {
-  background-color:  #fbf6f0;
+  background-color: #fbf6f0;
 }
 .left-nav {
   left: 30px;

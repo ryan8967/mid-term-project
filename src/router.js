@@ -48,7 +48,7 @@ import SellerPage from "./components/pages/UserPages/SellerPage.vue";
 const router = createRouter({
   scrollBehavior() {
     // always scroll to top
-    return { top: 0 }
+    return { top: 0 };
   },
   history: createWebHistory(),
   routes: [
@@ -91,7 +91,8 @@ const router = createRouter({
 
     // Product Pages
     {
-      path: "/products", component: NewPage,
+      path: "/products",
+      component: NewPage,
     },
     { path: "/search", component: SearchPage },
     { path: "/products/其他", component: OtherPage },

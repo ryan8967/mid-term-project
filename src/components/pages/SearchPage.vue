@@ -1,15 +1,26 @@
 <template>
-    <div class="container">
-      <h1>搜尋商品...</h1>
-    </div>
-    <div class="products">
-      <ProductCard v-for="prod in products" :key="prod._id" :id="prod._id" :image_url="prod.image_url" :name="prod.name"
-        :main_category="prod.main_category" :sub_category="prod.sub_category" :condition="prod.condition"
-        :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks" @navigate="goToProductDetails">
-      </ProductCard>
-      <router-view></router-view>
-    </div>
-  </template>
+  <div class="container">
+    <h1>搜尋商品...</h1>
+  </div>
+  <div class="products">
+    <ProductCard
+      v-for="prod in products"
+      :key="prod._id"
+      :id="prod._id"
+      :image_url="prod.image_url"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :condition="prod.condition"
+      :price="prod.price"
+      :quantity="prod.quantity"
+      :remarks="prod.remarks"
+      @navigate="goToProductDetails"
+    >
+    </ProductCard>
+    <router-view></router-view>
+  </div>
+</template>
 
 <script>
 import ProductCard from "@/components/ui/ProductCard.vue"; // Ensure this path is correct
@@ -32,15 +43,14 @@ export default {
 
   methods: {
     fetchProducts() {
-      
       const queryParams = new URLSearchParams(this.$route.query).toString();
-      console.log('Query Params:', queryParams);
-      console.log('Query:', this.query);
+      console.log("Query Params:", queryParams);
+      console.log("Query:", this.query);
 
       let url = `http://127.0.0.1:8000/api/products/?${queryParams}`;
       // let url = `http://localhost:8000/api/products`;
       // let url = `haha`;
-      console.log('Request URL:', url); // Debugging line
+      console.log("Request URL:", url); // Debugging line
 
       axios
         .get(url)
