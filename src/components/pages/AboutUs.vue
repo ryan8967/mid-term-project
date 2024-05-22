@@ -38,56 +38,58 @@
         <div class="image">
           <img src="@/assets/images/aboutus-4.jpg" alt="Image for 學生團隊打造">
         </div>
-        <div class="text-left">
+        <div class="text-right">
           <h2>學生團隊打造</h2>
           <p>理解並關心用戶需求，致力打造更便利的交易平台</p>
         </div>
       </div>
     </div>
     <h1><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Our team</a></h1>
-    <div class="team-images">
-      <div class="team-image">
-        <img src="@/assets/images/team-1.jpg" alt="Team member 1">
-        <div class="image-description">
-          <p>"中央大學學生團隊"</p>
-          <p>兄弟 余欣鴻</p>
+    <div class="team-container">
+      <div class="team-images">
+        <div class="team-image">
+          <img src="@/assets/images/team-1.jpg" alt="Team member 1">
+          <div class="image-description">
+            <p>"中央大學學生團隊"</p>
+            <p>兄弟 余欣鴻</p>
+          </div>
         </div>
+        <div class="team-image">
+          <img src="@\assets\images\16-1.png" alt="Team member 2">
+          <div class="image-description">
+            <p>"中央大學學生團隊"</p>
+            <p>兄弟 劉芊餘</p>
+          </div>
+        </div>
+        <div class="team-image">
+          <img src="@/assets/images/team-3.jpg" alt="Team member 3">
+          <div class="image-description">
+            <p>"中央大學學生團隊"</p>
+            <p>兄弟 戴宇偵</p>
+          </div>
+         </div>
+        <div class="team-image">
+          <img src="@/assets/images/team-4.gif" alt="Team member 4">
+          <div class="image-description">
+            <p>"中央大學學生團隊"</p>
+            <p>兄弟 楊鮪文</p>
+          </div>
+         </div>
+        <div class="team-image">
+          <img src="@/assets/images/team-5.jpg" alt="Team member 5">
+          <div class="image-description">
+            <p>"中央大學學生團隊"</p>
+            <p>兄弟 謝阿痿</p>
+          </div>
+         </div>
+        <div class="team-image">
+          <img src="@/assets/images/team-6.jpg" alt="Team member 6">
+          <div class="image-description">
+            <p>"中央大學學生團隊"</p>
+            <p>兄弟 林成髒</p>
+          </div>
+         </div>
       </div>
-      <div class="team-image">
-        <img src="@\assets\images\16-1.png" alt="Team member 2">
-        <div class="image-description">
-          <p>"中央大學學生團隊"</p>
-          <p>兄弟 劉芊餘</p>
-        </div>
-      </div>
-      <div class="team-image">
-        <img src="@/assets/images/team-3.jpg" alt="Team member 3">
-        <div class="image-description">
-          <p>"中央大學學生團隊"</p>
-          <p>兄弟 戴宇偵</p>
-        </div>
-       </div>
-      <div class="team-image">
-        <img src="@/assets/images/team-4.gif" alt="Team member 4">
-        <div class="image-description">
-          <p>"中央大學學生團隊"</p>
-          <p>兄弟 楊鮪文</p>
-        </div>
-       </div>
-      <div class="team-image">
-        <img src="@/assets/images/team-5.jpg" alt="Team member 5">
-        <div class="image-description">
-          <p>"中央大學學生團隊"</p>
-          <p>兄弟 謝阿痿</p>
-        </div>
-       </div>
-      <div class="team-image">
-        <img src="@/assets/images/team-6.jpg" alt="Team member 6">
-        <div class="image-description">
-          <p>"中央大學學生團隊"</p>
-          <p>兄弟 林成髒</p>
-        </div>
-       </div>
     </div>
   </div>
 </template>
@@ -116,8 +118,8 @@ img {
 
 h1 {
   display: flex;
-  align-items: center; /* 垂直置中 */
-  justify-content: center; /* 水平置中 */
+  align-items: center; 
+  justify-content: center; 
   font-size: 50px;
   margin: 5%;
   /* margin-bottom: 10%; */
@@ -166,13 +168,8 @@ h1 {
 
 .text-right {
   flex: 1;
-  margin: 10%;
+  margin: 10% 10% 10% 5%;
   text-align: right;
-}
-.text-left {
-  flex: 1;
-  margin: 10%;
-  text-align: left;
 }
 
 .image {
@@ -182,20 +179,27 @@ h1 {
   align-items: center;
 }
 
+.team-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+
 .team-images {
   display: flex;
+  align-items: center; 
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;  
-  
+  justify-content: center;
+  /*align-items: flex-start; */ 
   height: auto;
   width: 950px;
   background-color: #eee;
-  margin: auto;
+  /*margin: auto;*/
   padding: 20px;
+  margin-bottom: 5%;
 }
 
-/*我知道視窗縮小的時候圖片會壓縮，等我有精力會回來調*/
 .team-image img {
   flex: 1;
   width: 250px;
