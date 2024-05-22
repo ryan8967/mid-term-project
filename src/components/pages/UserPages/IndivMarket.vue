@@ -12,7 +12,7 @@
   <div class="product-card-row">
     <ProductCard
       class="product"
-      v-for="prod in products"
+      v-for="prod in formattedProducts"
       :key="prod._id"
       :id="prod._id"
       :image_url="prod.image_url"
@@ -49,6 +49,14 @@ export default {
       userId: null, // Initialize userId to null
       products: [], // Initialize an empty array for products
     };
+  },
+  computed: {
+    formattedProducts() {
+      return this.products.map(product => ({
+        ...product,
+        image_url: `http://localhost:8000/storage/${product.image_url}`
+      }));
+    }
   },
   methods: {
     fetchUserId() {
@@ -87,6 +95,7 @@ export default {
 
       const url = `http://127.0.0.1:8000/api/products/?user_id=${this.userId}`;
       console.log("Request URL:", url); // Debugging line
+      
       axios
         .get(url)
         .then((response) => {

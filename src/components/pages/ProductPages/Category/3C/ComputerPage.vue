@@ -3,7 +3,7 @@
     <h1>電腦</h1>
   </div>
   <div class="products">
-    <ProductCard v-for="prod in products" :key="prod._id" :id="prod._id" :image_url="prod.image_url" :name="prod.name"
+    <ProductCard v-for="prod in formattedProducts" :key="prod._id" :id="prod._id" :image_url="prod.image_url" :name="prod.name"
       :main_category="prod.main_category" :sub_category="prod.sub_category" :condition="prod.condition"
       :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks" @navigate="goToProductDetails">
     </ProductCard>
@@ -27,6 +27,15 @@ export default {
 
   created() {
     this.fetchProducts();
+  },
+
+  computed: {
+    formattedProducts() {
+      return this.products.map(product => ({
+        ...product,
+        image_url: `http://localhost:8000/storage/${product.image_url}`
+      }));
+    }
   },
 
   methods: {

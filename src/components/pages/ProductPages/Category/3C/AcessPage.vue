@@ -25,6 +25,15 @@ export default {
     ProductCard, // Register the ProductCard component
   },
 
+  computed: {
+    formattedProducts() {
+      return this.products.map(product => ({
+        ...product,
+        image_url: `http://localhost:8000/storage/${product.image_url}`
+      }));
+    }
+  },
+  
   created() {
     this.fetchProducts();
   },
