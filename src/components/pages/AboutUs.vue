@@ -79,7 +79,7 @@
           <img src="@/assets/images/team-5.jpg" alt="Team member 5">
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
-            <p>兄弟 謝阿痿</p>
+            <p>兄弟 謝方瑋</p>
           </div>
          </div>
         <div class="team-image">
