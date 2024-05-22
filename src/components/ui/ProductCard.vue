@@ -2,7 +2,7 @@
   <li class="product" @click="navigateToDetails">
     <div class="product-card">
       <div class="product-card__content">
-        <img :src="image_url" :alt="name" class="product-card__image" />
+        <img :src="image" :alt="name" class="product-card__image" />
         <div class="product-card__tags">
           <span class="product-card__tag">{{ main_category }}</span>
           <span class="product-card__tag">{{ sub_category }}</span>
@@ -20,7 +20,7 @@
 export default {
   props: [
     "id",
-    "image_url",
+    "image",
     "name",
     "main_category",
     "sub_category",
