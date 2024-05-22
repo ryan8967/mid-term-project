@@ -51,7 +51,6 @@ export default {
     };
   },
   created() {
-    localStorage.setItem("mode", "false");
     this.checkAuthentication();
   },
   methods: {
@@ -79,7 +78,6 @@ export default {
         window.location.href = "http://127.0.0.1:8000/portal";
         console.log("Signed in successfully");
         // localStorage.setItem("token", response.data.token);
-        localStorage.setItem("mode", "in");
         this.LoggedIn = true; // 更新 LoggedIn 狀態為已登入
       } catch (error) {
         console.error("Signed in failed", error);
@@ -88,7 +86,6 @@ export default {
 
     Logout() {
       localStorage.removeItem("jwtToken");
-      localStorage.removeItem("mode");
       this.LoggedIn = false; // 更新 LoggedIn 狀態為未登入
       this.dropDown = false; // 隱藏下拉菜單
       this.$router.push({ path: "/home" });
@@ -189,13 +186,14 @@ a {
 .profile-dropdown {
   position: relative;
   display: inline-block;
+  padding-right: 10px;
 }
 
 .dropdown-content {
   display: block;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
