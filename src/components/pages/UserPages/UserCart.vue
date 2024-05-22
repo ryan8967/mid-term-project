@@ -241,12 +241,15 @@ tr:hover .cart-button {
 .checkout-button {
   font: 20px Zen Old Mincho, sans-serif;
   padding: 10px 20px;
-  border: 1px solid #c69f76;
+  border: 2px solid #c69f76;
+  background-color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   cursor: pointer; /*將鼠標樣式更改為點擊*/
 }
 
 .clear-cart-button {
   margin-right: 20px;
+  margin-top:20px;
 }
 </style>
