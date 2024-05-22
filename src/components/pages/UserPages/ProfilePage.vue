@@ -127,6 +127,10 @@ export default {
   box-sizing: border-box; /* 包括邊框和內距在內的寬度 */
   box-shadow: 3px 3px 3px gray;
 }
+  
+.actions:hover {
+  background-color: #fbf6f0;
+}
 
 a {
   text-decoration: none;
