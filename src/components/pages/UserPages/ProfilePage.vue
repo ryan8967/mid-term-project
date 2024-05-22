@@ -2,16 +2,16 @@
   <div class="profile-container">
     <div class="profile-card">
       <div class="info">
-        <label>姓名</label><span>{{ account.name }}</span>
+        <label>姓名</label><span>{{ account.chineseName }}</span>
       </div>
       <div class="info">
-        <label>學號</label><span>{{ account.sid }}</span>
+        <label>學號</label><span>{{ account.studentId }}</span>
       </div>
       <div class="info">
         <label>信箱</label><span>{{ account.email }}</span>
       </div>
       <div class="info">
-        <label>電話</label><span>{{ account.phone }}</span>
+        <label>電話</label><span>{{ account.mobilePhone }}</span>
       </div>
     </div>
     <div class="menu">
@@ -29,16 +29,42 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      account: {
-        name: "coolstuff",
-        sid: "111432100",
-        email: "test@gmail.com",
-        phone: "0987654321",
-      },
+      account: [],
     };
+  },
+  mounted() {
+    {
+      let token = localStorage.getItem("jwtToken");
+      if (!token) {
+        console.error("No token found in local storage.");
+        return;
+      }
+      const url = `http://localhost:8000/api/user`;
+
+      console.log("token", token); // Debugging line
+      console.log("Request URL:", url); // Debugging line
+
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          this.account = response.data; // Extract user_id from the response
+          console.log("response", response.data); // Debugging line
+        })
+        .catch((error) => {
+          console.error(
+            "Error fetching user ID:",
+            error.response ? error.response.data : "Unknown error"
+          );
+        });
+    }
   },
 };
 </script>

@@ -30,7 +30,6 @@
       </tbody>
     </table>
 
-
     <div v-if="showComplaintForm" class="complaint-form-container">
       <div class="main-container">
         <section class="complaint-section">
@@ -361,5 +360,4 @@ export default {
   max-height: 600px;
   width: 100%;
 }
-
 </style>

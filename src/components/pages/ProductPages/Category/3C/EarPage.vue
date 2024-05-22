@@ -37,11 +37,11 @@ export default {
 
   computed: {
     formattedProducts() {
-      return this.products.map(product => ({
+      return this.products.map((product) => ({
         ...product,
-        image_url: `http://localhost:8000/storage/${product.image_url}`
+        image_url: `http://localhost:8000/storage/${product.image_url}`,
       }));
-    }
+    },
   },
 
   created() {
@@ -50,13 +50,13 @@ export default {
 
   methods: {
     fetchProducts() {
-      console.log('Route Query:', this.$route.query); // Debugging line
+      console.log("Route Query:", this.$route.query); // Debugging line
 
       const queryParams = new URLSearchParams(this.$route.query).toString();
-      console.log('Query Params:', queryParams); // Debugging line
+      console.log("Query Params:", queryParams); // Debugging line
 
-      let url = 'http://127.0.0.1:8000/api/products/?sub_category=耳機';
-      console.log('Request URL:', url); // Debugging line
+      let url = "http://127.0.0.1:8000/api/products/?sub_category=耳機";
+      console.log("Request URL:", url); // Debugging line
 
       axios
         .get(url)

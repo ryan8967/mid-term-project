@@ -4,19 +4,24 @@
     <h1>About us</h1>
     <div class="container">
       <div class="content-section">
-
         <div class="text">
           <h2>中大師生專屬</h2>
           <p>提供更實惠的購買選擇，同時推動舊物的循環利用，減少浪費</p>
         </div>
         <div class="image">
-          <img src="@/assets/images/aboutus-1.jpg" alt="Image for 中大師生專屬">
+          <img
+            src="@/assets/images/aboutus-1.jpg"
+            alt="Image for 中大師生專屬"
+          />
         </div>
       </div>
 
       <div class="content-section-right">
         <div class="image">
-          <img src="@/assets/images/aboutus-2.jpg" alt="Image for 保障交易安全">
+          <img
+            src="@/assets/images/aboutus-2.jpg"
+            alt="Image for 保障交易安全"
+          />
         </div>
         <div class="text-right">
           <h2>保障交易安全</h2>
@@ -30,13 +35,19 @@
           <p>交易進展即時更新，提升個人資料保密性</p>
         </div>
         <div class="image">
-          <img src="@/assets/images/aboutus-3.jpg" alt="Image for 優化交易體驗">
+          <img
+            src="@/assets/images/aboutus-3.jpg"
+            alt="Image for 優化交易體驗"
+          />
         </div>
       </div>
 
       <div class="content-section-right">
         <div class="image">
-          <img src="@/assets/images/aboutus-4.jpg" alt="Image for 學生團隊打造">
+          <img
+            src="@/assets/images/aboutus-4.jpg"
+            alt="Image for 學生團隊打造"
+          />
         </div>
         <div class="text-right">
           <h2>學生團隊打造</h2>
@@ -48,47 +59,47 @@
     <div class="team-container">
       <div class="team-images">
         <div class="team-image">
-          <img src="@/assets/images/team-1.jpg" alt="Team member 1">
+          <img src="@/assets/images/team-1.gif" alt="Team member 1" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
-            <p>兄弟 余欣鴻</p>
+            <p>兄弟 余猩鴻</p>
           </div>
         </div>
         <div class="team-image">
-          <img src="@\assets\images\16-1.png" alt="Team member 2">
+          <img src="@\assets\images\team-2.gif" alt="Team member 2" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
             <p>兄弟 劉芊餘</p>
           </div>
         </div>
         <div class="team-image">
-          <img src="@/assets/images/team-3.jpg" alt="Team member 3">
+          <img src="@/assets/images/team-3.jpg" alt="Team member 3" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
             <p>兄弟 戴宇偵</p>
           </div>
-         </div>
+        </div>
         <div class="team-image">
-          <img src="@/assets/images/team-4.gif" alt="Team member 4">
+          <img src="@/assets/images/team-4.gif" alt="Team member 4" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
             <p>兄弟 楊鮪文</p>
           </div>
-         </div>
+        </div>
         <div class="team-image">
-          <img src="@/assets/images/team-5.jpg" alt="Team member 5">
+          <img src="@/assets/images/team-5.gif" alt="Team member 5" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
-            <p>兄弟 謝方瑋</p>
+            <p>兄弟 謝方痿</p>
           </div>
-         </div>
+        </div>
         <div class="team-image">
-          <img src="@/assets/images/team-6.jpg" alt="Team member 6">
+          <img src="@/assets/images/team-6.gif" alt="Team member 6" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
             <p>兄弟 林成髒</p>
           </div>
-         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -96,7 +107,7 @@
 
 <script>
 export default {
-  name: 'CustomComponent'
+  name: "CustomComponent",
 };
 </script>
 
@@ -118,13 +129,13 @@ img {
 
 h1 {
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
   font-size: 50px;
   margin: 5%;
   /* margin-bottom: 10%; */
   border-bottom: 4px solid #7b6d64;
-  width:auto;
+  width: auto;
 }
 
 .container {
@@ -140,7 +151,6 @@ h1 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
   border-radius: 5px;
   padding: 20px;
   background-color: #f7eac369;
@@ -182,30 +192,31 @@ h1 {
 .team-container {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
-
 
 .team-images {
   display: flex;
-  align-items: center; 
+  align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  /*align-items: flex-start; */ 
+  /*align-items: flex-start; */
   height: auto;
-  width: 950px;
+  width: 1000px;
   /* background-color: #eee; */
   /*margin: auto;*/
   padding: 20px;
   margin-bottom: 5%;
+  /* grid-template-columns: repeat(2, 1fr); */
 }
 
 .team-image img {
   flex: 1;
-  width: 250px;
+  width: 300px;
   height: 300px;
   margin: 3%;
 }
+
 .image-description {
   text-align: center;
 }

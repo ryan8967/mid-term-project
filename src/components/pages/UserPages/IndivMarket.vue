@@ -1,19 +1,28 @@
 <template>
   <div class="market-information">
-    <div class="market-name">Cool Stuff</div>
-    <div class="counts">交易次數:</div>
+    <div class="market-name">{{ userName }}</div>
+    <div class="counts">交易次數: {{ rating_count }}</div>
     <div class="rating">
+      <div>{{ rating_score }}</div>
       <img src="@/assets/images/Rating.png" alt="rating" />
-    </div>
-    <div class="chatroom">
-      <a><img src="@/assets/images/chat.png" alt="Chatting room" />私訊</a>
     </div>
   </div>
   <div class="product-card-row">
-    <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
-      :image_url="prod.image_url" :name="prod.name" :main_category="prod.main_category"
-      :sub_category="prod.sub_category" :condition="prod.condition" :price="prod.price" :quantity="prod.quantity"
-      :remarks="prod.remarks" @navigate="goToProductDetails"></ProductCard>
+    <ProductCard
+      class="product"
+      v-for="prod in formattedProducts"
+      :key="prod._id"
+      :id="prod._id"
+      :image="prod.image_url"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :condition="prod.condition"
+      :price="prod.price"
+      :quantity="prod.quantity"
+      :remarks="prod.remarks"
+      @navigate="goToProductDetails"
+    ></ProductCard>
   </div>
   <div class="market-menu">
     <router-link :to="{ path: '/newproduct' }">
@@ -35,33 +44,24 @@ export default {
   },
   data() {
     return {
-      userId: null, // Initialize userId to null
+      userName: null, // Initialize userId to null
+      rating_count: null,
+      rating_score: null,
       products: [], // Initialize an empty array for products
     };
   },
   computed: {
     formattedProducts() {
-      return this.products.map(product => ({
+      return this.products.map((product) => ({
         ...product,
-        image_url: `http://localhost:8000/storage/${product.image_url}`
+        image_url: `http://localhost:8000/storage/${product.image_url}`,
       }));
-    }
+    },
   },
   methods: {
-    fetchUserId() {
+    fetchProducts() {
       let token = localStorage.getItem("jwtToken");
-      if (!token) {
-        console.error("No token found in local storage.");
-        return;
-      }
-      // const url = `http://localhost:8000/user/?token=${encodeURIComponent(
-      //   token
-      // )}`;
-
-      // const url = `http://localhost:8000/api/user/`;
-
-      const url = `http://localhost:8000/api/myproducts`;
-      console.log("token", token); // Debugging line
+      const url = `http://127.0.0.1:8000/api/myproducts`;
       console.log("Request URL:", url); // Debugging line
 
       axios
@@ -71,30 +71,7 @@ export default {
           },
         })
         .then((response) => {
-          this.userId = response.data.user_id; // Extract user_id from the response
-          console.log("response", response.data); // Debugging line
-          console.log("User ID:", this.userId); // Debugging line
-          this.fetchProducts();
-        })
-        .catch((error) => {
-          console.error(
-            "Error fetching user ID:",
-            error.response ? error.response.data : "Unknown error"
-          );
-        });
-    },
-
-    fetchProducts() {
-      if (!this.userId) return; // Ensure userId is available before making the request
-
-      const url = `http://127.0.0.1:8000/api/products/?user_id=${this.userId}`;
-      console.log("Request URL:", url); // Debugging line
-
-      axios
-        .get(url)
-        .then((response) => {
           this.products = response.data; // Assign fetched products to the products array
-          console.log("Products:", this.products); // Debugging line
         })
         .catch((error) => {
           console.error(
@@ -109,7 +86,30 @@ export default {
     },
   },
   mounted() {
-    this.fetchUserId(); // Fetch user ID when the component is mounted
+    this.fetchProducts(); // Fetch user ID when the component is mounted
+    let token = localStorage.getItem("jwtToken");
+    if (!token) {
+      console.error("No token found in local storage.");
+      return;
+    }
+    const url = `http://localhost:8000/api/user`;
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        this.userName = response.data.chineseName; // Extract user_id from the response
+        this.rating_count = response.data.rating_count;
+        this.rating_score = response.data.rating_score;
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching user ID:",
+          error.response ? error.response.data : "Unknown error"
+        );
+      });
   },
 };
 </script>
@@ -153,28 +153,22 @@ export default {
   font-weight: bold;
 }
 
-.rating img {
-  width: 250px;
-  height: auto;
-}
-
-.chatroom {
+.rating {
   display: flex;
-  width: 200px;
-  height: 80%;
-  background-color: white;
   align-items: center;
   justify-content: center;
-  border: 3px solid #c69f76;
-  border-radius: 30px;
+}
+
+.rating div {
+  margin-right: 10px;
   font-family: Zen Old Mincho;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: bold;
 }
 
-.chatroom img {
-  width: 35px;
-  height: 80%;
+.rating img {
+  width: 80px;
+  height: auto;
 }
 
 .product-card-row {
@@ -206,4 +200,6 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+
 </style>

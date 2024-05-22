@@ -31,8 +31,8 @@ export default {
   ],
   methods: {
     navigateToDetails() {
-      this.$emit('navigate', this.id);
-    }
+      this.$emit("navigate", this.id);
+    },
     //   addToCart() {
     //     const payload = {
     //       productId: this.id,
