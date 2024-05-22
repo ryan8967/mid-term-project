@@ -33,11 +33,11 @@ export default {
 
   computed: {
     formattedProducts() {
-      return this.products.map(product => ({
+      return this.products.map((product) => ({
         ...product,
-        image_url: `http://localhost:8000/storage/${product.image_url}`
+        image_url: `http://localhost:8000/storage/${product.image_url}`,
       }));
-    }
+    },
   },
 
   components: {

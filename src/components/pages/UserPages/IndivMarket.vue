@@ -10,10 +10,21 @@
     </div>
   </div>
   <div class="product-card-row">
-    <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
-      :image_url="prod.image_url" :name="prod.name" :main_category="prod.main_category"
-      :sub_category="prod.sub_category" :condition="prod.condition" :price="prod.price" :quantity="prod.quantity"
-      :remarks="prod.remarks" @navigate="goToProductDetails"></ProductCard>
+    <ProductCard
+      class="product"
+      v-for="prod in formattedProducts"
+      :key="prod._id"
+      :id="prod._id"
+      :image_url="prod.image_url"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :condition="prod.condition"
+      :price="prod.price"
+      :quantity="prod.quantity"
+      :remarks="prod.remarks"
+      @navigate="goToProductDetails"
+    ></ProductCard>
   </div>
   <div class="market-menu">
     <router-link :to="{ path: '/newproduct' }">
@@ -41,11 +52,11 @@ export default {
   },
   computed: {
     formattedProducts() {
-      return this.products.map(product => ({
+      return this.products.map((product) => ({
         ...product,
-        image_url: `http://localhost:8000/storage/${product.image_url}`
+        image_url: `http://localhost:8000/storage/${product.image_url}`,
       }));
-    }
+    },
   },
   methods: {
     fetchUserId() {

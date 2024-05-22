@@ -30,9 +30,15 @@
         />
 
         <div class="dropdown-content" v-show="dropDown">
-          <router-link to="/profile" @click="closeDropdown">我的帳戶</router-link>
-          <router-link to="/IndivMarket" @click="closeDropdown">我的賣場</router-link>
-          <router-link to="/newproduct" @click="closeDropdown">上架商品</router-link>
+          <router-link to="/profile" @click="closeDropdown"
+            >我的帳戶</router-link
+          >
+          <router-link to="/IndivMarket" @click="closeDropdown"
+            >我的賣場</router-link
+          >
+          <router-link to="/newproduct" @click="closeDropdown"
+            >上架商品</router-link
+          >
           <router-link to="/logout" @click="Logout">登出</router-link>
         </div>
       </div>
