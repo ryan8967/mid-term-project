@@ -56,6 +56,7 @@ export default {
     return {
       products: {},
       selectedQuantity: 1, // 確保這裡使用 selectedQuantity
+      baseUrl: 'http://localhost:8000/storage/',
     };
   },
   methods: {
@@ -88,19 +89,21 @@ export default {
           );
         });
     },
-  },
-  created() {
-    const productId = this.$route.params.id; // 確保你的路由設置可以接收id參數
-    console.log("Query Params:", productId); // Debugging line
-    axios
-      .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
+    fetchProductDetails() {
+      const productId = this.$route.params.id; // 从路由获取产品ID
+      axios.get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
       .then((response) => {
-        this.products = response.data[0];
+        this.products = response.data[0]; // 假设返回的是数组形式，取第一个
+        this.products.image_url = this.baseUrl + this.products.image_url; // 構造完整的圖片 URL
         console.log(this.products);
       })
       .catch((error) => {
-        console.log(error);
+        console.error("获取产品详情失败:", error);
       });
+    },
+  },
+  created() {
+    this.fetchProductDetails(); // 在组件创建后立即获取产品详情
   },
 };
 </script>

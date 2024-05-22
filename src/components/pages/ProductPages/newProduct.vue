@@ -18,6 +18,7 @@
         <option value="日常">日常</option>
         <option value="3C">3C</option>
         <option value="書店">書店</option>
+        <option value="其他">其他</option>
       </select>
     </div>
     <div class="form-group" v-if="availableSubCategories.length">
@@ -76,6 +77,7 @@ export default {
     return {
       // Your data properties here
       imageUpload: null,
+      image_url: "",
       name: "",
       mainCategory: "",
       subCategories: {
@@ -83,6 +85,7 @@ export default {
         日常: ["家電", "服飾", "衛生", "裝飾", "其他日常"],
         "3C": ["行動裝置", "電腦", "周邊", "相機", "其他3C"],
         書店: ["教科書", "小說", "知識/理財", "文具"],
+        其他: ["其他"],
       },
       selectedSubCategory: "",
       //預設為空，即不會顯示副類別(於主類別未選擇時)
@@ -103,7 +106,29 @@ export default {
   },
   methods: {
     handleFileUpload(event) {
-      this.imageUpload = event.target.files[0];
+
+      // 创建 FormData 对象
+      const formData = new FormData();
+
+      // 获取文件
+      const file = event.target.files[0];
+      if (!file) {
+        console.error("No file selected");
+        return;
+      }
+
+      // 添加文件到 FormData 对象
+      formData.append("image_url", file); // 确保后端接收的字段名与此一致
+
+      axios.post('http://localhost:8000/api/upload', formData)
+        .then((response) => {
+          this.image_url = response.data.path;
+          console.log("File uploaded successfully:", response.data.path);
+        })
+        .catch((error) => {
+          // 错误处理
+          console.error("Error uploading file:", error.response ? error.response.data : 'Unknown error');
+        });
     },
     async submitForm() {
       const formData = new FormData();
@@ -113,25 +138,8 @@ export default {
       //   formData.append("image_url", this.imageUpload);
       // }
 
-      if (this.imageUpload) {
-        // 上傳圖片並獲取圖片 URL
-        const imageFormData = new FormData();
-        imageFormData.append("image_url", this.imageUpload);
-
-        // 上傳圖片並獲取圖片 URL
-        try {
-          const imageUploadResponse = await axios.post('http://localhost:8000/api/upload', imageFormData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
-            }
-          });
-          formData.append("image_url", imageUploadResponse.data.path);
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          alert("圖片上傳失敗。" + (error.response && error.response.data.message ? error.response.data.message : error.message));
-          return;
-        }
+      if (this.image_url) {
+        formData.append("image_url", this.image_url);
       }
       formData.append("name", this.name);
       formData.append("main_category", this.mainCategory);
@@ -150,6 +158,7 @@ export default {
         .then((response) => {
           console.log("Product created:", response.data);
           alert("商品成功上架!");
+          this.$router.push({ path: "/IndivMarket" });
         })
         .catch((error) => {
           console.error("Error creating product:", error.response.data);

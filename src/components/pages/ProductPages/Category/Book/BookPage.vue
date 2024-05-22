@@ -4,10 +4,10 @@
   </div>
   <div class="products">
     <ProductCard
-      v-for="prod in products"
+      v-for="prod in formattedProducts"
       :key="prod._id"
       :id="prod._id"
-      :image_url="prod.image_url"
+      :image="prod.image_url"
       :name="prod.name"
       :main_category="prod.main_category"
       :sub_category="prod.sub_category"
@@ -29,6 +29,15 @@ export default {
     return {
       products: [],
     };
+  },
+
+  computed: {
+    formattedProducts() {
+      return this.products.map(product => ({
+        ...product,
+        image_url: `http://localhost:8000/storage/${product.image_url}`
+      }));
+    }
   },
 
   components: {

@@ -46,6 +46,10 @@ import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
 
 const router = createRouter({
+  scrollBehavior() {
+    // always scroll to top
+    return { top: 0 }
+  },
   history: createWebHistory(),
   routes: [
     // General Pages
@@ -87,38 +91,9 @@ const router = createRouter({
 
     // Product Pages
     {
-      path: "/products",
-      component: NewPage,
-      // children: [
-      //   { path: "其他", component: OtherPage },
-
-      //   { path: "3C", component: ThreeCPage },
-      //   { path: "周邊", component: HomePage },
-      //   { path: "電腦", component: ComputerPage },
-      //   { path: "耳機", component: EarPage },
-      //   { path: "行動裝置", component: MobilePage },
-
-      //   { path: "書店", component: BookPage },
-      //   { path: "小說", component: FictionPage },
-      //   { path: "知識/理財", component: KnowPage },
-      //   { path: "文具", component: StaplePage },
-      //   { path: "教科書", component: TextPage },
-
-      //   { path: "家電", component: AppliancePage },
-      //   { path: "服裝", component: ClothPage },
-      //   { path: "裝飾", component: DecorPage },
-      //   { path: "日常", component: EssentialPage },
-      //   { path: "衛生用品", component: HygeinePage },
-
-      //   { path: "食品", component: FoodPage },
-      //   { path: "飲品", component: DrinkPage },
-      //   { path: "生鮮/冷凍", component: FreshPage },
-      //   { path: "熟食", component: HotPage },
-      //   { path: "泡麵", component: RamyunPage },
-      //   { path: "零食", component: SnackPage },
-      // ],
+      path: "/products", component: NewPage,
     },
-    { path: "/search", component: SearchPage},
+    { path: "/search", component: SearchPage },
     { path: "/products/其他", component: OtherPage },
     { path: "/products/3C", component: ThreeCPage },
     { path: "/products/周邊", component: AcessPage },
@@ -144,7 +119,7 @@ const router = createRouter({
     { path: "/products/熟食", component: HotPage },
     { path: "/products/泡麵", component: RamyunPage },
     { path: "/products/零食", component: SnackPage },
-    
+
     {
       path: "/newproduct",
       component: newProduct,
@@ -152,7 +127,11 @@ const router = createRouter({
       //   requiresAuth: true,
       // },
     },
-    { path: "/productdetail/:id", component: ProductDetail, name : "productdetail"},
+    {
+      path: "/productdetail/:id",
+      component: ProductDetail,
+      name: "productdetail",
+    },
   ],
 });
 
@@ -173,13 +152,12 @@ router.beforeEach((to, from, next) => {
   // 檢查 URL 中是否有 token
   const token = to.query.token;
   if (token) {
-    localStorage.setItem('jwtToken', token);  // 將 token 存儲到 localStorage
-    delete to.query.token;  // 從 URL 中移除 token
-    next({ ...to, query: to.query });  // 繼續路由導航，不帶 token 參數
+    localStorage.setItem("jwtToken", token); // 將 token 存儲到 localStorage
+    delete to.query.token; // 從 URL 中移除 token
+    next({ ...to, query: to.query }); // 繼續路由導航，不帶 token 參數
   } else {
-    next();  // 無 token，正常進行路由導航
+    next(); // 無 token，正常進行路由導航
   }
 });
-
 
 export default router;

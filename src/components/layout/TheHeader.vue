@@ -17,22 +17,22 @@
       <router-link to="/cart">
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/0fa33fdb5f297f9c803839ca0a548882d3b6d75074bf1b3078a48c91734d1f92?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-          alt="Shopping-cart-icon" class="cart-icon" />
+          alt="Shopping-cart-icon"
+          class="cart-icon"
+        />
       </router-link>
       <div class="profile-dropdown">
-        <!-- <a href="http://127.0.0.1:8000/portal">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-            alt="User-profile-icon" class="user-icon" @click="toggleDropdown" />
-        </a> -->
-
         <img
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b02d02c05cbc583f199505c45214807fa2daa52f8c6cdf037c9d58ee805f209?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-          alt="User-profile-icon" class="user-icon" @click="toggleDropdown" />
+          alt="User-profile-icon"
+          class="user-icon"
+          @click="toggleDropdown"
+        />
 
         <div class="dropdown-content" v-show="dropDown">
-          <router-link to="/profile">我的帳戶</router-link>
-          <router-link to="/IndivMarket">我的賣場</router-link>
+          <router-link to="/profile" @click="closeDropdown">我的帳戶</router-link>
+          <router-link to="/IndivMarket" @click="closeDropdown">我的賣場</router-link>
+          <router-link to="/newproduct" @click="closeDropdown">上架商品</router-link>
           <router-link to="/logout" @click="Logout">登出</router-link>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default {
     return {
       LoggedIn: false,
       dropDown: false,
-      searchQuery: '',
+      searchQuery: "",
     };
   },
   created() {
@@ -55,11 +55,12 @@ export default {
   },
   methods: {
     isLoggedIn() {
-      return localStorage.getItem("mode") === "in";
+      return localStorage.getItem("jwtToken") !== null;
     },
 
     toggleDropdown() {
-      if (this.isLoggedIn()) { // 檢查是否已登入
+      if (this.isLoggedIn()) {
+        // 檢查是否已登入
         this.dropDown = !this.dropDown; // 如果已登入，則切換下拉菜單的顯示狀態
       } else {
         this.Login(); // 如果未登入，則呼叫 Login 方法進行登入
@@ -67,13 +68,16 @@ export default {
       }
     },
 
+    closeDropdown() {
+      this.dropDown = false;
+    },
+
     async Login() {
       try {
         // const response = await axios.get("http://127.0.0.1:8000/portal"); // 調用登入 API
-        window.location.href = "http://127.0.0.1:8000/portal"
+        window.location.href = "http://127.0.0.1:8000/portal";
         console.log("Signed in successfully");
         // localStorage.setItem("token", response.data.token);
-        localStorage.setItem("mode", "in");
         this.LoggedIn = true; // 更新 LoggedIn 狀態為已登入
       } catch (error) {
         console.error("Signed in failed", error);
@@ -81,27 +85,30 @@ export default {
     },
 
     Logout() {
-      localStorage.removeItem("token");
-      localStorage.removeItem("mode");
+      localStorage.removeItem("jwtToken");
       this.LoggedIn = false; // 更新 LoggedIn 狀態為未登入
+      this.dropDown = false; // 隱藏下拉菜單
+      this.$router.push({ path: "/home" });
     },
 
     checkAuthentication() {
       this.LoggedIn = this.isLoggedIn(); // 初始檢查
       setInterval(() => {
         this.LoggedIn = this.isLoggedIn(); // 每500毫秒檢查一次
-      }, 5000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
+      }, 3000); // 注意原始碼寫500應該是錯誤的，這裡調整為5000毫秒
     },
 
     async searchProducts() {
       const baseUrl = `http://127.0.0.1:8000/api/products/`;
-      const query = this.searchQuery.trim() ? `?name=${encodeURIComponent(this.searchQuery)}` : '';
+      const query = this.searchQuery.trim()
+        ? `?name=${encodeURIComponent(this.searchQuery)}`
+        : "";
       const fullUrl = baseUrl + query;
 
       console.log("Request URL:", fullUrl); // Debugging line
 
       // Trigger navigation with query parameters
-      this.$router.push({ path: '/search', query: { name: this.searchQuery } });
+      this.$router.push({ path: "/search", query: { name: this.searchQuery } });
       // axios
       //   .get(fullUrl)
       //   .then((response) => {
@@ -110,11 +117,11 @@ export default {
       //   .catch((error) => {
       //     console.log("Error:", error);
       //   });
-    }
+    },
   },
-
 };
 </script>
+
 <style scoped>
 .header {
   background-color: #7b6d64;
@@ -156,8 +163,6 @@ export default {
   border-radius: 50%;
 }
 
-
-
 .search input[type="text"] {
   min-width: 300px;
   min-height: 40px;
@@ -181,13 +186,14 @@ a {
 .profile-dropdown {
   position: relative;
   display: inline-block;
+  padding-right: 10px;
 }
 
 .dropdown-content {
   display: block;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 100px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
