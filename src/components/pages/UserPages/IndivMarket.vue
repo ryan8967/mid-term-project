@@ -10,10 +10,21 @@
     </div>
   </div>
   <div class="product-card-row">
-    <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
-      :image_url="prod.image_url" :name="prod.name" :main_category="prod.main_category"
-      :sub_category="prod.sub_category" :condition="prod.condition" :price="prod.price" :quantity="prod.quantity"
-      :remarks="prod.remarks" @navigate="goToProductDetails"></ProductCard>
+    <ProductCard
+      class="product"
+      v-for="prod in formattedProducts"
+      :key="prod._id"
+      :id="prod._id"
+      :image_url="prod.image_url"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :condition="prod.condition"
+      :price="prod.price"
+      :quantity="prod.quantity"
+      :remarks="prod.remarks"
+      @navigate="goToProductDetails"
+    ></ProductCard>
   </div>
   <div class="market-menu">
     <router-link :to="{ path: '/newproduct' }">
@@ -41,27 +52,48 @@ export default {
   },
   computed: {
     formattedProducts() {
-      return this.products.map(product => ({
+      return this.products.map((product) => ({
         ...product,
-        image_url: `http://localhost:8000/storage/${product.image_url}`
+        image_url: `http://localhost:8000/storage/${product.image_url}`,
       }));
-    }
+    },
   },
   methods: {
-    fetchUserId() {
+    // fetchUserId() {
+    //   let token = localStorage.getItem("jwtToken");
+    //   if (!token) {
+    //     console.error("No token found in local storage.");
+    //     return;
+    //   }
+    //   const url = `http://localhost:8000/user/?token=${encodeURIComponent(
+    //     token)}`;
+
+    //   console.log("token", token); // Debugging line
+    //   console.log("Request URL:", url); // Debugging line
+
+    //   axios
+    //     .get(url, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       this.userId = response.data.user_id; // Extract user_id from the response
+    //       console.log("response", response.data); // Debugging line
+    //       console.log("User ID:", this.userId); // Debugging line
+    //       this.fetchProducts();
+    //     })
+    //     .catch((error) => {
+    //       console.error(
+    //         "Error fetching user ID:",
+    //         error.response ? error.response.data : "Unknown error"
+    //       );
+    //     });
+    // },
+
+    fetchProducts() {
       let token = localStorage.getItem("jwtToken");
-      if (!token) {
-        console.error("No token found in local storage.");
-        return;
-      }
-      // const url = `http://localhost:8000/user/?token=${encodeURIComponent(
-      //   token
-      // )}`;
-
-      // const url = `http://localhost:8000/api/user/`;
-
-      const url = `http://localhost:8000/api/myproducts`;
-      console.log("token", token); // Debugging line
+      const url = `http://127.0.0.1:8000/api/myproducts`;
       console.log("Request URL:", url); // Debugging line
 
       axios
@@ -71,30 +103,7 @@ export default {
           },
         })
         .then((response) => {
-          this.userId = response.data.user_id; // Extract user_id from the response
-          console.log("response", response.data); // Debugging line
-          console.log("User ID:", this.userId); // Debugging line
-          this.fetchProducts();
-        })
-        .catch((error) => {
-          console.error(
-            "Error fetching user ID:",
-            error.response ? error.response.data : "Unknown error"
-          );
-        });
-    },
-
-    fetchProducts() {
-      if (!this.userId) return; // Ensure userId is available before making the request
-
-      const url = `http://127.0.0.1:8000/api/products/?user_id=${this.userId}`;
-      console.log("Request URL:", url); // Debugging line
-
-      axios
-        .get(url)
-        .then((response) => {
           this.products = response.data; // Assign fetched products to the products array
-          console.log("Products:", this.products); // Debugging line
         })
         .catch((error) => {
           console.error(
@@ -109,7 +118,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchUserId(); // Fetch user ID when the component is mounted
+    this.fetchProducts(); // Fetch user ID when the component is mounted
   },
 };
 </script>
