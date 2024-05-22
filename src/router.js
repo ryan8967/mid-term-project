@@ -87,7 +87,7 @@ const router = createRouter({
       //   requiresAuth: true,
       // },
     },
-    { path: "/seller", component: SellerPage },
+    { path: "/seller/:id", component: SellerPage },
 
     // Product Pages
     {
