@@ -33,7 +33,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      account: {},
+      account: [],
     };
   },
   mounted() {
@@ -43,8 +43,7 @@ export default {
         console.error("No token found in local storage.");
         return;
       }
-      const url = `http://localhost:8000/user/?token=${encodeURIComponent(token)}`;
-      // const url = `http://localhost:8000/user/?token=${encodeURIComponent(token)}`;
+      const url = `http://localhost:8000/api/user`;
 
       console.log("token", token); // Debugging line
       console.log("Request URL:", url); // Debugging line
@@ -58,7 +57,6 @@ export default {
         .then((response) => {
           this.account = response.data; // Extract user_id from the response
           console.log("response", response.data); // Debugging line
-          console.log("User ID:", this.userId); // Debugging line
         })
         .catch((error) => {
           console.error(
