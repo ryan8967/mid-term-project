@@ -1,36 +1,35 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
   <div class="product-details">
-    <div class="product-header">
-      <div class="product-title">商品名稱</div>
-      <div class="product-info">
-        <div class="product-seller">商家</div>
-        <div class="product-meta">
-          <div class="product-quantity">數量</div>
-          <div class="product-price">價格</div>
-          <div class="product-subtotal">小計</div>
-          <div class="product-date">交易日期</div>
-        </div>
-      </div>
-    </div>
-    <div class="product-separator"></div>
-    <div class="product-item" v-for="order in orders" :key="order._id">
-      <div class="product-name">{{ order.product_name }}</div>
-      <div class="product-seller">{{ order.seller_name }}</div>
-      <div class="product-meta">
-        <div class="product-quantity">{{ order.quantity }}</div>
-        <div class="product-price">{{ order.price }}</div>
-        <div class="product-subtotal">{{ order.subtotal }}</div>
-        <div class="product-date">
-          {{ new Date(order.created_at).toLocaleString() }}
-        </div>
-      </div>
-      <div class="product-appeal">
-        <button class="appeal-button" @click="openComplaintForm(order)">
-          申訴
-        </button>
-      </div>
-    </div>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>商品名稱</th>
+          <th>商家</th>
+          <th>數量</th>
+          <th>價格</th>
+          <th>小計</th>
+          <th>交易日期</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="order in orders" :key="order._id">
+          <td>{{ order.product_name }}</td>
+          <td>{{ order.seller_name }}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.price }}</td>
+          <td>{{ order.subtotal }}</td>
+          <td>{{ new Date(order.created_at).toLocaleString() }}</td>
+          <td>
+            <button class="appeal-button" @click="openComplaintForm(order)">
+              申訴
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
 
     <div v-if="showComplaintForm" class="complaint-form-container">
       <div class="main-container">
