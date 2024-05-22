@@ -3,14 +3,8 @@
     <div class="form-group">
       <label>商品圖片</label>
       <!-- <button class="upload-button">新增圖片</button> -->
-        <input
-          type="file"
-          id="imageUpload"
-          name="imageUpload"
-          class="upload-button"
-          @change="handleFileUpload"
-          required
-        />
+      <input type="file" id="imageUpload" name="imageUpload" class="upload-button" @change="handleFileUpload"
+        required />
     </div>
     <div class="form-group">
       <label>商品名稱</label>
@@ -31,23 +25,14 @@
       <select v-model="selectedSubCategory">
         <!-- 不可提交空值 -->
         <option disabled value="">請選擇...</option>
-        <option
-          v-for="subCategory in availableSubCategories"
-          :key="subCategory"
-          :value="subCategory"
-        >
+        <option v-for="subCategory in availableSubCategories" :key="subCategory" :value="subCategory">
           {{ subCategory }}
         </option>
       </select>
     </div>
     <div class="form-group">
       <label>狀況</label>
-      <input
-        type="text"
-        v-model="condition"
-        placeholder="請輸入新舊程度..."
-        required
-      />
+      <input type="text" v-model="condition" placeholder="請輸入新舊程度..." required />
     </div>
     <div class="form-group">
       <label>售價</label>
@@ -55,12 +40,7 @@
     </div>
     <div class="form-group">
       <label>數量</label>
-      <input
-        type="number"
-        v-model="quantity"
-        placeholder="請輸入..."
-        required
-      />
+      <input type="number" v-model="quantity" placeholder="請輸入..." required />
     </div>
     <div class="form-group">
       <label>詳細描述</label>
@@ -112,7 +92,7 @@ export default {
       quantity: "",
       remarks: "",
       soldStatus: "In stock",
-      
+
     };
   },
   watch: {
@@ -125,12 +105,33 @@ export default {
     handleFileUpload(event) {
       this.imageUpload = event.target.files[0];
     },
-    submitForm() {
+    async submitForm() {
       const formData = new FormData();
       const token = localStorage.getItem('jwtToken'); // 從 localStorage 獲取 token
 
+      // if (this.imageUpload) {
+      //   formData.append("image_url", this.imageUpload);
+      // }
+
       if (this.imageUpload) {
-        formData.append("image_url", this.imageUpload);
+        // 上傳圖片並獲取圖片 URL
+        const imageFormData = new FormData();
+        imageFormData.append("image_url", this.imageUpload);
+
+        // 上傳圖片並獲取圖片 URL
+        try {
+          const imageUploadResponse = await axios.post('http://localhost:8000/api/upload', imageFormData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
+            }
+          });
+          formData.append("image_url", imageUploadResponse.data.path);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert("圖片上傳失敗。" + (error.response && error.response.data.message ? error.response.data.message : error.message));
+          return;
+        }
       }
       formData.append("name", this.name);
       formData.append("main_category", this.mainCategory);
@@ -143,9 +144,9 @@ export default {
 
       axios.post('http://localhost:8000/api/products', formData, {
         headers: {
-            'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
+          'Authorization': `Bearer ${token}`  // 使用 JWT token 認證請求
         }
-    })
+      })
         .then((response) => {
           console.log("Product created:", response.data);
           alert("商品成功上架!");
@@ -173,7 +174,8 @@ export default {
   flex-direction: row;
   align-items: center;
   /* margin-bottom: 20px; Adds gap between form groups */
-  gap: 40px; /* Adds gap between label and input within each form group */
+  gap: 40px;
+  /* Adds gap between label and input within each form group */
 }
 
 .form-group label {
