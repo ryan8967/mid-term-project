@@ -3,9 +3,8 @@
   <div class="container">
     <div class="product-overview">
       <img
-        loading="lazy"
         :src="products.image_url"
-        alt="Fender Stratocaster"
+        :alt="products.name"
         class="product-image"
       />
       <section class="product-details">
@@ -23,7 +22,7 @@
         <div class="product-description">
           <p class="description">商品狀況: {{ products.condition }}</p>
           <p class="description">庫存量: {{ products.quantity }}</p>
-          <p class="description">詳情描述: {{ products.description }}</p>
+          <p class="description">詳情描述: {{ products.remarks }}</p>
         </div>
       </section>
     </div>
@@ -99,6 +98,7 @@ export default {
           this.products = response.data[0]; // 假设返回的是数组形式，取第一个
           this.products.image_url = this.baseUrl + this.products.image_url; // 構造完整的圖片 URL
           console.log(this.products);
+          console.log(this.products.image_url);
         })
         .catch((error) => {
           console.error("获取产品详情失败:", error);
