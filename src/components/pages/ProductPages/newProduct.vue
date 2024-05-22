@@ -24,6 +24,7 @@
         <option value="日常">日常</option>
         <option value="3C">3C</option>
         <option value="書店">書店</option>
+        <option value="其他">其他</option>
       </select>
     </div>
     <div class="form-group" v-if="availableSubCategories.length">
@@ -104,6 +105,7 @@ export default {
         日常: ["家電", "服飾", "衛生", "裝飾", "其他日常"],
         "3C": ["行動裝置", "電腦", "周邊", "相機", "其他3C"],
         書店: ["教科書", "小說", "知識/理財", "文具"],
+        其他: ["其他"],
       },
       selectedSubCategory: "",
       //預設為空，即不會顯示副類別(於主類別未選擇時)

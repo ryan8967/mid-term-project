@@ -51,7 +51,6 @@ export default {
     };
   },
   created() {
-    localStorage.setItem("mode", "false");
     this.checkAuthentication();
   },
   methods: {
@@ -79,7 +78,6 @@ export default {
         window.location.href = "http://127.0.0.1:8000/portal";
         console.log("Signed in successfully");
         // localStorage.setItem("token", response.data.token);
-        localStorage.setItem("mode", "in");
         this.LoggedIn = true; // 更新 LoggedIn 狀態為已登入
       } catch (error) {
         console.error("Signed in failed", error);
@@ -88,7 +86,6 @@ export default {
 
     Logout() {
       localStorage.removeItem("jwtToken");
-      localStorage.removeItem("mode");
       this.LoggedIn = false; // 更新 LoggedIn 狀態為未登入
       this.dropDown = false; // 隱藏下拉菜單
       this.$router.push({ path: "/home" });

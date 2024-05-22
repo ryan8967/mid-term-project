@@ -194,7 +194,7 @@ h1 {
   /*align-items: flex-start; */ 
   height: auto;
   width: 950px;
-  background-color: #eee;
+  /* background-color: #eee; */
   /*margin: auto;*/
   padding: 20px;
   margin-bottom: 5%;
