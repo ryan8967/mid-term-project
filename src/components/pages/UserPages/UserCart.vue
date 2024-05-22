@@ -247,6 +247,11 @@ tr:hover .cart-button {
   border-radius: 30px;
   cursor: pointer; /*將鼠標樣式更改為點擊*/
 }
+  
+.clear-cart-button:hover ,
+.checkout-button:hover {
+  background-color: #fbf6f0;
+}
 
 .clear-cart-button {
   margin-right: 20px;
