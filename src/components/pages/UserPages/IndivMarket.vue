@@ -10,29 +10,18 @@
     </div>
   </div>
   <div class="product-card-row">
-    <ProductCard
-      class="product"
-      v-for="prod in formattedProducts"
-      :key="prod._id"
-      :id="prod._id"
-      :image_url="prod.image_url"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :condition="prod.condition"
-      :price="prod.price"
-      :quantity="prod.quantity"
-      :remarks="prod.remarks"
-      @navigate="goToProductDetails"
-    ></ProductCard>
+    <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
+      :image_url="prod.image_url" :name="prod.name" :main_category="prod.main_category"
+      :sub_category="prod.sub_category" :condition="prod.condition" :price="prod.price" :quantity="prod.quantity"
+      :remarks="prod.remarks" @navigate="goToProductDetails"></ProductCard>
   </div>
   <div class="market-menu">
-    <router-link :to="{ path: '/newproduct' }"
-      ><div class="actions">上架物品</div></router-link
-    >
-    <router-link :to="{ path: '/RecordsPage' }"
-      ><div class="actions">交易紀錄/申訴</div></router-link
-    >
+    <router-link :to="{ path: '/newproduct' }">
+      <div class="actions">上架物品</div>
+    </router-link>
+    <router-link :to="{ path: '/RecordsPage' }">
+      <div class="actions">交易紀錄/申訴</div>
+    </router-link>
   </div>
 </template>
 
@@ -65,10 +54,15 @@ export default {
         console.error("No token found in local storage.");
         return;
       }
-      const url = `http://localhost:8000/user/?token=${encodeURIComponent(
-        token
-      )}`;
-      console.log("Request URL:", token); // Debugging line
+      // const url = `http://localhost:8000/user/?token=${encodeURIComponent(
+      //   token
+      // )}`;
+
+      // const url = `http://localhost:8000/api/user/`;
+
+      const url = `http://localhost:8000/api/myproducts`;
+      console.log("token", token); // Debugging line
+      console.log("Request URL:", url); // Debugging line
 
       axios
         .get(url, {
@@ -95,7 +89,7 @@ export default {
 
       const url = `http://127.0.0.1:8000/api/products/?user_id=${this.userId}`;
       console.log("Request URL:", url); // Debugging line
-      
+
       axios
         .get(url)
         .then((response) => {
