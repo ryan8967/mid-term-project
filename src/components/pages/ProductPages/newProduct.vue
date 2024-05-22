@@ -124,6 +124,7 @@ export default {
         .then((response) => {
           this.image_url = response.data.path;
           console.log("File uploaded successfully:", response.data.path);
+
         })
         .catch((error) => {
           // 错误处理
