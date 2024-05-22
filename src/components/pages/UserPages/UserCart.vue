@@ -106,18 +106,16 @@ export default {
       axios.post( url, {product_id: productId, quantity: quantity})
         .then(response => {
           console.log(response.data);
-          alert('訂單紀錄已更新!');
         })
         .catch(error =>{
           console.log('更新訂單失敗:', error.response.data);
-          alert('訂單未更新');
         }) 
       
     },
 
     removeFromCart(productId) {
       console.log(productId);
-      axios.post(`/cart/remove`, { product_id: productId })
+      axios.post(`http://localhost:8000/api/cart/remove`, { product_id: productId })
       .then(() => {
         this.cartItems = this.cartItems.filter(item => item.product_id !== productId);
         alert('商品已從購物車移除');
@@ -129,10 +127,9 @@ export default {
 
     //清空購物車
     clearCart() {
-      axios.post(`/cart/clear`)
+      axios.post(`http://localhost:8000/api/cart/clear`)
       .then(() => {
         this.cartItems = [];
-        alert('購物車已清空');
       })
       .catch(error => {
         alert('清空購物車失敗: ' + error.message);
@@ -144,6 +141,7 @@ export default {
       this.cartItems.forEach(item =>{
         this.purchaseProduct(item.product_id, item.quantity);
       });
+      this.clearCart();
     },
 },
   created() {
