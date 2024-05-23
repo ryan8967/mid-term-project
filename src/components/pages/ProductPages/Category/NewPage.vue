@@ -17,7 +17,6 @@
       :remarks="prod.remarks"
       @navigate="goToProductDetails"
     ></ProductCard>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -51,42 +50,29 @@ export default {
 
   methods: {
     fetchProducts() {
-      // console.log('Route Query:', this.$route.query); // Debugging line
+    const url = `http://localhost:8000/api/products`;
+    axios
+      .get(url)
+      .then((response) => {
+        const data = response.data;
+        // Check if the returned data has more than 10 items
+        if (data.length > 10) {
+          // Slice the last 10 items
+          this.products = data.slice(-10);
+        } else {
+          // If there are 10 or fewer items, use all of them
+          this.products = data;
+        }
+      })
+      .catch((error) => {
+        console.log('Error fetching products:', error);
+      });
+  },
 
-      // const queryParams = new URLSearchParams(this.$route.query).toString();
-      // console.log('Query Params:', queryParams); // Debugging line
-
-      // let url = 'http://127.0.0.1:8000/api/products/';
-      const queryParams = new URLSearchParams(this.$route.query);
-      console.log("Query Params:", queryParams);
-      console.log('Query:', this.query);
-
-      // let url = `http://127.0.0.1:8000/api/products/?` + queryParams;
-      let url = `http://localhost:8000/api/products`;
-      // let url = `haha`;
-      console.log('Request URL:', url); // Debugging line
-
-      axios
-        .get(url)
-        .then((response) => {
-          this.products = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
     goToProductDetails(productId) {
-      this.$router.push({ name: "ProductDetails", params: { id: productId } });
+      this.$router.push({ name: "productdetail", params: { id: productId } });
     },
-    generatePath(path, props) {
-      if (props && props.query) {
-        return {
-          path: path,
-          query: props.query,
-        };
-      }
-      return path;
-    },
+    
   },
 
   watch: {
