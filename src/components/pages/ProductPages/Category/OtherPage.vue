@@ -68,7 +68,7 @@
           });
       },
       goToProductDetails(productId) {
-        this.$router.push({ name: "ProductDetails", params: { id: productId } });
+        this.$router.push({ name: "productdetail", params: { id: productId } });
       },
       generatePath(path, props) {
         if (props && props.query) {
