@@ -157,6 +157,9 @@
   margin: 20px 0;
   text-decoration: none;
 }
+.footer-menu-item:hover {
+  background-color: #ad8e7835; 
+}
 .social-media {
   width: 150px;
   height: 100px;

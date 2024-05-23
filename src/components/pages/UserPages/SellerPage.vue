@@ -4,6 +4,7 @@
     <div class="market-name">Cool Stuff</div>
     <div class="counts">交易次數:</div>
     <div class="rating">
+      <div>{{ rating_score }}</div>
       <img src="@/assets/images/Rating.png" alt="rating" />
     </div>
     <div class="chatroom">
@@ -128,7 +129,7 @@ export default {
 }
 
 .rating img {
-  width: 250px;
+  width: 80px;
   height: auto;
 }
 
@@ -157,6 +158,12 @@ export default {
 
 .market-menu .actions {
   margin: 20px;
+}
+
+.cmarket-name:hover ,
+.chatroom:hover ,
+.actions:hover {
+  background-color: #fbf6f0;
 }
 
 a {

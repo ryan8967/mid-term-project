@@ -179,4 +179,16 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+  .category-menu-item:hover {
+  background-color: #c5bbb237; 
+}
+
+.category-menu-item:hover a {
+  color: #4e463c;
+}
+
+.subcategory-menu a:hover {
+  background-color: #c5bbb237;  
+}
 </style>

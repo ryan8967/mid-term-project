@@ -76,7 +76,7 @@
           <img src="@/assets/images/team-3.jpg" alt="Team member 3" />
           <div class="image-description">
             <p>"中央大學學生團隊"</p>
-            <p>兄弟 戴宇偵</p>
+            <p>兄弟 戴雨真大</p>
           </div>
         </div>
         <div class="team-image">
