@@ -2,6 +2,11 @@
   <div class="container">
     <h1>耳機</h1>
   </div>
+  <img
+    src="@\assets\images\3c headphone.jpg"
+    alt="Image for 3c earphone"
+  />
+  
   <div class="products">
     <ProductCard
       v-for="prod in formattedProducts"
