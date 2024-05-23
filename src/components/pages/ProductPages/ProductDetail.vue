@@ -46,10 +46,14 @@
           加入購物車
         </button>
       </section>
-      <section v-show="ownProduct">
-      </section>   
     </div>
-    
+    <div class="actions-container" v-show="ownProduct">
+      <section class="product-actions">
+        <button @click="deleteProduct(products._id)" class="add-to-cart">
+          刪除商品
+        </button>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -60,7 +64,7 @@ export default {
   data() {
     return {
       products: {},
-      ownProduct: true,
+      ownProduct: false,
       selectedQuantity: 1,
       baseUrl: "http://localhost:8000/storage/",
       userId: "",
@@ -83,34 +87,44 @@ export default {
     },
 
     checkPersonalProduct() {
-      if (this.products && this.userId) {  // Ensure both product and user are loaded
+      if (this.products && this.userId) {
+        // Ensure both product and user are loaded
         this.ownProduct = this.products.seller_id === this.userId;
       }
+      console.log("Own product:", this.ownProduct);
     },
 
     addToCart(productId) {
       let url = "http://127.0.0.1:8000/api/cart/add";
       console.log("Request url:" + url);
-      axios.post(url, {
-        product_id: productId,
-        quantity: this.selectedQuantity,
-      }).then(response => {
-        alert("產品已加入購物車！");
-        console.log("加入購物車:", response.data);
-      }).catch(error => {
-        console.error("加入購物車失敗:", error.response.data);
-        alert("加入購物車失敗: " + (error.response.data.message || error.message));
-      });
+      axios
+        .post(url, {
+          product_id: productId,
+          quantity: this.selectedQuantity,
+        })
+        .then((response) => {
+          alert("產品已加入購物車！");
+          console.log("加入購物車:", response.data);
+        })
+        .catch((error) => {
+          console.error("加入購物車失敗:", error.response.data);
+          alert(
+            "加入購物車失敗: " + (error.response.data.message || error.message)
+          );
+        });
     },
 
     fetchProductDetails() {
       const productId = this.$route.params.id;
-      axios.get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`).then(response => {
-        this.products = response.data[0];
-        this.products.image_url = this.baseUrl + this.products.image_url;
-      }).catch(error => {
-        console.error("获取产品详情失败:", error);
-      });
+      axios
+        .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
+        .then((response) => {
+          this.products = response.data[0];
+          this.products.image_url = this.baseUrl + this.products.image_url;
+        })
+        .catch((error) => {
+          console.error("获取产品详情失败:", error);
+        });
     },
 
     fetchUserDetails() {
@@ -120,21 +134,50 @@ export default {
         return;
       }
       const url = `http://localhost:8000/api/user`;
-      axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(response => {
-        this.userId = response.data.user_id;
-        this.checkPersonalProduct(); // Ensure user details are fetched before checking
-      }).catch(error => {
-        console.error("Error fetching user ID:", error.response ? error.response.data : "Unknown error");
-      });
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          this.userId = response.data.user_id;
+          this.checkPersonalProduct(); // Ensure user details are fetched before checking
+        })
+        .catch((error) => {
+          console.error(
+            "Error fetching user ID:",
+            error.response ? error.response.data : "Unknown error"
+          );
+        });
     },
+
+    deleteProduct(productId) {
+      let url = "http://127.0.0.1:8000/api/cart/add";
+      console.log("Request url:" + url);
+      axios
+        .post(url, {
+          product_id: productId,
+          quantity: this.selectedQuantity,
+        })
+        .then((response) => {
+          alert("產品已加入購物車！");
+          console.log("加入購物車:", response.data);
+        })
+        .catch((error) => {
+          console.error("加入購物車失敗:", error.response.data);
+          alert(
+            "加入購物車失敗: " + (error.response.data.message || error.message)
+          );
+        });
+    },
+
     goToSeller(productId) {
-        this.$router.push({ name: "seller", params: { id: productId } });
-      },
+      this.$router.push({ name: "seller", params: { id: productId } });
+    },
+
   },
+  
   created() {
     this.fetchUserDetails();
     this.fetchProductDetails();
