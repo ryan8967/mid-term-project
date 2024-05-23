@@ -62,38 +62,35 @@ const router = createRouter({
     {
       path: "/cart",
       component: UserCart,
-      // meta: {
-      //   requiresAuth: true,
-      // },
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/IndivMarket",
       component: IndivMarket,
-      // meta: {
-      //   requiresAuth: true,
-      // },
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/records",
       component: RecordsPage,
-      // meta: {
-      //   requiresAuth: true,
-      // },
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/profile",
       component: ProfilePage,
-      // meta: {
-      //   requiresAuth: true,
-      // },
+      meta: {
+        requiresAuth: true,
+      },
     },
     { path: "/seller/:id", component: SellerPage },
 
     // Product Pages
-    {
-      path: "/products",
-      component: NewPage,
-    },
+    { path: "/products", component: NewPage },
     { path: "/search", component: SearchPage },
     { path: "/products/其他", component: OtherPage },
     { path: "/products/3C", component: ThreeCPage },
@@ -124,9 +121,9 @@ const router = createRouter({
     {
       path: "/newproduct",
       component: newProduct,
-      // meta: {
-      //   requiresAuth: true,
-      // },
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: "/productdetail/:id",
@@ -136,18 +133,19 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.requiresAuth) {
-//     const user = localStorage.getItem("user");
-//     if (user) {
-//       next();
-//     } else {
-//       next("/auth");
-//     }
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = localStorage.getItem("jwtToken");
+    if (token) {
+      next();
+    } else {
+      alert("未登入!");
+      window.location.href = "http://127.0.0.1:8000/portal";
+    }
+  } else {
+    next();
+  }
+});
 
 router.beforeEach((to, from, next) => {
   // 檢查 URL 中是否有 token
