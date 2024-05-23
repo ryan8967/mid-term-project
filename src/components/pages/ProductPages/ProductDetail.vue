@@ -46,7 +46,10 @@
           加入購物車
         </button>
       </section>
+      <section v-show="ownProduct">
+      </section>   
     </div>
+    
   </div>
 </template>
 
@@ -57,7 +60,7 @@ export default {
   data() {
     return {
       products: {},
-      ownProduct: false,
+      ownProduct: true,
       selectedQuantity: 1,
       baseUrl: "http://localhost:8000/storage/",
       userId: "",
@@ -127,7 +130,10 @@ export default {
       }).catch(error => {
         console.error("Error fetching user ID:", error.response ? error.response.data : "Unknown error");
       });
-    }
+    },
+    goToSeller(productId) {
+        this.$router.push({ name: "seller", params: { id: productId } });
+      },
   },
   created() {
     this.fetchUserDetails();
@@ -309,6 +315,11 @@ export default {
   font-size: 20px;
   font-weight: 550;
   cursor: pointer;
+}
+
+.sub-block:hover,
+.add-to-cart:hover {
+  background-color: #fbf6f0;
 }
 
 input::-webkit-outer-spin-button,
