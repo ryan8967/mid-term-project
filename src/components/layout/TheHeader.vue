@@ -83,7 +83,6 @@ export default {
         // const response = await axios.get("http://127.0.0.1:8000/portal"); // 調用登入 API
         window.location.href = "http://127.0.0.1:8000/portal";
         console.log("Signed in successfully");
-        // localStorage.setItem("token", response.data.token);
         this.LoggedIn = true; // 更新 LoggedIn 狀態為已登入
       } catch (error) {
         console.error("Signed in failed", error);
@@ -115,14 +114,6 @@ export default {
 
       // Trigger navigation with query parameters
       this.$router.push({ path: "/search", query: { name: this.searchQuery } });
-      // axios
-      //   .get(fullUrl)
-      //   .then((response) => {
-      //     this.products = response.data;
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error:", error);
-      //   });
     },
   },
 };

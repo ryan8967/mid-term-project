@@ -68,17 +68,17 @@ export default {
             { name: "行動裝置", path: "/products/行動裝置" },
             { name: "電腦", path: "/products/電腦" },
             { name: "周邊", path: "/products/周邊" },
-            { name: "耳機", path: "/products" },
+            { name: "耳機", path: "/products/耳機" },
           ],
         },
         {
           name: "書店",
           path: "/products/書店",
           subcategories: [
-            { name: "教科書", path: "/products" },
-            { name: "小說", path: "/products" },
-            { name: "知識/理財", path: "/products" },
-            { name: "文具", path: "/products" },
+            { name: "教科書", path: "/products/教科書" },
+            { name: "小說", path: "/products/小說" },
+            { name: "知識/理財", path: "/products/知識/理財" },
+            { name: "文具", path: "/products/文具" },
           ],
         },
         {

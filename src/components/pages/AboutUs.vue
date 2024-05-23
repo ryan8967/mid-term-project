@@ -153,6 +153,7 @@ h1 {
   width: 100%;
   border-radius: 5px;
   padding: 20px;
+  max-width: 83.5%;
   background-color: #f7eac369;
   /*border: 2.5px solid #7b6d644b;*/
   animation: slideFromLeft 3s ease forwards;
@@ -163,7 +164,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 83.5%;
   border-radius: 5px;
   padding: 20px;
   background-color: #b1927243;

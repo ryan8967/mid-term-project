@@ -33,38 +33,6 @@ export default {
     navigateToDetails() {
       this.$emit("navigate", this.id);
     },
-    //   addToCart() {
-    //     const payload = {
-    //       productId: this.id,
-    //     };
-    //     axios
-    //       .post(`http://localhost:3000/addcart/ryanyang`)
-    //       .then((response) => {
-    //         this.products = response.data;
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //     fetch(`http://localhost:3000/addcart/ryanyang`, {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(payload),
-    //     })
-    //       .then((response) => {
-    //         if (!response.ok) {
-    //           throw new Error("Failed to add item to cart");
-    //         }
-    //         return response.json();
-    //       })
-    //       .then((data) => {
-    //         console.log(data);
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error adding item to cart:", error);
-    //       });
-    // },
   },
 };
 </script>
