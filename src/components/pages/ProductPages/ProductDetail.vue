@@ -311,6 +311,11 @@ export default {
   cursor: pointer;
 }
 
+.sub-block:hover,
+.add-to-cart:hover {
+  background-color: #fbf6f0;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
