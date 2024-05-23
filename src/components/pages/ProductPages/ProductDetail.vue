@@ -26,10 +26,10 @@
         </div>
       </section>
     </div>
-    <div class="actions-container">
+    <div class="actions-container" v-show="!ownProduct">
       <div class="staffInformation">
-        <div class="sub-block">COOL STUFF</div>
-        <div class="sub-block">私訊</div>
+        <div class="sub-block">{{ products.seller_id }}</div>
+        <div class="sub-block">聯絡</div>
       </div>
       <section class="product-actions">
         <div class="quantity-selector">
@@ -52,61 +52,86 @@
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
       products: {},
-      selectedQuantity: 1, // 確保這裡使用 selectedQuantity
+      ownProduct: false,
+      selectedQuantity: 1,
       baseUrl: "http://localhost:8000/storage/",
+      userId: "",
+      userName: null,
+      rating_count: null,
+      rating_score: null,
     };
   },
   methods: {
     increment() {
-      if (!this.selectQuantity < this.products.quantity) {
+      if (this.selectedQuantity < this.products.quantity) {
         this.selectedQuantity++;
       }
     },
+
     decrement() {
       if (this.selectedQuantity > 1) {
         this.selectedQuantity--;
       }
     },
+
+    checkPersonalProduct() {
+      if (this.products && this.userId) {  // Ensure both product and user are loaded
+        this.ownProduct = this.products.seller_id === this.userId;
+      }
+    },
+
     addToCart(productId) {
       let url = "http://127.0.0.1:8000/api/cart/add";
       console.log("Request url:" + url);
-      axios
-        .post(url, {
-          product_id: productId,
-          quantity: this.selectedQuantity,
-        })
-        .then((response) => {
-          alert("產品已加入購物車！");
-          console.log("加入購物車:", response.data);
-        })
-        .catch((error) => {
-          console.error("加入購物車失敗:", error.response.data);
-          alert(
-            "加入購物車失敗: " + (error.response.data.message || error.message)
-          );
-        });
+      axios.post(url, {
+        product_id: productId,
+        quantity: this.selectedQuantity,
+      }).then(response => {
+        alert("產品已加入購物車！");
+        console.log("加入購物車:", response.data);
+      }).catch(error => {
+        console.error("加入購物車失敗:", error.response.data);
+        alert("加入購物車失敗: " + (error.response.data.message || error.message));
+      });
     },
+
     fetchProductDetails() {
-      const productId = this.$route.params.id; // 从路由获取产品ID
-      axios
-        .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
-        .then((response) => {
-          this.products = response.data[0]; // 假设返回的是数组形式，取第一个
-          this.products.image_url = this.baseUrl + this.products.image_url; // 構造完整的圖片 URL
-          console.log(this.products);
-          console.log(this.products.image_url);
-        })
-        .catch((error) => {
-          console.error("获取产品详情失败:", error);
-        });
+      const productId = this.$route.params.id;
+      axios.get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`).then(response => {
+        this.products = response.data[0];
+        this.products.image_url = this.baseUrl + this.products.image_url;
+      }).catch(error => {
+        console.error("获取产品详情失败:", error);
+      });
     },
+
+    fetchUserDetails() {
+      let token = localStorage.getItem("jwtToken");
+      if (!token) {
+        console.error("No token found in local storage.");
+        return;
+      }
+      const url = `http://localhost:8000/api/user`;
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => {
+        this.userId = response.data.user_id;
+        this.checkPersonalProduct(); // Ensure user details are fetched before checking
+      }).catch(error => {
+        console.error("Error fetching user ID:", error.response ? error.response.data : "Unknown error");
+      });
+    }
   },
   created() {
-    this.fetchProductDetails(); // 在组件创建后立即获取产品详情
+    this.fetchUserDetails();
+    this.fetchProductDetails();
   },
 };
 </script>
