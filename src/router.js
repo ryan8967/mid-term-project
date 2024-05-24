@@ -37,6 +37,7 @@ import FreshPage from "./components/pages/ProductPages/Category/Food/FreshPage.v
 import HotPage from "./components/pages/ProductPages/Category/Food/HotPage.vue";
 import RamyunPage from "./components/pages/ProductPages/Category/Food/RamyunPage.vue";
 import SnackPage from "./components/pages/ProductPages/Category/Food/SnackPage.vue";
+import SaucePage from "./components/pages/ProductPages/Category/Food/SaucePage.vue";
 
 // User Pages
 import UserCart from "./components/pages/UserPages/UserCart.vue";
@@ -117,6 +118,7 @@ const router = createRouter({
     { path: "/products/熟食", component: HotPage },
     { path: "/products/泡麵", component: RamyunPage },
     { path: "/products/零食", component: SnackPage },
+    { path: "/products/罐頭醬料", component: SaucePage },
 
     {
       path: "/newproduct",
