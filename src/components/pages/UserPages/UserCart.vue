@@ -16,18 +16,18 @@
         <tr v-for="item in cartItems" :key="item.product_id">
           <td>{{ item.name }}</td>
           <td>
-            <button
+            <!-- <button
               type="button"
               @click="decrement(item)"
               class="cart-button"
               :disabled="item.quantity <= 1"
             >
-              -
-            </button>
+              - -->
+            <!-- </button> -->
             <span>{{ item.quantity }}</span>
-            <button type="button" @click="increment(item)" class="cart-button">
+            <!-- <button type="button" @click="increment(item)" class="cart-button">
               +
-            </button>
+            </button> -->
           </td>
           <td>{{ item.price }}</td>
           <td>{{ item.price * item.quantity }}</td>
