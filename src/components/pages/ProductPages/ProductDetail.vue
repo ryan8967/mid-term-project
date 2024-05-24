@@ -151,23 +151,15 @@ export default {
           );
         });
     },
+
     fetchSellerDetails(productId) {
-      let token = localStorage.getItem("jwtToken");
-      if (!token) {
-        console.error("No token found in local storage.");
-        return;
-      }
       const url = `http://localhost:8000/api/products/${productId}/seller`;
       console.log("Request url:", url);
       axios
-        .get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .get(url)
         .then((response) => {
-          this.seller = response.data;
-          console.log(this.seller);
+          this.seller = response.data.seller;
+          console.log("in ", this.seller);
         })
         .catch((error) => {
           console.error(
@@ -337,6 +329,7 @@ export default {
   cursor: pointer;
   border: none;
   box-shadow: 1px 1px 1px #e2dbc9;
+  font-size: 16px;
 }
 
 .staffInformation {
