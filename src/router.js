@@ -45,6 +45,7 @@ import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
 import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
+import StudentCard from "./components/pages/UserPages/StudentCard.vue";
 
 const router = createRouter({
   scrollBehavior() {
@@ -58,6 +59,8 @@ const router = createRouter({
     { path: "/home", component: HomePage },
     { path: "/:notFound(.*)", component: NotFound },
     { path: "/about", component: AboutUs },
+
+    { path: "/studentcard", component: StudentCard },
 
     // User Pages
     {
