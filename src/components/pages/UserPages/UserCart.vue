@@ -47,7 +47,32 @@
   <div class="checkout">
     <p>總金額:{{ totalPrice }}</p>
     <button @click="clearCart" class="clear-cart-button">清空購物車</button>
-    <button @click="checkout" class="checkout-button">結帳</button>
+    <button @click="showPaymentOption = true" class="checkout-button">
+      結帳
+    </button>
+  </div>
+  <div v-if="showPaymentOption" class="PaymentOption-container">
+    <div class="payment-title">付款選項</div>
+    <hr>
+    <div class="payment-options">
+      <button
+        v-for="method in paymentMethods"
+        :key="method.value"
+        :class="{
+          'payment-button': true,
+          selected: selectedPaymentMethod === method.value,
+        }"
+        @click="selectPaymentMethod(method)"
+      >
+        {{ method.name }}
+      </button>
+    </div>
+    <div>
+      <button @click="showPaymentOption = false" class="cancel-button">
+        取消
+      </button>
+      <button @click="checkout" class="submit-button">確認</button>
+    </div>
   </div>
 </template>
 
@@ -58,6 +83,15 @@ export default {
   data() {
     return {
       cartItems: [], // 存儲從 API 獲取的購物車項目列表
+      showPaymentOption: false, // 控制表單顯示的變量
+      paymentMethods: [
+        { name: "信用卡", value: "credit_card" },
+        { name: "LINE Pay", value: "line_pay" },
+        { name: "銀行轉帳", value: "bank_transfer" },
+        { name: "超商代碼", value: "store_code" },
+        { name: "現金交易", value: "Face_to_face" },
+      ],
+      selectedPaymentMethod: null,
     };
   },
   computed: {
@@ -69,6 +103,10 @@ export default {
     },
   },
   methods: {
+    selectPaymentMethod(method) {
+      this.selectedPaymentMethod = method.value;
+      console.log("選擇的付款方式:", method.name);
+    },
     //獲取購物車
     fetchCart() {
       const token = localStorage.getItem("jwtToken"); // 從 localStorage 獲取 token
@@ -166,6 +204,7 @@ export default {
         this.purchaseProduct(item.product_id, item.quantity);
       });
       this.clearCart();
+      this.showPaymentOption = false;
     },
   },
   created() {
@@ -174,7 +213,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cart-container {
   margin: 20px;
   padding: 10px;
@@ -247,14 +286,86 @@ tr:hover .cart-button {
   border-radius: 30px;
   cursor: pointer; /*將鼠標樣式更改為點擊*/
 }
-  
-.clear-cart-button:hover ,
+
+.clear-cart-button:hover,
 .checkout-button:hover {
   background-color: #fbf6f0;
 }
 
 .clear-cart-button {
   margin-right: 20px;
-  margin-top:20px;
+  margin-top: 20px;
+}
+
+.PaymentOption-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 確保所有子元件居中對齊 */
+  justify-content: center;
+  padding: 10px 20px;
+  width: 30%;
+  height: 20%;
+}
+
+.payment-title {
+  font-size: 24px; /* Larger font size for better visibility */
+  color: #333; /* Darker color for better contrast */
+  font-weight: bold; /* Make the title bold */
+  margin-bottom: 10px; /* Space between the title and the horizontal rule */
+}
+
+.PaymentOption-container hr {
+  width: 100%; /* Full width of the container */
+  border: none; /* Remove default border */
+  height: 2px; /* Set the height of the hr */
+  background-color: #ddd; /* Same color as other elements for consistency */
+  margin-bottom: 20px; /* Space below the hr */
+}
+
+.payment-options {
+  display: flex;
+  justify-content: space-between; /* 確保按鈕之間均勻分佈 */
+  width: 100%; /* 使用全部可用寬度 */
+  margin-bottom: 30px; /* 與底部按鈕組保持間距 */
+  grid-template-columns: repeat(2, 1fr); /* 4 columns of equal width */
+  grid-gap: 6px; /* Optional: add gap between grid items */
+}
+
+.payment-button {
+  width: 25%;
+  padding: 10px 20px;
+  background-color: #e2dbc9;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.selected {
+  background-color: #c69f76;
+}
+
+.payment-button:hover {
+  background-color: #c69f76;
+}
+
+.cancel-button,
+.submit-button {
+  font-family: Zen Old Mincho, sans-serif;
+  border-radius: 10px;
+  border: 2px solid rgba(198, 159, 118, 1);
+  background-color: #fff;
+  padding: 5px 20px;
+  cursor: pointer;
+  flex-grow: 1; /* 使兩個按鈕能夠均分容器寬度 */
+  margin: 0 5px;
 }
 </style>
