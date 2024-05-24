@@ -3,7 +3,7 @@
     <div class="top-section">
       <div class="label-content">
         <div class="label">
-          <span>3C產品</span>
+          <span>日常用品</span>
         </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -18,12 +18,12 @@
           <span>新品特區</span>
         </div>
       </div>
-      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;這～裡～放～商～品～</h2></div>
+      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～</h2></div>
       <div class="car-container">
         <img src="@/assets/images/cutecar.png" alt="car img" class="cuteCar-img" />
         <div class="dashed-line"></div>
       </div>
-      <div><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;這～裡～也～放～商～品～</h2></div>
+      <div><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～也～放～商～品～</h2><br></div>
       <div class="products">
         <ProductCard
           v-for="prod in formattedProducts"
@@ -117,10 +117,11 @@ export default {
 .top-section {
   display: flex;
   height: 40%;
-  width: 90%;
-  margin-top: 5%;
-  margin-left: 10%;
-  margin-bottom: 0px;
+  width: 100%;
+  align-items: center;
+  justify-content: center; 
+  margin-top: 2%;
+  margin-bottom: -2.5%;
 }
 .bottom-section {
   height: auto;
@@ -128,6 +129,7 @@ export default {
   justify-content: center; 
   align-items: center;
   margin-top: 3%;
+  margin-bottom: 3%;
   background-color: #FBF6F0;
 }
 
@@ -144,7 +146,12 @@ export default {
   align-items: center; 
   }
 
-  .label span ,
+  .label span {
+  font-size: 25px; 
+  color: white;
+  margin-left: 30px;
+  }
+
   .label2 span {
   font-size: 25px; 
   color: white;
@@ -154,7 +161,7 @@ export default {
 .line{
   justify-content: center; 
   align-items: center; 
-  width:70%;
+  width:60%;
   height:50px;
   margin-left: -50px;
 }
@@ -162,11 +169,11 @@ export default {
 .logo-img{
   justify-content: center; 
   align-items: center; 
-  width:200px;
+  width:13%;
   height:auto;
   margin-left: -60px;
-  margin-top:-70px;
-  margin-bottom:-40px;
+
+  transform: rotate(10deg); 
 }
 
 .devide-line {
