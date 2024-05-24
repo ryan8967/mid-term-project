@@ -33,17 +33,19 @@
     />
     <div class="product-card-row">
       <ProductCard
-        class="product"
-        v-for="prod in products"
-        :key="prod._id"
-        :id="prod._id"
-        :image="prod.image"
-        :name="prod.name"
-        :main_category="prod.main_category"
-        :sub_category="prod.sub_category"
-        :price="prod.price"
-        :quantity="prod.quantity"
-      ></ProductCard>
+      v-for="prod in formattedProducts"
+      :key="prod._id"
+      :id="prod._id"
+      :image="prod.image_url"
+      :name="prod.name"
+      :main_category="prod.main_category"
+      :sub_category="prod.sub_category"
+      :condition="prod.condition"
+      :price="prod.price"
+      :quantity="prod.quantity"
+      :remarks="prod.remarks"
+      @navigate="goToProductDetails"
+    ></ProductCard>
     </div>
   </div>
 </template>
@@ -51,11 +53,20 @@
 <script>
 import ImageSlider from "@/components/ui/ImageSlider.vue";
 import ProductCard from "@/components/ui/ProductCard.vue";
-// import axios from 'axios';
+import axios from "axios";
 export default {
   created() {
     console.log("Home component created");
     this.handleToken();
+    this.fetchProducts();
+  },
+  computed: {
+    formattedProducts() {
+      return this.products.map(product => ({
+        ...product,
+        image_url: `http://localhost:8000/storage/${product.image_url}`
+      }));
+    }
   },
   components: {
     ImageSlider,
@@ -63,55 +74,33 @@ export default {
   },
   data() {
     return {
-      products: [
-        {
-          id: 1,
-          image:
-            "https://m.media-amazon.com/images/I/51vTJqaNoRL._SX300_SY300_QL70_FMwebp_.jpg",
-          name: "辛拉麵 韓國境內版",
-          main_category: "食品",
-          sub_category: "食品",
-          price: 35,
-          quantity: 1,
-          description: "正宗韓國風味的辛拉麵，麵條彈牙，湯頭鮮辣。",
-        },
-        {
-          id: 2,
-          image:
-            "https://shoplineimg.com/5a238dc8080f0658ad003280/655184effafd2661c21e462c/800x.jpg?", 
-          name: "輕量化無線滑鼠 對稱式高背設計",
-          main_category: "3C",
-          sub_category: "周邊",
-          price: 299,
-          quantity: 1,
-          description: "符合人體工學的無線滑鼠，適合長時間操作不易疲勞。",
-        },
-        {
-         id: 3,
-          image:
-            "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/057/68/0010576829.jpg&v=5113823dk&w=1146&h=600",
-          name: "最新C語言：程式設計實例入門Ｉ博碩文化出版",
-          main_category: "書店",
-          sub_category: "教科書",
-          price: 120, 
-          quantity: 1,
-          description: "最新C語言：程式設計實例入門Ｉ博碩文化出版",
-        },
-        // {
-        //   id: 4,
-        //   title: "經典皮革長夾",
-        //   image: "https://picsum.photos/200/300?random=4",
-        //   price: 450,
-        //   description:
-        //     "經典款式皮革長夾，結合優雅與實用性，是商務人士的最佳選擇。",
-        //   tag1: "新品",
-        //   tag2: "推薦",
-        // },
-      ],
+      products: [],
     };
   },
 
   methods: {
+    fetchProducts() {
+      const url = `http://localhost:8000/api/products`;
+      axios
+        .get(url)
+        .then((response) => {
+          const data = response.data;
+          // Check if the returned data has more than 10 items
+          if (data.length > 3) {
+            // Slice the last 10 items
+            this.products = data.slice(-3);
+          } else {
+            // If there are 10 or fewer items, use all of them
+            this.products = data;
+          }
+        })
+        .catch((error) => {
+          console.log("Error fetching products:", error);
+        });
+    },
+    goToProductDetails(productId) {
+      this.$router.push({ name: "productdetail", params: { id: productId } });
+    },
     handleToken() {
       // 使用 URLSearchParams 解析当前页面 URL 中的查询参数
 
