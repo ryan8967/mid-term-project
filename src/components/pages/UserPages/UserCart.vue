@@ -204,6 +204,7 @@ export default {
         this.purchaseProduct(item.product_id, item.quantity);
       });
       this.clearCart();
+      this.showPaymentOption = false;
     },
   },
   created() {
