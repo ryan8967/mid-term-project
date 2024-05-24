@@ -3,7 +3,7 @@
     <div class="top-section">
       <div class="label-content">
         <div class="label">
-          <span>3C產品</span>
+          <span>3C用品</span>
         </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -43,6 +43,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import ProductCard from "@/components/ui/ProductCard.vue";
 import axios from "axios";
