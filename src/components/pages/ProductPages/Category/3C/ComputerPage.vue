@@ -222,6 +222,7 @@ export default {
     border-top: 2px dashed  #7b6d64;
     width: 85%;
     align-items: center; 
+    margin-top: 30px;
     }
 
 .h2{
@@ -236,4 +237,3 @@ export default {
   /* Adds space between product cards */
 }
 </style>
-
