@@ -114,7 +114,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .market-information {
   display: flex;
   justify-content: space-around;
@@ -191,7 +191,20 @@ export default {
 }
 
 .market-menu .actions {
-  margin: 20px 20px;
+  display: flex;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  border: 2px solid #c69f76;
+  border-radius: 30px;
+  padding: 16px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  box-sizing: border-box; /* 包括邊框和內距在內的寬度 */
+  box-shadow: 3px 3px 3px gray;
+  margin: 20px;
 }
 
 a {
