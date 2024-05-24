@@ -168,7 +168,7 @@ export default {
         })
         .then((response) => {
           alert("成功下架商品");
-          console.log("下架商品:", response.data);
+          console.log("下架商品:", response);
           this.$router.push({ name: "IndivMarket" });
         })
         .catch((error) => {
