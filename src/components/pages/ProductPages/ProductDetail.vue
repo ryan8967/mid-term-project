@@ -169,7 +169,7 @@ export default {
         .then((response) => {
           alert("成功下架商品");
           console.log("下架商品:", response);
-          this.$router.push({ name: "IndivMarket" });
+          this.$router.push({ path: "/IndivMarket" });
         })
         .catch((error) => {
           console.error("下架商品失敗:", error.response.data);
