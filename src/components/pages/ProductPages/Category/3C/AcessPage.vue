@@ -18,12 +18,12 @@
           <span>新品特區</span>
         </div>
       </div>
-      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;這～裡～放～商～品～</h2></div>
+      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～</h2></div>
       <div class="car-container">
         <img src="@/assets/images/cutecar.png" alt="car img" class="cuteCar-img" />
         <div class="dashed-line"></div>
       </div>
-      <div><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;這～裡～也～放～商～品～</h2></div>
+      <div><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～也～放～商～品～</h2><br></div>
       <div class="products">
         <ProductCard
           v-for="prod in formattedProducts"
@@ -43,8 +43,9 @@
     </div>
   </div>
 </template>
+
 <script>
-import ProductCard from "@/components/ui/ProductCard.vue";
+import ProductCard from "@/components/ui/ProductCard.vue"; // Ensure this path is correct
 import axios from "axios";
 
 export default {
@@ -55,7 +56,7 @@ export default {
   },
 
   components: {
-    ProductCard,
+    ProductCard, // Register the ProductCard component
   },
 
   computed: {
@@ -68,15 +69,17 @@ export default {
   },
 
   created() {
-    console.log("ThreeCPage created"); // Debugging line
     this.fetchProducts();
   },
 
   methods: {
     fetchProducts() {
-      const queryParams = new URLSearchParams(this.$route.query);
-      console.log("Query Params:", queryParams);
-      let url = `http://127.0.0.1:8000/api/products/?main_category=3C`;
+      console.log("Route Query:", this.$route.query); // Debugging line
+
+      const queryParams = new URLSearchParams(this.$route.query).toString();
+      console.log("Query Params:", queryParams); // Debugging line
+
+      let url = "http://127.0.0.1:8000/api/products/?sub_category=周邊";
       console.log("Request URL:", url); // Debugging line
 
       axios
@@ -85,11 +88,20 @@ export default {
           this.products = response.data;
         })
         .catch((error) => {
-          console.log("Error:", error);
+          console.log(error);
         });
     },
     goToProductDetails(productId) {
       this.$router.push({ name: "productdetail", params: { id: productId } });
+    },
+    generatePath(path, props) {
+      if (props && props.query) {
+        return {
+          path: path,
+          query: props.query,
+        };
+      }
+      return path;
     },
   },
 
@@ -117,10 +129,10 @@ export default {
 .top-section {
   display: flex;
   height: 40%;
-  width: 90%;
-  margin-top: 5%;
-  margin-left: 10%;
-  margin-bottom: 0px;
+  width: 100%;
+  align-items: center;
+  justify-content: center; 
+  margin-bottom: -2.5%;
 }
 .bottom-section {
   height: auto;
@@ -128,6 +140,7 @@ export default {
   justify-content: center; 
   align-items: center;
   margin-top: 3%;
+  margin-bottom: 3%;
   background-color: #FBF6F0;
 }
 
@@ -159,7 +172,7 @@ export default {
 .line{
   justify-content: center; 
   align-items: center; 
-  width:70%;
+  width:61.5%;
   height:50px;
   margin-left: -50px;
 }
@@ -167,11 +180,11 @@ export default {
 .logo-img{
   justify-content: center; 
   align-items: center; 
-  width:200px;
+  width:13%;
   height:auto;
   margin-left: -60px;
-  margin-top:-70px;
-  margin-bottom:-40px;
+
+  transform: rotate(10deg); 
 }
 
 .devide-line {
@@ -211,14 +224,15 @@ export default {
     align-items: center; 
     }
 
-.products {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
 .h2{
   color: black;
 }
 
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allows wrapping to the next row if there's not enough space */
+  gap: 20px;
+  /* Adds space between product cards */
+}
 </style>
