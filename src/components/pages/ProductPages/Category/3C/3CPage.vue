@@ -161,7 +161,7 @@ export default {
 .line{
   justify-content: center; 
   align-items: center; 
-  width:60%;
+  width:61.5%;
   height:50px;
   margin-left: -50px;
 }
