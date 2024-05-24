@@ -2,7 +2,9 @@
   <div class="container">
     <div class="top-section">
       <div class="label-content">
-        <div class="label"></div>
+        <div class="label">
+          <span>3C產品</span>
+        </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">
         <path d="M0,50 C250,150 750,-50 1000,50" stroke="#6B4E40" stroke-width="2" fill="transparent" />
@@ -11,6 +13,17 @@
     </div>
     <div class="devide-line"></div>
     <div class="bottom-section">
+      <div class="label-content">
+        <div class="label2">
+          <span>新品特區</span>
+        </div>
+      </div>
+      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;這～裡～放～商～品～</h2></div>
+      <div class="car-container">
+        <img src="@/assets/images/cutecar.png" alt="car img" class="cuteCar-img" />
+        <div class="dashed-line"></div>
+      </div>
+      <div><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;這～裡～也～放～商～品～</h2></div>
       <div class="products">
         <ProductCard
           v-for="prod in formattedProducts"
@@ -92,6 +105,7 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
   display: flex;
   flex-direction: column;
@@ -103,37 +117,44 @@ export default {
 .top-section {
   display: flex;
   height: 40%;
-  width: 80%;
-  margin-top: 8%;
+  width: 90%;
+  margin-top: 5%;
   margin-left: 10%;
-  margin-bottom: -20px;
+  margin-bottom: 0px;
 }
 .bottom-section {
-  height: 200px;
-  width: 80%;
+  height: auto;
+  width: 85%;
   justify-content: center; 
   align-items: center;
   margin-top: 3%;
   background-color: #FBF6F0;
-  /*border: 2px solid black;*/
 }
+
 .label-content {
   display: flex;
-  justify-content: center;
 }
+
 .label {
-  justify-content: center; 
-  align-items: center; 
   width:200px;
   height:50px;
   clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 0 100%, 0% 50%, 0 0);
   background-color: #7b6d64;
+  display: flex;
+  align-items: center; 
   }
+
+  .label span ,
+  .label2 span {
+  font-size: 25px; 
+  color: white;
+  margin-left: 30px;
+}
 
 .line{
   justify-content: center; 
   align-items: center; 
-  width:800px;
+  width:70%;
   height:50px;
   margin-left: -50px;
 }
@@ -145,17 +166,45 @@ export default {
   height:auto;
   margin-left: -60px;
   margin-top:-70px;
-  margin-bottom:-20px;
+  margin-bottom:-40px;
 }
 
 .devide-line {
-  width: 85%; 
+  width: 90%; 
   height: 2.5px; 
   background-color: #7b6d64;
   justify-content: center;
   align-items: center; 
 }
 
+.label2 {
+  width:200px;
+  height:50px;
+  clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 0 100%, 0% 50%, 0 0);
+  background-color: #7b6d64;
+  margin-left: 2.5%;
+  margin-top:2.5% ;
+  display: flex;
+  align-items: center; 
+  }
+
+  .car-container{
+    display: flex;
+    align-items: center;
+  }
+
+  .cuteCar-img{
+    width:100px;
+    height:auto;
+    margin-left: 2.5%;
+  }
+
+  .dashed-line {
+    height: 0px;
+    border-top: 2px dashed  #7b6d64;
+    width: 85%;
+    align-items: center; 
+    }
 
 .products {
   display: flex;
@@ -163,6 +212,8 @@ export default {
   gap: 20px;
 }
 
+.h2{
+  color: black;
+}
 
 </style>
-
