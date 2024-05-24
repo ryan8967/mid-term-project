@@ -15,7 +15,7 @@
           <div class="product-tags">
             <span class="tag">{{ products.main_category }}</span>
             <span class="tag">{{ products.sub_category }}</span>
-            <span class="product-price">{{ products.price }}</span>
+            <span class="product-price">${{ products.price }}</span>
           </div>
         </div>
         <hr class="divider" />
@@ -28,7 +28,7 @@
     </div>
     <div class="actions-container" v-show="!ownProduct">
       <div class="staffInformation">
-        <div class="sub-block">{{ seller.chineseName }}</div>
+        <div class="sub-block">{{ seller.nickname }}</div>
         <div class="sub-block">聯絡</div>
       </div>
       <section class="product-actions">
