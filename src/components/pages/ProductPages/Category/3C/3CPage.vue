@@ -120,7 +120,6 @@ export default {
   width: 100%;
   align-items: center;
   justify-content: center; 
-  margin-top: 2%;
   margin-bottom: -2.5%;
 }
 .bottom-section {
