@@ -28,7 +28,7 @@
     </div>
     <div class="actions-container" v-show="!ownProduct">
       <div class="staffInformation">
-        <div class="sub-block">{{ products.seller_id }}</div>
+        <div class="sub-block">{{ seller.chineseName }}</div>
         <div class="sub-block">聯絡</div>
       </div>
       <section class="product-actions">
@@ -69,8 +69,7 @@ export default {
       baseUrl: "http://localhost:8000/storage/",
       userId: "",
       userName: null,
-      rating_count: null,
-      rating_score: null,
+      seller: {},
     };
   },
   methods: {
@@ -121,6 +120,7 @@ export default {
         .then((response) => {
           this.products = response.data[0];
           this.products.image_url = this.baseUrl + this.products.image_url;
+          this.fetchSellerDetails(this.products._id);
         })
         .catch((error) => {
           console.error("获取产品详情失败:", error);
@@ -152,13 +152,30 @@ export default {
         });
     },
 
+    fetchSellerDetails(productId) {
+      const url = `http://localhost:8000/api/products/${productId}/seller`;
+      console.log("Request url:", url);
+      axios
+        .get(url)
+        .then((response) => {
+          this.seller = response.data.seller;
+          console.log("in ", this.seller);
+        })
+        .catch((error) => {
+          console.error(
+            "Error fetching product ID:",
+            error.response ? error.response.data : "Unknown error"
+          );
+        });
+    },
+
     deleteProduct(productId) {
       let token = localStorage.getItem("jwtToken");
       if (!token) {
         console.error("No token found in local storage.");
         return;
       }
-      let url = "http://localhost:8000/api/products/"+productId;
+      let url = "http://localhost:8000/api/products/" + productId;
       console.log("Request url:" + url);
       axios
         .delete(url, {
@@ -179,9 +196,8 @@ export default {
     goToSeller(productId) {
       this.$router.push({ name: "seller", params: { id: productId } });
     },
-
   },
-  
+
   created() {
     this.fetchUserDetails();
     this.fetchProductDetails();
@@ -313,6 +329,7 @@ export default {
   cursor: pointer;
   border: none;
   box-shadow: 1px 1px 1px #e2dbc9;
+  font-size: 16px;
 }
 
 .staffInformation {
