@@ -2,10 +2,10 @@
   <div class="container">
     <h1>MobilePage</h1>
   </div>
-  <img
+  <!-- <img
     src="@/assets\images\3c mobile.jpg"
     alt="Image for 3c mobile"
-  />
+  /> -->
   <div class="products">
     <ProductCard
       v-for="prod in formattedProducts"

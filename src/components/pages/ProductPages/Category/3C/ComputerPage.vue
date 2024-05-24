@@ -2,10 +2,10 @@
   <div class="container">
     <h1>電腦</h1>
   </div>
-  <img
+  <!-- <img
     src="@\assets\images\3c computer.jpg"
     alt="Image for 3c computer"
-  />
+  /> -->
   <div class="products">
     <ProductCard
       v-for="prod in formattedProducts"
