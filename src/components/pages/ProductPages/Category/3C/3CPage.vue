@@ -3,7 +3,7 @@
     <div class="top-section">
       <div class="label-content">
         <div class="label">
-          <span>日常用品</span>
+          <span>3C產品</span>
         </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">
