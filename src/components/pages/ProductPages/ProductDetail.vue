@@ -153,22 +153,26 @@ export default {
     },
 
     deleteProduct(productId) {
-      let url = "http://127.0.0.1:8000/api/cart/add";
+      let token = localStorage.getItem("jwtToken");
+      if (!token) {
+        console.error("No token found in local storage.");
+        return;
+      }
+      let url = "http://localhost:8000/api/products/"+productId;
       console.log("Request url:" + url);
       axios
-        .post(url, {
-          product_id: productId,
-          quantity: this.selectedQuantity,
+        .delete(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
         .then((response) => {
-          alert("產品已加入購物車！");
-          console.log("加入購物車:", response.data);
+          alert("成功下架商品");
+          console.log("下架商品:", response.data);
+          this.$router.push({ name: "IndivMarket" });
         })
         .catch((error) => {
-          console.error("加入購物車失敗:", error.response.data);
-          alert(
-            "加入購物車失敗: " + (error.response.data.message || error.message)
-          );
+          console.error("下架商品失敗:", error.response.data);
         });
     },
 
