@@ -100,7 +100,7 @@ export default {
         },
       })
       .then((response) => {
-        this.userName = response.data.chineseName; // Extract user_id from the response
+        this.userName = response.data.nickname; // Extract user_id from the response
         this.rating_count = response.data.rating_count;
         this.rating_score = response.data.rating_score;
       })
