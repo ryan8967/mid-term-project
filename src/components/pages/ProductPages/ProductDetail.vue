@@ -1,8 +1,16 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <div class="container">
+  <div v-if="isLoading" class="loading-spinner">
+    <div class="hourglass"></div>
+    <p>loading...</p>
+  </div>
+  <div v-else class="container">
     <div class="product-overview">
-      <img :src="products.image_url" :alt="products.name" class="product-image" />
+      <img
+        :src="products.image_url"
+        :alt="products.name"
+        class="product-image"
+      />
       <section class="product-details">
         <div class="product-header">
           <div class="product-info">
@@ -30,7 +38,12 @@
       <section class="product-actions">
         <div class="quantity-selector">
           <button @click="decrement" class="quantity-button">-</button>
-          <input type="number" v-model="selectedQuantity" class="quantity-input" min="1" />
+          <input
+            type="number"
+            v-model="selectedQuantity"
+            class="quantity-input"
+            min="1"
+          />
           <button @click="increment" class="quantity-button">+</button>
         </div>
         <button @click="addToCart(products._id)" class="add-to-cart">
@@ -50,7 +63,7 @@
 
 <script>
 import axios from "axios";
-import { openEmailClient } from '@/utils/emailUtils.js';
+import { openEmailClient } from "@/utils/emailUtils.js";
 
 export default {
   data() {
@@ -62,6 +75,7 @@ export default {
       userId: "",
       userName: null,
       seller: {},
+      isLoading: true,
     };
   },
   methods: {
@@ -125,6 +139,7 @@ export default {
         })
         .catch((error) => {
           console.error("获取产品详情失败:", error);
+          this.finishLoading(); // 即使出現錯誤也應結束加載
         });
     },
 
@@ -161,12 +176,14 @@ export default {
         .then((response) => {
           this.seller = response.data.seller;
           console.log("in ", this.seller);
+          this.finishLoading();
         })
         .catch((error) => {
           console.error(
             "Error fetching product ID:",
             error.response ? error.response.data : "Unknown error"
           );
+          this.finishLoading(); // 即使出現錯誤也應結束加載
         });
     },
 
@@ -196,6 +213,10 @@ export default {
 
     goToSeller(productId) {
       this.$router.push({ name: "seller", params: { id: productId } });
+    },
+
+    finishLoading() {
+      this.isLoading = false;
     },
   },
 
@@ -392,4 +413,50 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;
 }
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  color: #cfaf8d; /* Update text color */
+}
+
+.hourglass {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: 6px solid #cfaf8d; /* Update border color to new hourglass frame color */
+  border-color: #cfaf8d transparent #cfaf8d transparent;
+  animation: hourglass-spin 1.5s infinite;
+}
+
+@keyframes hourglass-spin {
+  0% {
+    transform: rotate(0);
+    border-color: #cfaf8d transparent #cfaf8d transparent;
+  }
+  25% {
+    border-color: transparent #c2b280 transparent #c2b280; /* Sand color when hourglass flips */
+  }
+  50% {
+    transform: rotate(180deg);
+    border-color: #cfaf8d transparent #cfaf8d transparent;
+  }
+  75% {
+    border-color: transparent #c2b280 transparent #c2b280; /* Sand color again for consistency */
+  }
+  100% {
+    transform: rotate(360deg);
+    border-color: #cfaf8d transparent #cfaf8d transparent;
+  }
+}
+
+.loading-spinner p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #cfaf8d; /* Update text color to match hourglass frame */
+}
+
 </style>
