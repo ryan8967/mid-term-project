@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "./components/pages/HomePage.vue";
 import NotFound from "./components/pages/NotFound.vue";
 import AboutUs from "./components/pages/AboutUs.vue";
+import HelpPage from "./components/pages/HelpPage.vue";
 
 // Product Pages
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
@@ -61,6 +62,7 @@ const router = createRouter({
     { path: "/home", component: HomePage },
     { path: "/:notFound(.*)", component: NotFound },
     { path: "/about", component: AboutUs },
+    { path: "/help", component: HelpPage },
 
     { path: "/studentcard", component: StudentCard },
 

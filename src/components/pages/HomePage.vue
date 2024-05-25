@@ -35,6 +35,7 @@
 import ImageSlider from "@/components/ui/ImageSlider.vue";
 import ProductCard from "@/components/ui/ProductCard.vue";
 import axios from "axios";
+
 export default {
   created() {
     console.log("Home component created");

@@ -208,6 +208,7 @@ export default {
           alert("確認成功");
           console.log("Confirmed:", response.data);
           this.closeSubmitForm();
+          this.$router.push({ path: "/records" });
         })
         .catch((error) => {
           console.error("Error submitting:", error);
