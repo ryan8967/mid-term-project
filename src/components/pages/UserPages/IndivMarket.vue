@@ -1,46 +1,51 @@
 <template>
-  <div class="market-information">
-    <div class="market-name">{{ userName }}</div>
-    <div class="counts">交易次數: {{ rating_count }}</div>
-    <div class="rating">
-      <div>{{ rating_score }}</div>
-      <img src="@/assets/images/Rating.png" alt="rating" />
+  <LoadingSpinner v-if="isLoading"></LoadingSpinner>
+  <div v-else class="container">
+    <div class="market-information">
+      <div class="market-name">{{ userName }}</div>
+      <div class="counts">交易次數: {{ rating_count }}</div>
+      <div class="rating">
+        <div>{{ rating_score }}</div>
+        <img src="@/assets/images/Rating.png" alt="rating" />
+      </div>
     </div>
-  </div>
-  <div class="product-card-row">
-    <ProductCard
-      class="product"
-      v-for="prod in formattedProducts"
-      :key="prod._id"
-      :id="prod._id"
-      :image="prod.image_url"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :condition="prod.condition"
-      :price="prod.price"
-      :quantity="prod.quantity"
-      :remarks="prod.remarks"
-      @navigate="goToProductDetails"
-    ></ProductCard>
-  </div>
-  <div class="market-menu">
-    <router-link :to="{ path: '/newproduct' }">
-      <div class="actions">上架物品</div>
-    </router-link>
-    <router-link :to="{ path: '/RecordsPage' }">
-      <div class="actions">交易紀錄/申訴</div>
-    </router-link>
+    <div class="product-card-row">
+      <ProductCard
+        class="product"
+        v-for="prod in formattedProducts"
+        :key="prod._id"
+        :id="prod._id"
+        :image="prod.image_url"
+        :name="prod.name"
+        :main_category="prod.main_category"
+        :sub_category="prod.sub_category"
+        :condition="prod.condition"
+        :price="prod.price"
+        :quantity="prod.quantity"
+        :remarks="prod.remarks"
+        @navigate="goToProductDetails"
+      ></ProductCard>
+    </div>
+    <div class="market-menu">
+      <router-link :to="{ path: '/newproduct' }">
+        <div class="actions">上架物品</div>
+      </router-link>
+      <router-link :to="{ path: '/RecordsPage' }">
+        <div class="actions">交易紀錄/申訴</div>
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import ProductCard from "@/components/ui/ProductCard.vue";
+import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
 
 export default {
   components: {
     ProductCard,
+    LoadingSpinner,
   },
   data() {
     return {
@@ -48,6 +53,7 @@ export default {
       rating_count: null,
       rating_score: null,
       products: [], // Initialize an empty array for products
+      isLoading: true,
     };
   },
   computed: {
@@ -84,6 +90,10 @@ export default {
     goToProductDetails(productId) {
       this.$router.push({ name: "productdetail", params: { id: productId } });
     },
+
+    finishLoading() {
+      this.isLoading = false;
+    },
   },
   mounted() {
     this.fetchProducts(); // Fetch user ID when the component is mounted
@@ -103,6 +113,7 @@ export default {
         this.userName = response.data.nickname; // Extract user_id from the response
         this.rating_count = response.data.rating_count;
         this.rating_score = response.data.rating_score;
+        this.finishLoading();
       })
       .catch((error) => {
         console.error(
@@ -115,6 +126,13 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  padding-top: 3%;
+}
+
 .market-information {
   display: flex;
   justify-content: space-around;
@@ -213,6 +231,4 @@ a {
   justify-content: center;
   align-items: center;
 }
-
-
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div class="profile-container">
+  <LoadingSpinner v-if="isLoading"></LoadingSpinner>
+  <div v-else class="profile-container">
     <div class="profile-card">
       <div class="info">
         <label>暱稱</label><span>{{ account.nickname }}</span>
@@ -43,14 +44,22 @@
 
 <script>
 import axios from "axios";
+import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
+
 export default {
   data() {
     return {
       account: {},
       editNickname: "", // 綁定表單的暱稱
       showEditNickname: false, // 控制表單顯示的變量
+      isLoading: true,
     };
   },
+
+  components: {
+    LoadingSpinner,
+  },
+
   methods: {
     updateNickname() {
       let token = localStorage.getItem("jwtToken");
@@ -80,6 +89,9 @@ export default {
           console.error("更新暱稱失敗:", error);
         });
     },
+    finishLoading() {
+      this.isLoading = false;
+    },
   },
   mounted() {
     {
@@ -102,6 +114,7 @@ export default {
         .then((response) => {
           this.account = response.data; // Extract user_id from the response
           console.log("response", response.data); // Debugging line
+          this.finishLoading();
         })
         .catch((error) => {
           console.error(

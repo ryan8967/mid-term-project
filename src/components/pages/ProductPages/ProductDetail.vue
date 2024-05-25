@@ -1,9 +1,6 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <div v-if="isLoading" class="loading-spinner">
-    <div class="hourglass"></div>
-    <p>loading...</p>
-  </div>
+  <LoadingSpinner v-if="isLoading"></LoadingSpinner>
   <div v-else class="container">
     <div class="product-overview">
       <img
@@ -32,7 +29,9 @@
     </div>
     <div class="actions-container" v-show="!ownProduct">
       <div class="staffInformation">
-        <div class="sub-block" @click="goToSeller(products._id)">{{ seller.nickname }}</div>
+        <div class="sub-block" @click="goToSeller(products._id)">
+          {{ seller.nickname }}
+        </div>
         <div class="sub-block" @click="sendEmail">聯絡</div>
       </div>
       <section class="product-actions">
@@ -64,6 +63,7 @@
 <script>
 import axios from "axios";
 import { openEmailClient } from "@/utils/emailUtils.js";
+import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
 
 export default {
   data() {
@@ -77,6 +77,9 @@ export default {
       seller: {},
       isLoading: true,
     };
+  },
+  components: {
+    LoadingSpinner,
   },
   methods: {
     sendEmail() {
@@ -414,50 +417,4 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none !important;
   margin: 0;
 }
-
-.loading-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  color: #cfaf8d; /* Update text color */
-}
-
-.hourglass {
-  width: 50px;
-  height: 50px;
-  background-color: transparent;
-  border: 6px solid #cfaf8d; /* Update border color to new hourglass frame color */
-  border-color: #cfaf8d transparent #cfaf8d transparent;
-  animation: hourglass-spin 1.5s infinite;
-}
-
-@keyframes hourglass-spin {
-  0% {
-    transform: rotate(0);
-    border-color: #cfaf8d transparent #cfaf8d transparent;
-  }
-  25% {
-    border-color: transparent #c2b280 transparent #c2b280; /* Sand color when hourglass flips */
-  }
-  50% {
-    transform: rotate(180deg);
-    border-color: #cfaf8d transparent #cfaf8d transparent;
-  }
-  75% {
-    border-color: transparent #c2b280 transparent #c2b280; /* Sand color again for consistency */
-  }
-  100% {
-    transform: rotate(360deg);
-    border-color: #cfaf8d transparent #cfaf8d transparent;
-  }
-}
-
-.loading-spinner p {
-  margin-top: 10px;
-  font-size: 18px;
-  color: #cfaf8d; /* Update text color to match hourglass frame */
-}
-
 </style>
