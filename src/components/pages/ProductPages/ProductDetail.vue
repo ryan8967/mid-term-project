@@ -3,11 +3,7 @@
   <LoadingSpinner v-if="isLoading"></LoadingSpinner>
   <div v-else class="container">
     <div class="product-overview">
-      <img
-        :src="products.image_url"
-        :alt="products.name"
-        class="product-image"
-      />
+      <img :src="products.image_url" :alt="products.name" class="product-image" />
       <section class="product-details">
         <div class="product-header">
           <div class="product-info">
@@ -22,7 +18,9 @@
         <hr class="divider" />
         <div class="product-description">
           <p class="description">商品狀況: {{ products.condition }}</p>
-          <p class="description">庫存量: {{ products.quantity }}</p>
+          <!-- <p class="description">庫存量: {{ products.quantity }}</p> -->
+          <p v-if="products.quantity > 0">庫存量: {{ products.quantity }}</p>
+          <p v-else>庫存已售完</p>
           <p class="description">詳情描述: {{ products.remarks }}</p>
         </div>
       </section>
@@ -34,20 +32,18 @@
         </div>
         <div class="sub-block" @click="sendEmail">聯絡</div>
       </div>
-      <section class="product-actions">
+      <section class="product-actions" v-if="products.quantity > 0">
         <div class="quantity-selector">
           <button @click="decrement" class="quantity-button">-</button>
-          <input
-            type="number"
-            v-model="selectedQuantity"
-            class="quantity-input"
-            min="1"
-          />
+          <input type="number" v-model="selectedQuantity" class="quantity-input" min="1" />
           <button @click="increment" class="quantity-button">+</button>
         </div>
         <button @click="addToCart(products._id)" class="add-to-cart">
           加入購物車
         </button>
+      </section>
+      <section class="product-actions" v-else>
+        <button class="add-to-cart" disabled>售完</button>
       </section>
     </div>
     <div class="actions-container" v-show="ownProduct">
