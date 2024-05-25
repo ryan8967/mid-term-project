@@ -271,5 +271,6 @@ export default {
   display: flex;
   flex-wrap: wrap; /* Allows wrapping to the next row if there's not enough space */
   gap: 20px; /* Adds space between product cards */
+  padding: 0 40px;
 }
 </style>
