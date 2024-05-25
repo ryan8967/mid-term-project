@@ -51,6 +51,9 @@
     </div>
     <div class="actions-container" v-show="ownProduct">
       <section class="product-actions">
+        <button @click="goToUpdateProduct(products._id)" class="add-to-cart">
+          更新商品
+        </button>
         <button @click="deleteProduct(products._id)" class="add-to-cart">
           刪除商品
         </button>
@@ -187,6 +190,10 @@ export default {
           );
           this.finishLoading(); // 即使出現錯誤也應結束加載
         });
+    },
+
+    goToUpdateProduct(productId){
+      this.$router.push({ name: "update", params: { id: productId } });
     },
 
     deleteProduct(productId) {
@@ -432,6 +439,7 @@ export default {
   text-align: center;
   justify-content: center;
   padding: 18px 26px;
+  margin: 10px;
   border-radius: 30px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: #fff;

@@ -9,6 +9,7 @@ import AboutUs from "./components/pages/AboutUs.vue";
 import newProduct from "./components/pages/ProductPages/newProduct.vue";
 import ProductDetail from "./components/pages/ProductPages/ProductDetail.vue";
 import SearchPage from "./components/pages/SearchPage.vue";
+import UpdateProduct from "./components/pages/ProductPages/UpdateProduct.vue";
 
 import NewPage from "./components/pages/ProductPages/Category/NewPage.vue";
 import OtherPage from "./components/pages/ProductPages/Category/OtherPage.vue";
@@ -131,6 +132,14 @@ const router = createRouter({
     {
       path: "/newproduct",
       component: newProduct,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/update/:id",
+      component: UpdateProduct,
+      name: "update",
       meta: {
         requiresAuth: true,
       },
