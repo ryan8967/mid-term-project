@@ -133,7 +133,7 @@ export default {
 
 .logo {
   color: #fff;
-  font: 800 30px Inter, sans-serif;
+  font: 800 30px, sans-serif;
   margin: 0;
 }
 
