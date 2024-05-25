@@ -1,27 +1,32 @@
 <template>
-  <div class="market-information">
-    <div class="market-name">{{ userName }}</div>
-    <div class="counts">交易次數: {{ rating_count }}</div>
-    <div class="rating">
-      <div>{{ rating_score }}</div>
-      <img src="@/assets/images/Rating.png" alt="rating" />
+  <LoadingSpinner v-if="isLoading"></LoadingSpinner>
+  <div v-else class="container">
+    <div class="market-information">
+      <div class="market-name">{{ userName }}</div>
+      <div class="counts">交易次數: {{ rating_count }}</div>
+      <div class="rating">
+        <div>{{ rating_score }}</div>
+        <img src="@/assets/images/Rating.png" alt="rating" />
+      </div>
     </div>
-  </div>
-  <div class="product-card-row">
-    <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
-      :image="prod.image_url" :name="prod.name" :main_category="prod.main_category" :sub_category="prod.sub_category"
-      :condition="prod.condition" :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks"
-      @navigate="goToProductDetails"></ProductCard>
+    <div class="product-card-row">
+      <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
+        :image="prod.image_url" :name="prod.name" :main_category="prod.main_category" :sub_category="prod.sub_category"
+        :condition="prod.condition" :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks"
+        @navigate="goToProductDetails"></ProductCard>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import ProductCard from "@/components/ui/ProductCard.vue";
+import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
 
 export default {
   components: {
     ProductCard,
+    LoadingSpinner,
   },
   data() {
     return {
@@ -29,16 +34,11 @@ export default {
       rating_count: null,
       rating_score: null,
       products: [], // 初始化空数组
+      isLoading: true,
     };
   },
   computed: {
     formattedProducts() {
-      // return Array.isArray(this.products)
-      //   ? this.products.map((product) => ({
-      //     ...product,
-      //     image_url: `http://localhost:8000/storage/${product.image_url}`,
-      //   }))
-      //   : [];
       return this.products.map((product) => ({
         ...product,
         image_url: `http://localhost:8000/storage/${product.image_url}`,
@@ -60,6 +60,7 @@ export default {
           this.rating_count = seller.rating_count;
           this.rating_score = seller.rating_score;
           this.products = Array.isArray(products) ? products : []; // 确保 products 是数组
+          this.finishLoading();
         })
         .catch((error) => {
           console.error(
@@ -73,33 +74,13 @@ export default {
     goToProductDetails(productId) {
       this.$router.push({ name: "productdetail", params: { id: productId } });
     },
+
+    finishLoading() {
+      this.isLoading = false;
+    },
   },
   mounted() {
     this.fetchProducts(); // 在组件挂载时获取产品信息
-    // const token = localStorage.getItem("jwtToken");
-    // if (!token) {
-    //   console.error("No token found in local storage.");
-    //   return;
-    // }
-    // const url = `http://localhost:8000/api/user`;
-    // axios
-    //   .get(url, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     // this.userName = response.data.nickname;
-    //     // this.rating_count = response.data.rating_count;
-    //     // this.rating_score = response.data.rating_score;
-    //     console.log("User info:", response.data); // 调试信息
-    //   })
-    //   .catch((error) => {
-    //     console.error(
-    //       "Error fetching user ID:",
-    //       error.response ? error.response.data : "Unknown error"
-    //     );
-    //   });
   },
 };
 </script>
@@ -164,12 +145,14 @@ export default {
 .product-card-row {
   display: flex;
   flex-wrap: wrap;
-  width: auto;
+  justify-content: space-around;
+  width: 80%;
   padding: 10px;
+  margin: 0 auto;
 }
 
 .product {
-  margin: auto;
+  margin: 10px;
 }
 
 .market-menu {

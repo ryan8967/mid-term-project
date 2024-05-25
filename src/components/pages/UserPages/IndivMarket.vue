@@ -183,7 +183,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  width: auto;
+  width: 80%;
   padding: 10px;
   margin: 0 auto;
 }
