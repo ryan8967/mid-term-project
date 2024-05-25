@@ -131,7 +131,6 @@ export default {
 }
 
 .category-menu-item {
-  font-family: Inter, sans-serif;
   width: calc(100% / 6);
   text-align: center;
   padding: 16px 30px 10px;
