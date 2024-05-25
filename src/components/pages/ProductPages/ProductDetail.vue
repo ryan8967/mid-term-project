@@ -3,7 +3,10 @@
   <LoadingSpinner v-if="isLoading"></LoadingSpinner>
   <div v-else class="container">
     <div class="product-overview">
-      <img :src="products.image_url" :alt="products.name" class="product-image" />
+      <div class="product-image-wrapper">
+        <img :src="products.image_url" :alt="products.name" class="product-image" :class="{ shadowed: products.quantity === 0 }"/>
+        <div v-if="products.quantity === 0" class="sold-out-banner">Sold Out!</div>
+      </div>
       <section class="product-details">
         <div class="product-header">
           <div class="product-info">
@@ -241,6 +244,41 @@ export default {
   flex-direction: column;
   padding: 16px;
   width: 70%;
+}
+
+.product-image-wrapper {
+  position: relative;
+  width: 500px; /* Ensure this matches your image width */
+  height: 500px; /* Ensure this matches your image height */
+  border-radius: 15px;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.product-image.shadowed {
+  filter: grayscale(100%) brightness(50%);
+  opacity: 0.5;
+}
+
+.sold-out-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better visibility */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 }
 
 @media (min-width: 992px) {
