@@ -32,7 +32,7 @@
     </div>
     <div class="actions-container" v-show="!ownProduct">
       <div class="staffInformation">
-        <div class="sub-block">{{ seller.nickname }}</div>
+        <div class="sub-block" @click="goToSeller(products._id)">{{ seller.nickname }}</div>
         <div class="sub-block" @click="sendEmail">聯絡</div>
       </div>
       <section class="product-actions">
@@ -212,7 +212,8 @@ export default {
     },
 
     goToSeller(productId) {
-      this.$router.push({ name: "seller", params: { id: productId } });
+      // this.$router.push({ name: "seller", params: { id: productId } });
+      this.$router.push({ name: "sellerPage", params: { id: productId } });
     },
 
     finishLoading() {

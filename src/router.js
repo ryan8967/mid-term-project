@@ -91,8 +91,13 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
-    { path: "/seller/:id", component: SellerPage },
-
+    // { path: "/seller/:id", component: SellerPage },
+    // { path: "/sellerPage", component: SellerPage },
+    {
+      path: "/seller/:id",
+      name: "sellerPage",
+      component: SellerPage,
+    },
     // Product Pages
     { path: "/products", component: NewPage },
     { path: "/search", component: SearchPage },
