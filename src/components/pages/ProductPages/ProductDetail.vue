@@ -21,9 +21,8 @@
         <hr class="divider" />
         <div class="product-description">
           <p class="description">商品狀況: {{ products.condition }}</p>
-          <!-- <p class="description">庫存量: {{ products.quantity }}</p> -->
-          <p v-if="products.quantity > 0">庫存量: {{ products.quantity }}</p>
-          <p v-else>庫存已售完</p>
+          <p class="description" v-if="products.quantity > 0">庫存量: {{ products.quantity }}</p>
+          <p class="description" v-else>庫存已售完</p>
           <p class="description">詳情描述: {{ products.remarks }}</p>
         </div>
       </section>
@@ -330,7 +329,7 @@ export default {
   font-family: "Zen Old Mincho", sans-serif;
   border-radius: 30px;
   background-color: #cfaf8d;
-  padding: 7px 30px;
+  padding: 8px 30px;
 }
 
 .divider {
@@ -344,24 +343,25 @@ export default {
   font-family: "Zen Old Mincho", sans-serif;
   font-weight: 600;
   font-size: 36px;
+  padding-left: 10 px;
 }
 
 .product-description {
-  margin-top: 23px;
+  margin-top: 20px;
   font-family: "Zen Old Mincho", sans-serif;
   font-size: 20px;
   font-weight: 400;
 }
 
 .description {
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .actions-container {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 20px;
+  padding: 25px;
   width: 80%;
   margin: 0 auto;
 }
