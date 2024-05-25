@@ -13,7 +13,7 @@
     </div>
     <div class="devide-line"></div>
     <div class="bottom-section">
-      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～</h2></div>
+      <!-- <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～</h2></div> -->
       <div class="products">
         <ProductCard
           v-for="prod in formattedProducts"
@@ -119,7 +119,7 @@ export default {
 }
 .bottom-section {
   height: auto;
-  width: 85%;
+  width: 80%;
   justify-content: center; 
   align-items: center;
   margin-top: 3%;
@@ -215,8 +215,10 @@ export default {
 .products {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;  
   /* Allows wrapping to the next row if there's not enough space */
   gap: 20px;
   /* Adds space between product cards */
+  padding: 20px;
 }
 </style>

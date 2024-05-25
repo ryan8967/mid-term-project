@@ -18,15 +18,43 @@
           <span>新品特區</span>
         </div>
       </div>
-      <div><br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～</h2></div>
+      <div>
+        <br />
+        <!-- <h2>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～
+        </h2> -->
+        <div class="products"><ProductCard
+          v-for="prod in latestThreeProducts"
+          :key="prod._id"
+          :id="prod._id"
+          :image="prod.image_url"
+          :name="prod.name"
+          :main_category="prod.main_category"
+          :sub_category="prod.sub_category"
+          :condition="prod.condition"
+          :price="prod.price"
+          :quantity="prod.quantity"
+          :remarks="prod.remarks"
+          @navigate="goToProductDetails"
+        ></ProductCard></div>
+      </div>
       <div class="car-container">
-        <img src="@/assets/images/cutecar.png" alt="car img" class="cuteCar-img" />
+        <img
+          src="@/assets/images/cutecar.png"
+          alt="car img"
+          class="cuteCar-img"
+        />
         <div class="dashed-line"></div>
       </div>
-      <div><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～也～放～商～品～</h2><br></div>
+      <div>
+        <!-- <h2>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～也～放～商～品～
+        </h2> -->
+        <br />
+      </div>
       <div class="products">
         <ProductCard
-          v-for="prod in formattedProducts"
+          v-for="prod in otherProducts"
           :key="prod._id"
           :id="prod._id"
           :image="prod.image_url"
@@ -56,13 +84,26 @@
     },
   
     computed: {
-      formattedProducts() {
-        return this.products.map((product) => ({
-          ...product,
-          image_url: `http://localhost:8000/storage/${product.image_url}`,
-        }));
-      },
+    formattedProducts() {
+      return this.products.map((product) => ({
+        ...product,
+        image_url: `http://localhost:8000/storage/${product.image_url}`,
+      }));
     },
+    latestThreeProducts() {
+      if(this.formattedProducts.length>3){
+        return this.formattedProducts.slice(-3);
+      }
+      return this.formattedProducts;
+    },
+    // 獲取除了最後三個產品的所有產品
+    otherProducts() {
+      if(this.formattedProducts.length>3){
+        return this.formattedProducts.slice(0, -3);
+      }
+      return [];
+    },
+  },
   
     components: {
       ProductCard, // Register the ProductCard component

@@ -88,7 +88,7 @@ export default {
           // Check if the returned data has more than 10 items
           if (data.length > 3) {
             // Slice the last 10 items
-            this.products = data.slice(-3);
+            this.products = data.slice(-4);
           } else {
             // If there are 10 or fewer items, use all of them
             this.products = data;
