@@ -2,11 +2,7 @@
 <template>
   <div class="container">
     <div class="product-overview">
-      <img
-        :src="products.image_url"
-        :alt="products.name"
-        class="product-image"
-      />
+      <img :src="products.image_url" :alt="products.name" class="product-image" />
       <section class="product-details">
         <div class="product-header">
           <div class="product-info">
@@ -29,17 +25,12 @@
     <div class="actions-container" v-show="!ownProduct">
       <div class="staffInformation">
         <div class="sub-block">{{ seller.nickname }}</div>
-        <div class="sub-block">聯絡</div>
+        <div class="sub-block" @click="sendEmail">聯絡</div>
       </div>
       <section class="product-actions">
         <div class="quantity-selector">
           <button @click="decrement" class="quantity-button">-</button>
-          <input
-            type="number"
-            v-model="selectedQuantity"
-            class="quantity-input"
-            min="1"
-          />
+          <input type="number" v-model="selectedQuantity" class="quantity-input" min="1" />
           <button @click="increment" class="quantity-button">+</button>
         </div>
         <button @click="addToCart(products._id)" class="add-to-cart">
@@ -59,6 +50,7 @@
 
 <script>
 import axios from "axios";
+import { openEmailClient } from '@/utils/emailUtils.js';
 
 export default {
   data() {
@@ -73,6 +65,13 @@ export default {
     };
   },
   methods: {
+    sendEmail() {
+      const email = 'haha@gmail.com';
+      const products =
+        { name: 'Apple', price: '$10' }
+        ;
+      openEmailClient(email, products);
+    },
     increment() {
       if (this.selectedQuantity < this.products.quantity) {
         this.selectedQuantity++;
