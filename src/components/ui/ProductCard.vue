@@ -2,11 +2,18 @@
   <li class="product" @click="navigateToDetails">
     <div class="product-card">
       <div class="product-card__content">
-        <img :src="image" :alt="name" class="product-card__image" />
+        <div class="product-card__image-wrapper">
+          <img
+            :src="image"
+            :alt="name"
+            class="product-card__image"
+            :class="{ shadowed: quantity === 0 }"
+          />
+          <div v-if="quantity === 0" class="sold-out-banner">Sold Out!</div>
+        </div>
         <div class="product-card__tags">
           <span class="product-card__tag">{{ main_category }}</span>
           <span class="product-card__tag">{{ sub_category }}</span>
-          <!-- <p class="amount">數量:{{ quantity }}</p> -->
           <span class="amount" v-if="quantity > 0">數量:{{ quantity }}</span>
           <span class="amount" v-else>售完</span>
         </div>
@@ -65,10 +72,22 @@ export default {
 }
 
 .product-card__image {
-  height: 60%;
+  height: 100%;
   width: 100%;
-  border-radius: 15px;
-  object-fit: cover;
+  object-fit: cover; /* Ensures images cover the area fully */
+}
+
+.product-card__image-wrapper {
+  position: relative;
+  height: 60%; /* Adjusted height relative to the card */
+  width: 100%;
+  overflow: hidden; /* Ensures no part of the image spills out */
+  border-radius: 15px; /* Optional, for rounded corners at the image level */
+}
+
+.product-card__image.shadowed {
+  filter: grayscale(100%) brightness(90%); /* Converts image to grayscale and reduces brightness */
+  opacity: 0.9; /* Further reduces the opacity to give a darker look */
 }
 
 .product-card__tags {
@@ -79,6 +98,22 @@ export default {
   margin-top: 10px;
   width: 100%;
   /* Ensures tags container spans full width */
+}
+
+.sold-out-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .amount {
