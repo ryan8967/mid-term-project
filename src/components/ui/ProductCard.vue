@@ -6,7 +6,9 @@
         <div class="product-card__tags">
           <span class="product-card__tag">{{ main_category }}</span>
           <span class="product-card__tag">{{ sub_category }}</span>
-          <p class="amount">數量:{{ quantity }}</p>
+          <!-- <p class="amount">數量:{{ quantity }}</p> -->
+          <span v-if="quantity > 0">{{ quantity }}</span>
+          <span v-else>售完</span>
         </div>
         <h3 class="title">{{ name }}</h3>
         <h3 class="price">${{ price }}</h3>
@@ -71,15 +73,19 @@ export default {
 
 .product-card__tags {
   display: flex;
-  justify-content: space-between; /* Adjusts alignment to space between items */
+  justify-content: space-between;
+  /* Adjusts alignment to space between items */
   gap: 5px;
   margin-top: 10px;
-  width: 100%; /* Ensures tags container spans full width */
+  width: 100%;
+  /* Ensures tags container spans full width */
 }
 
 .amount {
-  margin-left: auto; /* Pushes the amount element to the right */
-  font-family: Zen Old Mincho, sans-serif; /* Ensures consistent font */
+  margin-left: auto;
+  /* Pushes the amount element to the right */
+  font-family: Zen Old Mincho, sans-serif;
+  /* Ensures consistent font */
 }
 
 .product-card__tag {
