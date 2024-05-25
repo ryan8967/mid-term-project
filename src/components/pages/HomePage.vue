@@ -114,7 +114,7 @@ export default {
 
 .slider-container {
   height: 650px;
-  padding: 10px;
+  padding: 30px;
 }
 
 .banner {
@@ -154,7 +154,8 @@ export default {
   position: relative;
   align-self: start;
   color: #fff;
-  font: 32px Zen Old Mincho, sans-serif;
+  font-size: 32px;
+  
 }
 
 .banner-left-button {
