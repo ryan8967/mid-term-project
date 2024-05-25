@@ -10,24 +10,14 @@
       </div>
     </div>
     <div class="product-card-row">
-      <ProductCard
-        class="product"
-        v-for="prod in formattedProducts"
-        :key="prod._id"
-        :id="prod._id"
-        :image="prod.image_url"
-        :name="prod.name"
-        :main_category="prod.main_category"
-        :sub_category="prod.sub_category"
-        :condition="prod.condition"
-        :price="prod.price"
-        :quantity="prod.quantity"
-        :remarks="prod.remarks"
-        @navigate="goToProductDetails"
-      ></ProductCard>
+      <ProductCard class="product" v-for="prod in formattedProducts" :key="prod._id" :id="prod._id"
+        :image="prod.image_url" :name="prod.name" :main_category="prod.main_category" :sub_category="prod.sub_category"
+        :condition="prod.condition" :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks"
+        @navigate="goToProductDetails"></ProductCard>
     </div>
     <div class="market-menu">
-      <router-link :to="{ path: '/newproduct' }">
+      <!-- <router-link :to="{ path: '/newproduct' }">-->
+      <router-link :to="{ path: '/studentcard' }">
         <div class="actions">上架物品</div>
       </router-link>
       <router-link :to="{ path: '/RecordsPage' }">
@@ -199,7 +189,8 @@ export default {
 }
 
 .product {
-  margin: 10px; /* 为每个产品卡添加外边距，防止粘连 */
+  margin: 10px;
+  /* 为每个产品卡添加外边距，防止粘连 */
 }
 
 .market-menu {
@@ -222,7 +213,8 @@ export default {
   font-size: 16px;
   cursor: pointer;
   margin-bottom: 30px;
-  box-sizing: border-box; /* 包括邊框和內距在內的寬度 */
+  box-sizing: border-box;
+  /* 包括邊框和內距在內的寬度 */
   box-shadow: 3px 3px 3px gray;
   margin: 20px;
 }

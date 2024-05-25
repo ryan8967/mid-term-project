@@ -1,9 +1,14 @@
 <template>
-    <div>
-        <div>學生證辨識系統</div>
-        <button type="button" @click="init">開啟攝像頭</button>
-        <div id="webcam-container"></div>
-        <div id="label-container"></div>
+    <div class="app-container">
+        <div class="content">
+            <h1>身分驗證-學生證辨識系統</h1>
+            <div class="button-container">
+                <button type="button" @click="init" class="mybutton">開啟攝像頭</button>
+                <router-link to="/newproduct" class="mybutton">之後再驗證</router-link>
+            </div>
+            <div id="webcam-container" class="webcam-container"></div>
+            <div id="label-container" class="labels"></div>
+        </div>
     </div>
 </template>
 
@@ -113,11 +118,26 @@ export default {
         //     }
         // },
         async predict() {
+            // const prediction = await this.model.predict(this.webcam.canvas);
+            // for (let i = 0; i < this.maxPredictions; i++) {
+            //     const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+            //     this.labelContainer.childNodes[i].innerHTML = classPrediction;
+            //     if (prediction[i].className === 'studentCard' && prediction[i].probability > 0.98) {
+            //         this.$router.push('/newproduct');
+            //     }
+            // }
             const prediction = await this.model.predict(this.webcam.canvas);
+            const labels = {
+                studentCard: '學生證',
+                otherCard: '其他卡',
+                face: '人臉',
+                others: '其他'
+            };
             for (let i = 0; i < this.maxPredictions; i++) {
-                const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+                const classPrediction = labels[prediction[i].className] + ': ' + prediction[i].probability.toFixed(2);
                 this.labelContainer.childNodes[i].innerHTML = classPrediction;
-                if (prediction[i].className === 'studentCard' && prediction[i].probability > 0.98) {
+                if (prediction[i].className === 'studentCard' && prediction[i].probability > 0.99) {
+                    this.webcam.stop();
                     this.$router.push('/newproduct');
                 }
             }
@@ -126,8 +146,9 @@ export default {
 };
 </script>
 
+
+
 <style scoped>
-/* Add any necessary styles here */
 :root {
     --primary-color: #807469;
     /* Brownish color */
@@ -137,21 +158,41 @@ export default {
     /* White color */
 }
 
-.container {
+.app-container {
     font-family: Arial, sans-serif;
     background-color: var(--secondary-color);
     color: var(--primary-color);
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.content {
+    background: var(--accent-color);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
     text-align: center;
 }
 
-.title {
+h1 {
     font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-button {
-    /*background-color: var(--primary-color);*/
+.mybutton {
     background-color: #807469;
     color: var(--accent-color);
     border: none;
@@ -159,21 +200,38 @@ button {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    font-size: 16px;
+    text-decoration: none;
 }
 
-button:hover {
+.mybutton:hover {
     background-color: #6f6154;
     /* Darker shade of the primary color */
 }
 
-#webcam-container {
+.webcam-container {
     margin-top: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-#label-container {
+.labels {
     margin-top: 20px;
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.labels div {
+    background: var(--secondary-color);
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 </style>

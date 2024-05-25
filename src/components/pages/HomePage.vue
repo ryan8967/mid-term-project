@@ -7,45 +7,26 @@
     <div class="banner-left">
       <img
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/4a2066ba092df430ed84ed22cd6e4ba0300cb017621607a42c2952aff8a02242?apiKey=efd1b77638de4cc186ba2a1a8d649bb8&"
-        alt="Banner image"
-        class="banner-left-image"
-      />
+        alt="Banner image" class="banner-left-image" />
       <div class="banner-left-text">
         用不到的舊物? <br />想經營個人賣場?<br />現在登入中大Portal成為賣家!
       </div>
       <button class="banner-left-button">
-        <router-link to="/newproduct">成為賣家!</router-link>
+        <!-- <router-link to="/newproduct">成為賣家!</router-link> -->
+        <router-link to="studentcard">成為賣家!</router-link>
       </button>
     </div>
     <div class="banner-right">
-      <img
-        src="@/assets/images/Payment.png"
-        alt="Banner image"
-        class="banner-right-image"
-      />
+      <img src="@/assets/images/Payment.png" alt="Banner image" class="banner-right-image" />
     </div>
   </div>
   <div class="products-container">
-    <img
-      src="@/assets/images/popular.png"
-      alt="Random product"
-      class="product-card"
-    />
+    <img src="@/assets/images/popular.png" alt="Random product" class="product-card" />
     <div class="product-card-row">
-      <ProductCard
-      v-for="prod in formattedProducts"
-      :key="prod._id"
-      :id="prod._id"
-      :image="prod.image_url"
-      :name="prod.name"
-      :main_category="prod.main_category"
-      :sub_category="prod.sub_category"
-      :condition="prod.condition"
-      :price="prod.price"
-      :quantity="prod.quantity"
-      :remarks="prod.remarks"
-      @navigate="goToProductDetails"
-    ></ProductCard>
+      <ProductCard v-for="prod in formattedProducts" :key="prod._id" :id="prod._id" :image="prod.image_url"
+        :name="prod.name" :main_category="prod.main_category" :sub_category="prod.sub_category"
+        :condition="prod.condition" :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks"
+        @navigate="goToProductDetails"></ProductCard>
     </div>
   </div>
 </template>
