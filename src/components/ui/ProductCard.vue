@@ -7,8 +7,8 @@
           <span class="product-card__tag">{{ main_category }}</span>
           <span class="product-card__tag">{{ sub_category }}</span>
           <!-- <p class="amount">數量:{{ quantity }}</p> -->
-          <span v-if="quantity > 0">{{ quantity }}</span>
-          <span v-else>售完</span>
+          <span class="amount" v-if="quantity > 0">{{ quantity }}</span>
+          <span class="amount" v-else>售完</span>
         </div>
         <h3 class="title">{{ name }}</h3>
         <h3 class="price">${{ price }}</h3>
