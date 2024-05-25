@@ -121,12 +121,9 @@ export default {
 
   methods: {
     fetchProducts() {
-      console.log("Route Query:", this.$route.query); // Debugging line
-
-      const queryParams = new URLSearchParams(this.$route.query).toString();
-      console.log("Query Params:", queryParams); // Debugging line
-
-      let url = "http://127.0.0.1:8000/api/products/?sub_category=服裝";
+      const queryParams = new URLSearchParams(this.$route.query);
+      console.log("Query Params:", queryParams);
+      let url = `http://127.0.0.1:8000/api/products/?main_category=書店`;
       console.log("Request URL:", url); // Debugging line
 
       axios
@@ -266,7 +263,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  padding: 0 40px;
 }
 
 .h2 {

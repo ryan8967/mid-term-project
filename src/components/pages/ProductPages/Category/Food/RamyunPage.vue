@@ -28,20 +28,22 @@
         <!-- <h2>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～
         </h2> -->
-        <div class="products"><ProductCard
-          v-for="prod in latestThreeProducts"
-          :key="prod._id"
-          :id="prod._id"
-          :image="prod.image_url"
-          :name="prod.name"
-          :main_category="prod.main_category"
-          :sub_category="prod.sub_category"
-          :condition="prod.condition"
-          :price="prod.price"
-          :quantity="prod.quantity"
-          :remarks="prod.remarks"
-          @navigate="goToProductDetails"
-        ></ProductCard></div>
+        <div class="products">
+          <ProductCard
+            v-for="prod in latestThreeProducts"
+            :key="prod._id"
+            :id="prod._id"
+            :image="prod.image_url"
+            :name="prod.name"
+            :main_category="prod.main_category"
+            :sub_category="prod.sub_category"
+            :condition="prod.condition"
+            :price="prod.price"
+            :quantity="prod.quantity"
+            :remarks="prod.remarks"
+            @navigate="goToProductDetails"
+          ></ProductCard>
+        </div>
       </div>
       <div class="car-container">
         <img
@@ -100,14 +102,14 @@ export default {
       }));
     },
     latestThreeProducts() {
-      if(this.formattedProducts.length>3){
+      if (this.formattedProducts.length > 3) {
         return this.formattedProducts.slice(-3);
       }
       return this.formattedProducts;
     },
     // 獲取除了最後三個產品的所有產品
     otherProducts() {
-      if(this.formattedProducts.length>3){
+      if (this.formattedProducts.length > 3) {
         return this.formattedProducts.slice(0, -3);
       }
       return [];
@@ -124,7 +126,7 @@ export default {
 
       const queryParams = new URLSearchParams(this.$route.query).toString();
       console.log("Query Params:", queryParams); // Debugging line
-      
+
       let url = "http://127.0.0.1:8000/api/products/?sub_category=泡麵";
       console.log(url); // Debugging line
 
@@ -265,7 +267,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  padding: 0 40px;
 }
 
 .h2 {

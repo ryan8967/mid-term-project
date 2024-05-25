@@ -268,7 +268,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  padding: 0 40px;
 }
 
 .h2 {

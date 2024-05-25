@@ -273,6 +273,6 @@ export default {
   /* Allows wrapping to the next row if there's not enough space */
   gap: 20px;
   /* Adds space between product cards */
-  padding: 20px;
+  padding: 0 40px;
 }
 </style>

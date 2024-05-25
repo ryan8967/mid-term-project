@@ -44,19 +44,39 @@
           <form class="complaint-options">
             <label for="product-issue" class="checkbox-label">
               商品與實際不符
-              <input type="checkbox" id="product-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="product-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="attitude-issue" class="checkbox-label">
               交易態度差
-              <input type="checkbox" id="attitude-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="attitude-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="time-issue" class="checkbox-label">
               交易時間遲到
-              <input type="checkbox" id="time-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="time-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="location-issue" class="checkbox-label">
               交易地點不符
-              <input type="checkbox" id="location-issue" name="complaint" class="checkbox-input" />
+              <input
+                type="checkbox"
+                id="location-issue"
+                name="complaint"
+                class="checkbox-input"
+              />
             </label>
             <label for="other" class="checkbox-label">
               其他
@@ -78,7 +98,6 @@
 <script>
 import axios from "axios";
 import { openEmailClient } from "@/utils/emailUtils.js";
-
 
 export default {
   data() {
@@ -166,7 +185,10 @@ export default {
         console.log("in ", seller);
         return seller;
       } catch (error) {
-        console.error("Error fetching product ID:", error.response ? error.response.data : "Unknown error");
+        console.error(
+          "Error fetching product ID:",
+          error.response ? error.response.data : "Unknown error"
+        );
         return null;
       }
     },
@@ -331,6 +353,25 @@ export default {
   background-color: #ebd9b4;
   border-radius: 20px;
   padding: 24px;
+}
+
+/* 表格樣式 */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table td,
+.product-table th {
+  font: 25px Zen Old Mincho, sans-serif;
+  color: gray;
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.product-table tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 
 .complaint-section {
