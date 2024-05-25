@@ -230,14 +230,14 @@ a {
       :condition="prod.condition" :price="prod.price" :quantity="prod.quantity" :remarks="prod.remarks"
       @navigate="goToProductDetails"></ProductCard>
   </div>
-  <div class="market-menu">
+  <!-- <div class="market-menu">
     <router-link :to="{ path: '/newproduct' }">
       <div class="actions">上架物品</div>
     </router-link>
     <router-link :to="{ path: '/RecordsPage' }">
       <div class="actions">交易紀錄/申訴</div>
     </router-link>
-  </div>
+  </div> -->
 </template>
 
 <script>
