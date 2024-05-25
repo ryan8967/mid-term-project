@@ -1,57 +1,5 @@
-// export async function generateEmailTemplate(products) {
-//   const apiUrl =
-//     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY_HERE";
-
-//   const requestBody = {
-//     contents: [
-//       {
-//         parts: [
-//           {
-//             text: `Please generate an email template with the following product details: ${JSON.stringify(
-//               products
-//             )}`,
-//           },
-//         ],
-//       },
-//     ],
-//   };
-
-//   try {
-//     const response = await fetch(apiUrl, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(requestBody),
-//     });
-
-//     const data = await response.json();
-//     const emailTemplate = data.candidates[0].content.parts[0].text;
-
-//     return emailTemplate;
-//   } catch (error) {
-//     console.error("Error:", error);
-//     return null;
-//   }
-// }
-
-// export async function openEmailClient(email, products) {
-//   const emailTemplate = await generateEmailTemplate(products);
-
-//   if (emailTemplate) {
-//     const subject = "Product Details";
-//     const body = encodeURIComponent(emailTemplate);
-//     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
-//       subject
-//     )}&body=${body}`;
-//     window.location.href = mailtoLink;
-//   } else {
-//     console.error("Failed to generate email template.");
-//   }
-// }
-
 // src/utils/emailUtils.js
-export async function generateEmailTemplate(products) {
+export async function generateEmailTemplate(seller, products, user = null) {
   //   const apiUrl =
   //     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyBfyF26G-RvZPlfMSSuDbUtjHNOFqYnk8Y";
 
@@ -66,24 +14,57 @@ export async function generateEmailTemplate(products) {
   //     },
   //   };
   console.log(products);
-  const requestBody = {
-    contents: [
-      {
-        parts: [
-          {
-            // text: `這次訊息: ${message} 之前對話紀錄如下：${JSON.stringify(
-            //   conversationHistory
-            // )}`,
-            // text: `我想先確認你看不看的到這個訊息，看的到的話跟我說早安`
-
-            text: `生成一個email模板 有關於想要請求 賣家商品資訊 及 面交時間地點 商品資訊如下: ${JSON.stringify(
-              products
-            )} 但請不要使用Markdown格式，請給我純文字格式的email模板，請不要給我任何的* `,
-          },
-        ],
-      },
-    ],
-  };
+  let requestBody = null;
+  if (!user) {
+    //商品詳情 還沒下訂前
+    requestBody = {
+      contents: [
+        {
+          parts: [
+            {
+              text: `生成一個email模板 有關於想要請求 賣家商品資訊 商品資訊如下: ${JSON.stringify(
+                products
+              )} 賣家nickname ${
+                seller.nickname
+              } 但請不要使用Markdown格式，請給我純文字格式的email模板，請不要給我任何的*下面是email模板範例:
+       商家nickname您好
+       我是NCU二手物交易網站的用戶，我對您的商品有興趣，商品詳情為:名稱，價格，狀況，請問以下問題:
+         我對您的商品有興趣，請問以下問題:
+         (用戶請在這裡填入其他問題(不是給你gemeni填的))
+感謝您的抽空閱讀這封郵件，期待您的回覆。
+祝，學術順利
+            `,
+            },
+          ],
+        },
+      ],
+    };
+  } else {
+    //下訂後 訊問面交
+    requestBody = {
+      contents: [
+        {
+          parts: [
+            {
+              text: `生成一個email模板 有關於想要請求 面交 時間 地點 商品資訊如下: ${JSON.stringify(
+                products
+              )}， 賣家nickname ${seller.nickname} ，用戶nickname:${
+                user.nickname
+              } 但請不要使用Markdown格式，請給我純文字格式的email模板，請不要給我任何的*下面是email模板範例:
+             商家nickname您好
+             我是NCU二手物交易網站的用戶，我已經下訂了你的商品，商品詳情為:名稱，價格，狀況，請問以下問題:
+               方便什麼時間面交?
+                面交地點在哪裡?
+                (用戶請在這裡填入其他問題(不是給你gemeni填的))
+                感謝您的抽空閱讀這封郵件，期待您的回覆。
+祝，學術順利
+                  `,
+            },
+          ],
+        },
+      ],
+    };
+  }
 
   try {
     const response = await fetch(apiUrl, {
@@ -112,13 +93,13 @@ export async function generateEmailTemplate(products) {
   }
 }
 
-export async function openEmailClient(email, products) {
-  const emailTemplate = await generateEmailTemplate(products);
+export async function openEmailClient(seller, products) {
+  const emailTemplate = await generateEmailTemplate(seller, products);
 
   if (emailTemplate) {
-    const subject = "Product Details";
+    const subject = "商品詢問-NCU二手物交易網";
     const body = encodeURIComponent(emailTemplate);
-    const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
+    const mailtoLink = `mailto:${seller.email}?subject=${encodeURIComponent(
       subject
     )}&body=${body}`;
     window.location.href = mailtoLink;

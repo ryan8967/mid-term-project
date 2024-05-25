@@ -66,11 +66,13 @@ export default {
   },
   methods: {
     sendEmail() {
-      const email = 'haha@gmail.com';
-      const products =
-        { name: 'Apple', price: '$10' }
-        ;
-      openEmailClient(email, products);
+      // const email = 'haha@gmail.com';
+      // const products =
+      //   { name: 'Apple', price: '$10' }
+      //   ;
+      const seller = this.seller;
+      const products = this.products;
+      openEmailClient(seller, products);
     },
     increment() {
       if (this.selectedQuantity < this.products.quantity) {
