@@ -22,6 +22,11 @@
           <td>{{ order.subtotal }}</td>
           <td>{{ new Date(order.created_at).toLocaleString() }}</td>
           <td>
+            <button class="appeal-button" @click="sendEmail(order)">
+              聯絡
+            </button>
+          </td>
+          <td>
             <button class="appeal-button" @click="openComplaintForm(order)">
               申訴
             </button>
@@ -39,39 +44,19 @@
           <form class="complaint-options">
             <label for="product-issue" class="checkbox-label">
               商品與實際不符
-              <input
-                type="checkbox"
-                id="product-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="product-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="attitude-issue" class="checkbox-label">
               交易態度差
-              <input
-                type="checkbox"
-                id="attitude-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="attitude-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="time-issue" class="checkbox-label">
               交易時間遲到
-              <input
-                type="checkbox"
-                id="time-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="time-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="location-issue" class="checkbox-label">
               交易地點不符
-              <input
-                type="checkbox"
-                id="location-issue"
-                name="complaint"
-                class="checkbox-input"
-              />
+              <input type="checkbox" id="location-issue" name="complaint" class="checkbox-input" />
             </label>
             <label for="other" class="checkbox-label">
               其他
@@ -92,6 +77,8 @@
 
 <script>
 import axios from "axios";
+import { openEmailClient } from "@/utils/emailUtils.js";
+
 
 export default {
   data() {
@@ -106,9 +93,26 @@ export default {
         location_issue: false,
         other: "",
       },
+      user: [],
     };
   },
   methods: {
+    async sendEmail(product) {
+      // let seller = this.fetchSellerDetails(product.product_id);
+      const seller = await this.fetchSellerDetails(product.product_id);
+      // const user = await this.fetchUserDetails();
+      const user = this.user;
+      if (!seller) {
+        console.error("No seller found for product:", product);
+        return;
+      }
+      if (!user) {
+        console.error("No user found for email:", user);
+        return;
+      }
+      openEmailClient(seller, product, user);
+    },
+
     fetchOrders() {
       const token = localStorage.getItem("jwtToken");
       axios
@@ -123,6 +127,48 @@ export default {
         .catch((error) => {
           console.error("Error fetching orders:", error);
         });
+    },
+
+    async fetchUserDetails() {
+      let token = localStorage.getItem("jwtToken");
+      if (!token) {
+        console.error("No token found in local storage.");
+        return;
+      }
+      const url = `http://localhost:8000/api/user`;
+      axios
+        .get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          this.user = response.data;
+          // this.checkPersonalProduct(); // Ensure user details are fetched before checking
+          console.log("User details:", this.user);
+          // return response.data;
+          return this.user;
+        })
+        .catch((error) => {
+          console.error(
+            "Error fetching user ID:",
+            error.response ? error.response.data : "Unknown error"
+          );
+        });
+    },
+
+    async fetchSellerDetails(productId) {
+      const url = `http://localhost:8000/api/products/${productId}/seller`;
+      console.log("Request url:", url);
+      try {
+        const response = await axios.get(url);
+        const seller = response.data.seller;
+        console.log("in ", seller);
+        return seller;
+      } catch (error) {
+        console.error("Error fetching product ID:", error.response ? error.response.data : "Unknown error");
+        return null;
+      }
     },
 
     openComplaintForm(order) {
@@ -173,6 +219,7 @@ export default {
   },
   created() {
     this.fetchOrders();
+    this.fetchUserDetails();
   },
 };
 </script>

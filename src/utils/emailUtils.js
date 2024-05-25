@@ -1,5 +1,5 @@
 // src/utils/emailUtils.js
-export async function generateEmailTemplate(seller, products, user = null) {
+export async function generateEmailTemplate(seller, products, user) {
   //   const apiUrl =
   //     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyBfyF26G-RvZPlfMSSuDbUtjHNOFqYnk8Y";
 
@@ -13,9 +13,10 @@ export async function generateEmailTemplate(seller, products, user = null) {
   //       )}`,
   //     },
   //   };
-  console.log(products);
+  //   console.log(user);
+  //   console.log(products);
   let requestBody = null;
-  if (!user) {
+  if (user === null) {
     //商品詳情 還沒下訂前
     requestBody = {
       contents: [
@@ -48,11 +49,11 @@ export async function generateEmailTemplate(seller, products, user = null) {
             {
               text: `生成一個email模板 有關於想要請求 面交 時間 地點 商品資訊如下: ${JSON.stringify(
                 products
-              )}， 賣家nickname ${seller.nickname} ，用戶nickname:${
+              )}， 商家nickname ${seller.nickname} ，用戶nickname:${
                 user.nickname
               } 但請不要使用Markdown格式，請給我純文字格式的email模板，請不要給我任何的*下面是email模板範例:
              商家nickname您好
-             我是NCU二手物交易網站的用戶，我已經下訂了你的商品，商品詳情為:名稱，價格，狀況，請問以下問題:
+             我是NCU二手物交易網站的用戶nickname，我已經下訂了你的商品，商品詳情為:名稱，價格，狀況，請問以下問題:
                方便什麼時間面交?
                 面交地點在哪裡?
                 (用戶請在這裡填入其他問題(不是給你gemeni填的))
@@ -93,8 +94,8 @@ export async function generateEmailTemplate(seller, products, user = null) {
   }
 }
 
-export async function openEmailClient(seller, products) {
-  const emailTemplate = await generateEmailTemplate(seller, products);
+export async function openEmailClient(seller, products, user = null) {
+  const emailTemplate = await generateEmailTemplate(seller, products, user);
 
   if (emailTemplate) {
     const subject = "商品詢問-NCU二手物交易網";
