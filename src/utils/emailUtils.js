@@ -52,8 +52,11 @@ export async function generateEmailTemplate(seller, products, user) {
               )}， 商家nickname ${seller.nickname} ，用戶nickname:${
                 user.nickname
               } 但請不要使用Markdown格式，請給我純文字格式的email模板，請不要給我任何的*下面是email模板範例:
-             商家nickname您好
-             我是NCU二手物交易網站的用戶nickname，我已經下訂了你的商品，商品詳情為:名稱，價格，狀況，請問以下問題:
+
+             商家${seller.nickname}您好
+             我是NCU二手物交易網站的用戶${
+               user.nickname
+             }，我已經下訂了你的商品，商品詳情為:名稱，價格，狀況，請問以下問題:
                方便什麼時間面交?
                 面交地點在哪裡?
                 (用戶請在這裡填入其他問題(不是給你gemeni填的))
