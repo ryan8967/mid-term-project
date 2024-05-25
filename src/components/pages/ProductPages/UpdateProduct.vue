@@ -137,8 +137,8 @@ export default {
         .get(`http://127.0.0.1:8000/api/products/?product_id=${productId}`)
         .then((response) => {
           this.products = response.data[0];
-          this.products.image_url = this.baseUrl + this.products.image_url;
           this.SyncProductDetails();
+          this.products.image_url = this.baseUrl + this.products.image_url;
         })
         .catch((error) => {
           console.error("获取产品详情失败:", error);
@@ -168,9 +168,6 @@ export default {
         return;
       }
 
-      // 添加文件到 FormData 对象
-      formData.append("image_url", file); // 确保后端接收的字段名与此一致
-
       axios
         .post("http://localhost:8000/api/upload", formData)
         .then((response) => {
@@ -186,25 +183,23 @@ export default {
         });
     },
     async submitForm() {
-      const formData = new FormData();
       const token = localStorage.getItem("jwtToken"); // 從 localStorage 獲取 token
       const productId = this.products._id;
 
-      if (this.image_url) {
-        formData.append("image_url", this.image_url);
-      }
-      formData.append("name", this.name);
-      formData.append("main_category", this.mainCategory);
-      formData.append("sub_category", this.selectedSubCategory);
-      formData.append("condition", this.condition);
-      formData.append("price", this.price);
-      formData.append("quantity", this.quantity);
-      formData.append("remarks", this.remarks);
       let url = "http://localhost:8000/api/products/" + productId;
       console.log("Request url:", url);
 
       axios
-        .put(url, formData, {
+        .put(url, {
+          image_url:this.image_url,
+          name:this.name,
+          main_category:this.mainCategory,
+          sub_category:this.selectedSubCategory,
+          condition:this.condition,
+          price:this.price,
+          quantity:this.quantity,
+          remarks:this.remarks,
+        }, {
           headers: {
             Authorization: `Bearer ${token}`, // 使用 JWT token 認證請求
           },
