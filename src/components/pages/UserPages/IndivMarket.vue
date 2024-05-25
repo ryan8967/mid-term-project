@@ -192,12 +192,14 @@ export default {
 .product-card-row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   width: auto;
   padding: 10px;
+  margin: 0 auto;
 }
 
 .product {
-  margin: auto;
+  margin: 10px; /* 为每个产品卡添加外边距，防止粘连 */
 }
 
 .market-menu {
