@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
-  <section class="product_record">
-    <div class="title">買賣紀錄</div>
+  <section class="product-order">
+    <div class="title">訂單</div>
     <div class="product-details">
       <table class="product-table">
         <thead>
@@ -11,12 +11,12 @@
             <th>數量</th>
             <th>價格</th>
             <th>小計</th>
-            <th>完成日期</th>
+            <th>交易日期</th>
             <th>操作</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="order in records" :key="order._id">
+          <tr v-for="order in orders" :key="order._id">
             <td>{{ order.product_name }}</td>
             <td>{{ order.seller_name }}</td>
             <td>{{ order.quantity }}</td>
@@ -29,68 +29,43 @@
               </button>
             </td>
             <td>
-              <button class="appeal-button" @click="openComplaintForm(order)">
-                申訴
+              <button class="appeal-button" @click="openSubmitForm(order)">
+                完成交易
               </button>
             </td>
           </tr>
         </tbody>
       </table>
-
-      <div v-if="showComplaintForm" class="complaint-form-container">
+      <div v-if="showSubmitForm" class="complaint-form-container">
         <div class="main-container">
           <section class="complaint-section">
             <header class="complaint-header">
-              <h1 class="complaint-title">申訴原因</h1>
+              <h1 class="complaint-title">確認交易</h1>
             </header>
-            <form class="complaint-options">
-              <label for="product-issue" class="checkbox-label">
-                商品與實際不符
-                <input
-                  type="checkbox"
-                  id="product-issue"
-                  name="complaint"
-                  class="checkbox-input"
-                />
-              </label>
-              <label for="attitude-issue" class="checkbox-label">
-                交易態度差
-                <input
-                  type="checkbox"
-                  id="attitude-issue"
-                  name="complaint"
-                  class="checkbox-input"
-                />
-              </label>
-              <label for="time-issue" class="checkbox-label">
-                交易時間遲到
-                <input
-                  type="checkbox"
-                  id="time-issue"
-                  name="complaint"
-                  class="checkbox-input"
-                />
-              </label>
-              <label for="location-issue" class="checkbox-label">
-                交易地點不符
-                <input
-                  type="checkbox"
-                  id="location-issue"
-                  name="complaint"
-                  class="checkbox-input"
-                />
-              </label>
-              <label for="other" class="checkbox-label">
-                其他
-                <input type="text" id="other" name="other" class="text-input" />
-              </label>
+            <form @submit.prevent="confirmTransaction">
+              <div class="rating-container">
+                交易評價:
+                <label v-for="number in [1, 2, 3, 4, 5]" :key="number">
+                  {{ number }}
+                  <input
+                    type="radio"
+                    :value="number"
+                    v-model="transactionRating"
+                    name="rating"
+                  />
+                </label>
+              </div>
+              <button
+                type="submit"
+                class="confirm-transaction-button"
+                @click="submitConfirm"
+              >
+                確認交易
+              </button>
             </form>
             <section class="action-buttons">
-              <button class="cancel-button" @click="showComplaintForm = false">
+              <button class="cancel-button" @click="showSubmitForm = false">
                 取消
-              </button>
-              <button class="submit-button" @click="submitComplaint">
-                確認
               </button>
             </section>
           </section>
@@ -107,15 +82,11 @@ import { openEmailClient } from "@/utils/emailUtils.js";
 export default {
   data() {
     return {
-      records: [],
-      showComplaintForm: false,
-      complaint: {
+      orders: [],
+      showSubmitForm: false,
+      confirm: {
         orderId: null,
-        product_issue: false,
-        attitude_issue: false,
-        time_issue: false,
-        location_issue: false,
-        other: "",
+        rating: null,
       },
       user: [],
     };
@@ -137,7 +108,7 @@ export default {
       openEmailClient(seller, product, user);
     },
 
-    fetchRecords() {
+    fetchOrders() {
       const token = localStorage.getItem("jwtToken");
       axios
         .get("http://127.0.0.1:8000/api/orders/", {
@@ -147,12 +118,12 @@ export default {
         })
         .then((response) => {
           // Filter orders to include only those with status "訂購"
-          this.records = response.data.filter(
-            (records) => records.status === "完成"
+          this.orders = response.data.filter(
+            (order) => order.status === "訂購"
           );
         })
         .catch((error) => {
-          console.error("Error fetching records:", error);
+          console.error("Error fetching orders:", error);
         });
     },
 
@@ -201,56 +172,52 @@ export default {
       }
     },
 
-    openComplaintForm(order) {
-      this.complaint.orderId = order._id;
-      this.showComplaintForm = true;
+    openSubmitForm(order) {
+      this.confirm.orderId = order._id;
+      this.showSubmitForm = true;
     },
 
-    closeComplaintForm() {
-      this.showComplaintForm = false;
-      this.resetComplaintForm();
+    closeSubmitForm() {
+      this.showSubmitForm = false;
+      this.resetSubmitForm();
     },
 
-    resetComplaintForm() {
-      this.complaint = {
+    resetSubmitForm() {
+      this.confirm = {
         orderId: null,
-        product_issue: false,
-        attitude_issue: false,
-        time_issue: false,
-        location_issue: false,
-        other: "",
+        rating: null,
       };
     },
 
-  },
-
-  submitComplaint() {
-    const token = localStorage.getItem("jwtToken");
-    axios
-      .put(
-        `http://127.0.0.1:8000/api/orders/${this.complaint.orderId}`,
-        {
-          complaint: this.complaint,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    submitConfirm() {
+      const token = localStorage.getItem("jwtToken");
+      axios
+        .put(
+          `http://127.0.0.1:8000/api/orders/${this.confirm.orderId}`,
+          {
+            transaction_date: new Date().toISOString(),
+            status: "完成",
           },
-        }
-      )
-      .then((response) => {
-        alert("申訴提交成功");
-        console.log("Complaint submitted:", response.data);
-        this.closeComplaintForm();
-      })
-      .catch((error) => {
-        console.error("Error submitting complaint:", error);
-        alert("申訴提交失敗");
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          alert("確認成功");
+          console.log("Confirmed:", response.data);
+          this.closeSubmitForm();
+        })
+        .catch((error) => {
+          console.error("Error submitting:", error);
+          alert("失敗");
+        });
+    },
   },
 
   created() {
-    this.fetchRecords()
+    this.fetchOrders();
     this.fetchUserDetails();
   },
 };

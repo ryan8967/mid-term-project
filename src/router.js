@@ -43,6 +43,7 @@ import SaucePage from "./components/pages/ProductPages/Category/Food/SaucePage.v
 import UserCart from "./components/pages/UserPages/UserCart.vue";
 import ProfilePage from "./components/pages/UserPages/ProfilePage.vue";
 import RecordsPage from "./components/pages/UserPages/RecordsPage.vue";
+import OrderPage from "./components/pages/UserPages/OrderPage.vue";
 import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
 import StudentCard from "./components/pages/UserPages/StudentCard.vue";
@@ -80,6 +81,13 @@ const router = createRouter({
     {
       path: "/records",
       component: RecordsPage,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/orders",
+      component: OrderPage,
       meta: {
         requiresAuth: true,
       },

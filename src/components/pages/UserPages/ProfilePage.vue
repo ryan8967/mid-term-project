@@ -20,6 +20,9 @@
     </div>
     <div class="menu">
       <div class="actions" @click="showEditNickname = true">修改暱稱</div>
+      <router-link :to="{ path: '/orders' }">
+        <div class="actions">訂單</div>
+      </router-link>
       <router-link :to="{ path: '/records' }">
         <div class="actions">買賣紀錄/申訴</div>
       </router-link>
