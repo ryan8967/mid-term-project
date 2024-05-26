@@ -118,7 +118,7 @@ export default {
         })
         .then((response) => {
           // Filter orders to include only those with status "訂購"
-          this.orders = response.data.filter(
+          this.orders = response.data.buyer_orders.filter(
             (order) => order.status === "訂購"
           );
         })

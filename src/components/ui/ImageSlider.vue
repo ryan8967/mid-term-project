@@ -41,6 +41,10 @@ export default {
         },
         {
           id: 2,
+          src: require("@/assets/images/Carousel1.gif"),
+        },
+        {
+          id: 3,
           src: require("@/assets/images/Carousel1.jpg"),
         },
       ],
