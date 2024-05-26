@@ -222,35 +222,33 @@ export default {
       };
     },
 
-  },
-
-  submitComplaint() {
-    const token = localStorage.getItem("jwtToken");
-    axios
-      .put(
-        `http://127.0.0.1:8000/api/orders/${this.complaint.orderId}`,
-        {
-          complaint: this.complaint,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+    submitComplaint() {
+      const token = localStorage.getItem("jwtToken");
+      axios
+        .put(
+          `http://127.0.0.1:8000/api/orders/${this.complaint.orderId}`,
+          {
+            complaint: this.complaint,
           },
-        }
-      )
-      .then((response) => {
-        alert("申訴提交成功");
-        console.log("Complaint submitted:", response.data);
-        this.closeComplaintForm();
-      })
-      .catch((error) => {
-        console.error("Error submitting complaint:", error);
-        alert("申訴提交失敗");
-      });
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          alert("申訴提交成功");
+          console.log("Complaint submitted:", response.data);
+          this.closeComplaintForm();
+        })
+        .catch((error) => {
+          console.error("Error submitting complaint:", error);
+          alert("申訴提交失敗");
+        });
+    },
   },
-
   created() {
-    this.fetchRecords()
+    this.fetchRecords();
     this.fetchUserDetails();
   },
 };
