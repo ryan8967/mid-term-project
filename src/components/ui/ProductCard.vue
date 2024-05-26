@@ -7,9 +7,9 @@
             :src="image"
             :alt="name"
             class="product-card__image"
-            :class="{ shadowed: quantity === 0 }"
+            :class="{ shadowed: quantity <= 0 }"
           />
-          <div v-if="quantity === 0" class="sold-out-banner">Sold Out!</div>
+          <div v-if="quantity <= 0" class="sold-out-banner">Sold Out!</div>
         </div>
         <div class="product-card__tags">
           <span class="product-card__tag">{{ main_category }}</span>
