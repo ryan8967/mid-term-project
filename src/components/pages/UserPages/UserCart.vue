@@ -205,6 +205,7 @@ export default {
       });
       this.clearCart();
       this.showPaymentOption = false; 
+      this.$router.push("/orders");
     },
   },
   created() {
