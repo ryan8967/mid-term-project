@@ -14,7 +14,7 @@
           </div>
           <div class="product-tags">
             <span class="tag">{{ products.main_category }}</span>
-            <span class="tag">{{ products.sub_category }}</span>
+            <span class="tag" v-show="products.sub_category !== null">{{ products.sub_category }}</span>
             <span class="product-price">${{ products.price }}</span>
           </div>
         </div>
@@ -92,6 +92,7 @@ export default {
       const products = this.products;
       openEmailClient(seller, products);
     },
+
     increment() {
       if (this.selectedQuantity < this.products.quantity) {
         this.selectedQuantity++;
@@ -232,6 +233,7 @@ export default {
   created() {
     this.fetchUserDetails();
     this.fetchProductDetails();
+    console.log("Product details:", this.products);
   },
 };
 </script>
@@ -306,6 +308,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding-left: 5%;
+  width: 40%
 }
 
 .product-header {
@@ -315,8 +318,8 @@ export default {
 
 .product-info {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%; /* Ensure it spans the full width to allow space between elements */
 }
 
 .product-title {
@@ -327,16 +330,19 @@ export default {
 
 .product-tags {
   display: flex;
-  margin-top: 25px;
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between; /* Keeps items spaced out with price at the end */
+  gap: 10px; /* Reduced gap specifically for tags, adjust as needed */
   font-size: 20px;
+  padding-top: 16px;
+  width: 100%; /* Ensures it spans the full width of its parent container */
 }
 
 .tag {
-  font-family: "Zen Old Mincho", sans-serif;
-  border-radius: 30px;
+  flex-grow: 0; /* Prevents tags from stretching */
   background-color: #cfaf8d;
   padding: 8px 30px;
+  border-radius: 30px;
 }
 
 .divider {
@@ -347,10 +353,11 @@ export default {
 }
 
 .product-price {
+  flex-grow: 1; /* Allows the price to push itself to the right */
   font-family: "Zen Old Mincho", sans-serif;
   font-weight: 600;
   font-size: 36px;
-  padding-left: 10 px;
+  text-align: right; /* Ensures text alignment to the right */
 }
 
 .product-description {
