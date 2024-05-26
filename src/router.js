@@ -50,6 +50,8 @@ import IndivMarket from "./components/pages/UserPages/IndivMarket.vue";
 import SellerPage from "./components/pages/UserPages/SellerPage.vue";
 import StudentCard from "./components/pages/UserPages/StudentCard.vue";
 
+import MapPage from "./components/pages/UserPages/MapPage.vue";
+
 const router = createRouter({
   scrollBehavior() {
     // always scroll to top
@@ -65,6 +67,7 @@ const router = createRouter({
     { path: "/help", component: HelpPage },
 
     { path: "/studentcard", component: StudentCard },
+    { path: "/map", component: MapPage },
 
     // User Pages
     {
