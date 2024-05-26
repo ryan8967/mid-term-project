@@ -53,7 +53,7 @@
   </div>
   <div v-if="showPaymentOption" class="PaymentOption-container">
     <div class="payment-title">付款選項</div>
-    <hr>
+    <hr />
     <div class="payment-options">
       <button
         v-for="method in paymentMethods"
@@ -140,11 +140,12 @@ export default {
     },
 
     //購買商品
+    // Purchase a product
     purchaseProduct(productId, quantity) {
-      console.log(`Product ID: ${productId}, Quantity: ${quantity}`);
-      let url = "http://localhost:8000/api/products/" + productId + "/purchase";
+      let url = `http://localhost:8000/api/products/${productId}/purchase`;
       console.log("Request url:", url);
-      axios
+      // Return the axios promise
+      return axios
         .post(url, { quantity: quantity })
         .then(() => {
           alert("購買成功");
@@ -198,13 +199,12 @@ export default {
         });
     },
 
-    checkout() {
-      //為每一個商品做購買的動作
-      this.cartItems.forEach((item) => {
-        this.purchaseProduct(item.product_id, item.quantity);
-      });
-      this.clearCart();
-      this.showPaymentOption = false; 
+    async checkout() {
+      for (const item of this.cartItems) {
+        await this.purchaseProduct(item.product_id, item.quantity);
+      }
+      await this.clearCart();
+      this.showPaymentOption = false;
       this.$router.push("/orders");
     },
   },

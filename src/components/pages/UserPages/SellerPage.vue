@@ -21,7 +21,7 @@
 <script>
 import axios from "axios";
 import ProductCard from "@/components/ui/ProductCard.vue";
-import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
+import LoadingSpinner from "@/components/ui/LoadingSpinner.vue";
 
 export default {
   components: {

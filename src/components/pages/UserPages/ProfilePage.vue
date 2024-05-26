@@ -48,7 +48,7 @@
 
 <script>
 import axios from "axios";
-import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
+import LoadingSpinner from "@/components/ui/LoadingSpinner.vue";
 
 export default {
   data() {

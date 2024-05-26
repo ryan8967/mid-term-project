@@ -64,7 +64,7 @@
 <script>
 import axios from "axios";
 import { openEmailClient } from "@/utils/emailUtils.js";
-import LoadingSpinner from "@/components/layout/LoadingSpinner.vue";
+import LoadingSpinner from "@/components/ui/LoadingSpinner.vue";
 
 export default {
   data() {
