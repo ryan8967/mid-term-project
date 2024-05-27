@@ -193,10 +193,9 @@ export async function generateEmailTemplate(
           我是NCU二手物交易網站的用戶${
             user.nickname
           }，我已經下訂了你的商品，商品詳情為:名稱，價格，狀況，請問以下問題:
-          方便什麼時間面交?
-          面交地點在哪裡?
-          面交時間: ${slot.date} ${slot.time}
-          面交地點: ${slot.location}
+          方便什麼時間地點面交?
+          我的方便面交時間: ${slot.date} ${slot.time}
+          我的方便面交地點: ${slot.location}
           (用戶請在這裡填入其他問題(不是給你gemeni填的))
           感謝您的抽空閱讀這封郵件，期待您的回覆。
           祝，學術順利`,
