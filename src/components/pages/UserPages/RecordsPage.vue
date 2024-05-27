@@ -184,11 +184,11 @@ export default {
           // Filter orders to include only those with status "訂購"
           this.Bought_records = response.data.buyer_orders;
           this.Sold_records = response.data.seller_orders;
-          this.Bought_records.filter(
-            (Bought_records) => Bought_records.status === "完成"
+          this.Bought_records = this.Bought_records.filter(
+            (Bought_records) => Bought_records.status === '完成'
           );
-          this.Sold_records.filter(
-            (Sold_records) => Sold_records.status === "完成"
+          this.Sold_records = this.Sold_records.filter(
+            (Sold_records) => Sold_records.status === '完成'
           );
         })
         .catch((error) => {
