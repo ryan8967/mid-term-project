@@ -59,7 +59,7 @@
           >
         </ul>
       </nav>
-      <div class="footer-social">
+      <!-- <div class="footer-social">
         <div class="social-item">
           <a href="https://www.facebook.com/"
             ><img src="@/assets/images/facebook-icon.png" alt="facebook"
@@ -75,7 +75,15 @@
             ><img src="@/assets/images/insta-icon.png" alt="instagram"
           /></a>
         </div>
-      </div>
+      </div> -->
+      <section class="footer-right">
+        <div class="title">Need Continue Utilize</div>
+        <ul>
+          <li>叫外送? Food panda</li>
+          <li>Hotel? Trivago</li>
+          <li>買賣二手商品? NCU二手物交易網</li>
+        </ul>
+      </section>
     </div>
     <hr />
     <div class="footer-copyright">@2024 No Rights Reserved</div>
@@ -96,16 +104,12 @@
   display: flex;
   padding-left: 10%;
   padding-top: 20px;
-  width: 75%;
-  /* justify-content: space-around;
-  align-items: flex-start; */
+  width: 80%;
 }
 
 .footer-heading {
   min-width: 200px;
   margin: 0 20px;
-  /* display: flex; */
-  /* align-items: center;  */
   font-size: small;
 }
 
@@ -148,6 +152,29 @@
   margin: 0;
   align-items: flex-start;
   height: 180px;
+}
+
+.footer-right {
+  padding: 18px;
+  text-align: left; /* Add text alignment to the entire .footer-right section */
+  .title {
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-style: italic;
+  }
+
+  li {
+    font-size: 20px;
+    margin: 10px 0;
+    padding-left: 10px;
+    text-align: left; /* Ensure list items are aligned to the left */
+  }
 }
 
 .footer-contact-item,
