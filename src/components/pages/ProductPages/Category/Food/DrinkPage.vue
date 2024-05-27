@@ -3,7 +3,7 @@
     <div class="top-section">
       <div class="label-content">
         <div class="label">
-          <span>食品/飲品</span>
+          <span>飲品</span>
         </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -25,9 +25,6 @@
       </div>
       <div>
         <br />
-        <!-- <h2>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～放～商～品～
-        </h2> -->
         <div class="products"><ProductCard
           v-for="prod in latestThreeProducts"
           :key="prod._id"
@@ -52,9 +49,6 @@
         <div class="dashed-line"></div>
       </div>
       <div>
-        <!-- <h2>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～也～放～商～品～
-        </h2> -->
         <br />
       </div>
       <div class="products">

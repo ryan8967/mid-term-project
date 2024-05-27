@@ -3,7 +3,7 @@
     <div class="top-section">
       <div class="label-content">
         <div class="label">
-          <span>食品/罐頭&醬料</span>
+          <span>罐頭&醬料</span>
         </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">

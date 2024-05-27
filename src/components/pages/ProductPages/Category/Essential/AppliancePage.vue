@@ -3,7 +3,7 @@
     <div class="top-section">
       <div class="label-content">
         <div class="label">
-          <span>日常/家電</span>
+          <span>家電</span>
         </div>
       </div>
       <svg class="line" viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -52,9 +52,6 @@
         <div class="dashed-line"></div>
       </div>
       <div>
-        <!-- <h2>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;～這～裡～也～放～商～品～
-        </h2> -->
         <br />
       </div>
       <div class="products">
