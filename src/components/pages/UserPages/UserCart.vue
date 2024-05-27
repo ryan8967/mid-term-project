@@ -164,6 +164,7 @@ export default {
         .post(url, { product_id: productId, quantity: quantity })
         .then((response) => {
           console.log(response.data);
+          this.$router.push("/orders");
         })
         .catch((error) => {
           console.log("更新訂單失敗:", error.response.data);
@@ -205,7 +206,6 @@ export default {
       }
       await this.clearCart();
       this.showPaymentOption = false;
-      this.$router.push("/orders");
     },
   },
   created() {
