@@ -20,7 +20,7 @@
       <router-link :to="{ path: '/studentcard' }">
         <div class="actions">上架物品</div>
       </router-link>
-      <router-link :to="{ path: '/RecordsPage' }">
+      <router-link :to="{ path: '/records' }">
         <div class="actions">交易紀錄/申訴</div>
       </router-link>
     </div>

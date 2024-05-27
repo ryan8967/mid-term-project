@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/no-parsing-error -->
 <template>
   <section class="product_record">
-    <div class="title">買賣紀錄</div>
+    <div class="title">買家紀錄</div>
     <div class="product-details">
       <table class="product-table">
         <thead>
@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="order in records" :key="order._id">
+          <tr v-for="order in Bought_records" :key="order._id">
             <td>{{ order.product_name }}</td>
             <td>{{ order.seller_name }}</td>
             <td>{{ order.quantity }}</td>
@@ -36,7 +36,7 @@
           </tr>
         </tbody>
       </table>
-
+      
       <div v-if="showComplaintForm" class="complaint-form-container">
         <div class="main-container">
           <section class="complaint-section">
@@ -97,6 +97,42 @@
         </div>
       </div>
     </div>
+    <div class="title">賣家紀錄</div>
+    <div class="product-details"> 
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>商品名稱</th>
+            <th>商家</th>
+            <th>數量</th>
+            <th>價格</th>
+            <th>小計</th>
+            <th>完成日期</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="order in Sold_records" :key="order._id">
+            <td>{{ order.product_name }}</td>
+            <td>{{ order.seller_name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.subtotal }}</td>
+            <td>{{ new Date(order.created_at).toLocaleString() }}</td>
+            <td>
+              <button class="appeal-button" @click="sendEmail(order)">
+                聯絡
+              </button>
+            </td>
+            <td>
+              <button class="appeal-button" @click="openComplaintForm(order)">
+                申訴
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </template>
 
@@ -107,7 +143,8 @@ import { openEmailClient } from "@/utils/emailUtils.js";
 export default {
   data() {
     return {
-      records: [],
+      Bought_records: [],
+      Sold_records: [],
       showComplaintForm: false,
       complaint: {
         orderId: null,
@@ -147,9 +184,13 @@ export default {
         })
         .then((response) => {
           // Filter orders to include only those with status "訂購"
-          this.records = response.data.buyer_orders;
-          this.records.filter(
-            (records) => records.status === "完成"
+          this.Bought_records = response.data.buyer_orders;
+          this.Sold_records = response.data.seller_orders;
+          this.Bought_records.filter(
+            (Bought_records) => Bought_records.status === "完成"
+          );
+          this.Sold_records.filter(
+            (Sold_records) => Sold_records.status === "完成"
           );
         })
         .catch((error) => {
