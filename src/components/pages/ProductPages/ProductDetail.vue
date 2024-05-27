@@ -130,6 +130,7 @@ export default {
           alert(
             "加入購物車失敗: " + (error.response.data.message || error.message)
           );
+          window.location.href = "http://127.0.0.1:8000/portal";
         });
     },
 
