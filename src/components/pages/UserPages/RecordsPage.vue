@@ -6,12 +6,12 @@
       <table class="product-table">
         <thead>
           <tr>
-            <th>商品名稱</th>
-            <th>商家</th>
-            <th>數量</th>
-            <th>價格</th>
-            <th>小計</th>
-            <th>完成日期</th>
+            <th class="name">商品名稱</th>
+            <th class="seller">商家</th>
+            <th class="quantity">數量</th>
+            <th class="price">價格</th>
+            <th class="total">小計</th>
+            <th class="date">完成日期</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -36,7 +36,7 @@
           </tr>
         </tbody>
       </table>
-      
+
       <div v-if="showComplaintForm" class="complaint-form-container">
         <div class="main-container">
           <section class="complaint-section">
@@ -98,18 +98,16 @@
       </div>
     </div>
     <div class="title">賣家紀錄</div>
-    <div class="product-details"> 
+    <div class="product-details">
       <table class="product-table">
         <thead>
-          <tr>
-            <th>商品名稱</th>
-            <th>商家</th>
-            <th>數量</th>
-            <th>價格</th>
-            <th>小計</th>
-            <th>完成日期</th>
-            <th>操作</th>
-          </tr>
+          <th class="name">商品名稱</th>
+          <th class="seller">商家</th>
+          <th class="quantity">數量</th>
+          <th class="price">價格</th>
+          <th class="total">小計</th>
+          <th class="date">完成日期</th>
+          <th>操作</th>
         </thead>
         <tbody>
           <tr v-for="order in Sold_records" :key="order._id">
@@ -326,6 +324,7 @@ export default {
   font-size: 30px;
   font-weight: 600;
 }
+
 .product-title {
   font-family: Zen Old Mincho, sans-serif;
   flex: 1;
@@ -425,6 +424,18 @@ export default {
   border-bottom: 1px solid #eee;
 }
 
+.name{
+  width: 25%;
+}
+.seller{
+  width: 20%;
+}
+.quantity{
+  width: 5%;
+}
+.price{
+  width: 5%;
+}
 .product-table tr:nth-child(even) {
   background-color: #f2f2f2;
 }
